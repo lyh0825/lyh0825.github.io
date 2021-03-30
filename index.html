@@ -71,6 +71,97 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python-code" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/30/python-code/" class="article-date">
+  <time class="dt-published" datetime="2021-03-30T06:39:00.000Z" itemprop="datePublished">2021-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/30/python-code/">python-code</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Group"><a href="#1-Group" class="headerlink" title="1.Group"></a>1.Group</h1><blockquote>
+<p>uesing group to create an empty list, and modify  elements`attributes in the list.</p>
+</blockquote>
+<h2 id="1-1-Add-Attributes"><a href="#1-1-Add-Attributes" class="headerlink" title="1.1 Add Attributes"></a>1.1 Add Attributes</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class settings()</span><br><span class="line"></span><br><span class="line">def __init__():</span><br><span class="line">--snip--</span><br><span class="line"></span><br><span class="line"># 子弹设置</span><br><span class="line">self.bullet_speed_factor &#x3D; 10</span><br><span class="line">self.ship_limit &#x3D; 3</span><br><span class="line">self.bullet_width &#x3D; 3</span><br><span class="line">self.bullet_height &#x3D; 40</span><br><span class="line">self.bullet_color &#x3D; 60, 60, 60</span><br><span class="line">self.bullets_allowed &#x3D; 10</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2Create-Class"><a href="#1-2Create-Class" class="headerlink" title="1.2Create Class"></a>1.2Create Class</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import pygame</span><br><span class="line">from pygame.sprite import Sprite</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Bullet(Sprite):</span><br><span class="line">    &quot;&quot;&quot;一个对飞船发射的子弹进行管理的类&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    def __init__(self, ai_settings, screen, ship):</span><br><span class="line">        &quot;&quot;&quot;在飞船所处的位置创建一个子弹对象&quot;&quot;&quot;</span><br><span class="line">        super(Bullet, self).__init__()</span><br><span class="line">        self.screen &#x3D; screen</span><br><span class="line"></span><br><span class="line">        # 在(0,0)处创建一个表示子弹的矩形，再设置正确的位置</span><br><span class="line">        self.rect &#x3D; pygame.Rect(0, 0, ai_settings.bullet_width,</span><br><span class="line">                                ai_settings.bullet_height)</span><br><span class="line">        self.rect.centerx &#x3D; ship.rect.centerx</span><br><span class="line">        self.rect.top &#x3D; ship.rect.top</span><br><span class="line"></span><br><span class="line">        # 存储用小数表示的子弹位置</span><br><span class="line">        self.y &#x3D; float(self.rect.y)</span><br><span class="line"></span><br><span class="line">        self.color &#x3D; ai_settings.bullet_color</span><br><span class="line">        self.speed_factor &#x3D; ai_settings.bullet_speed_factor</span><br><span class="line"></span><br><span class="line">    def update(self):</span><br><span class="line">        &quot;&quot;&quot;向上移动子弹&quot;&quot;&quot;</span><br><span class="line">        # update the float </span><br><span class="line">        self.y -&#x3D; self.speed_factor</span><br><span class="line">        # update the bullet&#96; position of rect</span><br><span class="line">        self.rect.y &#x3D; self.y</span><br><span class="line"></span><br><span class="line">    def draw_bullet(self):</span><br><span class="line">        &quot;&quot;&quot;draw bullets in the screen&quot;&quot;&quot;</span><br><span class="line">        pygame.draw.rect(self.screen, self.color, self.rect)</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3Add-instance-in-the-Group"><a href="#1-3Add-instance-in-the-Group" class="headerlink" title="1.3Add instance in the Group"></a>1.3Add instance in the Group</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import pygame</span><br><span class="line">from pygame.sprite import Sprite</span><br><span class="line">from pygame.sprite import Group</span><br><span class="line"></span><br><span class="line">--snip--</span><br><span class="line"></span><br><span class="line">def run_game():</span><br><span class="line">	--snip--</span><br><span class="line">	</span><br><span class="line">	# create an empty Group</span><br><span class="line">	bullets &#x3D; Group()</span><br><span class="line">	</span><br><span class="line">	--snip--</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">run_game()</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-4Fire"><a href="#1-4Fire" class="headerlink" title="1.4Fire"></a>1.4Fire</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import pygame</span><br><span class="line"></span><br><span class="line">from bullet import Bullet</span><br><span class="line">--snip--</span><br><span class="line"></span><br><span class="line">def check_events(param)</span><br><span class="line">	--snip--</span><br><span class="line">	elif event.key &#x3D;&#x3D; pygame.K_SPACE:</span><br><span class="line">	new_bullet &#x3D; Bullet(parameter)</span><br><span class="line">	bullets.add(new_bullets)</span><br><span class="line">	--snip--</span><br><span class="line">	</span><br><span class="line">def update_screen(param)</span><br><span class="line">	--snip--</span><br><span class="line">	for bullet in bullets.sprites():</span><br><span class="line">		bullet.draw_bullet</span><br><span class="line">	--snip--</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-5Delete"><a href="#1-5Delete" class="headerlink" title="1.5Delete"></a>1.5Delete</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">main program</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">	for bullet in bullets.copy():</span><br><span class="line">		if bullet.rect.bottom &lt;&#x3D; 0:</span><br><span class="line">			bullets.remove(bullet)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/03/30/python-code/" data-id="ckmvo1piw000070f59018f7pa" data-title="python-code" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-新闻联播" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/27/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" class="article-date">
+  <time class="dt-published" datetime="2021-03-27T08:25:11.000Z" itemprop="datePublished">2021-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/03/27/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/">新闻联播</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/03/27/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" data-id="ckmvo1piy000170f54gz8dpdc" data-title="新闻联播" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-English-Study-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/03/21/English-Study-2/" class="article-date">
@@ -93,11 +184,21 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="English-Study-Two"><a href="#English-Study-Two" class="headerlink" title="English Study Two"></a>English Study Two</h1><h2 id="Object-Glossary"><a href="#Object-Glossary" class="headerlink" title="Object Glossary"></a>Object Glossary</h2><p>Determine which parts of the game to run</p>
+        <h1 id="English-Study-Two"><a href="#English-Study-Two" class="headerlink" title="English Study Two"></a>English Study Two</h1><h2 id="Object-Glossary"><a href="#Object-Glossary" class="headerlink" title="Object Glossary"></a>Object Glossary</h2><p>flow chart –&gt;  schematic diagram</p>
+<p><code>enable command</code>    –&gt;    return <code>string</code>:启用命令符</p>
+<p>The action-operations corresponding to the active-sign should be placed outside the loop, otherwise even if the active-sign is activated, the action will still only loop once.</p>
+<p>Switch the play button to inactive state</p>
+<p>Reset game <em>statistics</em>:统计信息</p>
+<p>Start a new game when the player clicks the play button</p>
+<p>If the game is inactive, draw play button</p>
+<p>Draw a color-filled button, and draw the text</p>
+<p>Render <code>msg</code> as an image and center its button</p>
+<p>The button label can only be created once</p>
+<p>Determine which parts of the game to run</p>
 <p>detect whether the aliens arrive the bottom of screen</p>
 <p>Aliens arrive at the bottom of the screen</p>
 <p>Create a group of new aliens and place the spaceship at the bottom center of the screen</p>
-<p>clear the list</p>
+<p>clear the list  —&gt; hide cursor –&gt; level up</p>
 <p>Responding to a spacecraft hit by an alien</p>
 <p>Initialize statistics that may change during the game’s running</p>
 <p>Track game statistics</p>
@@ -529,7 +630,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li></ul>
     </div>
   </div>
 
@@ -539,7 +640,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a>
+      <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a>
     </div>
   </div>
 
@@ -561,6 +662,14 @@
       <ul>
         
           <li>
+            <a href="/2021/03/30/python-code/">python-code</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/27/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/">新闻联播</a>
+          </li>
+        
+          <li>
             <a href="/2021/03/21/English-Study-2/">English Study 2</a>
           </li>
         
@@ -570,10 +679,6 @@
         
           <li>
             <a href="/2021/03/02/%E4%B8%80%E5%8F%B0%E7%94%B5%E8%84%91%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AAGitHub/">一台电脑使用多个GitHub</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/02/English-Study/">English Study</a>
           </li>
         
       </ul>
