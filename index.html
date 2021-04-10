@@ -71,6 +71,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-DataStructure" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/10/DataStructure/" class="article-date">
+  <time class="dt-published" datetime="2021-04-10T11:09:15.000Z" itemprop="datePublished">2021-04-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/04/10/DataStructure/">DataStructure</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1Bubble-Sort"><a href="#1Bubble-Sort" class="headerlink" title="1Bubble Sort"></a>1Bubble Sort</h2><p>The idea of bubbling sorting is that in each cycle, the big element goes down and the small one goes up, so that sorting is carried out. The specific process is as follows:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/bubblesort.gif"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span>(<span class="params">lst</span>):</span></span><br><span class="line"></span><br><span class="line">    unsorted_index = <span class="built_in">len</span>(lst) - <span class="number">1</span></span><br><span class="line">    sorted_sign = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> sorted_sign:</span><br><span class="line">        sorted_sign = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(unsorted_index):</span><br><span class="line">            <span class="keyword">if</span> lst[i] &gt; lst[i+<span class="number">1</span>]:</span><br><span class="line">                sorted_sign = <span class="literal">False</span></span><br><span class="line">                lst[i], lst[i+<span class="number">1</span>] = lst[i+<span class="number">1</span>], lst[i]</span><br><span class="line">        unsorted_index = unsorted_index - <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2Select-Sort"><a href="#2Select-Sort" class="headerlink" title="2Select Sort"></a>2Select Sort</h2><p>The idea of select sort is to find the smallest value in the first place in the process of each loop, loop to find other smaller values and place it in the next position, and sort by searching. The process is as follows:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/SelectSort.gif"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select_sort</span>(<span class="params">a</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(a)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n - <span class="number">1</span>):</span><br><span class="line">        min_index = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, n):</span><br><span class="line">            <span class="keyword">if</span> a[j] &lt; a[min_index]:</span><br><span class="line">                min_index = j</span><br><span class="line">        a[i], a[min_index] = a[min_index], a[i]</span><br><span class="line">    <span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+
+<h2 id="3Insert-Sort"><a href="#3Insert-Sort" class="headerlink" title="3Insert Sort"></a>3Insert Sort</h2><p>The idea of insertion sort is to compare with the previous elements. The big elements are placed at the back and the small ones are placed at the front. The specific process is as follows:</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/InsertSort.gif"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_sort</span>(<span class="params">a</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(a)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n):</span><br><span class="line">        cur_val = a[i]</span><br><span class="line">        pos = i</span><br><span class="line">        <span class="keyword">while</span> pos &gt; <span class="number">0</span> <span class="keyword">and</span> a[pos - <span class="number">1</span>] &gt; cur_val:</span><br><span class="line">            a[pos] = a[pos - <span class="number">1</span>]</span><br><span class="line">            pos -= <span class="number">1</span></span><br><span class="line">        a[pos] = cur_val</span><br><span class="line">    <span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/04/10/DataStructure/" data-id="cknbnd5n500007gf5184z1va7" data-title="DataStructure" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-世界观与方法论" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/04/10/%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AE%BA/" class="article-date">
@@ -93,18 +143,18 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="致世界的一封公开信"><a href="#致世界的一封公开信" class="headerlink" title="致世界的一封公开信"></a>致世界的一封公开信</h1><h2 id="致郭嗣琮教授的一封信"><a href="#致郭嗣琮教授的一封信" class="headerlink" title="致郭嗣琮教授的一封信"></a>致郭嗣琮教授的一封信</h2><p>​        尊敬的郭教授您好:</p>
+        <h1 id="致世界的一封公开信"><a href="#致世界的一封公开信" class="headerlink" title="致世界的一封公开信"></a>致世界的一封公开信</h1><h2 id="致郭嗣琮教授的一封信"><a href="#致郭嗣琮教授的一封信" class="headerlink" title="致郭嗣琮教授的一封信"></a>致郭嗣琮教授的一封信</h2><p>尊敬的郭教授您好:</p>
 <p>​        我是来自理学院信息与计算机科学17-1班的柳宇豪，在听您教授的模糊数课程以及前段时间有关神经网络的讲座中，对您印象颇深，临近毕业，在思想上有些许问题想与您交流，以下是我在思想上拥有的疑问，我将写下我困惑的地方，希望老师您能给予我帮助。</p>
-<p>​        一，郭教授您是如何看待当今中国的主要矛盾的？大三期间我读了许多书，譬如《毛选》、《红星照耀中国》、《中国私有化大逆转》、《哲学小词典》等等，读的越多我内心的疑惑也就越大。中国贫富逐步拉大，阶层固化日益严重，许多资本家即企业家越来越脱离群众，一些先富起来的人们在网络上丝毫不掩盖自己对于无产阶级的鄙视，并把原始资本的积累归结于自身的努力，（参考“欣小萌事件”、“后浪”、“打工人”）。我想请问，在这一时代背景下我们青年要做什么，该做什么？是团结起来组建左翼联盟尝试集体公社式经济合作社还是毕业后进入大厂实习找工作？</p>
+<p>​        一，郭教授您是如何看待当今中国的主要矛盾的？大三期间我读了许多书，譬如《毛选》、《红星照耀中国》、《中国私有化大逆转》、《哲学小词典》等等，读的越多我内心的疑惑也就越大。中国贫富逐步拉大，阶层固化日益严重，许多资本家即企业家越来越脱离群众，一些先富起来的人们丝毫不掩盖自己对于无产阶级的鄙视，并把原始资本的积累归结于自身的努力，（参考“欣小萌事件”、“后浪”、“打工人”等）。我想请问，在这一时代背景下我们青年要做什么，该做什么？是团结起来组建左翼联盟尝试集体公社式经济合作社还是毕业后进入大厂实习找工作？</p>
 <p>​        二、承接上一个问题，在面对日益严重的阶级矛盾和充满整个社会的唯功利主义、唯实用主义以及资产阶级人性论的大环境中，如果我们青年选择尝试组建左翼联盟，实行集体经济，以辩证唯物主义和阶级论作为思想基础来创业，以创建一个内部没有资本压迫的公司，这种可能性实现的概率有多大？政府允不允许这一新企业的出现？我们又该如何保持自我的独立性？您对我们这一青年又有什么建议和看法？</p>
-<p>​        三、从形式上前两问题是不同的两个问题，但从本质上讲又是同一个问题，即我们青年大学生在这一时代背景下该怎么做的问题，而第三个问题是关乎我个人的一点疑问。我想请问郭教授您是如何看待爱情的？如何处理爱情与理想或称现实的关系？</p>
-<p>​        以上三点是我在大学生涯所面临的最大不解和有疑问的地方，希望郭教授您百忙之中能抽出部分时间帮我解答这些问题，如果条件允许，线下见面交谈这些问题更好。期待着您的回信。</p>
+<p>​        三、从形式上前两问题是不同的两个问题，但从本质上讲又是同一个问题，即我们青年大学生在这一时代背景下该怎么做的问题，而第三个问题是关乎我个人的一点疑问。我想请问郭教授您是如何看待爱情的？如何处理爱情与理想（现实）的关系？</p>
+<p>​        以上三点是我在大学生涯所面临的最大不解和有疑问的地方，希望郭教授您百忙之中能抽出部分时间帮我解答这些问题，如果条件允许，线下见面交谈这些问题更好。真诚地期待着您的回信。</p>
 <p>辞职</p>
 <p>敬礼</p>
 <p>柳宇豪</p>
 <p>2021年4月10日</p>
-<p>附录：</p>
-<p>联系方式：微信/QQ1982164667        </p>
+<p>联系方式：</p>
+<p>微信/QQ1982164667        </p>
 <p>手机：13154187195  </p>
 <p>个人网站：starfire1226.top</p>
 
@@ -333,7 +383,8 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="English-Study-Two"><a href="#English-Study-Two" class="headerlink" title="English Study Two"></a>English Study Two</h1><h2 id="Project2DataVisualization"><a href="#Project2DataVisualization" class="headerlink" title="Project2DataVisualization"></a>Project2DataVisualization</h2><p>Constant time and linear time</p>
+        <h1 id="English-Study-Two"><a href="#English-Study-Two" class="headerlink" title="English Study Two"></a>English Study Two</h1><h2 id="Project2DataVisualization"><a href="#Project2DataVisualization" class="headerlink" title="Project2DataVisualization"></a>Project2DataVisualization</h2><p>Ignore constants</p>
+<p>Constant time and linear time</p>
 <p>Use mathematics to express the step length</p>
 <p>deprecator</p>
 <p>Set the axis scale</p>
@@ -936,6 +987,10 @@
       <ul>
         
           <li>
+            <a href="/2021/04/10/DataStructure/">DataStructure</a>
+          </li>
+        
+          <li>
             <a href="/2021/04/10/%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AE%BA/">世界观与方法论</a>
           </li>
         
@@ -949,10 +1004,6 @@
         
           <li>
             <a href="/2021/03/27/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/">新闻联播</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/21/English-Study-2/">English Study 2</a>
           </li>
         
       </ul>
