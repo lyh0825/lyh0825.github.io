@@ -94,7 +94,7 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h1 id="Daily-Python-Problems"><a href="#Daily-Python-Problems" class="headerlink" title="Daily Python Problems"></a>Daily Python Problems</h1><p>Weekly issues(start:2021/4/16)</p>
-<h2 id="First-Week-4-16-4-23"><a href="#First-Week-4-16-4-23" class="headerlink" title="First Week(4/16-4/23)"></a>First Week(4/16-4/23)</h2><h3 id="Q1-Split-string-into-individual-letters"><a href="#Q1-Split-string-into-individual-letters" class="headerlink" title="Q1:Split string into individual letters"></a>Q1:Split string into individual letters</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&#x27;ab_cdefg&#x27;</span></span><br><span class="line">y = []</span><br><span class="line">alphabet = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;h&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;j&#x27;</span>, <span class="string">&#x27;q&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;p&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;q&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;s&#x27;</span>, <span class="string">&#x27;t&#x27;</span>, <span class="string">&#x27;u&#x27;</span>, <span class="string">&#x27;v&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, <span class="string">&#x27;x&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;z&#x27;</span>]</span><br><span class="line"><span class="comment"># another method about calling alphabet</span></span><br><span class="line"><span class="comment"># alphabet = [chr(i) for i in range(97, 123)]</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> string:</span><br><span class="line">    print(i)</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> alphabet:</span><br><span class="line">        y.append(i)</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
+<h2 id="First-Week-4-16-4-23"><a href="#First-Week-4-16-4-23" class="headerlink" title="First Week(4/16-4/23)"></a>First Week(4/16-4/23)</h2><h3 id="Q2"><a href="#Q2" class="headerlink" title="Q2:"></a>Q2:</h3><h3 id="Q1-Split-string-into-individual-letters"><a href="#Q1-Split-string-into-individual-letters" class="headerlink" title="Q1:Split string into individual letters"></a>Q1:Split string into individual letters</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">&#x27;ab_cdefg&#x27;</span></span><br><span class="line">y = []</span><br><span class="line">alphabet = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>, <span class="string">&#x27;g&#x27;</span>, <span class="string">&#x27;h&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;j&#x27;</span>, <span class="string">&#x27;q&#x27;</span>, <span class="string">&#x27;l&#x27;</span>, <span class="string">&#x27;m&#x27;</span>, <span class="string">&#x27;n&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;p&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;q&#x27;</span>, <span class="string">&#x27;r&#x27;</span>, <span class="string">&#x27;s&#x27;</span>, <span class="string">&#x27;t&#x27;</span>, <span class="string">&#x27;u&#x27;</span>, <span class="string">&#x27;v&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, <span class="string">&#x27;x&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;y&#x27;</span>, <span class="string">&#x27;z&#x27;</span>]</span><br><span class="line"><span class="comment"># another method about calling alphabet</span></span><br><span class="line"><span class="comment"># alphabet = [chr(i) for i in range(97, 123)]</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> string:</span><br><span class="line">    print(i)</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> alphabet:</span><br><span class="line">        y.append(i)</span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>number(0<del>9):the representation of ASCII is 48</del>57</li>
@@ -142,7 +142,32 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Implement-Data-Structure"><a href="#Implement-Data-Structure" class="headerlink" title="Implement Data Structure"></a>Implement Data Structure</h1><h2 id="Part-1-Introduction"><a href="#Part-1-Introduction" class="headerlink" title="Part 1 Introduction"></a>Part 1 Introduction</h2><h3 id="Short-Sentences"><a href="#Short-Sentences" class="headerlink" title="Short Sentences"></a>Short Sentences</h3><p>Uppercase letter</p>
+        <h1 id="Implement-Data-Structure"><a href="#Implement-Data-Structure" class="headerlink" title="Implement Data Structure"></a>Implement Data Structure</h1><h2 id="Part-1-Introduction"><a href="#Part-1-Introduction" class="headerlink" title="Part 1 Introduction"></a>Part 1 Introduction</h2><h3 id="Short-Sentences"><a href="#Short-Sentences" class="headerlink" title="Short Sentences"></a>Short Sentences</h3><p>Image recognition process</p>
+<p>representation learning development history</p>
+<p>Input layer    ==&gt;    Hidden layer    ==&gt;    Output layer</p>
+<p>Professional Edition</p>
+<p>enhanced CNN </p>
+<p>download dataset</p>
+<p>Paper framework</p>
+<p>Introduction to unsupervised learning</p>
+<p>Mechanical learning</p>
+<p>Marked data</p>
+<p>format specification ==&gt; syntax specification</p>
+<p>Exception handling contains[Syntax Error  ==&gt;  logical error]</p>
+<p>Separate ==&gt;  Delimiter(sep=””)</p>
+<p>Control structure contains Iteration(while) and branch(if/elif/else)</p>
+<p>Single branch structure</p>
+<p>Absolute value</p>
+<p>return a boolean value</p>
+<p>Unordered collection</p>
+<p>Set does not allow duplicate elements </p>
+<p>Heterogeneous data</p>
+<p>Tabs：<code>制表符</code></p>
+<p>Newline:<code>换行符</code></p>
+<p>Space:<code>空格</code></p>
+<p>Thought report:<code>思想汇报</code></p>
+<p>Experience:<code>心得体会</code></p>
+<p>Uppercase letter</p>
 <p>Lower case letters</p>
 <p>Built-in collection data type(set/list/dictionary/hash map/tuple/string)</p>
 <p>Built-in atomic data type(binary data type/float/int/ : contains Numerical class    Boolean value)</p>
@@ -163,7 +188,8 @@
 <p>square root    ==    Cube</p>
 <p>what is the computer science</p>
 <p>the process of solving questions</p>
-<h3 id="Word-List"><a href="#Word-List" class="headerlink" title="Word List"></a>Word List</h3><p>encapsulation    annotation    notation    assign</p>
+<h3 id="Word-List"><a href="#Word-List" class="headerlink" title="Word List"></a>Word List</h3><p>Modifiable    sequence    grammar    Interactive</p>
+<p>encapsulation    annotation    notation    assign</p>
 <p>alphabet    introduction    Objectives of this chapter</p>
 <p>getting Started    interface    Low-level details</p>
 
@@ -486,7 +512,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>严格地说这并不是一封信。</p>
+        <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><h2 id="四月"><a href="#四月" class="headerlink" title="四月"></a>四月</h2><p>严格地说这并不是一封信。</p>
 <p>我是一个比较怀旧和喜欢记录的人，我并不相信爱情，或者说不相信自己能遇到爱情，但是最近不断在我脑海里出现的思想，已经严重影响了我的正常生活，那就去正视和解决吧。</p>
 <p>最初，对你只有感谢，多次建模合作后，也没感觉你有什么特别，考研时，甚至觉得你些许讨厌。</p>
 <p>经过断断续续的了解和认识，我发现自己喜欢上了你，理性让我克制并淡化这种感觉，但，在此我并不想讨论感性与理性，也不想讨论世界观和方法论，我只知道此刻我喜欢上了你，这绝不是一时的冲动和激情，是的，我喜欢你。</p>
@@ -498,25 +524,25 @@
 <p>已经23:35了，电脑快要没电了，有电也写不完我此刻想说的话和对你的爱，那么这篇序就到这里了。</p>
 <p>最后，我喜欢你。</p>
 <p>写于二零二一年四月六日二十三点三十七分辽宁工程技术大学七舍四三三</p>
-<h2 id="2021-4-5"><a href="#2021-4-5" class="headerlink" title="2021.4.5"></a>2021.4.5</h2><p>纪念日</p>
-<h2 id="2021-4-6"><a href="#2021-4-6" class="headerlink" title="2021.4.6"></a>2021.4.6</h2><p>9:25</p>
+<h3 id="2021-4-5"><a href="#2021-4-5" class="headerlink" title="2021.4.5"></a>2021.4.5</h3><p>纪念日</p>
+<h3 id="2021-4-6"><a href="#2021-4-6" class="headerlink" title="2021.4.6"></a>2021.4.6</h3><p>9:25</p>
 <p>请原谅我没在QQ和朋友圈特意发文公开你的存在，我并不认为两个人的爱情需要得到其他人的关注，不过你放心，我会将你逐一介绍给我所有的朋友和家人。</p>
 <p>22:35</p>
 <p>什么是喜欢？这个问题困扰着我，我反复思索着，尝试用尽自己的一切知识着解释喜欢，现在我明白了，喜欢是想多看你一眼。</p>
-<h2 id="2021-4-7"><a href="#2021-4-7" class="headerlink" title="2021.4.7"></a>2021.4.7</h2><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/IMG_2378.PNG"></p>
+<h3 id="2021-4-7"><a href="#2021-4-7" class="headerlink" title="2021.4.7"></a>2021.4.7</h3><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/IMG_2378.PNG"></p>
 <p>第一次以伴侣的方式通话</p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/IMG_2379.PNG"></p>
-<h2 id="2021-4-8"><a href="#2021-4-8" class="headerlink" title="2021.4.8"></a>2021.4.8</h2><p>21:57</p>
+<h3 id="2021-4-8"><a href="#2021-4-8" class="headerlink" title="2021.4.8"></a>2021.4.8</h3><p>21:57</p>
 <p>还记得今天火锅和你说的一句话，是要把娶你这件事放到日程了</p>
 <p>图书馆里偷偷看你，很美</p>
 <p>咬了你的手，嘴感尚可</p>
-<h2 id="2021-4-9"><a href="#2021-4-9" class="headerlink" title="2021.4.9"></a>2021.4.9</h2><p>21:29</p>
+<h3 id="2021-4-9"><a href="#2021-4-9" class="headerlink" title="2021.4.9"></a>2021.4.9</h3><p>21:29</p>
 <p>毕业去哪是个问题也不是个问题，你只要好好考研等我娶你</p>
 <p>你说研究生毕业稳定后父母才考虑，我也知道你不并想让自己“耽误”了我</p>
 <p>那么还有三四年时间，我爱你，虽然在这以后时间段里可能会做出与爱你相反的决定</p>
 <p>比如去了一个较远的地方工作，比如默默无闻创业</p>
 <p>不要紧，我相信你能理解我，这一切都是为了更加接近你</p>
-<h2 id="2021-4-10"><a href="#2021-4-10" class="headerlink" title="2021.4.10"></a>2021.4.10</h2><p>5:14</p>
+<h3 id="2021-4-10"><a href="#2021-4-10" class="headerlink" title="2021.4.10"></a>2021.4.10</h3><p>5:14</p>
 <p>有两件事，这两天应该和你谈谈，</p>
 <p>一、你现在的主要任务是学习，是考研， 不要多想我怎么办和以后怎么办，这些问题并不是你当前的主要问题</p>
 <p>二、你产生该怎么办这一想法的根本原因在于我的不稳定性，不过你放心，我知道自己应该怎么做</p>
@@ -533,26 +559,41 @@
 <p>22:30</p>
 <p>很高兴你从伤心的情绪中恢复过来，事物的发展总是内部矛盾作用的结果，你我作为物质的载体也是事物，你能很快地从伤心的环节中走出来让我很欣慰，按照事物发展的规律，在备战考研期间你还会有或大或小的情绪波动，那我们也不怕，有了这次经验你也懂了如何处理这对矛盾了。对了还有一件事，我想吻你。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/kissyou.png"></p>
-<h2 id="2021-4-11"><a href="#2021-4-11" class="headerlink" title="2021.4.11"></a>2021.4.11</h2><p>22:38</p>
+<h3 id="2021-4-11"><a href="#2021-4-11" class="headerlink" title="2021.4.11"></a>2021.4.11</h3><p>22:38</p>
 <p>今天发生很多开心的事，在图书馆我吻了你的额头和脸颊，虽然可能不算吻，但我很开心。</p>
 <p>我还问了你<code>昨天我想吻你,你说我太逗了的原因</code>，你有点害羞，不让我追问，我能看出来，你也期待着吻你，那就找个合适的时机。</p>
 <p>当询问我明天是否升旗时说“爱你哟”，我无法形容此刻的心情，就像碰到一本好书，我很开心。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/loveyou1.png"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/loveyou2.png"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/loveyou3.png"></p>
-<h2 id="2021-4-12"><a href="#2021-4-12" class="headerlink" title="2021.4.12"></a>2021.4.12</h2><p>22:07</p>
+<h3 id="2021-4-12"><a href="#2021-4-12" class="headerlink" title="2021.4.12"></a>2021.4.12</h3><p>22:07</p>
 <p>今天你吻了我脸颊，我也吻了你，</p>
 <p>这是我除了看书之外最喜欢的事情</p>
 <p>我还想吻你，天天吻你。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/2021.4.12.png"></p>
 <p>我再给你写这封信呢，爱你，我要天天吻你。</p>
-<h2 id="2021-4-13"><a href="#2021-4-13" class="headerlink" title="2021.4.13"></a>2021.4.13</h2><p>22:13</p>
+<h3 id="2021-4-13"><a href="#2021-4-13" class="headerlink" title="2021.4.13"></a>2021.4.13</h3><p>22:13</p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/4.13.png"></p>
-<h2 id="2021-4-14"><a href="#2021-4-14" class="headerlink" title="2021.4.14"></a>2021.4.14</h2><p>15:10</p>
+<h3 id="2021-4-14"><a href="#2021-4-14" class="headerlink" title="2021.4.14"></a>2021.4.14</h3><p>15:10</p>
 <p>电话里你说考研期间会好好听话，会学习，不会乱玩，我当然相信你。</p>
-<h2 id="2021-4-15"><a href="#2021-4-15" class="headerlink" title="2021.4.15"></a>2021.4.15</h2><p>22:16</p>
+<h3 id="2021-4-15"><a href="#2021-4-15" class="headerlink" title="2021.4.15"></a>2021.4.15</h3><p>22:16</p>
 <p>和于漫交流后你问以后我们会不会吵架？答案是否定的，当然这并不意味着我们在相处的过程中没有矛盾，一个人还会有自我矛盾的时候更何况两个人，之所以说我们不会吵架是因为吵架是处理矛盾的一种方式，我并不喜欢这种方式且认为它单纯的是一种情绪的宣泄对于问题的解决没有任何作用。</p>
 <p>我喜欢解决矛盾，在我们有矛盾爆发的情况下，我更害怕你会冷战不交流，一个人去解决两个人之间的矛盾其结果必然是灾难，我希望在矛盾爆发的时候，你我都能冷静，即是那时你不喜欢讲道理也没关系，只要交流，你我之间的小插曲总会解决，因为我爱你，我也相信你不会触及原则性问题，正如我会娶你，你也要相信我。</p>
+<h3 id="2021-4-16"><a href="#2021-4-16" class="headerlink" title="2021.4.16"></a>2021.4.16</h3><p>21:22</p>
+<p>好像有点事情想和你说，又忽然不知道怎么告诉你，或者说还没把我说清楚，那就等清楚再告诉你吧。</p>
+<p>对了还有一件趣事，从另一层面也表明了最近不午休状态是比较差的，应该把我俩的聊天框与群聊天框分离开来。</p>
+<h3 id="2021-4-17"><a href="#2021-4-17" class="headerlink" title="2021.4.17"></a>2021.4.17</h3><p>22:27</p>
+<p>吻你是我一天中最期待的时刻，我喜欢吻你，喜欢吻你的耳朵、脸庞、嘴唇和你的一切。</p>
+<h3 id="2021-4-18"><a href="#2021-4-18" class="headerlink" title="2021.4.18"></a>2021.4.18</h3><p>22:23</p>
+<p>今天是目前为止吻你最多的一天，也touch you，and it can be bigger after touching.</p>
+<p>拍了四张照片我都喜欢，更喜欢可爱的你。</p>
+<p>晚上我们也讨论了很多，首先一点，你很美，尤其在我眼里，这一点不要质疑。</p>
+<p>我们都要努力。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/4.18.png"></p>
+<p>不要怕宝儿，五一之前能好的。</p>
+<h3 id="2021-4-19"><a href="#2021-4-19" class="headerlink" title="2021.4.19"></a>2021.4.19</h3><p>22:45</p>
+<p>中午有些不自在，不自在在主要原因在于你我对待异性关系的差异性或者说处理异性关系的差异性，对于你说都认识/都是熟人/怕尴尬这样的词汇让我觉得很不自在，因为上次也是有人这样对我说的，我当然知道你和别人不同，不过还是有点心情上的落差，我很怕你不会处理或者处理的不好让别人误以为你没伴侣，但同时我又相信你能处理好，这种矛盾我想会一直持续很长时间，我也要慢慢克服这种感觉。看书吧，我想多看些书，或者多了解下你，你让我着迷又让我害怕。好像很久没在这里说过我爱你了…</p>
+<p>我爱你。</p>
 
       
     </div>
