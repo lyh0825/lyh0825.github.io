@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Infectious-Disease-Model | Drink`s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="模型一：SI-Model1234567891011121314151617181920212223242526272829303132333435363738394041import scipy.integrate as spiimport numpy as npimport matplotlib.pyplot as plt# N为人群总数N &#x3D; 10000# β为传染率系数beta &#x3D; 0.25">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Infectious-Disease-Model">
+<meta property="og:url" content="https://drinkle.top/2021/04/30/Infectious-Disease-Model/index.html">
+<meta property="og:site_name" content="Drink&#96;s Blog">
+<meta property="og:description" content="模型一：SI-Model1234567891011121314151617181920212223242526272829303132333435363738394041import scipy.integrate as spiimport numpy as npimport matplotlib.pyplot as plt# N为人群总数N &#x3D; 10000# β为传染率系数beta &#x3D; 0.25">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-30T02:11:59.000Z">
+<meta property="article:modified_time" content="2021-04-30T02:29:52.591Z">
+<meta property="article:author" content="Drink">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Drink`s Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Drink`s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://drinkle.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Infectious-Disease-Model" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/04/30/Infectious-Disease-Model/" class="article-date">
+  <time class="dt-published" datetime="2021-04-30T02:11:59.000Z" itemprop="datePublished">2021-04-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Infectious-Disease-Model
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="模型一：SI-Model"><a href="#模型一：SI-Model" class="headerlink" title="模型一：SI-Model"></a>模型一：SI-Model</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scipy.integrate <span class="keyword">as</span> spi</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># N为人群总数</span></span><br><span class="line">N = <span class="number">10000</span></span><br><span class="line"><span class="comment"># β为传染率系数</span></span><br><span class="line">beta = <span class="number">0.25</span></span><br><span class="line"><span class="comment"># gamma为恢复率系数</span></span><br><span class="line">gamma = <span class="number">0</span></span><br><span class="line"><span class="comment"># I_0为感染者的初始人数</span></span><br><span class="line">I_0 = <span class="number">1</span></span><br><span class="line"><span class="comment"># S_0为易感者的初始人数</span></span><br><span class="line">S_0 = N - I_0</span><br><span class="line"><span class="comment"># T为传播时间</span></span><br><span class="line">T = <span class="number">150</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># INI为初始状态下的数组</span></span><br><span class="line">INI = (S_0,I_0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">funcSI</span>(<span class="params">inivalue,_</span>):</span></span><br><span class="line">    Y = np.zeros(<span class="number">2</span>)</span><br><span class="line">    X = inivalue</span><br><span class="line">    <span class="comment"># 易感个体变化</span></span><br><span class="line">    Y[<span class="number">0</span>] = - (beta * X[<span class="number">0</span>] * X[<span class="number">1</span>]) / N + gamma * X[<span class="number">1</span>]</span><br><span class="line">    <span class="comment"># 感染个体变化</span></span><br><span class="line">    Y[<span class="number">1</span>] = (beta * X[<span class="number">0</span>] * X[<span class="number">1</span>]) / N - gamma * X[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> Y</span><br><span class="line"></span><br><span class="line">T_range = np.arange(<span class="number">0</span>,T + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">RES = spi.odeint(funcSI,INI,T_range)</span><br><span class="line"></span><br><span class="line">plt.plot(RES[:,<span class="number">0</span>],color = <span class="string">&#x27;darkblue&#x27;</span>,label = <span class="string">&#x27;Susceptible&#x27;</span>,marker = <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">plt.plot(RES[:,<span class="number">1</span>],color = <span class="string">&#x27;red&#x27;</span>,label = <span class="string">&#x27;Infection&#x27;</span>,marker = <span class="string">&#x27;.&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;SI Model&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Day&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Number&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="模型二：SIS-Model"><a href="#模型二：SIS-Model" class="headerlink" title="模型二：SIS-Model"></a>模型二：SIS-Model</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import scipy.integrate as spi</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># N为人群总数</span><br><span class="line">N &#x3D; 10000</span><br><span class="line"># β为传染率系数</span><br><span class="line">beta &#x3D; 0.25</span><br><span class="line"># gamma为恢复率系数</span><br><span class="line">gamma &#x3D; 0.05</span><br><span class="line"># I_0为感染者的初始人数</span><br><span class="line">I_0 &#x3D; 1</span><br><span class="line"># S_0为易感者的初始人数</span><br><span class="line">S_0 &#x3D; N - I_0</span><br><span class="line"># T为传播时间</span><br><span class="line">T &#x3D; 150</span><br><span class="line"></span><br><span class="line"># INI为初始状态下的数组</span><br><span class="line">INI &#x3D; (S_0,I_0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def funcSIS(inivalue,_):</span><br><span class="line">    Y &#x3D; np.zeros(2)</span><br><span class="line">    X &#x3D; inivalue</span><br><span class="line">    # 易感个体变化</span><br><span class="line">    Y[0] &#x3D; - (beta * X[0]) &#x2F; N * X[1] + gamma * X[1]</span><br><span class="line">    # 感染个体变化</span><br><span class="line">    Y[1] &#x3D; (beta * X[0] * X[1]) &#x2F; N - gamma * X[1]</span><br><span class="line">    return Y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">T_range &#x3D; np.arange(0,T + 1)</span><br><span class="line"></span><br><span class="line">RES &#x3D; spi.odeint(funcSIS,INI,T_range)</span><br><span class="line"></span><br><span class="line">plt.plot(RES[:,0],color &#x3D; &#39;darkblue&#39;,label &#x3D; &#39;Susceptible&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,1],color &#x3D; &#39;red&#39;,label &#x3D; &#39;Infection&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.title(&#39;SIS Model&#39;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel(&#39;Day&#39;)</span><br><span class="line">plt.ylabel(&#39;Number&#39;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="模型三：SIR-Model"><a href="#模型三：SIR-Model" class="headerlink" title="模型三：SIR-Model"></a>模型三：SIR-Model</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import scipy.integrate as spi</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># N为人群总数</span><br><span class="line">N &#x3D; 10000</span><br><span class="line"># β为传染率系数</span><br><span class="line">beta &#x3D; 0.25</span><br><span class="line"># gamma为恢复率系数</span><br><span class="line">gamma &#x3D; 0.05</span><br><span class="line"># I_0为感染者的初始人数</span><br><span class="line">I_0 &#x3D; 1</span><br><span class="line"># R_0为治愈者的初始人数</span><br><span class="line">R_0 &#x3D; 0</span><br><span class="line"># S_0为易感者的初始人数</span><br><span class="line">S_0 &#x3D; N - I_0 - R_0</span><br><span class="line"># T为传播时间</span><br><span class="line">T &#x3D; 150</span><br><span class="line"></span><br><span class="line"># INI为初始状态下的数组</span><br><span class="line">INI &#x3D; (S_0,I_0,R_0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def funcSIR(inivalue,_):</span><br><span class="line">    Y &#x3D; np.zeros(3)</span><br><span class="line">    X &#x3D; inivalue</span><br><span class="line">    # 易感个体变化</span><br><span class="line">    Y[0] &#x3D; - (beta * X[0] * X[1]) &#x2F; N</span><br><span class="line">    # 感染个体变化</span><br><span class="line">    Y[1] &#x3D; (beta * X[0] * X[1]) &#x2F; N - gamma * X[1]</span><br><span class="line">    # 治愈个体变化</span><br><span class="line">    Y[2] &#x3D; gamma * X[1]</span><br><span class="line">    return Y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">T_range &#x3D; np.arange(0,T + 1)</span><br><span class="line"></span><br><span class="line">RES &#x3D; spi.odeint(funcSIR,INI,T_range)</span><br><span class="line"></span><br><span class="line">plt.plot(RES[:,0],color &#x3D; &#39;darkblue&#39;,label &#x3D; &#39;Susceptible&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,1],color &#x3D; &#39;red&#39;,label &#x3D; &#39;Infection&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,2],color &#x3D; &#39;green&#39;,label &#x3D; &#39;Recovery&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.title(&#39;SIR Model&#39;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel(&#39;Day&#39;)</span><br><span class="line">plt.ylabel(&#39;Number&#39;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="模型四：SIRS-Model"><a href="#模型四：SIRS-Model" class="headerlink" title="模型四：SIRS-Model"></a>模型四：SIRS-Model</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">import scipy.integrate as spi</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># N为人群总数</span><br><span class="line">N &#x3D; 10000</span><br><span class="line"># β为传染率系数</span><br><span class="line">beta &#x3D; 0.25</span><br><span class="line"># gamma为恢复率系数</span><br><span class="line">gamma &#x3D; 0.05</span><br><span class="line"># Ts为抗体持续时间</span><br><span class="line">Ts &#x3D; 7</span><br><span class="line"># I_0为感染者的初始人数</span><br><span class="line">I_0 &#x3D; 1</span><br><span class="line"># R_0为治愈者的初始人数</span><br><span class="line">R_0 &#x3D; 0</span><br><span class="line"># S_0为易感者的初始人数</span><br><span class="line">S_0 &#x3D; N - I_0 - R_0</span><br><span class="line"># T为传播时间</span><br><span class="line">T &#x3D; 150</span><br><span class="line"></span><br><span class="line"># INI为初始状态下的数组</span><br><span class="line">INI &#x3D; (S_0,I_0,R_0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def funcSIRS(inivalue,_):</span><br><span class="line">    Y &#x3D; np.zeros(3)</span><br><span class="line">    X &#x3D; inivalue</span><br><span class="line">    # 易感个体变化</span><br><span class="line">    Y[0] &#x3D; - (beta * X[0] * X[1]) &#x2F; N + X[2] &#x2F; Ts</span><br><span class="line">    # 感染个体变化</span><br><span class="line">    Y[1] &#x3D; (beta * X[0] * X[1]) &#x2F; N - gamma * X[1]</span><br><span class="line">    # 治愈个体变化</span><br><span class="line">    Y[2] &#x3D; gamma * X[1] - X[2] &#x2F; Ts</span><br><span class="line">    return Y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">T_range &#x3D; np.arange(0,T + 1)</span><br><span class="line"></span><br><span class="line">RES &#x3D; spi.odeint(funcSIRS,INI,T_range)</span><br><span class="line"></span><br><span class="line">plt.plot(RES[:,0],color &#x3D; &#39;darkblue&#39;,label &#x3D; &#39;Susceptible&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,1],color &#x3D; &#39;red&#39;,label &#x3D; &#39;Infection&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,2],color &#x3D; &#39;green&#39;,label &#x3D; &#39;Recovery&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.title(&#39;SIRS Model&#39;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel(&#39;Day&#39;)</span><br><span class="line">plt.ylabel(&#39;Number&#39;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="模型五：SEIR-Model"><a href="#模型五：SEIR-Model" class="headerlink" title="模型五：SEIR-Model"></a>模型五：SEIR-Model</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">import scipy.integrate as spi</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># N为人群总数</span><br><span class="line">N &#x3D; 10000</span><br><span class="line"># β为传染率系数</span><br><span class="line">beta &#x3D; 0.6</span><br><span class="line"># gamma为恢复率系数</span><br><span class="line">gamma &#x3D; 0.1</span><br><span class="line"># Te为疾病潜伏期</span><br><span class="line">Te &#x3D; 14</span><br><span class="line"># I_0为感染者的初始人数</span><br><span class="line">I_0 &#x3D; 1</span><br><span class="line"># E_0为潜伏者的初始人数</span><br><span class="line">E_0 &#x3D; 0</span><br><span class="line"># R_0为治愈者的初始人数</span><br><span class="line">R_0 &#x3D; 0</span><br><span class="line"># S_0为易感者的初始人数</span><br><span class="line">S_0 &#x3D; N - I_0 - E_0 - R_0</span><br><span class="line"># T为传播时间</span><br><span class="line">T &#x3D; 150</span><br><span class="line"></span><br><span class="line"># INI为初始状态下的数组</span><br><span class="line">INI &#x3D; (S_0,E_0,I_0,R_0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def funcSEIR(inivalue,_):</span><br><span class="line">    Y &#x3D; np.zeros(4)</span><br><span class="line">    X &#x3D; inivalue</span><br><span class="line">    # 易感个体变化</span><br><span class="line">    Y[0] &#x3D; - (beta * X[0] * X[2]) &#x2F; N</span><br><span class="line">    # 潜伏个体变化</span><br><span class="line">    Y[1] &#x3D; (beta * X[0] * X[2]) &#x2F; N - X[1] &#x2F; Te</span><br><span class="line">    # 感染个体变化</span><br><span class="line">    Y[2] &#x3D; X[1] &#x2F; Te - gamma * X[2]</span><br><span class="line">    # 治愈个体变化</span><br><span class="line">    Y[3] &#x3D; gamma * X[2]</span><br><span class="line">    return Y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">T_range &#x3D; np.arange(0,T + 1)</span><br><span class="line"></span><br><span class="line">RES &#x3D; spi.odeint(funcSEIR,INI,T_range)</span><br><span class="line"></span><br><span class="line">plt.plot(RES[:,0],color &#x3D; &#39;darkblue&#39;,label &#x3D; &#39;Susceptible&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,1],color &#x3D; &#39;orange&#39;,label &#x3D; &#39;Exposed&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,2],color &#x3D; &#39;red&#39;,label &#x3D; &#39;Infection&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,3],color &#x3D; &#39;green&#39;,label &#x3D; &#39;Recovery&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line"></span><br><span class="line">plt.title(&#39;SEIR Model&#39;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel(&#39;Day&#39;)</span><br><span class="line">plt.ylabel(&#39;Number&#39;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="模型六：SEIRS-Model"><a href="#模型六：SEIRS-Model" class="headerlink" title="模型六：SEIRS-Model"></a>模型六：SEIRS-Model</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">import scipy.integrate as spi</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># N为人群总数</span><br><span class="line">N &#x3D; 10000</span><br><span class="line"># β为传染率系数</span><br><span class="line">beta &#x3D; 0.6</span><br><span class="line"># gamma为恢复率系数</span><br><span class="line">gamma &#x3D; 0.1</span><br><span class="line"># Ts为抗体持续时间</span><br><span class="line">Ts &#x3D; 7</span><br><span class="line"># Te为疾病潜伏期</span><br><span class="line">Te &#x3D; 14</span><br><span class="line"># I_0为感染者的初始人数</span><br><span class="line">I_0 &#x3D; 1</span><br><span class="line"># E_0为潜伏者的初始人数</span><br><span class="line">E_0 &#x3D; 0</span><br><span class="line"># R_0为治愈者的初始人数</span><br><span class="line">R_0 &#x3D; 0</span><br><span class="line"># S_0为易感者的初始人数</span><br><span class="line">S_0 &#x3D; N - I_0 - E_0 - R_0</span><br><span class="line"># T为传播时间</span><br><span class="line">T &#x3D; 150</span><br><span class="line"></span><br><span class="line"># INI为初始状态下的数组</span><br><span class="line">INI &#x3D; (S_0,E_0,I_0,R_0)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def funcSEIRS(inivalue,_):</span><br><span class="line">    Y &#x3D; np.zeros(4)</span><br><span class="line">    X &#x3D; inivalue</span><br><span class="line">    # 易感个体变化</span><br><span class="line">    Y[0] &#x3D; - (beta * X[0] * X[2]) &#x2F; N + X[3] &#x2F; Ts</span><br><span class="line">    # 潜伏个体变化</span><br><span class="line">    Y[1] &#x3D; (beta * X[0] * X[2]) &#x2F; N - X[1] &#x2F; Te</span><br><span class="line">    # 感染个体变化</span><br><span class="line">    Y[2] &#x3D; X[1] &#x2F; Te - gamma * X[2]</span><br><span class="line">    # 治愈个体变化</span><br><span class="line">    Y[3] &#x3D; gamma * X[2] - X[3] &#x2F; Ts</span><br><span class="line">    return Y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">T_range &#x3D; np.arange(0,T + 1)</span><br><span class="line"></span><br><span class="line">RES &#x3D; spi.odeint(funcSEIRS,INI,T_range)</span><br><span class="line"></span><br><span class="line">plt.plot(RES[:,0],color &#x3D; &#39;darkblue&#39;,label &#x3D; &#39;Susceptible&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,1],color &#x3D; &#39;orange&#39;,label &#x3D; &#39;Exposed&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,2],color &#x3D; &#39;red&#39;,label &#x3D; &#39;Infection&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line">plt.plot(RES[:,3],color &#x3D; &#39;green&#39;,label &#x3D; &#39;Recovery&#39;,marker &#x3D; &#39;.&#39;)</span><br><span class="line"></span><br><span class="line">plt.title(&#39;SEIRS Model&#39;)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.xlabel(&#39;Day&#39;)</span><br><span class="line">plt.ylabel(&#39;Number&#39;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/04/30/Infectious-Disease-Model/" data-id="cko3p7vbx0000qkf501zfd1zy" data-title="Infectious-Disease-Model" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/30/Nerual-Network/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Nerual-Network</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English-Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/English-Study/" style="font-size: 10px;">English-Study</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/04/30/Infectious-Disease-Model/">Infectious-Disease-Model</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/30/Nerual-Network/">Nerual-Network</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/16/Python-Problems/">Python-Problems</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/15/English-Study-4/">English-Study-4</a>
+          </li>
+        
+          <li>
+            <a href="/2021/04/14/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A%E7%AB%A0%E7%A8%8B/">左翼同盟会章程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Drink<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
