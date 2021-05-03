@@ -6,12 +6,12 @@
   
   <title>DataStructure | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="GCD_LCMGCD: greatest common divisor Euclid Algorithm:欧几里得算法 12345678def gcd(n, m):	while n % m !&#x3D; 0:		oldm &#x3D; m		oldn &#x3D; n				m &#x3D; oldn		n &#x3D; oldm	return n  LCM: least common multiple 123456789101112def l">
+  <meta name="description" content="GCD_LCMGCD: greatest common divisor Euclid Algorithm:欧几里得算法 12345678def gcd(n, m):	while n % m !&#x3D; 0:		oldm &#x3D; m		oldn &#x3D; n				m &#x3D; oldn		n &#x3D; oldm % oldn	return n  LCM: least common multiple 1234567891011">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DataStructure">
 <meta property="og:url" content="https://drinkle.top/2021/04/10/DataStructure/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
-<meta property="og:description" content="GCD_LCMGCD: greatest common divisor Euclid Algorithm:欧几里得算法 12345678def gcd(n, m):	while n % m !&#x3D; 0:		oldm &#x3D; m		oldn &#x3D; n				m &#x3D; oldn		n &#x3D; oldm	return n  LCM: least common multiple 123456789101112def l">
+<meta property="og:description" content="GCD_LCMGCD: greatest common divisor Euclid Algorithm:欧几里得算法 12345678def gcd(n, m):	while n % m !&#x3D; 0:		oldm &#x3D; m		oldn &#x3D; n				m &#x3D; oldn		n &#x3D; oldm % oldn	return n  LCM: least common multiple 1234567891011">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/datastructure.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/bubblesort.gif">
@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/BucketSort.gif">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/RadixSort.gif">
 <meta property="article:published_time" content="2021-04-10T11:09:15.000Z">
-<meta property="article:modified_time" content="2021-05-02T15:01:13.572Z">
+<meta property="article:modified_time" content="2021-05-03T06:13:22.662Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="English Study">
 <meta name="twitter:card" content="summary">
@@ -110,7 +110,7 @@
       
         <h2 id="GCD-LCM"><a href="#GCD-LCM" class="headerlink" title="GCD_LCM"></a>GCD_LCM</h2><p>GCD: greatest common divisor</p>
 <p>Euclid Algorithm:<code>欧几里得算法</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd</span>(<span class="params">n, m</span>):</span></span><br><span class="line">	<span class="keyword">while</span> n % m != <span class="number">0</span>:</span><br><span class="line">		oldm = m</span><br><span class="line">		oldn = n</span><br><span class="line">		</span><br><span class="line">		m = oldn</span><br><span class="line">		n = oldm</span><br><span class="line">	<span class="keyword">return</span> n</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd</span>(<span class="params">n, m</span>):</span></span><br><span class="line">	<span class="keyword">while</span> n % m != <span class="number">0</span>:</span><br><span class="line">		oldm = m</span><br><span class="line">		oldn = n</span><br><span class="line">		</span><br><span class="line">		m = oldn</span><br><span class="line">		n = oldm % oldn</span><br><span class="line">	<span class="keyword">return</span> n</span><br></pre></td></tr></table></figure>
 
 <p>LCM: least common multiple</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lcm</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">if</span> x &gt; y:</span><br><span class="line">        greater = x</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        greater = y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> greater % x == <span class="number">0</span> <span class="keyword">and</span> greater % y == <span class="number">0</span>:</span><br><span class="line">            lcmnum = greater</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        greater += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> lcmnum</span><br></pre></td></tr></table></figure>
@@ -121,7 +121,6 @@
 <p><code>list</code> <code>tuple</code> <code>sting</code>是有序集合 </p>
 <p><code>dictionary</code> <code>set</code> 是无序集合</p>
 <p>注：set是一个不含key的字典，含有key-value pairs的字典又称为Hash Map</p>
-<p>​                                                                                                                    `</p>
 <h2 id="Sorting-Algorithm"><a href="#Sorting-Algorithm" class="headerlink" title="Sorting Algorithm"></a>Sorting Algorithm</h2><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/datastructure.png"></p>
 <h3 id="1Bubble-Sort"><a href="#1Bubble-Sort" class="headerlink" title="1Bubble Sort"></a>1Bubble Sort</h3><p>The idea of bubble sort is that in each cycle, the big element goes down and the small one goes up, so that sorting is carried out. The specific process is as follows:</p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/bubblesort.gif"></p>
