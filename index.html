@@ -71,10 +71,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Python Underlying Structure " class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-Python-Underlying-Structure" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/05/14/Python%20Underlying%20Structure%20/" class="article-date">
-  <time class="dt-published" datetime="2021-05-14T14:52:25.000Z" itemprop="datePublished">2021-05-14</time>
+    <a href="/2021/05/15/Python-Underlying-Structure/" class="article-date">
+  <time class="dt-published" datetime="2021-05-15T07:14:15.000Z" itemprop="datePublished">2021-05-15</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/14/Python%20Underlying%20Structure%20/">Python Underlying Structure</a>
+      <a class="p-name article-title" href="/2021/05/15/Python-Underlying-Structure/">Python-Underlying-Structure</a>
     </h1>
   
 
@@ -142,23 +142,23 @@
 <p>逻辑与用 <code>and</code> ，逻辑或用 <code>or</code></p>
 <h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p>Python中有<code>while</code>和<code>for</code>两种循环，都可以使用<code>break</code>跳出循环和<code>continue</code>立即进入下一轮循环，另外，Python的循环语句还可以用<code>else</code>执行循环全部完毕后的代码，<code>break</code>跳出后不会执行<code>else</code>的代码</p>
 <p><strong>while</strong> 条件循环，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> (count &lt; <span class="number">9</span>):</span><br><span class="line">    print(<span class="string">&#x27;The count is:&#x27;</span>, count)</span><br><span class="line">    count = count + <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">5</span>:</span><br><span class="line">        <span class="keyword">break</span>   <span class="comment"># 可以比较以下break和不break的区别</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&#x27;loop over&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count = 0while (count &lt; <span class="number">9</span>):    print(<span class="string">&#x27;The count is:&#x27;</span>, count)    count = count + <span class="number">1</span>    <span class="keyword">if</span> count == <span class="number">5</span>:        <span class="keyword">break</span>   <span class="comment"># 可以比较以下break和不break的区别        passelse:    print(&#x27;loop over&#x27;)</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>for</strong> 遍历循环，循环遍历所有序列对象的子项</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">names = [<span class="string">&#x27;zeta&#x27;</span>, <span class="string">&#x27;chow&#x27;</span>,  <span class="string">&#x27;world&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> names:</span><br><span class="line">    print(<span class="string">&#x27;Hello, &#x27;</span> + n)</span><br><span class="line">    <span class="keyword">if</span> n == <span class="string">&#x27;world&#x27;</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&#x27;Good night!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">names = [<span class="string">&#x27;zeta&#x27;</span>, <span class="string">&#x27;chow&#x27;</span>,  <span class="string">&#x27;world&#x27;</span>]<span class="keyword">for</span> n <span class="keyword">in</span> names:    print(<span class="string">&#x27;Hello, &#x27;</span> + n)    <span class="keyword">if</span> n == <span class="string">&#x27;world&#x27;</span>:        <span class="keyword">break</span>        passelse:    print(<span class="string">&#x27;Good night!&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <p><code>for</code>循环中也可以用<code>else</code>，（注释掉代码中的<code>break</code>试试看。)</p>
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>用<code>def</code>关键字定义函数，并且在Python中，作为脚本语言，调用函数必须在定义函数之后。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">name</span>):</span></span><br><span class="line">    print(<span class="string">&quot;hello, &quot;</span>+name)</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">foo(<span class="string">&quot;zeta&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">name</span>):</span>    print(<span class="string">&quot;hello, &quot;</span>+name)    passfoo(<span class="string">&quot;zeta&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p><strong>默认参数</strong> Python定义函数参数时，可以设置默认值，调用时如果没有传递该参数，函数内将使用默认值，默认值参数必须放在无默认值参数后面。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">name=<span class="string">&quot;zeta&quot;</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;hello, &quot;</span>+name)</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">name=<span class="string">&quot;zeta&quot;</span></span>):</span>    print(<span class="string">&quot;hello, &quot;</span>+name)    passfoo()</span><br></pre></td></tr></table></figure>
 
 <p><strong>关键字参数</strong> 一般函数传递参数时，必须按照参数定于的顺序传递，但是Python中，允许使用关键字参数，这样通过指定参数明，可以不按照函数定义参数的顺序传递参数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">age, name=<span class="string">&quot;zeta&quot;</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;hello, &quot;</span>+name+<span class="string">&quot;; age=&quot;</span>+<span class="built_in">str</span>(age))</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">foo(name=<span class="string">&quot;chow&quot;</span>, age=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">age, name=<span class="string">&quot;zeta&quot;</span></span>):</span>    print(<span class="string">&quot;hello, &quot;</span>+name+<span class="string">&quot;; age=&quot;</span>+<span class="built_in">str</span>(age))    passfoo(name=<span class="string">&quot;chow&quot;</span>, age=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
 
 <p><strong>不定长参数</strong>，Python支持不定长参数，用<code>*</code>定义参数名，调用时多个参数将作为一个元祖传递到函数内</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">*names</span>):</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> names:</span><br><span class="line">        print(<span class="string">&quot;hello, &quot;</span>+n)</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">foo(<span class="string">&quot;zeta&quot;</span>, <span class="string">&quot;chow&quot;</span>, <span class="string">&quot;world&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">*names</span>):</span>    <span class="keyword">for</span> n <span class="keyword">in</span> names:        print(<span class="string">&quot;hello, &quot;</span>+n)    passfoo(<span class="string">&quot;zeta&quot;</span>, <span class="string">&quot;chow&quot;</span>, <span class="string">&quot;world&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p><strong>return</strong> 返回函数结果。</p>
 <h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><ul>
@@ -168,7 +168,7 @@
 <li>导入模块习惯性在脚本顶部，但是不强制</li>
 </ul>
 <h2 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h2><p>在Python中，使用<code>import</code>导入模块。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 导入模块</span></span><br><span class="line"><span class="keyword">import</span> support</span><br><span class="line"> </span><br><span class="line">support.print_func(“Runoob”)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python# -*- coding: UTF-8 -*- # 导入模块import support support.print_func(“Runoob”)</span></span><br></pre></td></tr></table></figure>
 
 <p>还可以使用<code>from import</code>导入模块指定部分</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> modname <span class="keyword">import</span> name1[, name2[, ... nameN]]</span><br></pre></td></tr></table></figure>
@@ -177,7 +177,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime <span class="keyword">as</span> dt</span><br></pre></td></tr></table></figure>
 
 <h2 id="错误和异常"><a href="#错误和异常" class="headerlink" title="错误和异常"></a>错误和异常</h2><p>Python中用经典的 <code>try/except</code> 捕获异常</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">&lt;语句&gt;        <span class="comment">#运行别的代码</span></span><br><span class="line"><span class="keyword">except</span> &lt;异常名称&gt;：</span><br><span class="line">&lt;语句&gt;        <span class="comment">#</span></span><br><span class="line"><span class="keyword">except</span> &lt;异常名称&gt;，&lt;数据&gt;:</span><br><span class="line">&lt;语句&gt;        <span class="comment">#如果引发了指定名称的异常，获得附加的数据</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:&lt;语句&gt;        <span class="comment">#运行别的代码except &lt;异常名称&gt;：&lt;语句&gt;        #except &lt;异常名称&gt;，&lt;数据&gt;:&lt;语句&gt;        #如果引发了指定名称的异常，获得附加的数据</span></span><br></pre></td></tr></table></figure>
 
 <p>还提供了 <strong>else</strong> 和 <strong>finally</strong></p>
 <p>如果没发生异常的执行<code>else</code>语句块，<code>finally</code>块的代码无论是否捕获异常都会执行</p>
@@ -195,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/05/14/Python%20Underlying%20Structure%20/" data-id="ckooh4zii000h78f5b8ie8uh0" data-title="Python Underlying Structure" class="article-share-link">分享</a>
+      <a data-url="https://drinkle.top/2021/05/15/Python-Underlying-Structure/" data-id="ckopezsv70000cwf52kqmg664" data-title="Python-Underlying-Structure" class="article-share-link">分享</a>
       
       
       
@@ -1057,7 +1057,7 @@
       <ul>
         
           <li>
-            <a href="/2021/05/14/Python%20Underlying%20Structure%20/">Python Underlying Structure</a>
+            <a href="/2021/05/15/Python-Underlying-Structure/">Python-Underlying-Structure</a>
           </li>
         
           <li>
