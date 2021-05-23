@@ -71,6 +71,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Framework-Thinking" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/23/Framework-Thinking/" class="article-date">
+  <time class="dt-published" datetime="2021-05-23T10:35:51.000Z" itemprop="datePublished">2021-05-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/23/Framework-Thinking/">Framework-Thinking</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>1.一般情况下使用index进行列表的切分比使用[:]的时间复杂度更低，效率也更高O(1）&lt;–&gt;O（n）</p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><h2 id="Dictionary"><a href="#Dictionary" class="headerlink" title="Dictionary"></a>Dictionary</h2><h2 id="Tuple"><a href="#Tuple" class="headerlink" title="Tuple"></a>Tuple</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/05/23/Framework-Thinking/" data-id="ckp1cbb4x0000ukf5cn4v72te" data-title="Framework-Thinking" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Python-Underlying-Structure" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/05/15/Python-Underlying-Structure/" class="article-date">
@@ -93,7 +134,174 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p><code>//</code>:rounding down ==&gt; 7//2 = 3.5 —&gt; 3</p>
+        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="检测代码的性能"><a href="#检测代码的性能" class="headerlink" title="检测代码的性能"></a>检测代码的性能</h2><h3 id="测试代码的性能"><a href="#测试代码的性能" class="headerlink" title="测试代码的性能"></a>测试代码的性能</h3><h4 id="1-timeit"><a href="#1-timeit" class="headerlink" title="1.timeit"></a><strong>1.timeit</strong></h4><p>timeit只输出被测试代码的总运行时间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>():</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">        a = i * i</span><br><span class="line"></span><br><span class="line">cost_time = timeit.timeit(<span class="string">&#x27;fun()&#x27;</span>, <span class="string">&#x27;from __main__ import fun&#x27;</span>, number=<span class="number">1000</span>)</span><br><span class="line">print(cost_time)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">0.0074794</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-profile"><a href="#2-profile" class="headerlink" title="2.profile"></a><strong>2.profile</strong></h4><p>profile：纯Python实现的性能测试模块，接口和cProfile一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>():</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">        a = i * i</span><br><span class="line">        </span><br><span class="line">profile.run(<span class="string">&#x27;fun()&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ncall：函数运行次数</li>
+<li>tottime： 函数的总的运行时间，减去函数中调用子函数的运行时间</li>
+</ul>
+<p>第一个percall：percall = tottime / nclall</p>
+<ul>
+<li>cumtime:函数及其所有子函数调整的运行时间，也就是函数开始调用到结束的时间。</li>
+</ul>
+<p>第二个percall：percall = cumtime / nclall</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ncalls</td>
+<td align="center">函数被调用次数</td>
+</tr>
+<tr>
+<td align="center">tottime</td>
+<td align="center">函数（除去子函数）总运行时间</td>
+</tr>
+<tr>
+<td align="center">percall</td>
+<td align="center">平均时间，等于tottime/ncalls</td>
+</tr>
+<tr>
+<td align="center">cumtime</td>
+<td align="center">函数（包括子函数）总运行时间</td>
+</tr>
+<tr>
+<td align="center">percall</td>
+<td align="center">平均时间，等于cumtime/ncalls</td>
+</tr>
+<tr>
+<td align="center">filename</td>
+<td align="center">文件：行号（函数）</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523203737.png"></p>
+<hr>
+<h4 id="3-cProfiler"><a href="#3-cProfiler" class="headerlink" title="3.cProfiler"></a><strong>3.cProfiler</strong></h4><p>profile：c语言实现的性能测试模块，接口和profile一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cProfile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>():</span></span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    b = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">        a = a + i * i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">        b += <span class="number">1</span></span><br><span class="line">        time.sleep(<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cProfile.run(<span class="string">&#x27;fun()&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>result：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523205439.png"></p>
+<p><strong>profiler 和 cProfiler 都只能检测整个函数的运行时间，要想知道每行代码运行所损耗的时间需要line_profiler或者memory_profiler（不仅可以得到每行代码运行的时间还可以统计每行代码所占用的内存大小）</strong></p>
+<hr>
+<h4 id="4-line-profiler"><a href="#4-line-profiler" class="headerlink" title="4.line_profiler"></a><strong>4.line_profiler</strong></h4><p>pip install line_profiler</p>
+<p>安装之后kernprof.py会加到环境变量中。</p>
+<p>line_profiler可以统计每行代码的执行次数和执行时间等，时间单位为微妙。</p>
+<p>该模块常通过装饰器来使用。在安装好该模块后，编写需要测试的python程序，并在需要测试的函数上方加入<code>@profile</code>，保存为<code>*.py</code>文件。在命令行使用<code>kernprof -l -v *.py</code>，在输出打印出程序结果之后会打印性能分析。</p>
+<p>输出结果的含义：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> line_profiler <span class="keyword">import</span> LineProfiler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_stuff</span>(<span class="params">numbers</span>):</span></span><br><span class="line">    s = <span class="built_in">sum</span>(numbers)</span><br><span class="line">    l = [numbers[i] / <span class="number">43</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(numbers))]</span><br><span class="line">    m = [<span class="string">&#x27;hello&#x27;</span> + <span class="built_in">str</span>(numbers[i]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(numbers))]</span><br><span class="line">    </span><br><span class="line">numbers = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>)]</span><br><span class="line"></span><br><span class="line">lp = LineProfiler(do_stuff)</span><br><span class="line">lp.runcall(do_stuff, numbers)</span><br><span class="line">lp.print_stats()</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Timer unit</td>
+<td align="center">计时器单位，微秒</td>
+</tr>
+<tr>
+<td align="center">Total time</td>
+<td align="center">测试代码总运行时间</td>
+</tr>
+<tr>
+<td align="center">File</td>
+<td align="center">测试代码文件名</td>
+</tr>
+<tr>
+<td align="center">Hits</td>
+<td align="center">每行代码运行次数</td>
+</tr>
+<tr>
+<td align="center">Time</td>
+<td align="center">每行代码运行时间</td>
+</tr>
+<tr>
+<td align="center">Per Hit</td>
+<td align="center">每行代码运行一次的时间</td>
+</tr>
+<tr>
+<td align="center">% Time</td>
+<td align="center">每行代码运行时间的百分比</td>
+</tr>
+<tr>
+<td align="center">Line Contents</td>
+<td align="center">每行代码</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523213913.png"></p>
+<ul>
+<li>Total Time：测试代码的总运行时间</li>
+<li>Hits：表示每行代码运行的次数</li>
+<li>Time：每行代码运行的总时间</li>
+<li>Per Hits：每行代码运行一次的时间</li>
+<li>% Time：每行代码运行时间的百分比</li>
+</ul>
+<hr>
+<h4 id="5-memory-profiler"><a href="#5-memory-profiler" class="headerlink" title="5.memory_profiler:"></a><strong>5.memory_profiler:</strong></h4><p>memory_profiler工具可以统计每行代码占用的内存大小。</p>
+<p><strong>测试代码：</strong></p>
+<p>使用方法同line_profiler模块，借助装饰器调用。在需要分析的函数上方加<code>@profile</code>。在命令行使用<code>python -m memory_profiler *.py</code>运行代码。<br>输出结果中：<br>Mem usage：内存使用情况<br>Increment：每行代码运行后内存增减情况</p>
+<p><strong>使用：</strong></p>
+<ol>
+<li>在需要测试的函数加上@profile装饰</li>
+<li>执行命令： python -m memory_profiler C:Python34 est.py</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将调试文件独立出xx.py</span></span><br><span class="line"><span class="comment"># 在pycharm 的 terminal windows中使用</span></span><br><span class="line"><span class="comment"># code: python -m memory_profiler memory_profiler</span></span><br><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span>():</span></span><br><span class="line">    c = []</span><br><span class="line">    a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] * (<span class="number">2</span> ** <span class="number">20</span>)</span><br><span class="line">    b = [<span class="number">1</span>] * (<span class="number">2</span> ** <span class="number">20</span>)</span><br><span class="line">    c.extend(a)</span><br><span class="line">    c.extend(b)</span><br><span class="line">    <span class="keyword">del</span> b</span><br><span class="line">    <span class="keyword">del</span> c</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test1()</span><br><span class="line"></span><br><span class="line">&gt;&gt;cmd -&gt;python version 3.7</span><br><span class="line">&gt;&gt;//terminal//</span><br><span class="line">&lt;python -m memory_profiler memory_profiler&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523232121.png"></p>
+<ul>
+<li><code>Mem usage</code> 为当前总内存</li>
+<li><code>Increment</code> 为增加的内存</li>
+</ul>
+<p>总结起来使用非常时间</p>
+<ul>
+<li>方法前加上 <code>@profile</code> 主键</li>
+<li>使用 <code>python -m memory_profiler</code> 来运行，不过直接用 <code>python</code> 运行也可以</li>
+</ul>
+<p>通过上面这段代码我们可以发现，<code>del</code> 语句只是将变量删除，并不能减少内存的消耗。</p>
+<p><strong>参数使用</strong></p>
+<ul>
+<li><code>precision</code> 显示小数点后的位数</li>
+</ul>
+<p>默认显示的内存单位为 <code>MiB</code>，小数点后显示一位，如果某行代码占用内存比较小，就可能显示不出来，此时可以通过调整小数点后的位数实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@profile(<span class="params">precision=<span class="number">4</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test3</span>():</span></span><br><span class="line">    a = [<span class="number">1</span>, <span class="number">2</span>] * (<span class="number">2</span> ** <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test3()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>stream</code> 将结果输出到流中</li>
+</ul>
+<p>每次运行都要打印内存情况，势必会影响程序输出效果，我们可以将结果通过流输出到文件中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile(<span class="params">precision=<span class="number">4</span>, @profile(<span class="params">precision=<span class="number">4</span>, stream=<span class="built_in">open</span>(<span class="params"><span class="string">&#x27;/tmp/memory_profiler.log&#x27;</span>,<span class="string">&#x27;w+&#x27;</span></span>)</span>)</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test3</span>():</span></span><br><span class="line">    a = [<span class="number">1</span>, <span class="number">2</span>] * (<span class="number">2</span> ** <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test3()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="6-objgraph：-待完善"><a href="#6-objgraph：-待完善" class="headerlink" title="6.objgraph：[待完善]"></a>6.objgraph：[待完善]</h4><p>objgraph是一个实用模块,可以列出当前内存中存在的对象，可用于定位内存泄露。</p>
+<p>objgraph需要安装：</p>
+<p>pip install objgraph</p>
+<hr>
+<hr>
+<h3 id="测试代码的运行时间"><a href="#测试代码的运行时间" class="headerlink" title="测试代码的运行时间"></a>测试代码的运行时间</h3><p>计算Python的某个程序，或者是代码块运行的时间一般有三种方法。</p>
+<h4 id="1-datetime"><a href="#1-datetime" class="headerlink" title="1.datetime"></a><strong>1.datetime</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">start = datetime.datetime.now()</span><br><span class="line">run_function():</span><br><span class="line">    <span class="comment"># do something</span></span><br><span class="line"></span><br><span class="line">end = datetime.datetime.now()</span><br><span class="line"><span class="built_in">print</span> (end-start)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-time–time"><a href="#2-time–time" class="headerlink" title="2.time–time"></a><strong>2.time–time</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">start = time.time()</span><br><span class="line">run_function()</span><br><span class="line">end = time.time()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">str</span>(end-start)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-time-clock-version-lt-3-8"><a href="#3-time-clock-version-lt-3-8" class="headerlink" title="3.time-clock(version&lt;3.8)"></a><strong>3.time-clock(version&lt;3.8)</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">start = time.clock()</span><br><span class="line">run_function()</span><br><span class="line">end = time.clock()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">str</span>(end-start)</span><br></pre></td></tr></table></figure>
+
+<p>通过对以上方法的比较我们发现，方法二的精度比较高。方法一基本上是性能最差的。这个其实是和系统有关系的。一般我们推荐使用方法二和方法三。我的系统是Ubuntu，也就是Linux系统，方法二返回的是UTC时间。 在很多系统中time.time()的精度都是非常低的，包括windows。</p>
+<p>python 的标准库手册推荐在任何情况下尽量使用time.clock().但是这个函数在windows下返回的是真实时间（wall time）</p>
+<p><strong>方法一和方法二都包含了其他程序使用CPU的时间。方法三只计算了程序运行CPU的时间。</strong></p>
+<p>方法二和方法三都返回的是浮点数<br>究竟是使用 <strong>time.clock()</strong> 精度高，还是使用 <strong>time.time()</strong> 精度更高，要视乎所在的平台来决定。总概来讲，在 <strong>Unix</strong> 系统中，建议使用 **time.time()**，在 Windows 系统中，建议使用 **time.clock()**。</p>
+<p><strong>我们要实现跨平台的精度性，我们可以使用timeit 来代替time</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line">start = timeit.default_timer()</span><br><span class="line">do_func()</span><br><span class="line">end = timeit.default_timer()</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">str</span>(end-start)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p><code>//</code>:rounding down ==&gt; 7//2 = 3.5 —&gt; 3</p>
 <h2 id="BuiltIn"><a href="#BuiltIn" class="headerlink" title="BuiltIn"></a>BuiltIn</h2><h3 id="yield-lt-gt-send-gt-next"><a href="#yield-lt-gt-send-gt-next" class="headerlink" title="yield&lt;==&gt;send==&gt;next"></a>yield&lt;==&gt;send==&gt;next</h3><p>首先，如果你还没有对yield有个初步分认识，那么你先把yield看做“return”，这个是直观的，它首先是个return，普通的return是什么意思，就是在程序中返回某个值，返回之后程序就不再往下运行了。看做return之后再把它看做一个是生成器（generator）的一部分（带yield的函数才是真正的迭代器），好了，如果你对这些不明白的话，那先把yield看做return,然后直接看下面的程序，你就会明白yield的全部意思了：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>():</span></span><br><span class="line">    print(<span class="string">&quot;starting...&quot;</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        res = <span class="keyword">yield</span> <span class="number">4</span></span><br><span class="line">        print(<span class="string">&quot;res:&quot;</span>,res)</span><br><span class="line">g = foo()</span><br><span class="line">print(<span class="built_in">next</span>(g))</span><br><span class="line">print(<span class="string">&quot;*&quot;</span>*<span class="number">20</span>)</span><br><span class="line">print(<span class="built_in">next</span>(g))</span><br><span class="line">&gt;&gt;</span><br><span class="line">starting...</span><br><span class="line"><span class="number">4</span></span><br><span class="line">********************</span><br><span class="line">res: <span class="literal">None</span></span><br><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
 
@@ -1059,68 +1267,6 @@
 
 
   
-    <article id="post-世界观与方法论" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/10/%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AE%BA/" class="article-date">
-  <time class="dt-published" datetime="2021-04-10T06:34:49.000Z" itemprop="datePublished">2021-04-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/10/%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AE%BA/">世界观与方法论</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="致世界的一封公开信"><a href="#致世界的一封公开信" class="headerlink" title="致世界的一封公开信"></a>致世界的一封公开信</h1><h2 id="郭嗣琮"><a href="#郭嗣琮" class="headerlink" title="郭嗣琮"></a>郭嗣琮</h2><p>【中国民主同盟盟员】</p>
-<h3 id="致郭嗣琮教授的一封信"><a href="#致郭嗣琮教授的一封信" class="headerlink" title="致郭嗣琮教授的一封信"></a>致郭嗣琮教授的一封信</h3><p><strong>尊敬的郭教授您好:</strong></p>
-<p><strong>我是来自理学院信息与计算机科学17-1班的柳宇豪，在听您教授的模糊数课程以及前段时间有关神经网络的讲座中，对您印象颇深，临近毕业，在思想上有些许问题想与您交流，以下是我在思想上拥有的疑问，我将写下我困惑的地方，希望老师您能给予我帮助。</strong></p>
-<p><strong>一、郭教授您如何看待当今中国的主要矛盾？大三期间我读了许多书，譬如《毛选》、《红星照耀中国》、《中国私有化大逆转》、《哲学小词典》等等，读的越多我内心的疑惑也就越大。现阶段中国贫富逐步拉大，阶级固化日益严重，许多资本家/企业家越来越脱离群众，一部分先富起来的人们丝毫不掩盖自己对于无产阶级和社会底层的鄙视，并把原始资本的积累归结于自身的努力，（参考“欣小萌事件”、“后浪”、“打工人”等）。我想请问老师您，在这一时代背景下我们青年要做什么，该做什么？是团结起来组建左翼联盟尝试集体公社式经济合作社还是毕业后进入大厂实习找工作？</strong></p>
-<p><strong>二、承接上一个问题，在面对日益严重的阶级矛盾和充满整个社会的唯功利主义、唯实用主义以及资产阶级人性论的大环境中，如果我们青年选择尝试组建左翼联盟，实行集体经济，以辩证唯物主义和阶级论为思想基础来创业，以创建一个内部没有资本压迫的公司，这种可能性实现的概率有多大？政府允不允许这一新式企业的出现？我们又该如何保持自我的独立性？您对持有我们这一想法的青年又有什么建议和看法？青年又该如何保持对世界前沿问题包括但不限于学术研究、未来发展方向等这些问题的信息获取？</strong></p>
-<p><strong>三、从形式上讲，前两个问题是不同的两个问题，但从本质上讲又是同一个问题，即我们青年大学生在这一时代背景下该怎么做的问题，而第三个问题是关乎我个人的一点疑问。我想请问郭教授您是如何看待爱情的？又该如何处理爱情与理想（现实）的关系？您理想中的爱情又是什么样子的？</strong></p>
-<p><strong>以上三点是我在最后大学生涯所面临的最大不解和有疑问的地方，希望郭教授您百忙之中能抽出部分时间帮我解答这些问题，如果条件允许，线下见面交谈这些问题更好。真诚地期待着您的回信。</strong></p>
-<p><strong>此致</strong></p>
-<p><strong>敬礼</strong></p>
-<p><strong>柳宇豪</strong></p>
-<p><strong>2021年4月10日</strong></p>
-<p>附联系方式：</p>
-<p><strong>微信/QQ1982164667</strong></p>
-<p><strong>手机：13154187195</strong></p>
-<p>个人网站：<a target="_blank" rel="noopener" href="https://starfire1226.top/">https://starfire1226.top/</a></p>
-<h3 id="回复："><a href="#回复：" class="headerlink" title="回复："></a>回复：</h3><p>柳宇豪同学你好！</p>
-<p>​        看到了你的来信，感觉你是一个喜欢思考、忧国忧民、有大志向的青年人。你有想法和疑问来问我，说明你信任我，我也很高兴。</p>
-<p>​        你提的头两个问题，这在人类的历史上有很多人思考（如柏拉图）并实践过（如欧文），同时也是促使马克思主义形成 的一个因素。不管前人是如何总结和评价历史教训的，我有我自己的认识：即社会的任何生产组织过程都离不开两个要素，即资本与劳动力，通俗地说就是“钱和人”。首先，搞公社式合作形式生产组织必须要先有资本，资金从何而来？面对着市场经济环境，投资人是否要求回报 ？当你们真正走入到生产实践之中后，你们才会体会到，生产过程最最重要的就是资本的运作过程；其次是人，谁能保证在金钱面前所有人的灵魂都是圣洁的。所以马克思说共产主义必须在所有人的觉悟都得到极大提高前提下才能实现。我国建国后搞了三十年的人民公社，最终还是失败的；早在200年前英国的罗伯特.欧文就实践过（见我发给你的附件），也是失败的。从本质上讲，公社式生产组织形式是最理想的、最美好的生产方式，但是为什么一次又一次的失败呢？这正是需要你们年轻人多多思考的问题。建议你们年轻人要多读书、多观察、多思考，不要头脑冲动去搞什么联盟。社会问题不是搞个联盟就能解决的，要相信共产党的宗旨和最终目标（尽管我不是共产党员），社会的污垢要靠一个强大的社会力量来洗涤，幻想靠一个无资本压迫的公司来改变社会是不可能的，只有一个政党才能动员起整个社会力量来完成改变社会的目的。公司改变不了社会，但是社会一定能够改变你的公司，致使你的目标最终要失败。</p>
-<p>​        关于你提到的如何看待爱情的问题，我只能告诉你如下感知：（1）这是两个人的事，一厢情愿一定是灾难；（2）浪漫是短暂的，现实是长久的；（3）婚前两人都在粉饰个人的优点，掩饰缺点，婚后一切缺点都将暴露无遗，所以，爱一个人就要能接受对方的缺点；（4）对方爱你的家人、爱你的父母，比爱你更重要；（5）你能找到一位爱生活、爱家庭、能在别人面前尊重你的人，那是你一生最大的幸福。</p>
-<p>​        说了这许多，不知是否对你有用，仅供你参考，顺祝学习进步！</p>
-<p>​        郭嗣琮  4-11</p>
-<p>附件：欧文的空想社会主义为什么会失败？</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/04/10/%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AE%BA/" data-id="ckooh4zj1000n78f5dblp0j35" data-title="世界观与方法论" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1139,7 +1285,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -1149,7 +1295,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -1171,6 +1317,10 @@
       <ul>
         
           <li>
+            <a href="/2021/05/23/Framework-Thinking/">Framework-Thinking</a>
+          </li>
+        
+          <li>
             <a href="/2021/05/15/Python-Underlying-Structure/">Python-Underlying-Structure</a>
           </li>
         
@@ -1184,10 +1334,6 @@
         
           <li>
             <a href="/2021/04/30/Nerual-Network/">Nerual-Network</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/16/Python-Problems/">Python-Problems</a>
           </li>
         
       </ul>
