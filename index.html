@@ -71,6 +71,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeeCode" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/06/13/LeeCode/" class="article-date">
+  <time class="dt-published" datetime="2021-06-13T09:15:54.000Z" itemprop="datePublished">2021-06-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/06/13/LeeCode/">LeeCode</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Day01"><a href="#Day01" class="headerlink" title="Day01"></a>Day01</h2><h3 id="1E-两数之和"><a href="#1E-两数之和" class="headerlink" title="1E.两数之和"></a>1E.两数之和</h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution1</span>(<span class="params">alist, target</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(alist) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">for</span> index, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(alist):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index+<span class="number">1</span>, <span class="built_in">len</span>(alist)):</span><br><span class="line">            <span class="keyword">if</span> alist[i] + val == target:</span><br><span class="line">                <span class="keyword">return</span> [index, i]</span><br><span class="line">time = 3340ms</span><br><span class="line">memory = <span class="number">14.9</span>MB</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution2</span>(<span class="params">alist, target</span>):</span></span><br><span class="line">    hashmap = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> index, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(alist):</span><br><span class="line">        <span class="keyword">if</span> target - val <span class="keyword">in</span> hashmap:</span><br><span class="line">            <span class="keyword">return</span> hashmap[target-val], index</span><br><span class="line">        hashmap[val] = index</span><br><span class="line">time = 40ms</span><br><span class="line">memory = <span class="number">15.8</span>MB</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/06/13/LeeCode/" data-id="ckpv081uv0000aof549d6e3en" data-title="LeeCode" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-批评与自我批评" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/06/13/%E6%89%B9%E8%AF%84%E4%B8%8E%E8%87%AA%E6%88%91%E6%89%B9%E8%AF%84/" class="article-date">
@@ -1390,151 +1435,6 @@
 
 
   
-    <article id="post-English-Study-4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/15/English-Study-4/" class="article-date">
-  <time class="dt-published" datetime="2021-04-15T14:37:30.000Z" itemprop="datePublished">2021-04-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/15/English-Study-4/">English-Study-4</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Implement-Data-Structure"><a href="#Implement-Data-Structure" class="headerlink" title="Implement Data Structure"></a>Implement Data Structure</h1><h2 id="Part-1-Introduction"><a href="#Part-1-Introduction" class="headerlink" title="Part 1 Introduction"></a>Part 1 Introduction</h2><h3 id="Short-Sentences"><a href="#Short-Sentences" class="headerlink" title="Short Sentences"></a>Short Sentences</h3><p>A complete binary tree can be represented by a list instead of using ‘list nested list’ or ‘nodes and references’</p>
-<p>The hierarchical nature of the tree derives<code>generate</code> an important property, that is, part of the tree (subtree) can be moved to another position as a whole without affecting the layers below.</p>
-<p>Implement the tree as a recursive data structure</p>
-<p>Implement priority queue with stack</p>
-<p>Hash Mapping Relations –&gt; deal with conflicts</p>
-<p>Open addressing &lt;==&gt; Linear detection </p>
-<p>If there is no termination condition, it will enter an endless loop, the program will crash, and the stack will overflow</p>
-<p>Complex recursion problem </p>
-<p>Calculate the sum of a column of numbers</p>
-<p>Three principles of recursion</p>
-<p>The base case recursive algorithm must change the state and move closer to the base case</p>
-<p>RecursionError: maximum recursion depth exceeded while getting the str of an object</p>
-<p>Each element has a position relative to the other elements</p>
-<p>lambda variable : variable <code>operation code block</code></p>
-<p>Calculate execution time</p>
-<p>The realization of abstract data types is called data structure</p>
-<p>Understand the pre-order, middle-order, and post-order expressions </p>
-<p>By running the code 10,000 times to find the time required for each method, we conclude that the best method is list(range())</p>
-<p>python data structure performance:<code>数据结构的性能</code></p>
-<p>Realize the inventory plan </p>
-<p>Examples of heterologous word detection</p>
-<p>The number in the computer is expressed in binary, and the leftmost bit is generally used to indicate whether the number is positive or negative. In this case, the number is a signed integer. If the leftmost bit is not used to indicate positive or negative, but is connected with the following to indicate an integer, then it cannot be distinguished whether the number is positive or negative, and it can only be a positive number, which is an unsigned integer.</p>
-<p>Comparison with None performed with equality operators </p>
-<p>Instance attribute pinA defined outside <strong>init</strong></p>
-<p>Lowercase variable imported as non lowercase :<code>小写变量导入为非小写</code></p>
-<p>categorical cross entropy ：<code>分类交叉熵</code></p>
-<p>Remove redundant parentheses </p>
-<p>row –&gt; 行        column |–列</p>
-<p>hyper-parameter: parameters set manually</p>
-<p><code>Relu</code>:rectified linear units layer</p>
-<p>The choice depends on the big data and full connected layer based on back propagation.(Convolution Kernel)</p>
-<p>The selection of the convolution kernel is not manual operation, but mechanical learning with the help of big data. The key lies in the loss function of the fully connected layer and the principle of back propagation.</p>
-<p>Rectified Linear Units layer == Modified linear unit(Relu layer)</p>
-<p>back propagation –&gt; down sampling</p>
-<p>Modified linear unit(Relu layer)</p>
-<p><code>Relu activation function</code>–beneficial to–&gt; Gradient descent </p>
-<p>The relu function turns negative numbers in the feature map to zero</p>
-<p>Activation function</p>
-<p>The marginal area will be processed with zero padding</p>
-<p>Ability to reduce the data volume of the feature map while retaining the original data</p>
-<p>Convolution kernel</p>
-<p>Convolutional Neural Network：<code>CNN</code></p>
-<p>gcd: greatest common divisor</p>
-<p>Euclid Algorithm:<code>欧几里得算法</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gcd</span>(<span class="params">m, n</span>):</span></span><br><span class="line">    <span class="keyword">while</span> m % n != <span class="number">0</span>:</span><br><span class="line">        oldm = m</span><br><span class="line">        oldn = n</span><br><span class="line"></span><br><span class="line">        m = oldn</span><br><span class="line">        n = oldm % oldn</span><br><span class="line">    <span class="keyword">return</span> n</span><br></pre></td></tr></table></figure>
-
-<p>A common example is to implement a data type of construct class fraction</p>
-<p>library root：库根</p>
-<p>Image recognition process</p>
-<p>representation learning development history</p>
-<p>Input layer    ==&gt;    Hidden layer    ==&gt;    Output layer</p>
-<p>Professional Edition</p>
-<p>enhanced CNN </p>
-<p>download dataset</p>
-<p>Paper framework</p>
-<p>Introduction to unsupervised learning</p>
-<p>Mechanical learning</p>
-<p>Marked data</p>
-<p>format specification ==&gt; syntax specification</p>
-<p>Exception handling contains[Syntax Error  ==&gt;  logical error]</p>
-<p>Separate ==&gt;  Delimiter(sep=””)</p>
-<p>Control structure contains Iteration(while) and branch(if/elif/else)</p>
-<p>Single branch structure</p>
-<p>Absolute value</p>
-<p>return a boolean value</p>
-<p>Unordered collection</p>
-<p>Set does not allow duplicate elements </p>
-<p>Heterogeneous data</p>
-<p>Tabs：<code>制表符</code></p>
-<p>Newline:<code>换行符</code></p>
-<p>Space:<code>空格</code></p>
-<p>Thought report:<code>思想汇报</code></p>
-<p>Experience:<code>心得体会</code></p>
-<p>Uppercase letter</p>
-<p>Lower case letters</p>
-<p>Built-in collection data type(set/list/dictionary/hash map/tuple/string)</p>
-<p>Built-in atomic data type(binary data type/float/int/ : contains Numerical class    Boolean value)</p>
-<p>Take an integer  ==&gt;  a//b</p>
-<p>Take the remainder  ==&gt;  a%b</p>
-<p>Object-Oriented Programming </p>
-<p>Data perspective independent of reality </p>
-<p>The implementation of abstract data types is called data structure</p>
-<p>Information hiding</p>
-<p>How to learn data structure and abstract data types</p>
-<p>Sequential execution == 顺序执行</p>
-<p>Decision branch == 决策分支</p>
-<p>Loop iteration == 循环迭代</p>
-<p>control statement</p>
-<p>data type</p>
-<p>This is an example of process abstraction</p>
-<p>What is programming</p>
-<p>square root    ==    Cube</p>
-<p>what is the computer science</p>
-<p>the process of solving questions</p>
-<h3 id="Word-List"><a href="#Word-List" class="headerlink" title="Word List"></a>Word List</h3><p>merge</p>
-<p>Framework thinking    awareness    Hash table    Mapping relations</p>
-<p>Cache    Cookies    Recursive call    Dynamic programming<br>Fractal    basic situation    Key term    Programming exercises</p>
-<p>Palindrome detector    Linked list</p>
-<p>logarithm    time    complexity    index<br>Brute-force    Ordinary situation    Magnitude</p>
-<p>magnitude    Worst way    List comprehension    generate</p>
-<p>Architecture    nutshell    batch    filter    regression</p>
-<p>Modifiable    sequence    grammar    Interactive</p>
-<p>encapsulation    annotation    notation    assign</p>
-<p>alphabet    introduction    Objectives of this chapter</p>
-<p>getting Started    interface    Low-level details</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/04/15/English-Study-4/" data-id="ckooh4zi2000978f5gyspgtqj" data-title="English-Study-4" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1553,7 +1453,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -1563,7 +1463,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -1585,6 +1485,10 @@
       <ul>
         
           <li>
+            <a href="/2021/06/13/LeeCode/">LeeCode</a>
+          </li>
+        
+          <li>
             <a href="/2021/06/13/%E6%89%B9%E8%AF%84%E4%B8%8E%E8%87%AA%E6%88%91%E6%89%B9%E8%AF%84/">批评与自我批评</a>
           </li>
         
@@ -1598,10 +1502,6 @@
         
           <li>
             <a href="/2021/05/23/Framework-Thinking/">Framework-Thinking</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/15/Python-Underlying-Structure/">Python-Underlying-Structure</a>
           </li>
         
       </ul>
