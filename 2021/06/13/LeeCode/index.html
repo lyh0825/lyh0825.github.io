@@ -6,18 +6,20 @@
   
   <title>LeeCode | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Day011E.两数之和给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。 你可以按任意顺序返回答案。 123456789101112131415161718def solution1(alist, target):">
+  <meta name="description" content="华为题库1H字符串最后一个单词的长度字符串思路&#x2F;考点将输入的字符串通过split()转化成list,再通过index进行求解 描述 计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。 输入描述： 输入一行，代表要计算的字符串，非空，长度小于5000。 输出描述： 输出一个整数，表示输入字符串最后一个单词的长度。 12t &#x3D; input().split(&amp;#x27; &amp;#x27;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeeCode">
 <meta property="og:url" content="https://drinkle.top/2021/06/13/LeeCode/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
-<meta property="og:description" content="Day011E.两数之和给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。 你可以按任意顺序返回答案。 123456789101112131415161718def solution1(alist, target):">
+<meta property="og:description" content="华为题库1H字符串最后一个单词的长度字符串思路&#x2F;考点将输入的字符串通过split()转化成list,再通过index进行求解 描述 计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。 输入描述： 输入一行，代表要计算的字符串，非空，长度小于5000。 输出描述： 输出一个整数，表示输入字符串最后一个单词的长度。 12t &#x3D; input().split(&amp;#x27; &amp;#x27;">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/02/addtwonumber1.jpg">
 <meta property="article:published_time" content="2021-06-13T09:15:54.000Z">
-<meta property="article:modified_time" content="2021-06-13T09:47:09.346Z">
+<meta property="article:modified_time" content="2021-06-16T11:57:58.297Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="LeeCode">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/02/addtwonumber1.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Drink`s Blog" type="application/atom+xml">
   
@@ -96,10 +98,87 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Day01"><a href="#Day01" class="headerlink" title="Day01"></a>Day01</h2><h3 id="1E-两数之和"><a href="#1E-两数之和" class="headerlink" title="1E.两数之和"></a>1E.两数之和</h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
+        <h2 id="华为题库"><a href="#华为题库" class="headerlink" title="华为题库"></a>华为题库</h2><h3 id="1H字符串最后一个单词的长度"><a href="#1H字符串最后一个单词的长度" class="headerlink" title="1H字符串最后一个单词的长度"></a>1H字符串最后一个单词的长度</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><h4 id="思路-考点"><a href="#思路-考点" class="headerlink" title="思路/考点"></a><strong>思路</strong>/考点</h4><p>将输入的字符串通过split()转化成list,再通过index进行求解</p>
+<p><strong>描述</strong></p>
+<p>计算字符串最后一个单词的长度，单词以空格隔开，字符串长度小于5000。</p>
+<p><strong>输入描述：</strong></p>
+<p>输入一行，代表要计算的字符串，非空，长度小于5000。</p>
+<p><strong>输出描述：</strong></p>
+<p>输出一个整数，表示输入字符串最后一个单词的长度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = <span class="built_in">input</span>().split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">print(<span class="built_in">len</span>(t[-<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+
+<h3 id="2H计算某字母出现次数"><a href="#2H计算某字母出现次数" class="headerlink" title="2H计算某字母出现次数"></a><strong>2H计算某字母出现次数</strong></h3><h4 id="字符串-哈希"><a href="#字符串-哈希" class="headerlink" title="字符串/哈希"></a>字符串/哈希</h4><h4 id="思路-考点-1"><a href="#思路-考点-1" class="headerlink" title="思路/考点"></a>思路/考点</h4><p>考察count()函数,由于tuple\string\list在python具有相似的底层逻辑,因此count()既可以统计string中某字符串出出现的个数,又可以统计list中元素出现的个数</p>
+<p><strong>描述</strong></p>
+<p>写出一个程序，接受一个由字母、数字和空格组成的字符串，和一个字母，然后输出输入字符串中该字母的出现次数。不区分大小写，字符串长度小于500。</p>
+<p><strong>输入描述：</strong></p>
+<p>第一行输入一个由字母和数字以及空格组成的字符串，第二行输入一个字母。</p>
+<p><strong>输出描述：</strong></p>
+<p>输出输入字符串中含有该字符的个数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="built_in">input</span>()</span><br><span class="line">word = <span class="built_in">input</span>()</span><br><span class="line"><span class="built_in">str</span> = <span class="built_in">str</span>.lower()</span><br><span class="line">word = word.lower()</span><br><span class="line">print(<span class="built_in">str</span>.count(word))</span><br></pre></td></tr></table></figure>
+
+<h3 id="3H明明的随机数-0"><a href="#3H明明的随机数-0" class="headerlink" title="3H明明的随机数[0]"></a>3H<strong>明明的随机数</strong>[0]</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p><strong>描述</strong></p>
+<p>明明想在学校中请一些同学一起做一项问卷调查，为了实验的客观性，他先用计算机生成了N个1到1000之间的随机整数（N≤1000），对于其中重复的数字，只保留一个，把其余相同的数去掉，不同的数对应着不同的学生的学号。然后再把这些数从小到大排序，按照排好的顺序去找同学做调查。请你协助明明完成“去重”与“排序”的工作(同一个测试用例里可能会有多组数据(用于不同的调查)，希望大家能正确处理)。</p>
+<p>注：测试用例保证输入参数的正确性，答题者无需验证。测试用例不止一组。</p>
+<p>当没有新的输入时，说明输入结束。</p>
+<p><strong>输入描述：</strong></p>
+<p>注意：输入可能有多组数据(用于不同的调查)。每组数据都包括多行，第一行先输入随机整数的个数N，接下来的N行再输入相应个数的整数。具体格式请看下面的”示例”。</p>
+<p><strong>输出描述：</strong></p>
+<p>返回多行，处理后的结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    line = sys.stdin.readline()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> line:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    n = <span class="built_in">int</span>(line)</span><br><span class="line">    d = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        d[<span class="built_in">int</span>(sys.stdin.readline())]=<span class="number">1</span></span><br><span class="line">    l = <span class="built_in">list</span>(d.keys())</span><br><span class="line">    l.sort()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        print(i)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4H字符串分隔"><a href="#4H字符串分隔" class="headerlink" title="4H字符串分隔"></a>4H字符串分隔</h3><h4 id="字符串-1"><a href="#字符串-1" class="headerlink" title="字符串"></a>字符串</h4><h4 id="思路-考点-2"><a href="#思路-考点-2" class="headerlink" title="思路/考点"></a>思路/考点</h4><p>注意slice的运用,同时对于需要对其的字符串使用ljust–左对齐–右填充</p>
+<p><strong>描述</strong></p>
+<p>•连续输入字符串，请按长度为8拆分每个字符串后输出到新的字符串数组；<br>•长度不是8整数倍的字符串请在后面补数字0，空字符串不处理。</p>
+<p><strong>输入描述</strong>：</p>
+<p>连续输入字符串(输入多次,每个字符串长度小于100)</p>
+<p><strong>输出描述</strong>：</p>
+<p>输出到长度为8的新字符串数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        s = <span class="built_in">input</span>()</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(s) &gt; <span class="number">8</span>:</span><br><span class="line">            print(s[:<span class="number">8</span>])</span><br><span class="line">            s = s[<span class="number">8</span>:]</span><br><span class="line">        print(s.ljust(<span class="number">8</span>, <span class="string">&#x27;0&#x27;</span>))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>使用ljust（）、rjust（）、center（）</p>
+<p>parameters：width（contains oneself）， fillchar</p>
+<p>是对齐方向ljust，左对齐右填充</p>
+<h3 id="5M进制转换"><a href="#5M进制转换" class="headerlink" title="5M进制转换"></a>5M进制转换</h3><h4 id="字符串-2"><a href="#字符串-2" class="headerlink" title="字符串"></a>字符串</h4><h4 id="思路-考点-3"><a href="#思路-考点-3" class="headerlink" title="思路/考点"></a>思路/考点</h4><p>使用int(str, base=n)进行进制的直接转化,其中输入的str是在base的基础上的值,此操作将会返回一个int值(base=10)</p>
+<p>同理bin(str, base=n) 将会返回一个int值(base=2)开头为0b</p>
+<p>0b在c语言中表示二进制</p>
+<p><strong>描述</strong></p>
+<p>写出一个程序，接受一个十六进制的数，输出该数值的十进制表示。</p>
+<p><strong>输入描述：</strong></p>
+<p>输入一个十六进制的数值字符串。</p>
+<p><strong>输出描述：</strong></p>
+<p>输出该数值的十进制字符串。不同组的测试用例用\n隔开。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        temp = <span class="built_in">int</span>(<span class="built_in">input</span>(), base=<span class="number">16</span>)</span><br><span class="line">        print(temp)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="6M质数因子"><a href="#6M质数因子" class="headerlink" title="6M质数因子"></a>6M质数因子</h3><h4 id="排序-递归"><a href="#排序-递归" class="headerlink" title="排序/递归"></a>排序/递归</h4><h4 id="思路-考点-4"><a href="#思路-考点-4" class="headerlink" title="思路/考点"></a>思路/考点</h4><p><strong>描述</strong></p>
+<p>功能:输入一个正整数，按照从小到大的顺序输出它的所有质因子（重复的也要列举）（如180的质因子为2 2 3 3 5 ）</p>
+<p>最后一个数后面也要有空格</p>
+<p><strong>输入描述：</strong></p>
+<p>输入一个long型整数</p>
+<p><strong>输出描述：</strong></p>
+<p>按照从小到大的顺序输出它的所有质数的因子，以空格隔开。最后一个数后面也要有空格。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factor</span>(<span class="params">n</span>):</span></span><br><span class="line">    flag = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>+<span class="number">1</span>)):</span><br><span class="line">        <span class="keyword">if</span> n % i  == <span class="number">0</span>:</span><br><span class="line">            print(i, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">            flag = <span class="literal">False</span></span><br><span class="line">            factor(<span class="built_in">int</span>(n/i))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> flag:</span><br><span class="line">        print(n, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">factor(<span class="built_in">int</span>(<span class="built_in">input</span>()))</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="14M字符串排序"><a href="#14M字符串排序" class="headerlink" title="14M字符串排序"></a>14M字符串排序</h3><p>输入一定的字符串，将字符串按照字母优先级进行排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">words = []</span><br><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num):</span><br><span class="line">    word = <span class="built_in">input</span>()</span><br><span class="line">    words.append(word)</span><br><span class="line">words.sort()</span><br><span class="line"><span class="comment"># 不能直接遍历words.sort()，否则返回None</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> words:</span><br><span class="line">    print(item)</span><br></pre></td></tr></table></figure>
+
+<p>sort()即可进行数字排序也可以对单词按照字母优先级进行排序</p>
+<h2 id="Day01"><a href="#Day01" class="headerlink" title="Day01"></a>Day01</h2><h3 id="1E-两数之和"><a href="#1E-两数之和" class="headerlink" title="1E.两数之和"></a>1E.两数之和</h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
 <p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
 <p>你可以按任意顺序返回答案。</p>
+<p>思路:</p>
+<ol>
+<li>使用双循环暴力求解，缺点是时间复杂度会很高</li>
+<li>使用哈希表，记录上一个值和对应的index</li>
+</ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution1</span>(<span class="params">alist, target</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(alist) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line">    <span class="keyword">for</span> index, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(alist):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index+<span class="number">1</span>, <span class="built_in">len</span>(alist)):</span><br><span class="line">            <span class="keyword">if</span> alist[i] + val == target:</span><br><span class="line">                <span class="keyword">return</span> [index, i]</span><br><span class="line">time = 3340ms</span><br><span class="line">memory = <span class="number">14.9</span>MB</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution2</span>(<span class="params">alist, target</span>):</span></span><br><span class="line">    hashmap = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> index, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(alist):</span><br><span class="line">        <span class="keyword">if</span> target - val <span class="keyword">in</span> hashmap:</span><br><span class="line">            <span class="keyword">return</span> hashmap[target-val], index</span><br><span class="line">        hashmap[val] = index</span><br><span class="line">time = 40ms</span><br><span class="line">memory = <span class="number">15.8</span>MB</span><br></pre></td></tr></table></figure>
+
+<h3 id="2M-两数相加"><a href="#2M-两数相加" class="headerlink" title="2M.两数相加"></a>2M.两数相加</h3><p>给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。</p>
+<p>请你将两个数相加，并以相同形式返回一个表示和的链表。</p>
+<p>你可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/02/addtwonumber1.jpg" alt="img"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span>(<span class="params">l1, l2</span>):</span></span><br><span class="line">    length1, length2 = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    p = l1</span><br><span class="line">    <span class="keyword">while</span> p:</span><br><span class="line">        length1 += <span class="number">1</span></span><br><span class="line">        p = p.<span class="built_in">next</span></span><br><span class="line">    p = l2</span><br><span class="line">    <span class="keyword">while</span> p:</span><br><span class="line">        length2 += <span class="number">1</span></span><br><span class="line">        p = p.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">if</span> length1 &lt; length2:</span><br><span class="line">        l1, l2 = l2, l1</span><br><span class="line"></span><br><span class="line">    p1, p2 = l1, l2</span><br><span class="line">    c = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> p2:</span><br><span class="line">        p1.val += p2.val</span><br><span class="line">        p1 = p1.<span class="built_in">next</span></span><br><span class="line">        p2 = p2.<span class="built_in">next</span></span><br><span class="line">    p1 = l1</span><br><span class="line">    <span class="keyword">while</span> p1:</span><br><span class="line">        p1.val += c</span><br><span class="line">        c = <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> p1.val &gt; <span class="number">9</span>:</span><br><span class="line">            p1.val -= <span class="number">10</span></span><br><span class="line">            c = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> p1.<span class="built_in">next</span> <span class="keyword">and</span> c:</span><br><span class="line">            p1.<span class="built_in">next</span> = ListNode(<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        p1 = p1.<span class="built_in">next</span></span><br><span class="line">    <span class="keyword">return</span> l1</span><br><span class="line">&gt;&gt;</span><br><span class="line">Time = 50ms</span><br><span class="line">Memory = <span class="number">14.9</span>M</span><br></pre></td></tr></table></figure>
 
 
       
@@ -116,6 +195,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2021/06/14/Postgraduate/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Postgraduate
+        
+      </div>
+    </a>
   
   
     <a href="/2021/06/13/%E6%89%B9%E8%AF%84%E4%B8%8E%E8%87%AA%E6%88%91%E6%89%B9%E8%AF%84/" id="article-nav-older" class="article-nav-link-wrap">
@@ -140,7 +228,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -150,7 +238,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -172,6 +260,10 @@
       <ul>
         
           <li>
+            <a href="/2021/06/14/Postgraduate/">Postgraduate</a>
+          </li>
+        
+          <li>
             <a href="/2021/06/13/LeeCode/">LeeCode</a>
           </li>
         
@@ -185,10 +277,6 @@
         
           <li>
             <a href="/2021/06/06/Python-BuiltIn/">Python-BuiltIn</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/23/Framework-Thinking/">Framework-Thinking</a>
           </li>
         
       </ul>

@@ -6,21 +6,22 @@
   
   <title>Python-BuiltIn | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Class魔法–iter––str&#x2F;repr&#x2F;format–string&#x2F;represent 其实这正是反应了两者的区别，如果简单理解，这两个函数都是将一个实例转成字符串。但是不同的是，两者的使用场景不同，其中__str__更加侧重展示。所以当我们print输出给用户或者使用str函数进行类型转化的时候，Python都会默认优先调用__str__函数。而__repr__更侧重于这个实例的报告，除了">
+  <meta name="description" content="[Class魔法]–iter––str&#x2F;repr&#x2F;format–string&#x2F;represent 其实这正是反应了两者的区别，如果简单理解，这两个函数都是将一个实例转成字符串。但是不同的是，两者的使用场景不同，其中__str__更加侧重展示。所以当我们print输出给用户或者使用str函数进行类型转化的时候，Python都会默认优先调用__str__函数。而__repr__更侧重于这个实例的报告，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python-BuiltIn">
 <meta property="og:url" content="https://drinkle.top/2021/06/06/Python-BuiltIn/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
-<meta property="og:description" content="Class魔法–iter––str&#x2F;repr&#x2F;format–string&#x2F;represent 其实这正是反应了两者的区别，如果简单理解，这两个函数都是将一个实例转成字符串。但是不同的是，两者的使用场景不同，其中__str__更加侧重展示。所以当我们print输出给用户或者使用str函数进行类型转化的时候，Python都会默认优先调用__str__函数。而__repr__更侧重于这个实例的报告，除了">
+<meta property="og:description" content="[Class魔法]–iter––str&#x2F;repr&#x2F;format–string&#x2F;represent 其实这正是反应了两者的区别，如果简单理解，这两个函数都是将一个实例转成字符串。但是不同的是，两者的使用场景不同，其中__str__更加侧重展示。所以当我们print输出给用户或者使用str函数进行类型转化的时候，Python都会默认优先调用__str__函数。而__repr__更侧重于这个实例的报告，">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2017/04/loading-example.gif">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210529144951.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210529145101.png">
 <meta property="article:published_time" content="2021-06-06T12:46:32.000Z">
-<meta property="article:modified_time" content="2021-06-08T13:44:00.735Z">
+<meta property="article:modified_time" content="2021-06-16T11:53:21.227Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="BuiltIn">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210529144951.png">
+<meta name="twitter:image" content="https://www.runoob.com/wp-content/uploads/2017/04/loading-example.gif">
   
     <link rel="alternate" href="/atom.xml" title="Drink`s Blog" type="application/atom+xml">
   
@@ -99,7 +100,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Class魔法"><a href="#Class魔法" class="headerlink" title="Class魔法"></a>Class魔法</h2><h3 id="–iter–"><a href="#–iter–" class="headerlink" title="–iter–"></a>–iter–</h3><h3 id="–str-repr-format–"><a href="#–str-repr-format–" class="headerlink" title="–str/repr/format–"></a>–str/repr/format–</h3><p>string/represent</p>
+        <h2 id="Class魔法"><a href="#Class魔法" class="headerlink" title="[Class魔法]"></a>[Class魔法]</h2><h3 id="–iter–"><a href="#–iter–" class="headerlink" title="–iter–"></a>–iter–</h3><h3 id="–str-repr-format–"><a href="#–str-repr-format–" class="headerlink" title="–str/repr/format–"></a>–str/repr/format–</h3><p>string/represent</p>
 <p>其实这正是<strong>反应了两者的区别</strong>，如果简单理解，这两个函数都是将一个实例转成字符串。但是不同的是，两者的使用场景不同，其中__str__更加侧重展示。所以当我们print<strong>输出给用户或者使用str函数进行类型转化</strong>的时候，Python都会默认优先调用__str__函数。而__repr__更侧重于这个实例的报告，除了实例当中的内容之外，我们往往还会附上它的类相关的信息，<strong>因为这些内容是给开发者看的</strong>。所以当我们在交互式窗口输出的时候，它会优先调用__repr__。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">       <span class="keyword">return</span> <span class="string">&#x27;x: %s, y: %s&#x27;</span> % (self.x, self.y)</span><br><span class="line">   </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">       <span class="keyword">return</span> <span class="string">&#x27;x: %s, y: %s&#x27;</span> % (self.x, self.y)</span><br></pre></td></tr></table></figure>
 
@@ -112,7 +113,7 @@
 
 <h3 id="–contains–"><a href="#–contains–" class="headerlink" title="–contains–"></a>–contains–</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Class A:</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">		self.item = <span class="number">10</span></span><br><span class="line">       </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__contains__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">		<span class="keyword">if</span> item <span class="keyword">is</span> self.item:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">a = A()</span><br><span class="line">print(a.__contains__(<span class="number">5</span>))</span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h2><h3 id="加密Class属性"><a href="#加密Class属性" class="headerlink" title="加密Class属性"></a>加密Class属性</h3><p><strong>使用__getattribute_</strong>_进行加密</p>
+<h2 id="查看信息"><a href="#查看信息" class="headerlink" title="[查看信息]"></a>[查看信息]</h2><h3 id="加密Class属性"><a href="#加密Class属性" class="headerlink" title="加密Class属性"></a>加密Class属性</h3><p><strong>使用__getattribute_</strong>_进行加密</p>
 <p>为了避免从实列中使用dir()或者<code>__dict__</code>access属性,可以使用<code>__getattribute__</code>:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.__name = <span class="string">&#x27;LIU&#x27;</span></span><br><span class="line">        self.__score = <span class="number">96</span></span><br><span class="line">        self.age = <span class="number">17</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattribute__</span>(<span class="params">self, item</span>):</span></span><br><span class="line">        <span class="comment"># prevent all methods to access attributes</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">temp = Student()</span><br><span class="line">print(temp.age)</span><br><span class="line">print(temp.__name)</span><br><span class="line">print(temp.__dict__)</span><br><span class="line">print(<span class="built_in">dir</span>(temp))</span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="literal">None</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line"><span class="literal">None</span></span><br><span class="line">[]</span><br></pre></td></tr></table></figure>
 
@@ -199,7 +200,36 @@
 <p><strong>总结：</strong><br>“__getattribute__”与“__getattr__”的最大差异在于：<br>1.无论调用对象的什么属性，包括不存在的属性，都会首先调用“__getattribute__”方法；<br>2.只有找不到对象的属性时，才会调用“__getattr__”方法；</p>
 <p>仅希望以某种特殊的方式使用少数属性，而其他属性则按照普通属性操作。这些普通属性不会触发任何特殊代码，也不会因为遍历方法代码而浪费时间。在这些情况下，您可以对属性使用描述符<br>每次访问descriptor（即实现了__get__的类），都会先经过__get__函数。</p>
 <p>需要注意的是，当使用类访问不存在的变量是，不会经过__getattr__函数。而descriptor不存在此问题，只是把instance标识为none而已</p>
-<h2 id="快捷操作"><a href="#快捷操作" class="headerlink" title="快捷操作"></a>快捷操作</h2><h3 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h3><p>eval() 函数用来执行一个字符串表达式，并返回表达式的值。</p>
+<h2 id="快捷操作"><a href="#快捷操作" class="headerlink" title="[快捷操作]"></a>[快捷操作]</h2><h3 id="print"><a href="#print" class="headerlink" title="print()"></a>print()</h3><p>print(objectes, sep=’’, end=’\n’, flush=False, file=sys.stdout)</p>
+<ul>
+<li>objects:需要输出的对象</li>
+<li>sep:以什么间隔default:space</li>
+<li>end:以什么结尾default:\n</li>
+<li>file:是要写入的对象,其中sys.stdout为python的标准输出</li>
+<li>flush:输出是否被缓存通常决定于 file，但如果 flush 关键字参数为 True，流会被强制刷新</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">print(<span class="string">&#x27;Loading&#x27;</span>, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment"># 以end=&#x27;&#x27;结尾防止Loading后面的&quot;.&quot;换行</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">20</span>):</span><br><span class="line">    print(<span class="string">&#x27;.&#x27;</span>, end=<span class="string">&#x27;&#x27;</span>, flush=<span class="literal">True</span>)</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://www.runoob.com/wp-content/uploads/2017/04/loading-example.gif" alt="img"></p>
+<h3 id="ljust-center"><a href="#ljust-center" class="headerlink" title="ljust/center"></a>ljust/center</h3><p>对于需要填充的字符串一种快捷操作</p>
+<ul>
+<li><p>ljust(width, char)–&gt;左对齐–&gt;右填充</p>
+</li>
+<li><p>rjust(width, char)–&gt;右对齐–&gt;左tianchong</p>
+</li>
+<li><p>center(width, char)–&gt;中间对齐–&gt;两边填充</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&#x27;  123  &#x27;</span></span><br><span class="line">print(<span class="built_in">len</span>(<span class="built_in">str</span>))</span><br><span class="line">print(<span class="built_in">str</span>.ljust(<span class="number">10</span>, <span class="string">&#x27;*&#x27;</span>))</span><br><span class="line">print(<span class="built_in">str</span>.rjust(<span class="number">10</span>, <span class="string">&#x27;*&#x27;</span>))</span><br><span class="line">print(<span class="built_in">str</span>.center(<span class="number">10</span>, <span class="string">&#x27;*&#x27;</span>))</span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">7</span></span><br><span class="line">  <span class="number">123</span>  ***</span><br><span class="line">***  <span class="number">123</span>  </span><br><span class="line">*  <span class="number">123</span>  **</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="‘’-join"><a href="#‘’-join" class="headerlink" title="‘’.join()"></a>‘’.join()</h3><p>将list中的element转化成string,其中”char”中的符号为间隔填充符,但是如果list中只有数字,将不能直接转化,需要遍历列表,将列表中的内容转化成字符串:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment"># True</span></span><br><span class="line">print(<span class="string">&#x27;&#x27;</span>.join(<span class="string">&#x27;%s&#x27;</span> %i <span class="keyword">for</span> i <span class="keyword">in</span> alist))</span><br><span class="line"></span><br><span class="line"><span class="comment"># False</span></span><br><span class="line">print(<span class="string">&#x27;&#x27;</span>.join(alist))</span><br><span class="line">&gt;&gt;</span><br><span class="line">TypeError: sequence item <span class="number">3</span>: expected <span class="built_in">str</span> instance, <span class="built_in">int</span> found</span><br></pre></td></tr></table></figure>
+
+<h3 id="int"><a href="#int" class="headerlink" title="int()"></a>int()</h3><p>int()可以快速的实现进制的转换</p>
+<p>int(num, base)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="built_in">int</span>(num, base=n))</span><br><span class="line"><span class="comment"># 在base进制下的num表示成10j</span></span><br><span class="line"></span><br><span class="line">num=<span class="number">110</span>, base=<span class="number">2</span></span><br><span class="line">&gt;&gt;<span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h3><p>eval() 函数用来执行一个字符串表达式，并返回表达式的值。</p>
 <p>以下是 eval() 方法的语法:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval(expression[, globals[, locals]])</span><br></pre></td></tr></table></figure>
 
@@ -221,7 +251,61 @@
 <p>format 函数可以接受不限个参数，位置可以不按顺序。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">&quot;&#123;&#125; &#123;&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>)    </span><br><span class="line"><span class="comment"># 不设置指定位置，按默认顺序</span></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;0&#125; &#123;1&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>)  </span><br><span class="line"><span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;1&#125; &#123;0&#125; &#123;1&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>) </span><br><span class="line"><span class="comment"># 设置指定位置</span></span><br><span class="line"><span class="string">&#x27;world hello world&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="特殊方法"></a>特殊方法</h2><h3 id="处理异常"><a href="#处理异常" class="headerlink" title="处理异常"></a>处理异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    可能产生异常的代码块</span><br><span class="line"><span class="keyword">except</span> [ (Error1, Error2, ... ) /[<span class="keyword">as</span> e] ]:</span><br><span class="line">    处理异常的代码块<span class="number">1</span></span><br><span class="line"><span class="keyword">except</span> [ (Error3, Error4, ... ) /[<span class="keyword">as</span> e] ]:</span><br><span class="line">    处理异常的代码块<span class="number">2</span></span><br><span class="line"><span class="keyword">except</span>  [Exception]:</span><br><span class="line">    处理其它异常</span><br></pre></td></tr></table></figure>
+<h2 id="sys"><a href="#sys" class="headerlink" title="[sys]"></a>[sys]</h2><h3 id="stdin-readline"><a href="#stdin-readline" class="headerlink" title=".stdin.readline()"></a>.stdin.readline()</h3><h3 id="stdin-read"><a href="#stdin-read" class="headerlink" title=".stdin.read()"></a>.stdin.read()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">line = sys.stdin.readline()     <span class="comment"># 读取一行（包括换行符）</span></span><br><span class="line">char = sys.stdin.read(<span class="number">1</span>)        <span class="comment"># 读取一个字节</span></span><br><span class="line">lines = sys.stdin.read()        <span class="comment"># 读取到文件尾</span></span><br></pre></td></tr></table></figure>
+
+<p>Python中常用到的两种标准化输入方式：分别sys.stdin和input，两者使用方式大致相同，但是总的来说sys.stdin使用方式更加多样化一些，下面就例子说明两者之间的使用差别。</p>
+<ul>
+<li>python3中使用sys.stdin.readline()可以实现标准输入，其中默认输入的格式是字符串，如果是int，float类型则需要强制转换。</li>
+</ul>
+<h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="[特殊方法]"></a>[特殊方法]</h2><h3 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h3><p>可以统计在list\tuple\string中某个element\string出现的次数</p>
+<ul>
+<li>list.count(element)</li>
+<li>string.count(string, strat, end)</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>value</em></td>
+<td align="left">必需。字符串。要检索的字符串。</td>
+</tr>
+<tr>
+<td align="left"><em>start</em></td>
+<td align="left">可选。整数。开始检索的位置。默认是 0。</td>
+</tr>
+<tr>
+<td align="left"><em>end</em></td>
+<td align="left">可选。整数。结束检索的位置。默认是字符串的结尾。</td>
+</tr>
+</tbody></table>
+<h3 id="strip"><a href="#strip" class="headerlink" title="strip()"></a>strip()</h3><p>Python strip() 方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。</p>
+<p><strong>注意：</strong>该方法只能删除开头或是结尾的字符，不能删除中间部分的字符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&quot;00000003210Runoob01230000000&quot;</span>; </span><br><span class="line">print(str1.strip( <span class="string">&#x27;0&#x27;</span> ))	 <span class="comment"># 去除首尾字符 0</span></span><br><span class="line"> </span><br><span class="line">str2 = <span class="string">&quot;   Runoob      &quot;</span>   <span class="comment"># 去除首尾空格</span></span><br><span class="line">print(str2.strip())</span><br><span class="line">&gt;&gt;</span><br><span class="line">3210Runoob0123</span><br><span class="line">Runoob</span><br></pre></td></tr></table></figure>
+
+<p><strong>一、默认用法：去除空格</strong></p>
+<ul>
+<li>str.strip()  ： 去除字符串两边的空格</li>
+<li>str.lstrip() ： 去除字符串左边的空格</li>
+<li>str.rstrip() ： 去除字符串右边的空格</li>
+</ul>
+<p>注：此处的空格包含’\n’, ‘\r’,  ‘\t’,  ‘ ‘</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">&#x27; abc de a  1&#x27;</span></span><br><span class="line">print(a.strip())</span><br><span class="line">print(a.lstrip())</span><br><span class="line">print(a.rstrip())</span><br><span class="line">&gt;&gt;</span><br><span class="line">abc de a  <span class="number">1</span></span><br><span class="line">abc de a  <span class="number">1</span></span><br><span class="line"> abc de a  <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>二、去除指定字符</strong></p>
+<ul>
+<li>str.strip(‘do’)  ：去除字符串两端指定的字符</li>
+<li>str.lstrip(‘do’) ：用于去除左边指定的字符</li>
+<li>str.rstrip(‘do’) ：用于去除右边指定的字符</li>
+</ul>
+<p>三个函数都可以传入一个参数(这里以’do’为例)，指定要去除的首尾字符，编译器会去除两端所有相应的字符，直到没有匹配的字符。</p>
+<p><code>指定的字符表示的一种组合，例如&#39;do&#39;表示&#39;dd&#39;,&#39;do&#39;,&#39;od&#39;,&#39;oo&#39;,&#39;ddd&#39;,&#39;ooo&#39;等</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">dodo = <span class="string">&quot;say hello say boy saaayaaas&quot;</span>  </span><br><span class="line"></span><br><span class="line">print(dodo.strip(<span class="string">&#x27;say&#x27;</span>) ) </span><br><span class="line">print(dodo.strip(<span class="string">&#x27;yas&#x27;</span>) )  </span><br><span class="line"><span class="comment">#当传入的参数中加入空格时  </span></span><br><span class="line">print(dodo.strip(<span class="string">&#x27;say &#x27;</span>) )</span><br><span class="line"></span><br><span class="line">print(dodo.lstrip(<span class="string">&#x27;say&#x27;</span>) ) </span><br><span class="line">print(dodo.rstrip(<span class="string">&#x27;say&#x27;</span>) ) </span><br><span class="line"></span><br><span class="line">hello say boy </span><br><span class="line"> hello say boy </span><br><span class="line">hello say bo</span><br><span class="line"> hello say boy saaayaaas</span><br><span class="line">say hello say boy </span><br></pre></td></tr></table></figure>
+
+<h3 id="处理异常"><a href="#处理异常" class="headerlink" title="处理异常"></a>处理异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    可能产生异常的代码块</span><br><span class="line"><span class="keyword">except</span> [ (Error1, Error2, ... ) /[<span class="keyword">as</span> e] ]:</span><br><span class="line">    处理异常的代码块<span class="number">1</span></span><br><span class="line"><span class="keyword">except</span> [ (Error3, Error4, ... ) /[<span class="keyword">as</span> e] ]:</span><br><span class="line">    处理异常的代码块<span class="number">2</span></span><br><span class="line"><span class="keyword">except</span>  [Exception]:</span><br><span class="line">    处理其它异常</span><br></pre></td></tr></table></figure>
 
 <p>该格式中，[] 括起来的部分可以使用，也可以省略。其中各部分的含义如下：</p>
 <ul>
@@ -320,7 +404,7 @@
 </li>
 </ol>
 <p><strong>简要理解：yield就是 return 返回一个值，并且记住这个返回的位置，下次迭代就从这个位置后开始。</strong></p>
-<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p>简要理解：yield就是 return 返回一个值，并且记住这个返回的位置，下次迭代就从这个位置后开始</p>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="[关键字]"></a>[关键字]</h2><h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p>简要理解：yield就是 return 返回一个值，并且记住这个返回的位置，下次迭代就从这个位置后开始</p>
 <ul>
 <li>它首先是个<code>return：在程序中返回某个值，返回之后程序就不再往下运行了。</code></li>
 <li>之后是生成器（generator）的一部分（带yield的函数才是真正的迭代器）</li>
@@ -388,7 +472,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -398,7 +482,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -420,6 +504,10 @@
       <ul>
         
           <li>
+            <a href="/2021/06/14/Postgraduate/">Postgraduate</a>
+          </li>
+        
+          <li>
             <a href="/2021/06/13/LeeCode/">LeeCode</a>
           </li>
         
@@ -433,10 +521,6 @@
         
           <li>
             <a href="/2021/06/06/Python-BuiltIn/">Python-BuiltIn</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/23/Framework-Thinking/">Framework-Thinking</a>
           </li>
         
       </ul>
