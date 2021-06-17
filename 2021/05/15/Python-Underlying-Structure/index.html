@@ -6,19 +6,19 @@
   
   <title>Python-Underlying-Structure | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Python底层结构Operators&#x2F;&#x2F;:rounding down &#x3D;&#x3D;&gt; 7&#x2F;&#x2F;2 &#x3D; 3.5 —&gt; 3 [start:end]&#x3D;&#x3D;&gt;contains start except end [1, 2, 3, 4, 5] &#x3D;&#x3D;[2:]&#x3D;&#x3D;&gt;[3, 4, 5] [1, 2, 3, 4, 5] &#x3D;&#x3D;[:2]&#x3D;&#x3D;&gt;[1, 2] [1, 2, 3, 4, 5] &#x3D;&#x3D;[1:3">
+  <meta name="description" content="Python底层结构字典字典的访问：  dic.get(key, default):访问key，如果没有key返回None，有key返回对应的value dic[key]：通过key访问value for key in dic.keys()：访问所有的keys for value in dic.values()：访问所有的values for key, value in dic.items()：访">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python-Underlying-Structure">
 <meta property="og:url" content="https://drinkle.top/2021/05/15/Python-Underlying-Structure/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
-<meta property="og:description" content="Python底层结构Operators&#x2F;&#x2F;:rounding down &#x3D;&#x3D;&gt; 7&#x2F;&#x2F;2 &#x3D; 3.5 —&gt; 3 [start:end]&#x3D;&#x3D;&gt;contains start except end [1, 2, 3, 4, 5] &#x3D;&#x3D;[2:]&#x3D;&#x3D;&gt;[3, 4, 5] [1, 2, 3, 4, 5] &#x3D;&#x3D;[:2]&#x3D;&#x3D;&gt;[1, 2] [1, 2, 3, 4, 5] &#x3D;&#x3D;[1:3">
+<meta property="og:description" content="Python底层结构字典字典的访问：  dic.get(key, default):访问key，如果没有key返回None，有key返回对应的value dic[key]：通过key访问value for key in dic.keys()：访问所有的keys for value in dic.values()：访问所有的values for key, value in dic.items()：访">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523203737.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523205439.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523213913.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523232121.png">
 <meta property="article:published_time" content="2021-05-15T07:14:15.000Z">
-<meta property="article:modified_time" content="2021-06-16T11:06:42.224Z">
+<meta property="article:modified_time" content="2021-06-17T02:55:12.601Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -101,7 +101,15 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p><code>//</code>:rounding down ==&gt; 7//2 = 3.5 —&gt; 3</p>
+        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><p>字典的访问：</p>
+<ul>
+<li>dic.get(key, default):访问key，如果没有key返回None，有key返回对应的value</li>
+<li>dic[key]：通过key访问value</li>
+<li>for key in dic.keys()：访问所有的keys</li>
+<li>for value in dic.values()：访问所有的values</li>
+<li>for key, value in dic.items()：访问所有的键值对</li>
+</ul>
+<h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p><code>//</code>:rounding down ==&gt; 7//2 = 3.5 —&gt; 3</p>
 <p><code>[start:end]</code>==&gt;contains start except end</p>
 <p>[1, 2, 3, 4, 5] ==[2:]==&gt;[3, 4, 5]</p>
 <p>[1, 2, 3, 4, 5] ==[:2]==&gt;[1, 2]</p>

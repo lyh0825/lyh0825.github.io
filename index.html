@@ -296,9 +296,24 @@
 <p>按照从小到大的顺序输出它的所有质数的因子，以空格隔开。最后一个数后面也要有空格。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factor</span>(<span class="params">n</span>):</span></span><br><span class="line">    flag = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(n**<span class="number">0.5</span>+<span class="number">1</span>)):</span><br><span class="line">        <span class="keyword">if</span> n % i  == <span class="number">0</span>:</span><br><span class="line">            print(i, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">            flag = <span class="literal">False</span></span><br><span class="line">            factor(<span class="built_in">int</span>(n/i))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> flag:</span><br><span class="line">        print(n, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">factor(<span class="built_in">int</span>(<span class="built_in">input</span>()))</span><br></pre></td></tr></table></figure>
 
+<h3 id="7E取近似值"><a href="#7E取近似值" class="headerlink" title="7E取近似值"></a>7E取近似值</h3><h4 id="数学-语法"><a href="#数学-语法" class="headerlink" title="数学/语法"></a>数学/语法</h4><h4 id="思路-考点-5"><a href="#思路-考点-5" class="headerlink" title="思路/考点"></a>思路/考点</h4><ul>
+<li>int()函数如果接受的是个float数，他将只取整数位抛弃小数位</li>
+<li>//也是只取整数位</li>
+</ul>
+<p>写出一个程序，接受一个正浮点数值，输出该数值的近似整数值。如果小数点后数值大于等于5,向上取整；小于5，则向下取整。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="built_in">int</span>(<span class="built_in">float</span>(<span class="built_in">input</span>())+<span class="number">0.5</span>)</span><br><span class="line">print(num)</span><br></pre></td></tr></table></figure>
+
+<h3 id="8M合并表记录"><a href="#8M合并表记录" class="headerlink" title="8M合并表记录"></a>8M合并表记录</h3><h4 id="几何-哈希"><a href="#几何-哈希" class="headerlink" title="几何/哈希"></a>几何/哈希</h4><p><strong>描述</strong></p>
+<p>数据表记录包含表索引和数值（int范围的正整数），请对表索引相同的记录进行合并，即将相同索引的数值进行求和运算，输出按照key值升序进行输出。</p>
+<p><strong>输入描述：</strong></p>
+<p>先输入键值对的个数<br>然后输入成对的index和value值，以空格隔开</p>
+<p><strong>输出描述：</strong></p>
+<p>输出合并后的键值对（多行）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>()) <span class="comment"># 共输入几组key-val</span></span><br><span class="line">dic = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num):</span><br><span class="line">    line = <span class="built_in">input</span>().split()</span><br><span class="line">    key = <span class="built_in">int</span>(line[<span class="number">0</span>])</span><br><span class="line">    value = <span class="built_in">int</span>(line[<span class="number">1</span>])</span><br><span class="line">    dic[key] = dic.get(key,<span class="number">0</span>) + value</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> <span class="built_in">sorted</span>(dic):</span><br><span class="line">    print(key, dic.get(key))</span><br></pre></td></tr></table></figure>
 
 
-<h3 id="14M字符串排序"><a href="#14M字符串排序" class="headerlink" title="14M字符串排序"></a>14M字符串排序</h3><p>输入一定的字符串，将字符串按照字母优先级进行排序</p>
+
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="14M字符串排序"><a href="#14M字符串排序" class="headerlink" title="14M字符串排序"></a>14M字符串排序</h3><p>输入一定的字符串，将字符串按照字母优先级进行排序</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">words = []</span><br><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num):</span><br><span class="line">    word = <span class="built_in">input</span>()</span><br><span class="line">    words.append(word)</span><br><span class="line">words.sort()</span><br><span class="line"><span class="comment"># 不能直接遍历words.sort()，否则返回None</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> words:</span><br><span class="line">    print(item)</span><br></pre></td></tr></table></figure>
 
 <p>sort()即可进行数字排序也可以对单词按照字母优先级进行排序</p>
@@ -695,7 +710,26 @@
 <p><strong>总结：</strong><br>“__getattribute__”与“__getattr__”的最大差异在于：<br>1.无论调用对象的什么属性，包括不存在的属性，都会首先调用“__getattribute__”方法；<br>2.只有找不到对象的属性时，才会调用“__getattr__”方法；</p>
 <p>仅希望以某种特殊的方式使用少数属性，而其他属性则按照普通属性操作。这些普通属性不会触发任何特殊代码，也不会因为遍历方法代码而浪费时间。在这些情况下，您可以对属性使用描述符<br>每次访问descriptor（即实现了__get__的类），都会先经过__get__函数。</p>
 <p>需要注意的是，当使用类访问不存在的变量是，不会经过__getattr__函数。而descriptor不存在此问题，只是把instance标识为none而已</p>
-<h2 id="快捷操作"><a href="#快捷操作" class="headerlink" title="[快捷操作]"></a>[快捷操作]</h2><h3 id="print"><a href="#print" class="headerlink" title="print()"></a>print()</h3><p>print(objectes, sep=’’, end=’\n’, flush=False, file=sys.stdout)</p>
+<h2 id="快捷操作"><a href="#快捷操作" class="headerlink" title="[快捷操作]"></a>[快捷操作]</h2><h3 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h3><p><strong>字典中的get操作</strong></p>
+<p>return: 返回字典中key对应value值，如果没有就return None， 而get函数可以将没有的key进行操作</p>
+<p>dict.get(key, default=None)</p>
+<ul>
+<li>key – 字典中要查找的键。</li>
+<li>default – 如果指定键的值不存在时，返回该默认值。</li>
+</ul>
+<p>返回指定键的值，如果键不在字典中返回默认值 None 或者设置的默认值。</p>
+<h3 id="split"><a href="#split" class="headerlink" title="split()"></a>split()</h3><p><strong>return</strong> <strong>list</strong></p>
+<p>Python <strong>split()</strong> 通过指定分隔符对字符串进行切片，如果参数 num 有指定值，则分隔 num+1 个子字符串</p>
+<p>string.split(sep=’’, maxsplit=num)</p>
+<ul>
+<li>sep–&gt;分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等默认情况下不显示sep，直接输入需要splitstr即可。</li>
+<li>maxsplit– &gt;分割次数。默认为 -1, 即分隔所有。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">temp = <span class="built_in">input</span>().split(sep=<span class="string">&#x27;**&#x27;</span>, maxsplit=-<span class="number">1</span>)</span><br><span class="line">print(temp)</span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> ** <span class="number">4</span></span><br><span class="line">[<span class="string">&#x27;1 2 3 &#x27;</span>, <span class="string">&#x27; 4&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="print"><a href="#print" class="headerlink" title="print()"></a>print()</h3><p>print(objectes, sep=’’, end=’\n’, flush=False, file=sys.stdout)</p>
 <ul>
 <li>objects:需要输出的对象</li>
 <li>sep:以什么间隔default:space</li>
@@ -1000,7 +1034,15 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p><code>//</code>:rounding down ==&gt; 7//2 = 3.5 —&gt; 3</p>
+        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><p>字典的访问：</p>
+<ul>
+<li>dic.get(key, default):访问key，如果没有key返回None，有key返回对应的value</li>
+<li>dic[key]：通过key访问value</li>
+<li>for key in dic.keys()：访问所有的keys</li>
+<li>for value in dic.values()：访问所有的values</li>
+<li>for key, value in dic.items()：访问所有的键值对</li>
+</ul>
+<h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p><code>//</code>:rounding down ==&gt; 7//2 = 3.5 —&gt; 3</p>
 <p><code>[start:end]</code>==&gt;contains start except end</p>
 <p>[1, 2, 3, 4, 5] ==[2:]==&gt;[3, 4, 5]</p>
 <p>[1, 2, 3, 4, 5] ==[:2]==&gt;[1, 2]</p>
