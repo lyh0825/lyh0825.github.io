@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/02/addtwonumber1.jpg">
 <meta property="article:published_time" content="2021-06-13T09:15:54.000Z">
-<meta property="article:modified_time" content="2021-06-17T02:39:35.122Z">
+<meta property="article:modified_time" content="2021-06-18T03:32:28.752Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="LeeCode">
 <meta name="twitter:card" content="summary">
@@ -165,7 +165,25 @@
 <p>写出一个程序，接受一个正浮点数值，输出该数值的近似整数值。如果小数点后数值大于等于5,向上取整；小于5，则向下取整。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="built_in">int</span>(<span class="built_in">float</span>(<span class="built_in">input</span>())+<span class="number">0.5</span>)</span><br><span class="line">print(num)</span><br></pre></td></tr></table></figure>
 
-<h3 id="8M合并表记录"><a href="#8M合并表记录" class="headerlink" title="8M合并表记录"></a>8M合并表记录</h3><h4 id="几何-哈希"><a href="#几何-哈希" class="headerlink" title="几何/哈希"></a>几何/哈希</h4><p><strong>描述</strong></p>
+<h3 id="8M合并表记录"><a href="#8M合并表记录" class="headerlink" title="8M合并表记录"></a>8M合并表记录</h3><h4 id="几何-哈希"><a href="#几何-哈希" class="headerlink" title="几何/哈希"></a>几何/哈希</h4><h4 id="思路-考点-6"><a href="#思路-考点-6" class="headerlink" title="思路/考点"></a>思路/考点</h4><p>考察dict的访问:</p>
+<ul>
+<li>for i in dict–&gt;access key</li>
+<li>for key in dict.keys–&gt;accsee key</li>
+<li>for key, val in dict.item–&gt;access key and val</li>
+<li>dict[key]–&gt;access key对应的val, 没有的话返回KeyError</li>
+<li>dict.get(key, val(default:None))–&gt;访问dict中key对应的值,没有的话返回val</li>
+</ul>
+<p>有与dict中的key不可以直接修改,如果要修改key需要以下操作</p>
+<p><strong>第一种方法：将需要修改的键对应的值用dict.pop() 的方法提取出来，并重新赋值给新的键，即dict[新的键] = dict.pop(旧的键)。</strong>（字典dict的pop是删除某个键及其对应的值，返回的是该键对应的值）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">dict</span>[<span class="string">&quot;c&quot;</span>] = <span class="built_in">dict</span>.pop(<span class="string">&quot;a&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二种方法：结合dict.pop() 和dict.update() 的方法。</strong>（字典dict的pop是删除某个键及其对应的值，返回的是该键对应的值）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">dict</span>.update(&#123;<span class="string">&#x27;c&#x27;</span>:<span class="built_in">dict</span>.pop(<span class="string">&quot;a&quot;</span>)&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第三种方法：结合直接修改和del语句。</strong>先用直接修改的方式将旧键赋值给新的键，再用del语句删除原来的键名。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">dict</span>[<span class="string">&#x27;c&#x27;</span>]=<span class="built_in">dict</span>[<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"><span class="keyword">del</span> <span class="built_in">dict</span>[<span class="string">&#x27;a&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>描述</strong></p>
 <p>数据表记录包含表索引和数值（int范围的正整数），请对表索引相同的记录进行合并，即将相同索引的数值进行求和运算，输出按照key值升序进行输出。</p>
 <p><strong>输入描述：</strong></p>
 <p>先输入键值对的个数<br>然后输入成对的index和value值，以空格隔开</p>
@@ -173,9 +191,31 @@
 <p>输出合并后的键值对（多行）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>()) <span class="comment"># 共输入几组key-val</span></span><br><span class="line">dic = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num):</span><br><span class="line">    line = <span class="built_in">input</span>().split()</span><br><span class="line">    key = <span class="built_in">int</span>(line[<span class="number">0</span>])</span><br><span class="line">    value = <span class="built_in">int</span>(line[<span class="number">1</span>])</span><br><span class="line">    dic[key] = dic.get(key,<span class="number">0</span>) + value</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> <span class="built_in">sorted</span>(dic):</span><br><span class="line">    print(key, dic.get(key))</span><br></pre></td></tr></table></figure>
 
+<h3 id="9M提取不重复的整数"><a href="#9M提取不重复的整数" class="headerlink" title="9M提取不重复的整数"></a>9M提取不重复的整数</h3><h4 id="数组-位运算-哈希"><a href="#数组-位运算-哈希" class="headerlink" title="数组/位运算/哈希"></a>数组/位运算/哈希</h4><p><strong>描述</strong></p>
+<p>输入一个int型整数，按照从右向左的阅读顺序，返回一个不含重复数字的新的整数。</p>
+<p>保证输入的整数最后一位不是0。</p>
+<p><strong>输入描述</strong>：</p>
+<p>输入一个int型整数</p>
+<p><strong>输出描述</strong>：</p>
+<p>按照从右向左的阅读顺序，返回一个不含重复数字的新的整数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">temp = <span class="built_in">input</span>()</span><br><span class="line">ans = <span class="built_in">list</span>(temp)[::-<span class="number">1</span>]</span><br><span class="line">anss = []</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> ans:</span><br><span class="line">    <span class="keyword">if</span> item <span class="keyword">not</span> <span class="keyword">in</span> anss:</span><br><span class="line">        anss.append(item)</span><br><span class="line">print(<span class="string">&#x27;&#x27;</span>.join(<span class="string">&#x27;%s&#x27;</span> %i <span class="keyword">for</span> i <span class="keyword">in</span> anss))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>:m:’’.join()将list中的元素转化成string,如果list中有number,则需要使用格式<code>&#39;&#39;.join(&#39;%s&#39; %i for i in list)</code></p>
+<h3 id="10字符个数统计"><a href="#10字符个数统计" class="headerlink" title="10字符个数统计"></a><strong>10字符个数统计</strong></h3><h4 id="字符串-哈希-1"><a href="#字符串-哈希-1" class="headerlink" title="字符串/哈希"></a>字符串/哈希</h4><h4 id="思路-考点-7"><a href="#思路-考点-7" class="headerlink" title="思路/考点"></a>思路/考点</h4><ul>
+<li>如何记录已存在的值,如果当前值已经存在,则跳过该值的后续操作</li>
+</ul>
+<p><strong>描述</strong></p>
+<p>编写一个函数，计算字符串中含有的不同字符的个数。字符在ASCII码范围内(0~127，包括0和127)，换行表示结束符，不算在字符里。不在范围内的不作统计。多个相同的字符只计算一次</p>
+<p>例如，对于字符串abaca而言，有a、b、c三种不同的字符，因此输出3。</p>
+<p><strong>输入描述：</strong></p>
+<p>输入一行没有空格的字符串。</p>
+<p><strong>输出描述：</strong></p>
+<p>输出 输入字符串 中范围在(0~127，包括0和127)字符的种数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        zifu = <span class="built_in">input</span>()</span><br><span class="line">        a=<span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> zifu:</span><br><span class="line">            <span class="keyword">if</span> i <span class="keyword">in</span> a <span class="keyword">and</span> <span class="number">0</span>&lt;<span class="built_in">ord</span>(i)&lt;<span class="number">127</span>:</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                a+=i</span><br><span class="line">        print(<span class="built_in">len</span>(a))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 
 
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="14M字符串排序"><a href="#14M字符串排序" class="headerlink" title="14M字符串排序"></a>14M字符串排序</h3><p>输入一定的字符串，将字符串按照字母优先级进行排序</p>
+
+<h3 id="14M字符串排序"><a href="#14M字符串排序" class="headerlink" title="14M字符串排序"></a>14M字符串排序</h3><p>输入一定的字符串，将字符串按照字母优先级进行排序</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">words = []</span><br><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num):</span><br><span class="line">    word = <span class="built_in">input</span>()</span><br><span class="line">    words.append(word)</span><br><span class="line">words.sort()</span><br><span class="line"><span class="comment"># 不能直接遍历words.sort()，否则返回None</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> words:</span><br><span class="line">    print(item)</span><br></pre></td></tr></table></figure>
 
 <p>sort()即可进行数字排序也可以对单词按照字母优先级进行排序</p>
