@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2021/01/02/addtwonumber1.jpg">
 <meta property="article:published_time" content="2021-06-13T09:15:54.000Z">
-<meta property="article:modified_time" content="2021-06-18T03:32:28.752Z">
+<meta property="article:modified_time" content="2021-06-19T02:00:40.402Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="LeeCode">
 <meta name="twitter:card" content="summary">
@@ -201,7 +201,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">temp = <span class="built_in">input</span>()</span><br><span class="line">ans = <span class="built_in">list</span>(temp)[::-<span class="number">1</span>]</span><br><span class="line">anss = []</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> ans:</span><br><span class="line">    <span class="keyword">if</span> item <span class="keyword">not</span> <span class="keyword">in</span> anss:</span><br><span class="line">        anss.append(item)</span><br><span class="line">print(<span class="string">&#x27;&#x27;</span>.join(<span class="string">&#x27;%s&#x27;</span> %i <span class="keyword">for</span> i <span class="keyword">in</span> anss))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>:m:’’.join()将list中的元素转化成string,如果list中有number,则需要使用格式<code>&#39;&#39;.join(&#39;%s&#39; %i for i in list)</code></p>
-<h3 id="10字符个数统计"><a href="#10字符个数统计" class="headerlink" title="10字符个数统计"></a><strong>10字符个数统计</strong></h3><h4 id="字符串-哈希-1"><a href="#字符串-哈希-1" class="headerlink" title="字符串/哈希"></a>字符串/哈希</h4><h4 id="思路-考点-7"><a href="#思路-考点-7" class="headerlink" title="思路/考点"></a>思路/考点</h4><ul>
+<h3 id="10E字符个数统计"><a href="#10E字符个数统计" class="headerlink" title="10E字符个数统计"></a><strong>10E字符个数统计</strong></h3><h4 id="字符串-哈希-1"><a href="#字符串-哈希-1" class="headerlink" title="字符串/哈希"></a>字符串/哈希</h4><h4 id="思路-考点-7"><a href="#思路-考点-7" class="headerlink" title="思路/考点"></a>思路/考点</h4><ul>
 <li>如何记录已存在的值,如果当前值已经存在,则跳过该值的后续操作</li>
 </ul>
 <p><strong>描述</strong></p>
@@ -213,12 +213,85 @@
 <p>输出 输入字符串 中范围在(0~127，包括0和127)字符的种数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        zifu = <span class="built_in">input</span>()</span><br><span class="line">        a=<span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> zifu:</span><br><span class="line">            <span class="keyword">if</span> i <span class="keyword">in</span> a <span class="keyword">and</span> <span class="number">0</span>&lt;<span class="built_in">ord</span>(i)&lt;<span class="number">127</span>:</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                a+=i</span><br><span class="line">        print(<span class="built_in">len</span>(a))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="11E数字颠倒"><a href="#11E数字颠倒" class="headerlink" title="11E数字颠倒"></a>11E数字颠倒</h3><h4 id="字符串-3"><a href="#字符串-3" class="headerlink" title="字符串"></a>字符串</h4><h4 id="思路-考点-8"><a href="#思路-考点-8" class="headerlink" title="思路/考点"></a>思路/考点</h4><ul>
+<li>考察对tuple/string/list使用slice操作[::-1]</li>
+</ul>
+<p>输入一个整数，将这个整数以字符串的形式逆序输出</p>
+<p>程序不考虑负数的情况，若数字含有0，则逆序形式也含有0，如输入为100，则输出为001</p>
+<p>输入一个int整数</p>
+<p>将这个整数以字符串的形式逆序输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp = <span class="built_in">input</span>()[::-<span class="number">1</span>]</span><br><span class="line">print(temp)</span><br></pre></td></tr></table></figure>
 
+<h3 id="12E字符串反转"><a href="#12E字符串反转" class="headerlink" title="12E字符串反转"></a>12E字符串反转</h3><h4 id="字符串-4"><a href="#字符串-4" class="headerlink" title="字符串"></a>字符串</h4><h4 id="思路-考点-9"><a href="#思路-考点-9" class="headerlink" title="思路/考点"></a>思路/考点</h4><p>接受一个只包含小写字母的字符串，然后输出该字符串反转后的字符串。（字符串长度不超过1000）</p>
+<p>输入一行，为一个只包含小写字母的字符串。</p>
+<p>输出该字符串反转后的字符串。</p>
+<p><strong>Essrntial：同11数字颠倒</strong></p>
+<h3 id="13H句子逆序"><a href="#13H句子逆序" class="headerlink" title="13H句子逆序"></a>13H句子逆序</h3><h4 id="数组-1"><a href="#数组-1" class="headerlink" title="数组"></a>数组</h4><h4 id="思路-考点-10"><a href="#思路-考点-10" class="headerlink" title="思路/考点"></a>思路/考点</h4><ul>
+<li>控制输入，使用split()将输入的string转化成list，以方便后续操作</li>
+<li>控制输出，使用.join()，将list转化成string，其中sep=‘ ’</li>
+</ul>
+<p>将一个英文语句以单词为单位逆序排放。例如“I am a boy”，逆序排放后为“boy a am I”<br>所有单词之间用一个空格隔开，语句中除了英文字母外，不再包含其他字符</p>
+<p>输入一个英文语句，每个单词用空格隔开。保证输入只包含空格和字母。</p>
+<p>得到逆序的句子</p>
+<p>I am a boy</p>
+<p>boy a am I</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        temp = <span class="built_in">input</span>().split()[::-<span class="number">1</span>]</span><br><span class="line">        print(<span class="string">&#x27; &#x27;</span>.join(temp))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="14M字符串排序"><a href="#14M字符串排序" class="headerlink" title="14M字符串排序"></a>14M字符串排序</h3><p>输入一定的字符串，将字符串按照字母优先级进行排序</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">words = []</span><br><span class="line">num = <span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num):</span><br><span class="line">    word = <span class="built_in">input</span>()</span><br><span class="line">    words.append(word)</span><br><span class="line">words.sort()</span><br><span class="line"><span class="comment"># 不能直接遍历words.sort()，否则返回None</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> words:</span><br><span class="line">    print(item)</span><br></pre></td></tr></table></figure>
 
 <p>sort()即可进行数字排序也可以对单词按照字母优先级进行排序</p>
+<h3 id="15E求int数据在存贮中使用1的个数"><a href="#15E求int数据在存贮中使用1的个数" class="headerlink" title="15E求int数据在存贮中使用1的个数"></a>15E求int数据在存贮中使用1的个数</h3><h4 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h4><h4 id="思路-考点-11"><a href="#思路-考点-11" class="headerlink" title="思路/考点"></a>思路/考点</h4><ul>
+<li>使用bin（）将输入的base=10数据转化成binary数据（str）</li>
+<li>使用str的slice将0b（二进制开头）去除[2:]</li>
+<li>使用.count（‘item’） 返回str中‘item’出现的次数</li>
+</ul>
+<p><strong>描述</strong></p>
+<p>输入一个int型的正整数，计算出该int型数据在内存中存储时1的个数。</p>
+<p><strong>输入描述：</strong></p>
+<p> 输入一个整数（int类型）</p>
+<p><strong>输出描述：</strong></p>
+<p> 这个数转换成2进制后，输出1的个数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp = <span class="built_in">bin</span>(<span class="built_in">int</span>(<span class="built_in">input</span>()))</span><br><span class="line">print(<span class="built_in">str</span>(temp)[<span class="number">2</span>:].count(<span class="string">&#x27;1&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>16M购物单</p>
+<h4 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h4><h4 id="思路-考点-12"><a href="#思路-考点-12" class="headerlink" title="思路/考点"></a>思路/考点</h4><p><strong>描述</strong></p>
+<p>王强今天很开心，公司发给N元的年终奖。王强决定把年终奖用于购物，他把想买的物品分为两类：主件与附件，附件是从属于某个主件的，下表就是一些主件与附件的例子：</p>
+<table>
+<thead>
+<tr>
+<th align="center">主件</th>
+<th align="center">附件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">电脑</td>
+<td align="center">打印机，扫描仪</td>
+</tr>
+<tr>
+<td align="center">书柜</td>
+<td align="center">图书</td>
+</tr>
+<tr>
+<td align="center">书桌</td>
+<td align="center">台灯，文具</td>
+</tr>
+<tr>
+<td align="center">工作椅</td>
+<td align="center">无</td>
+</tr>
+</tbody></table>
+<p>如果要买归类为附件的物品，必须先买该附件所属的主件。每个主件可以有 0 个、 1 个或 2 个附件。附件不再有从属于自己的附件。王强想买的东西很多，为了不超出预算，他把每件物品规定了一个重要度，分为 5 等：用整数 1 <strong>~</strong> 5 表示，第 5 等最重要。他还从因特网上查到了每件物品的价格（都是 10 元的整数倍）。他希望在不超过 N 元（可以等于 N 元）的前提下，使每件物品的价格与重要度的乘积的总和最大。</p>
+<p>  设第 j 件物品的价格为 v[j] ，重要度为 w[j] ，共选中了 k 件物品，编号依次为 j 1 ， j 2 ，……， j k ，则所求的总和为：</p>
+<p>v[j 1 ]*w[j 1 ]+v[j 2 ]*w[j 2 ]+ … +v[j k ]*w[j k ] 。（其中 * 为乘号）</p>
+<p>  请你帮助王强设计一个满足要求的购物单。</p>
+<p> <strong>输入描述：</strong></p>
+<p>输入的第 1 行，为两个正整数，用一个空格隔开：N m</p>
+<p>（其中 N （ &lt;32000 ）表示总钱数， m （ &lt;60 ）为希望购买物品的个数。）</p>
+<p>从第 2 行到第 m+1 行，第 j 行给出了编号为 j-1 的物品的基本数据，每行有 3 个非负整数 v p q</p>
+<p>（其中 v 表示该物品的价格（ v&lt;10000 ）， p 表示该物品的重要度（ 1 **~** 5 ）， q 表示该物品是主件还是附件。如果 q=0 ，表示该物品为主件，如果 q&gt;0 ，表示该物品为附件， q 是所属主件的编号）</p>
+<p><strong>输出描述：</strong></p>
+<p> 输出文件只有一个正整数，为不超过总钱数的物品的价格与重要度乘积的总和的最大值（ &lt;200000 ）。</p>
 <h2 id="Day01"><a href="#Day01" class="headerlink" title="Day01"></a>Day01</h2><h3 id="1E-两数之和"><a href="#1E-两数之和" class="headerlink" title="1E.两数之和"></a>1E.两数之和</h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
 <p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
 <p>你可以按任意顺序返回答案。</p>
