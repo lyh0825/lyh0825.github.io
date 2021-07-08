@@ -567,7 +567,35 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Part2AlgorithmAnalysis"><a href="#Part2AlgorithmAnalysis" class="headerlink" title="Part2AlgorithmAnalysis"></a>Part2AlgorithmAnalysis</h2><h3 id="Four-methods-for-generating-list"><a href="#Four-methods-for-generating-list" class="headerlink" title="Four methods for generating list"></a>Four methods for generating list</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span>():</span></span><br><span class="line">	l = []</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">		l = l + [i]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">append</span>():</span></span><br><span class="line">	l = []</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">		l.append(i)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">comprehension</span>():</span></span><br><span class="line">	l = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>)]</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_range</span>():</span></span><br><span class="line">	l = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1000</span>))</span><br><span class="line"></span><br><span class="line">t1 = timeit.timeit(<span class="string">&#x27;connect()&#x27;</span>, <span class="string">&#x27;from __main__ import connect&#x27;</span>, number = <span class="number">100000</span>)</span><br><span class="line">print(<span class="string">&#x27;connect &#x27;</span>, t1, <span class="string">&#x27;millisecondes&#x27;</span>)</span><br></pre></td></tr></table></figure>
+        <h2 id="Use-Stack-Implement-Queue"><a href="#Use-Stack-Implement-Queue" class="headerlink" title="Use Stack Implement Queue"></a>Use Stack Implement Queue</h2><h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><ul>
+<li><p>push–&gt;append</p>
+</li>
+<li><p>pop–&gt;pop</p>
+</li>
+<li><p>peek–&gt;return the new item</p>
+</li>
+<li><p>isEmpty–&gt;return Bool</p>
+</li>
+<li><p>size–&gt;return len</p>
+</li>
+</ul>
+<p><strong>入栈</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/push_stack.gif"></p>
+<p><strong>出栈</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/pop_stack.gif"></p>
+<h3 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h3><ul>
+<li>enqueue–&gt;append</li>
+<li>dequeue–&gt;pop</li>
+<li>isEmpty–&gt;return Bool</li>
+<li>size–&gt;retuen size</li>
+</ul>
+<p><strong>入队</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/enqueue.gif"></p>
+<p><strong>出队</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dequeue.gif"></p>
+<h3 id="stack–-gt-queue"><a href="#stack–-gt-queue" class="headerlink" title="stack–&gt;queue"></a>stack–&gt;queue</h3><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/stack_im_queue.gif"></p>
+<h3 id="queue–-gt-stack"><a href="#queue–-gt-stack" class="headerlink" title="queue–&gt;stack"></a>queue–&gt;stack</h3><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/queue_im_stack.gif"></p>
+<h2 id="Part2Algorithm-Analysis"><a href="#Part2Algorithm-Analysis" class="headerlink" title="Part2Algorithm Analysis"></a>Part2Algorithm Analysis</h2><h3 id="Four-methods-for-generating-list"><a href="#Four-methods-for-generating-list" class="headerlink" title="Four methods for generating list"></a>Four methods for generating list</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span>():</span></span><br><span class="line">	l = []</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">		l = l + [i]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">append</span>():</span></span><br><span class="line">	l = []</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">		l.append(i)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">comprehension</span>():</span></span><br><span class="line">	l = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>)]</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">list_range</span>():</span></span><br><span class="line">	l = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1000</span>))</span><br><span class="line"></span><br><span class="line">t1 = timeit.timeit(<span class="string">&#x27;connect()&#x27;</span>, <span class="string">&#x27;from __main__ import connect&#x27;</span>, number = <span class="number">100000</span>)</span><br><span class="line">print(<span class="string">&#x27;connect &#x27;</span>, t1, <span class="string">&#x27;millisecondes&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>By running the code 100,000 times to find the time required for each method, we conclude that the best method is <code>list range() </code></p>
 <p>O(1) &lt;– append    O(n) &lt;– + if the length of list needed connecting is n</p>
@@ -941,17 +969,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="2021-4-7"><a href="#2021-4-7" class="headerlink" title="2021/4/7"></a>2021/4/7</h2><p>[视频]习近平同德国总理通电话</p>
-<p>[视频]经中央军委主席习近平批准中央军委印发《关于构建新时代人民军队思想政治教育体系的意见》</p>
-<p>[视频]李克强主持召开国务院常务会议[视频]李克强同蒙古国总理通电话</p>
-<p>[视频]李克强签署国务院令公布修订后的《粮食流通管理条例》</p>
-<p>[视频]栗战书同摩洛哥众议长举行会谈</p>
-<p>[视频]汪洋出席《中国共产党统一战线工作条例》研讨班开班式</p>
-<p>[视频]【奋斗百年路启航新征程·同心奔小康】湖南油溪桥村:昔日穷山沟今朝小康村[视频]我国将加快建立现代财税体制</p>
-<p>[视频]国家卫生健康委通报最新疫情[视频]国内联播快讯</p>
-<p>[视频]国际货币基金组织上调全球及中国经济发展预期</p>
-<p>[视频]全球新冠肺炎确诊病例超1亿3148万</p>
-<p>[视频]美德特里克堡基地附近发生枪击1死2伤[视频]俄罗斯本月开始大规模军事战备检查</p>
+        <h2 id="2021-7-8"><a href="#2021-7-8" class="headerlink" title="2021/7/8"></a>2021/7/8</h2><h3 id="医改"><a href="#医改" class="headerlink" title="医改"></a>医改</h3><p><strong>央视网消息</strong>（新闻联播）：国务院新闻办公室今天（7月8日）举行国务院政策例行吹风会，介绍2021年深化医药卫生体制改革重点工作任务有关情况。进一步推广三明市医改经验，加快推进医疗、医保、医药联动改革。促进优质医疗资源均衡布局，完善分级诊疗体系。选择<strong>上海、江苏、浙江</strong>等11个省份为医改试点地区，统筹推进省域内各级各类公立医院探索高质量发展的实施路径和支撑体系，加快形成符合实际、可推广、可复制、可持续的经验和模式。</p>
 
       
     </div>
