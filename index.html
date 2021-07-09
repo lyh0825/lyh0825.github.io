@@ -1125,7 +1125,7 @@
 <li>G （Global） 全局作用域</li>
 <li>B （Built-in） 内建作用域 以 L –&gt; E –&gt; G –&gt;B 的规则查找，即：在局部找不到，便会去局部外的局部找（例如闭包），再找不到就会去全局找，再者去内建中找。</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># instance 1</span></span><br><span class="line">x = <span class="number">5</span> <span class="comment"># global</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun_a</span>():</span></span><br><span class="line">    x = <span class="number">4</span> <span class="comment"># local</span></span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun_b</span>():</span></span><br><span class="line">    x = <span class="number">3</span></span><br><span class="line">    print(x)</span><br><span class="line">    </span><br><span class="line">print(x)</span><br><span class="line">&gt;&gt;\n</span><br><span class="line"><span class="number">5</span> <span class="number">4</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># instance 1</span></span><br><span class="line">x = <span class="number">5</span> <span class="comment"># global</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun_a</span>():</span></span><br><span class="line">    x = <span class="number">4</span> <span class="comment"># local</span></span><br><span class="line">    print(x)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun_b</span>():</span></span><br><span class="line">    x = <span class="number">3</span></span><br><span class="line">    print(x)</span><br><span class="line">    </span><br><span class="line">print(x)</span><br><span class="line">fun_a()</span><br><span class="line">fun_b()</span><br><span class="line">&gt;&gt;\n</span><br><span class="line"><span class="number">5</span> <span class="number">4</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># instance 2</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun_a</span>():</span></span><br><span class="line">    x = <span class="number">5</span> <span class="comment"># enclosing</span></span><br><span class="line">    print(x)</span><br><span class="line">    <span class="keyword">return</span> fun_b</span><br><span class="line"></span><br><span class="line">b = fun_a()</span><br><span class="line">b()</span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
 
@@ -2099,7 +2099,69 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, [4, 5, 6]]      #l[3]添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5, 6]]      #l1跟着添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5, 6]]      #l2跟着添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5]]         #l3保持不变</span><br></pre></td></tr></table></figure>
 
 <p>1.外层添加元素时，浅拷贝不会随原列表变化而变化；内层添加元素时，浅拷贝才会变化。<br>2.无论原列表如何变化，深拷贝都保持不变。<br>3.赋值对象随着原列表一起变化。</p>
-<h2 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h2><p>字典中的.pop()是指删除key-val并抛出val</p>
+<h2 id="几何-set"><a href="#几何-set" class="headerlink" title="几何[set]"></a>几何[set]</h2><p><a target="_blank" rel="noopener" href="http://c.biancheng.net/python/">Python</a> set 集合最常用的操作是向集合中添加、删除元素，以及集合之间做交集、并集、差集等运算，本节将一一讲解这些操作的具体实现。</p>
+<p><strong>向 set 集合中添加元素</strong></p>
+<p>set 集合中添加元素，可以使用 set 类型提供的 add() 方法实现，该方法的语法格式为：</p>
+<p>setname.add(element)</p>
+<p>其中，setname 表示要添加元素的集合，element 表示要添加的元素内容。</p>
+<p><strong>需要注意的是，使用 add() 方法添加的元素，只能是数字、字符串、元组或者布尔类型（True 和 False）值，不能添加列表、字典、集合这类可变的数据，否则 Python 解释器会报 TypeError 错误。例如：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;1,2,3&#125;a.add((1,2))print(a)a.add([1,2])print(a)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果为：</p>
+<p>{(1, 2), 1, 2, 3}<br>Traceback (most recent call last):<br> File “C:\Users\mengma\Desktop\1.py”, line 4, in <module><br>  a.add([1,2])<br>TypeError: unhashable type: ‘list’</p>
+<p><strong>从set集合中删除元素</strong></p>
+<p>删除现有 set 集合中的指定元素，可以使用 remove() 方法，该方法的语法格式如下：</p>
+<p>setname.remove(element)</p>
+<p>使用此方法删除集合中元素，需要注意的是，如果被删除元素本就不包含在集合中，则此方法会抛出 KeyError 错误，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;1,2,3&#125;a.remove(1)print(a)a.remove(1)print(a)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果为：</p>
+<p>{2, 3}<br>Traceback (most recent call last):<br> File “C:\Users\mengma\Desktop\1.py”, line 4, in <module><br>  a.remove(1)<br>KeyError: 1</p>
+<p>上面程序中，由于集合中的元素 1 已被删除，因此当再次尝试使用 remove() 方法删除时，会引发 KeyError 错误。</p>
+<p>如果我们不想在删除失败时令解释器提示 KeyError 错误，还可以使用 discard() 方法，此方法和 remove() 方法的用法完全相同，唯一的区别就是，当删除集合中元素失败时，此方法不会抛出任何错误。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;1,2,3&#125;a.remove(1)print(a)a.discard(1)print(a)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果为：</p>
+<p>{2, 3}<br>{2, 3}</p>
+<p><strong>Python set集合做交集、并集、差集运算</strong></p>
+<p>集合最常做的操作就是进行交集、并集、差集以及对称差集运算，首先有必要给大家普及一下各个运算的含义。</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190712/2-1ZG2132104150.gif" alt="img"><br>图 1 中，有 2 个集合，分别为 set1={1,2,3} 和 set2={3,4,5}，它们既有相同的元素，也有不同的元素。以这两个集合为例，分别做不同运算的结果如表 1 所示。</p>
+<table>
+<thead>
+<tr>
+<th>运算操作</th>
+<th>Python运算符</th>
+<th>含义</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>交集</td>
+<td>&amp;</td>
+<td>取两集合公共的元素</td>
+<td>&gt;&gt;&gt; set1 &amp; set2 {3}</td>
+</tr>
+<tr>
+<td>并集</td>
+<td>|</td>
+<td>取两集合全部的元素</td>
+<td>&gt;&gt;&gt; set1 | set2 {1,2,3,4,5}</td>
+</tr>
+<tr>
+<td>差集</td>
+<td>-</td>
+<td>取一个集合中另一集合没有的元素</td>
+<td>&gt;&gt;&gt; set1 - set2 {1,2} &gt;&gt;&gt; set2 - set1 {4,5}</td>
+</tr>
+<tr>
+<td>对称差集</td>
+<td>^</td>
+<td>取集合 A 和 B 中不属于 A&amp;B 的元素</td>
+<td>&gt;&gt;&gt; set1 ^ set2 {1,2,4,5}</td>
+</tr>
+</tbody></table>
+<h2 id="字典-dict"><a href="#字典-dict" class="headerlink" title="字典[dict]"></a>字典[dict]</h2><p>字典中的.pop()是指删除key-val并抛出val</p>
 <p>字典的访问：</p>
 <ul>
 <li>dic.get(key, default):访问key，如果没有key返回None，有key返回对应的value</li>
