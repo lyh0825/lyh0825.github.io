@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210529144951.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210529145101.png">
 <meta property="article:published_time" content="2021-06-06T12:46:32.000Z">
-<meta property="article:modified_time" content="2021-07-09T10:31:12.267Z">
+<meta property="article:modified_time" content="2021-07-10T04:42:15.082Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="BuiltIn">
 <meta name="twitter:card" content="summary">
@@ -316,7 +316,13 @@
 <ul>
 <li>python3中使用sys.stdin.readline()可以实现标准输入，其中默认输入的格式是字符串，如果是int，float类型则需要强制转换。</li>
 </ul>
-<h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="[特殊方法]"></a>[特殊方法]</h2><h3 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h3><p>可以统计在list\tuple\string中某个element\string出现的次数</p>
+<h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="[特殊方法]"></a>[特殊方法]</h2><h3 id="isxxx-string"><a href="#isxxx-string" class="headerlink" title=".isxxx()[string]"></a>.isxxx()[string]</h3><p>is判断函数为一种判断函数，根据规定字符串判断是否符合结果返回True或者False</p>
+<p>主要判断如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">isdecimal():判断给定字符串是否全为数字</span><br><span class="line"></span><br><span class="line">isalpha():判断给定的字符串是否全为字母</span><br><span class="line"></span><br><span class="line">isalnum()：判断给定的字符串是否只含有数字与字母</span><br><span class="line"></span><br><span class="line">isupper():判断给定的字符串是否全为大写</span><br><span class="line"></span><br><span class="line">islower():判断给定的字符串是否全为小写</span><br><span class="line"></span><br><span class="line">istitle():判断给定的字符串是否符合title()</span><br><span class="line"></span><br><span class="line">isspace():判断给定的字符串是否为空白符（空格、换行、制表符）</span><br><span class="line"></span><br><span class="line">isprintable():判断给定的字符串是否为可打印字符（只有空格可以，换行、制表符都不可以）</span><br><span class="line"></span><br><span class="line">isidentifier():判断给定的字符串是否符合命名规则（只能是字母或下划线开头、不能包含除数字、字母和下划线</span><br><span class="line">				以外的任意字符。）</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h3><p>可以统计在list\tuple\string中某个element\string出现的次数</p>
 <ul>
 <li>list.count(element)</li>
 <li>string.count(string, strat, end)</li>
