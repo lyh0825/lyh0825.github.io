@@ -6,12 +6,12 @@
   
   <title>Python-Underlying-Structure | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Python底层结构浅拷贝&#x2F;深拷贝首先需要了解下几个概念  变量：是一个系统表的元素，拥有指向对象的连接空间 对象：被分配的一块内存，存储其所代表的值 引用：是自动形成的从变量到对象的指针 类型：属于对象，而非变量 不可变对象：一旦创建就不可修改的对象，包括字符串、元组、数值类型  （该对象所指向的内存中的值不能被改变。当改变某个变量时候，由于其所指的值不能被改变，相当于把原来的值复制一份后再改变">
+  <meta name="description" content="Python底层结构generate当terminal中输出的是generator时,可以使用: 1234&gt;&gt;list(generator)&gt;&gt;for i in generator:    print(i)  查看迭代器的内容,而非输出其memory地址 浅拷贝&#x2F;深拷贝首先需要了解下几个概念  变量：是一个系统表的元素，拥有指向对象的连接空间 对象：被分配的一块内存，存储其">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python-Underlying-Structure">
 <meta property="og:url" content="https://drinkle.top/2021/05/15/Python-Underlying-Structure/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
-<meta property="og:description" content="Python底层结构浅拷贝&#x2F;深拷贝首先需要了解下几个概念  变量：是一个系统表的元素，拥有指向对象的连接空间 对象：被分配的一块内存，存储其所代表的值 引用：是自动形成的从变量到对象的指针 类型：属于对象，而非变量 不可变对象：一旦创建就不可修改的对象，包括字符串、元组、数值类型  （该对象所指向的内存中的值不能被改变。当改变某个变量时候，由于其所指的值不能被改变，相当于把原来的值复制一份后再改变">
+<meta property="og:description" content="Python底层结构generate当terminal中输出的是generator时,可以使用: 1234&gt;&gt;list(generator)&gt;&gt;for i in generator:    print(i)  查看迭代器的内容,而非输出其memory地址 浅拷贝&#x2F;深拷贝首先需要了解下几个概念  变量：是一个系统表的元素，拥有指向对象的连接空间 对象：被分配的一块内存，存储其">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://c.biancheng.net/uploads/allimg/190712/2-1ZG2132104150.gif">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523203737.png">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523213913.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523232121.png">
 <meta property="article:published_time" content="2021-05-15T07:14:15.000Z">
-<meta property="article:modified_time" content="2021-07-09T06:21:23.921Z">
+<meta property="article:modified_time" content="2021-07-11T03:54:20.431Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -102,7 +102,11 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="浅拷贝-深拷贝"><a href="#浅拷贝-深拷贝" class="headerlink" title="浅拷贝/深拷贝"></a>浅拷贝/深拷贝</h2><p>首先需要了解下几个概念</p>
+        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h2><p>当terminal中输出的是generator时,可以使用:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;<span class="built_in">list</span>(generator)</span><br><span class="line"></span><br><span class="line">&gt;&gt;<span class="keyword">for</span> i <span class="keyword">in</span> generator:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+
+<p>查看迭代器的内容,而非输出其memory地址</p>
+<h2 id="浅拷贝-深拷贝"><a href="#浅拷贝-深拷贝" class="headerlink" title="浅拷贝/深拷贝"></a>浅拷贝/深拷贝</h2><p>首先需要了解下几个概念</p>
 <ul>
 <li>变量：是一个系统表的元素，拥有指向对象的连接空间</li>
 <li>对象：被分配的一块内存，存储其所代表的值</li>
