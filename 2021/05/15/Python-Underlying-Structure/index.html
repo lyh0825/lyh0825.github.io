@@ -6,12 +6,12 @@
   
   <title>Python-Underlying-Structure | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Python底层结构字典排序【1.按照keys进行排序】 1234567dct &#x3D; &amp;#123;&amp;#x27;a&amp;#x27;: 1, &amp;#x27;e&amp;#x27;: 8, &amp;#x27;c&amp;#x27;: 10, &amp;#x27;d&amp;#x27;: 4&amp;#125;for key in sorted(dct.keys()):    value &#x3D; dct.get(key)    print(key, value,">
+  <meta name="description" content="Python底层结构基础知识[Python里面如何生成随机数？] random模块**随机整数：random.randint(a,b)**：返回随机整数x,a&lt;&#x3D;x&lt;&#x3D;brandom.randrange(start,stop,[,step])：返回一个范围在(start,stop,step)之间的随机整数，不包括结束值。**随机实数：random.random( ):**返回0到1之间">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python-Underlying-Structure">
 <meta property="og:url" content="https://drinkle.top/2021/05/15/Python-Underlying-Structure/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
-<meta property="og:description" content="Python底层结构字典排序【1.按照keys进行排序】 1234567dct &#x3D; &amp;#123;&amp;#x27;a&amp;#x27;: 1, &amp;#x27;e&amp;#x27;: 8, &amp;#x27;c&amp;#x27;: 10, &amp;#x27;d&amp;#x27;: 4&amp;#125;for key in sorted(dct.keys()):    value &#x3D; dct.get(key)    print(key, value,">
+<meta property="og:description" content="Python底层结构基础知识[Python里面如何生成随机数？] random模块**随机整数：random.randint(a,b)**：返回随机整数x,a&lt;&#x3D;x&lt;&#x3D;brandom.randrange(start,stop,[,step])：返回一个范围在(start,stop,step)之间的随机整数，不包括结束值。**随机实数：random.random( ):**返回0到1之间">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://c.biancheng.net/uploads/allimg/190712/2-1ZG2132104150.gif">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523203737.png">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523213913.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523232121.png">
 <meta property="article:published_time" content="2021-05-15T07:14:15.000Z">
-<meta property="article:modified_time" content="2021-07-11T11:41:21.910Z">
+<meta property="article:modified_time" content="2021-07-16T14:04:23.234Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -102,7 +102,20 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="字典排序"><a href="#字典排序" class="headerlink" title="字典排序"></a>字典排序</h2><p><strong>【1.按照keys进行排序】</strong></p>
+        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p><strong>[Python里面如何生成随机数？]</strong></p>
+<p>random模块<br>**随机整数：random.randint(a,b)**：返回随机整数x,a&lt;=x&lt;=b<br>random.randrange(start,stop,[,step])：返回一个范围在(start,stop,step)之间的随机整数，不包括结束值。<br>**随机实数：random.random( ):**返回0到1之间的浮点数<br>random.uniform(a,b):返回指定范围内的浮点数。</p>
+<p><strong>[python复制一个对象]</strong></p>
+<p>Python里面如何拷贝一个对象？（赋值，浅拷贝，深拷贝的区别）<br>答：赋值（=），就是创建了对象的一个新的引用，修改其中任意一个变量都会影响到另一个。<br>浅拷贝：创建一个新的对象，但它包含的是对原始对象中包含项的引用（如果用引用的方式修改其中一个对象，另外一个也会修改改变）{1,完全切片方法；2，工厂函数，如list()；3，copy模块的copy()函数}<br>深拷贝：创建一个新的对象，并且递归的复制它所包含的对象（修改其中一个，另外一个不会改变）{copy模块的deep.deepcopy()函数}</p>
+<p><strong>[is与==的区别]</strong></p>
+<p>在 Python 中，”==” 和 “is” 的区别可类比这个例子 ，**==是相等性比较，比较的是两个对象中的值是否相等，is是一致性比较，比较的是两个对象的内存空间地址是否相同。**</p>
+<p><strong>[列表由于是可以增删的(可变化)因此不能做为hashtable的key]</strong></p>
+<p><strong>[python不支持的数据类型是什么？]</strong></p>
+<p>python不支持的数据类型是char 、byte类型。Python没有char或byte类型来保存单一字符或 8 比特整数。你可以使用长度为 1 的字符串表示字符或 8 比特整数。</p>
+<p>python的数据类型有：</p>
+<p>数字(int)、浮点(float)、字符串(str)，列表(list)、元组(tuple)、字典(dict)、集合(set)、</p>
+<p><strong>byte 是字节数据类型 ，是有符号型的，可以表示-128—127 的数；</strong></p>
+<p><strong>char 是字符数据类型 ，是无符号型的，可以表示一个整数，不能表示负数。</strong></p>
+<h2 id="字典排序"><a href="#字典排序" class="headerlink" title="字典排序"></a>字典排序</h2><p><strong>【1.按照keys进行排序】</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dct = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">8</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">10</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">4</span>&#125;</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> <span class="built_in">sorted</span>(dct.keys()):</span><br><span class="line">    value = dct.get(key)</span><br><span class="line">    print(key, value, sep=<span class="string">&#x27;:&#x27;</span>, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    </span><br><span class="line">&gt;&gt;</span><br><span class="line">a:<span class="number">1</span> c:<span class="number">10</span> d:<span class="number">4</span> e:<span class="number">8</span> </span><br></pre></td></tr></table></figure>
 
 <p><strong>【2.按照values进行排序】</strong></p>
@@ -157,8 +170,8 @@
 <p>浅复制要分两种情况进行讨论：</p>
 <p>1）当浅复制的值是不可变对象（字符串、元组、数值类型）时和“赋值”的情况一样，对象的id值<em>（id()函数用于获取对象的内存地址）</em>与浅复制原来的值相同。</p>
 <p>2）当浅复制的值是可变对象（列表、字典、集合）时会产生一个“不是那么独立的对象”存在。有两种情况：</p>
-<p><em>第一种情况：复制的对象中无复杂子对象，原来值的改变并不会影响浅复制的值，同时浅复制的值改变也并不会影响原来的值。原来值的id值与浅复制原来的值不同。</em></p>
-<p><em>第二种情况：复制的对象中有复杂子对象（例如列表中的一个子元素是一个列表），如果不改变其中复杂子对象，浅复制的值改变并不会影响原来的值。 但是改变原来的值中的复杂子对象的值会影响浅复制的值。</em></p>
+<p>​        <strong>第一种情况：复制的对象中无复杂子对象，原来值的改变并不会影响浅复制的值，同时浅复制的值改变也并不会影响原来的值。原来值的id值与浅复制原来的值不同。</strong></p>
+<p>​        <strong>第二种情况：复制的对象中有复杂子对象（例如列表中的一个子元素是一个列表），如果不改变其中复杂子对象，浅复制的值改变并不会影响原来的值。 但是改变原来的值中的复杂子对象的值会影响浅复制的值。</strong></p>
 <p><strong>3.深拷贝：和浅拷贝对应，深拷贝拷贝了对象的所有元素，包括多层嵌套的元素。深拷贝出来的对象是一个全新的对象，不再与原来的对象有任何关联。</strong></p>
 <p>所以改变原有被复制对象不会对已经复制出来的新对象产生影响。</p>
 <p>只有一种形式，copy模块中的deepcopy函数</p>
@@ -624,7 +637,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -634,7 +647,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -656,6 +669,14 @@
       <ul>
         
           <li>
+            <a href="/2021/07/18/Linux/">Linux</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/18/MySQL/">MySQL</a>
+          </li>
+        
+          <li>
             <a href="/2021/07/11/Algorithm/">Algorithm</a>
           </li>
         
@@ -665,14 +686,6 @@
         
           <li>
             <a href="/2021/06/14/Postgraduate/">Postgraduate</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/13/LeeCode/">LeeCode</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/13/%E6%89%B9%E8%AF%84%E4%B8%8E%E8%87%AA%E6%88%91%E6%89%B9%E8%AF%84/">批评与自我批评</a>
           </li>
         
       </ul>

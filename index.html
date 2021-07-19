@@ -71,6 +71,109 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/18/Linux/" class="article-date">
+  <time class="dt-published" datetime="2021-07-18T05:45:13.000Z" itemprop="datePublished">2021-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/07/18/Linux/">Linux</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="0-安装"><a href="#0-安装" class="headerlink" title="0.安装"></a>0.安装</h2><ol>
+<li>官网上获得版本偶数版为稳定版，奇数版位测试版</li>
+<li>下载VMware14pro，安装码百度即可</li>
+<li>选择编辑添加新虚拟机</li>
+<li>其中虚拟机设置里将CD/DVD 2（IED）设置为<code>centOS-8-×86_64-1905-dcd.iso</code>的路径</li>
+</ol>
+<p>如果开始时出现</p>
+<p><strong>Pane is dead.窗格已死，解决方法为：</strong></p>
+<p>​    1、把内存从1G升到2G，不管用。</p>
+<p>​    2、按住 Ctrl+alt+F2， 然后输出 reboot， 依然不行。</p>
+<p>​    3、更改ISO默认的映像文件，【step4】</p>
+<p>安装时选择工作站版即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/07/18/Linux/" data-id="ckrarjjgi00008of52xj2aau5" data-title="Linux" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-MySQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/18/MySQL/" class="article-date">
+  <time class="dt-published" datetime="2021-07-18T05:43:55.000Z" itemprop="datePublished">2021-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/07/18/MySQL/">MySQL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-MySQL"><a href="#1-MySQL" class="headerlink" title="1.MySQL"></a>1.MySQL</h2><h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>Error Code: 1054. Unknown column ‘%%’ in ‘where clause’</p>
+<p>出现类似的语法错误时，首先考虑是 <strong>‘</strong> 还是 <strong>`</strong> 出错了</p>
+<p>一个是syntax error 一个是通配符使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT COL_NAME</span><br><span class="line">FROM TABLE_NAME</span><br><span class="line">WHERE STUDENT_NAME LIKE &#39;小%&#39;;</span><br><span class="line"></span><br><span class="line">SELECT &#96;COL_NAME&#96;</span><br><span class="line">FROM &#96;DATABASE_NAME&#96;.&#96;TABLE_NAME&#96;</span><br></pre></td></tr></table></figure>
+
+<p>`DataBase/Table``     ‘wildcard’ </p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="Schema和DataBase是否等同？"><a href="#Schema和DataBase是否等同？" class="headerlink" title="Schema和DataBase是否等同？"></a>Schema和DataBase是否等同？</h3><p><strong>schema是数据库的组织和结构，是数据库对象的集合，集合包括表，视图，储存过程，索引等。</strong></p>
+<p>（1）MySQL的文档中指出，在物理上，模式与数据库是同义的，所以，模式和数据库是一回事。</p>
+<p>（2）但是，Oracle的文档却指出，某些对象可以存储在数据库中，但不能存储在schema中。 因此，模式和数据库不是一回事。</p>
+<p>（3）而根据这篇SQL Server技术文章<a target="_blank" rel="noopener" href="https://technet.microsoft.com/en-us/library/dd283095(v=sql.100).aspx">SQLServer technical article</a>，schema是数据库SQL Server内部的一个独立的实体。 所以，他们也不是一回事。</p>
+<p>因此，取决于您使用的RDBMS，模式和数据库可能不一样。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/07/18/MySQL/" data-id="ckrarjjgm00018of58kwa2icz" data-title="MySQL" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Algorithm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/11/Algorithm/" class="article-date">
@@ -97,8 +200,6 @@
 <p>一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># method 1 recursion 2**n</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drump</span>(<span class="params">n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> drump(n-<span class="number">1</span>) + drump(n-<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># method 2 loop n</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">jump</span>(<span class="params">number</span>):</span></span><br><span class="line">    <span class="keyword">if</span> number &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(number):</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">    <span class="keyword">return</span> b</span><br></pre></td></tr></table></figure>
 
-
-
 <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="1-M排序"><a href="#1-M排序" class="headerlink" title="1.M排序"></a>1.M排序</h3><p>给定一个数组，请你编写一个函数，返回该数组排序后的形式。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">sorted</span>(a)</span><br><span class="line">&gt;&gt;</span><br><span class="line">exchange</span><br><span class="line">bubble-&gt;select</span><br><span class="line">ordereder</span><br><span class="line">insert-&gt;shell</span><br><span class="line">divide <span class="keyword">and</span> conquer</span><br><span class="line">merge-&gt;quick</span><br></pre></td></tr></table></figure>
 
@@ -107,16 +208,14 @@
 <li>0 &lt;= k &lt;= input.length &lt;= 10000</li>
 <li>0 &lt;= input[i] &lt;= 10000</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GetLeastNumbers_Solution</span>(<span class="params">self, tinput, k</span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        temp = <span class="built_in">sorted</span>(tinput)</span><br><span class="line">        <span class="keyword">return</span> temp[:k]</span><br></pre></td></tr></table></figure>
-
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GetLeastNumbers_Solution</span>(<span class="params">self, tinput, k</span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        temp = <span class="built_in">sorted</span>(tinput)</span><br><span class="line">        <span class="keyword">return</span> temp[:k]</span><br><span class="line"><span class="comment"># 使用bubble控制遍历次数得出最小的n个数</span></span><br><span class="line">a = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">8</span>]</span><br><span class="line">temp = []</span><br><span class="line">n = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)-<span class="number">1</span>, <span class="built_in">len</span>(a)-<span class="number">5</span>, -<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">        <span class="keyword">if</span> a[j+<span class="number">1</span>] &gt; a[j]:</span><br><span class="line">            a[j], a[j+<span class="number">1</span>] = a[j+<span class="number">1</span>], a[j]</span><br><span class="line">    temp.append(a.pop())</span><br><span class="line">print(temp)</span><br></pre></td></tr></table></figure>
 
 <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="1-E两数之和"><a href="#1-E两数之和" class="headerlink" title="1.E两数之和"></a>1.E两数之和</h3><h4 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h4><p><strong>【enurmate(iteration)–&gt;return index–value】</strong></p>
 <p>给出一个整数数组，请在数组中找出两个加起来等于目标值的数，</p>
 <p>你给出的函数twoSum 需要返回这两个数字的下标（index1，index2），需要满足 index1 小于index2.。注意：下标是从1开始的假设给出的数组中只存在唯一解</p>
 <p>例如：</p>
 <p>给出的数组为 {20, 70, 110, 150},目标值为90<br>输出 index1=1, index2=2</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span>(<span class="params">self , numbers , target </span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">for</span> index1, value1 <span class="keyword">in</span> <span class="built_in">enumerate</span>(numbers):</span><br><span class="line">            <span class="keyword">for</span> index2, value2 <span class="keyword">in</span> <span class="built_in">enumerate</span>(numbers):</span><br><span class="line">                <span class="keyword">if</span> index1 == index2:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">elif</span> value1 + value2 == target:</span><br><span class="line">                    <span class="keyword">return</span> [index1+<span class="number">1</span>, index2+<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># time complexity O(n^2)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span>(<span class="params">self , numbers , target </span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">for</span> index1, value1 <span class="keyword">in</span> <span class="built_in">enumerate</span>(numbers):</span><br><span class="line">            <span class="keyword">for</span> index2, value2 <span class="keyword">in</span> <span class="built_in">enumerate</span>(numbers):</span><br><span class="line">                <span class="keyword">if</span> index1 == index2:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">elif</span> value1 + value2 == target:</span><br><span class="line">                    <span class="keyword">return</span> [index1+<span class="number">1</span>, index2+<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-M最长无重复子数组-DP-star"><a href="#2-M最长无重复子数组-DP-star" class="headerlink" title="2.M最长无重复子数组[DP:star:]"></a>2.M最长无重复子数组[DP:star:]</h3><h4 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h4><p><strong>【1.双指针】</strong></p>
 <p>方法一和方法二本质上属于同一个解法</p>
@@ -135,16 +234,16 @@
 <p>子数组是连续的，比如[1,3,5,7,9]的子数组有[1,3]，[3,5,7]等等，但是[1,3,7]不是子数组</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># method 1 </span></span><br><span class="line"><span class="comment"># 使用队列queue模拟</span></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>]</span><br><span class="line">long = <span class="number">0</span></span><br><span class="line">queue = []</span><br><span class="line"><span class="keyword">for</span> ele <span class="keyword">in</span> a:</span><br><span class="line">    <span class="keyword">while</span> ele <span class="keyword">in</span> queue:</span><br><span class="line">        queue.pop(<span class="number">0</span>)</span><br><span class="line">    queue.append(ele)</span><br><span class="line">    long = <span class="built_in">max</span>(long, <span class="built_in">len</span>(queue))</span><br><span class="line">print(long)</span><br><span class="line"></span><br><span class="line"><span class="comment"># methond 2</span></span><br><span class="line"><span class="comment"># list记录,再使用slice更新</span></span><br><span class="line">arr = [<span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">99</span>, <span class="number">3</span>]</span><br><span class="line">long, cur_seq = <span class="number">0</span>, []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> arr:</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> cur_seq:</span><br><span class="line">        long = <span class="built_in">max</span>(long, <span class="built_in">len</span>(cur_seq))</span><br><span class="line">        start = cur_seq.index(i)</span><br><span class="line">        cur_seq = cur_seq[start + <span class="number">1</span>:]</span><br><span class="line">    cur_seq.append(i)</span><br><span class="line">print(<span class="built_in">max</span>(long, <span class="built_in">len</span>(cur_seq)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># methond3</span></span><br><span class="line"><span class="comment"># 动态规划</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxLength</span>(<span class="params">self, a</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(a) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        dp = [<span class="number">0</span>]*(<span class="built_in">len</span>(a)+<span class="number">1</span>)</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        cur_list = a[:<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(a)):</span><br><span class="line">            progress = self.dp_len(cur_list, a[i])</span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>], progress[<span class="number">0</span>])</span><br><span class="line">            cur_list = progress[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(dp)</span><br><span class="line">    <span class="comment"># update the situation</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dp_len</span>(<span class="params">self, temp, ele</span>):</span></span><br><span class="line">        <span class="keyword">while</span> ele <span class="keyword">in</span> temp:</span><br><span class="line">            temp.pop(<span class="number">0</span>)</span><br><span class="line">        temp.append(ele)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(temp), temp</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-合并两个有序的数组"><a href="#3-合并两个有序的数组" class="headerlink" title="3.合并两个有序的数组"></a>3.合并两个有序的数组</h3><h4 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h4><p><strong>[1.先将数据合成到一个数组中,之后对数组进行排序]</strong></p>
+<h3 id="3-M合并两个有序的数组"><a href="#3-M合并两个有序的数组" class="headerlink" title="3.M合并两个有序的数组"></a>3.M合并两个有序的数组</h3><h4 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h4><p><strong>[1.先将数据合成到一个数组中,之后对数组进行排序]</strong></p>
 <p><strong>[2.使用merge sort的思想]</strong></p>
 <p>例1:</p>
 <p>A: [1,2,3,0,0,0]，m=3</p>
 <p>B: [2,5,6]，n=3</p>
 <p>合并过后A为:</p>
 <p>A: [1,2,2,3,5,6]</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># methond1 [合并列表再排序,时间复杂度高]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self , A, m, B, n</span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(B)):</span><br><span class="line">            A[m] = B[i]</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">        index = <span class="built_in">len</span>(A)-<span class="number">1</span></span><br><span class="line">        sign = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> sign:</span><br><span class="line">            sign = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">                <span class="keyword">if</span> A[i] &gt; A[i+<span class="number">1</span>]:</span><br><span class="line">                    sign = <span class="literal">False</span></span><br><span class="line">                    A[i], A[i+<span class="number">1</span>] = A[i+<span class="number">1</span>], A[i]</span><br><span class="line">            index -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> A</span><br><span class="line">    </span><br><span class="line"><span class="comment"># method2 [利用列表本身已经是排好序的,使用merge思想]</span></span><br><span class="line">A = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">B = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">m = <span class="number">3</span></span><br><span class="line">n = <span class="number">3</span></span><br><span class="line">ls = []</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">    print(B)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> B:</span><br><span class="line">    print(A)</span><br><span class="line">i = j = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; m <span class="keyword">and</span> j &lt; n:</span><br><span class="line">    <span class="keyword">if</span> A[i] &lt;= B[j]:</span><br><span class="line">        ls.append(A[i])</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ls.append(B[j])</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">ls.extend(A[i:])</span><br><span class="line">ls.extend(B[j:])</span><br><span class="line">print(ls)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># methond1 [合并列表再排序,时间复杂度高]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self , A, m, B, n</span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(B)):</span><br><span class="line">            A[m] = B[i]</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">        index = <span class="built_in">len</span>(A)-<span class="number">1</span></span><br><span class="line">        sign = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> sign:</span><br><span class="line">            sign = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(index):</span><br><span class="line">                <span class="keyword">if</span> A[i] &gt; A[i+<span class="number">1</span>]:</span><br><span class="line">                    sign = <span class="literal">False</span></span><br><span class="line">                    A[i], A[i+<span class="number">1</span>] = A[i+<span class="number">1</span>], A[i]</span><br><span class="line">            index -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> A</span><br><span class="line">    </span><br><span class="line"><span class="comment"># method2 [利用列表本身已经是排好序的,使用merge思想]</span></span><br><span class="line">A = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">B = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">m = <span class="number">3</span></span><br><span class="line">n = <span class="number">3</span></span><br><span class="line">ls = []</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">    print(B)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> B:</span><br><span class="line">    print(A)</span><br><span class="line">i = j = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; m <span class="keyword">and</span> j &lt; n:</span><br><span class="line">    <span class="keyword">if</span> A[i] &lt;= B[j]:</span><br><span class="line">        ls.append(A[i])</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ls.append(B[j])</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">ls.extend(A[i:])</span><br><span class="line">ls.extend(B[j:])</span><br><span class="line">print(ls)</span><br><span class="line"></span><br><span class="line"><span class="comment"># method3 [利用merge排序但是思想上首先排最大值，因为对于AB来说都是已经排序号的链表]</span></span><br><span class="line">A = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>， <span class="number">0</span>， <span class="number">0</span>， <span class="number">0</span>]</span><br><span class="line">B = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">m = <span class="number">3</span></span><br><span class="line">n = <span class="number">3</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">    print(B)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> B:</span><br><span class="line">    print(A)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> m &gt; <span class="number">0</span> <span class="keyword">and</span> n &gt; <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">if</span> A[m-<span class="number">1</span>] &gt; B[n-<span class="number">1</span>]:</span><br><span class="line">        A[m+n-<span class="number">1</span>] = A[m-<span class="number">1</span>]</span><br><span class="line">        m -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        lA[m+n-<span class="number">1</span>] = B[n-<span class="number">1</span>]</span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line"><span class="comment"># based on the poroblem, the B alwalys has the remaind ele &lt; == &gt;</span></span><br><span class="line"><span class="comment">#==&gt; m = 0; n&gt;</span></span><br><span class="line">A[:n] = B[:n]</span><br><span class="line">print(A)</span><br></pre></td></tr></table></figure>
 
-<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="1E反转链表"><a href="#1E反转链表" class="headerlink" title="1E反转链表"></a>1E反转链表</h3><h4 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h4><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210711215311.png"  />
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="1-E反转链表"><a href="#1-E反转链表" class="headerlink" title="1.E反转链表"></a>1.E反转链表</h3><h4 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h4><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210711215311.png"  />
 
 <p><strong>【使用指针进行操作：使用前序赋值法替换】</strong></p>
 <p>输入一个链表，反转链表后，输出新链表的表头。</p>
@@ -175,21 +274,97 @@
 
 
 
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><h3 id="1-M遍历二叉树"><a href="#1-M遍历二叉树" class="headerlink" title="1.M遍历二叉树"></a>1.M遍历二叉树</h3><p>实现pre-order/in-order/post-order遍历二叉树</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="1-E匹配括号"><a href="#1-E匹配括号" class="headerlink" title="1.E匹配括号"></a>1.E匹配括号</h3><p><strong>[思路]</strong></p>
+<p>要判断括号的有效性，<strong>左括号必须和右括号相对应</strong>。如果是有效括号，并且他们中间还有括号，那么他们必须也是有效的，所以最简单的一种方式就是使用栈来解决。</p>
+<p>我们遍历字符串中的所有字符</p>
+<p><strong>1，如果遇到了左括号，就把对应的右括号压栈（比如遇到了字符’(‘，就把字符’)’压栈）。</strong><br><strong>2，如果遇到了右括号</strong></p>
+<ul>
+<li>1）查看栈是否为空，如果为空，说明不能构成有效的括号，直接返回false。</li>
+<li>2）如果栈不为空，栈顶元素出栈，然后判断出栈的这个元素是否等于这个右括号，如果不等于，说明不匹配，直接返回false。如果匹配，就继续判断字符串的下一个字符。</li>
+</ul>
+<p><strong>3，最后如果栈为空，说明是完全匹配，是有效的括号，否则如果栈不为空，说明不完全匹配，不是有效的括号。</strong></p>
+<p><strong>题目</strong></p>
+<p>给出一个仅包含字符’(‘,’)’,’{‘,’}’,’[‘和’]’,的字符串，判断给出的字符串是否是合法的括号序列<br>括号必须以正确的顺序关闭，”()”和”()[]{}”都是合法的括号序列，但”(]”和”([)]”不合法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isValid</span>(<span class="params">self , s </span>):</span></span><br><span class="line">        mapping = &#123;<span class="string">&quot;)&quot;</span>:<span class="string">&quot;(&quot;</span>, <span class="string">&quot;]&quot;</span>:<span class="string">&quot;[&quot;</span>, <span class="string">&quot;&#125;&quot;</span>:<span class="string">&quot;&#123;&quot;</span>&#125;</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> i, char <span class="keyword">in</span> <span class="built_in">enumerate</span>(s):</span><br><span class="line">            <span class="keyword">if</span> char <span class="keyword">not</span> <span class="keyword">in</span> mapping:<span class="comment">#left</span></span><br><span class="line">                stack.append(char)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> stack <span class="keyword">or</span> stack[-<span class="number">1</span>] != mapping[char]:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">                stack.pop()</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(stack) == <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="树"><a href="#树" class="headerlink" title="树"></a>树</h2><h3 id="1-M遍历二叉树"><a href="#1-M遍历二叉树" class="headerlink" title="1.M遍历二叉树"></a>1.M遍历二叉树</h3><p>实现pre-order/in-order/post-order遍历二叉树</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">threeOrders</span>(<span class="params">self , root </span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        self.res = [[],[],[]]</span><br><span class="line">        self.dfs(root)</span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">self,root</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        self.res[<span class="number">0</span>].append(root.val)</span><br><span class="line">        self.dfs(root.left)</span><br><span class="line">        self.res[<span class="number">1</span>].append(root.val)</span><br><span class="line">        self.dfs(root.right)</span><br><span class="line">        self.res[<span class="number">2</span>].append(root.val)</span><br><span class="line">        <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="2-M求二叉树的层序遍历【BFS】"><a href="#2-M求二叉树的层序遍历【BFS】" class="headerlink" title="2.M求二叉树的层序遍历【BFS】"></a>2.M求二叉树的层序遍历【BFS】</h3><p>给定一个二叉树，返回该二叉树层序遍历的结果，（从左到右，一层一层地遍历）<br>例如：<br>给定的二叉树是{3,9,20,#,#,15,7},</p>
 <p>该二叉树层序遍历的结果是<br>[<br>[3],<br>[9,20],<br>[15,7]<br>]</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">levelOrder</span>(<span class="params">self , root </span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="comment">#队列解决</span></span><br><span class="line">        qune, res = [], []</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        qune.append(root)</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(qune)!=<span class="number">0</span>:</span><br><span class="line">            n = <span class="built_in">len</span>(qune)</span><br><span class="line">            temp = []</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                node = qune.pop(<span class="number">0</span>)</span><br><span class="line">                temp.append(node.val)</span><br><span class="line">                <span class="keyword">if</span> node.left:</span><br><span class="line">                    qune.append(node.left)</span><br><span class="line">                <span class="keyword">if</span> node.right:</span><br><span class="line">                    qune.append(node.right)</span><br><span class="line">            res.append(temp)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
 
-<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="1E-子数组的最大累加和-star-star-star"><a href="#1E-子数组的最大累加和-star-star-star" class="headerlink" title="1E.子数组的最大累加和[:star::star::star:]"></a>1E.子数组的最大累加和[:star::star::star:]</h3><h4 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h4><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dp_instance.gif"></p>
+<h3 id="3-M树的遍历【前序遍历】"><a href="#3-M树的遍历【前序遍历】" class="headerlink" title="3.M树的遍历【前序遍历】"></a>3.M树的遍历【前序遍历】</h3><h4 id="思路【使用递归，本质上是树的深度遍历DSF】"><a href="#思路【使用递归，本质上是树的深度遍历DSF】" class="headerlink" title="思路【使用递归，本质上是树的深度遍历DSF】"></a>思路【使用递归，本质上是树的深度遍历DSF】</h4><p>输入几组数据，pid为-1的代表根节点。如果数据为非根节点，那么就要搜索此节点直至找到根节点。</p>
+<table>
+<thead>
+<tr>
+<th align="center">id</th>
+<th align="center">pid</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">A</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">A-1</td>
+<td align="center">A</td>
+</tr>
+<tr>
+<td align="center">A-2</td>
+<td align="center">A</td>
+</tr>
+<tr>
+<td align="center">A-3</td>
+<td align="center">A</td>
+</tr>
+<tr>
+<td align="center">A-2-1</td>
+<td align="center">A-2</td>
+</tr>
+<tr>
+<td align="center">A-2-2</td>
+<td align="center">A-2</td>
+</tr>
+<tr>
+<td align="center">A-2-3</td>
+<td align="center">A-2</td>
+</tr>
+</tbody></table>
+<p><code>result: /A /A/A-1 /A/A-2 /A/A-3 /A/A-2/A-2-1 /A/A-2/A-2-2 /A/A-2/A-2-3</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;</span><br><span class="line">    <span class="string">&quot;A&quot;</span>:<span class="string">&quot;-1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;A-1&quot;</span>:<span class="string">&quot;A&quot;</span>,</span><br><span class="line">    <span class="string">&quot;A-2&quot;</span>:<span class="string">&quot;A&quot;</span>,</span><br><span class="line">    <span class="string">&quot;A-3&quot;</span>:<span class="string">&quot;A&quot;</span>,</span><br><span class="line">    <span class="string">&quot;A-2-1&quot;</span>:<span class="string">&quot;A-2&quot;</span>,</span><br><span class="line">    <span class="string">&quot;A-2-2&quot;</span>:<span class="string">&quot;A-2&quot;</span>,</span><br><span class="line">    <span class="string">&quot;A-2-3&quot;</span>:<span class="string">&quot;A-2&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">res = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span>(<span class="params">node</span>):</span></span><br><span class="line">    <span class="comment"># using recursion</span></span><br><span class="line">    array.append(node[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">if</span> node[<span class="number">1</span>] == <span class="string">&quot;-1&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    func((node[<span class="number">1</span>], d[node[<span class="number">1</span>]]))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ele_tuple <span class="keyword">in</span> d.items():</span><br><span class="line">    <span class="comment"># 每次设置一个temp=[]</span></span><br><span class="line">    array = []</span><br><span class="line">    func(ele_tuple)</span><br><span class="line">    string = <span class="string">&quot;/&quot;</span>.join(array[::-<span class="number">1</span>])</span><br><span class="line">    res.append(<span class="string">&quot;/&quot;</span>+string)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ele <span class="keyword">in</span> res:</span><br><span class="line">    print(ele)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-按之字形顺序打印二叉树"><a href="#4-按之字形顺序打印二叉树" class="headerlink" title="4. 按之字形顺序打印二叉树"></a>4. <strong>按之字形顺序打印二叉树</strong></h3><p><strong>[思路]</strong></p>
+<p>利用栈后入先出的特性，一个栈保存当前层节点，一个栈保存下一层节点。入栈规则如下：</p>
+<ul>
+<li>当前层为<strong>奇数层</strong>时：下一层为从左到右输出，故从右到左入栈即可。</li>
+<li>当前层为<strong>偶数层</strong>时：下一层为从右到左输出，故从左到右入栈即可。</li>
+</ul>
+<hr>
+<p>给定一个二叉树，返回该二叉树的之字形层序遍历，（第一层从左向右，下一层从右向左，一直这样交替）<br>例如：<br>给定的二叉树是{1,2,3,#,#,4,5}</p>
+<p>该二叉树之字形层序遍历的结果是</p>
+<p>[</p>
+<p>[1],</p>
+<p>[3,2],</p>
+<p>[4,5]</p>
+<p>]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Print</span>(<span class="params">self, pRoot</span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="keyword">if</span> pRoot == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        <span class="comment"># 定义两个栈，一个保存从左到右的打印的层的节点，一个保存从右到左打印的层的节点</span></span><br><span class="line">        stack1 = []</span><br><span class="line">        stack2 = []</span><br><span class="line">        stack1.append(pRoot)</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">while</span> stack1 <span class="keyword">or</span> stack2:</span><br><span class="line">            <span class="keyword">if</span> stack1:</span><br><span class="line">                tempValue = []</span><br><span class="line">                <span class="keyword">while</span> stack1:</span><br><span class="line">                    tempNode = stack1.pop()</span><br><span class="line">                    tempValue.append(tempNode.val)</span><br><span class="line">                    <span class="keyword">if</span> tempNode.left:</span><br><span class="line">                        stack2.append(tempNode.left)</span><br><span class="line">                    <span class="keyword">if</span> tempNode.right:</span><br><span class="line">                        stack2.append(tempNode.right)</span><br><span class="line">                res.append(tempValue)</span><br><span class="line">            <span class="keyword">if</span> stack2:</span><br><span class="line">                tempValue = []</span><br><span class="line">                <span class="keyword">while</span> stack2:</span><br><span class="line">                    tempNode = stack2.pop()</span><br><span class="line">                    tempValue.append(tempNode.val)</span><br><span class="line">                    <span class="keyword">if</span> tempNode.right:</span><br><span class="line">                        stack1.append(tempNode.right)</span><br><span class="line">                    <span class="keyword">if</span> tempNode.left:</span><br><span class="line">                        stack1.append(tempNode.left)</span><br><span class="line">                res.append(tempValue)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><h3 id="1-E子数组的最大累加和-star-star-star"><a href="#1-E子数组的最大累加和-star-star-star" class="headerlink" title="1.E子数组的最大累加和[:star::star::star:]"></a>1.E子数组的最大累加和[:star::star::star:]</h3><h4 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h4><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dp_instance.gif"></p>
 <p>给定一个数组arr，返回子数组的最大累加和</p>
 <p>例如，arr = [1, -2, 3, 5, -2, 6, -1]，所有子数组中，[3, 5, -2, 6]可以累加出最大的和12，所以返回12.</p>
 <p>题目保证没有全为负数的数据</p>
 <p>[要求]时间复杂度为O(n)，空间复杂度为O(1)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># method1:暴力解法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxsumofSubarray</span>(<span class="params">self , arr </span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="built_in">sum</span> = arr[<span class="number">0</span>]</span><br><span class="line">        presum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> ele <span class="keyword">in</span> arr:</span><br><span class="line">            <span class="keyword">if</span> presum &lt; <span class="number">0</span>:</span><br><span class="line">                presum = ele</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                presum += ele</span><br><span class="line">            <span class="built_in">sum</span> = <span class="built_in">max</span>(presum, <span class="built_in">sum</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># method2:动态规划</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxsumofSubarray</span>(<span class="params">self , arr </span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="comment"># dp[i]代表到第i位的时侯,以arr[i]结尾的连续子数组最大累加和</span></span><br><span class="line">        dp = [<span class="number">0</span>] * <span class="built_in">len</span>(arr)  <span class="comment"># 开辟dp</span></span><br><span class="line">        res = arr[<span class="number">0</span>]  <span class="comment"># 保存最终的结果</span></span><br><span class="line">        dp[<span class="number">0</span>] = arr[<span class="number">0</span>]  <span class="comment"># 初始化</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(arr)):</span><br><span class="line">            <span class="comment"># 维护dp[i], 如果&lt;0，则舍弃zi&#x27;chuan</span></span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>],<span class="number">0</span>) + arr[i]  </span><br><span class="line">            res = <span class="built_in">max</span>(res,dp[i])  <span class="comment"># 每更新一个dp值就更新一下res</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># method3:动态规划</span></span><br><span class="line">a = [<span class="number">1</span>, -<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, -<span class="number">2</span>, <span class="number">6</span>, -<span class="number">1</span>]</span><br><span class="line">dp = [<span class="number">0</span>] * <span class="built_in">len</span>(a)</span><br><span class="line">dp[<span class="number">0</span>] = a[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dp_fun</span>(<span class="params">temp, ele</span>):</span></span><br><span class="line">    <span class="keyword">if</span> temp &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> temp + ele &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> temp + ele</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(a)):</span><br><span class="line">    dp[i] = dp_fun(dp[i-<span class="number">1</span>], a[i])</span><br><span class="line">print(<span class="built_in">max</span>(dp))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># method1:暴力解法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxsumofSubarray</span>(<span class="params">self , arr </span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="built_in">sum</span> = arr[<span class="number">0</span>]</span><br><span class="line">        presum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> ele <span class="keyword">in</span> arr:</span><br><span class="line">            <span class="keyword">if</span> presum &lt; <span class="number">0</span>:</span><br><span class="line">                presum = ele</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                presum += ele</span><br><span class="line">            <span class="built_in">sum</span> = <span class="built_in">max</span>(presum, <span class="built_in">sum</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># method2:动态规划</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxsumofSubarray</span>(<span class="params">self , arr </span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        <span class="comment"># dp[i]代表到第i位的时侯,以arr[i]结尾的连续子数组最大累加和</span></span><br><span class="line">        dp = [<span class="number">0</span>] * <span class="built_in">len</span>(arr)  <span class="comment"># 开辟dp</span></span><br><span class="line">        res = arr[<span class="number">0</span>]  <span class="comment"># 保存最终的结果</span></span><br><span class="line">        dp[<span class="number">0</span>] = arr[<span class="number">0</span>]  <span class="comment"># 初始化</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(arr)):</span><br><span class="line">            <span class="comment"># 维护dp[i], 如果&lt;0，则舍弃cur</span></span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>],<span class="number">0</span>) + arr[i]  </span><br><span class="line">            res = <span class="built_in">max</span>(res,dp[i])  <span class="comment"># 每更新一个dp值就更新一下res</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="comment"># method3:动态规划 不仅可以return max number 还可以返回子串</span></span><br><span class="line">a = [<span class="number">1</span>, -<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, -<span class="number">2</span>, <span class="number">6</span>, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">dp = [<span class="number">0</span>]*<span class="built_in">len</span>(a)</span><br><span class="line">dp[<span class="number">0</span>] = a[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>(<span class="params">index</span>):</span></span><br><span class="line">    <span class="comment"># 相比如method1、2此处更新状态时，也记录了index变化</span></span><br><span class="line">    <span class="keyword">if</span> dp[index] &lt;= <span class="number">0</span>:</span><br><span class="line">        pointer.clear()</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    pointer.append(index)</span><br><span class="line">    <span class="keyword">return</span> dp[index]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pointer = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(a)):</span><br><span class="line">    dp[i] = fun(i-<span class="number">1</span>) + a[i]</span><br><span class="line"></span><br><span class="line">print(dp)</span><br><span class="line">print(<span class="built_in">list</span>((a[i] <span class="keyword">for</span> i <span class="keyword">in</span> pointer)))</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-M最短路径和-star-star-star"><a href="#2-M最短路径和-star-star-star" class="headerlink" title="2.M最短路径和[:star::star::star:]"></a>2.M最短路径和[:star::star::star:]</h3><h4 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h4><p><strong>【注意边界条件和状态转移】</strong></p>
+<h3 id="2-M最短路径和-star-star-star"><a href="#2-M最短路径和-star-star-star" class="headerlink" title="2.M最短路径和[:star::star::star:]"></a>2.M最短路径和[:star::star::star:]</h3><h4 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h4><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210716180943.png"></p>
+<p>:red_circle:dp[ij] = a[ij]</p>
+<p>:green_book:dp[ij] = a[ij] + min(dp[i-1, j], dp[i-1, j+1])</p>
+<p>:ribbon:dp[ij] = a[ij] + min(dp[i-1, j], dp[i-1, j-1])</p>
+<p>:yellow_heart:dp[ij] = a[ij] + min(dp[i-1, j-1], dp[j-1, j], dp[i-1, j+1])</p>
+<p><strong>【注意边界条件和状态转移】</strong></p>
 <p>从上到下找到最短路径（数字之和最小）,只能往下层走，同时只能走向相邻的节点，例如图中第一排的2只能走向第二排的3、7，第一排的5可以走向第二排的1、7、3</p>
 <table>
 <thead>
@@ -215,14 +390,70 @@
 </tbody></table>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">a = [[<span class="number">1</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">2</span>],</span><br><span class="line">     [<span class="number">4</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">3</span>],</span><br><span class="line">     [<span class="number">3</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">9</span>]]</span><br><span class="line">x = <span class="built_in">len</span>(a)</span><br><span class="line">y = <span class="built_in">len</span>(a[<span class="number">0</span>])</span><br><span class="line">dp = [[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(y)] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(x)]</span><br><span class="line"><span class="comment"># 遍历顺序是每行内的每列。所以遍历a中第一行只执行到if，dp中第一行就确定了，然后再确定dp第二行。</span></span><br><span class="line"><span class="comment"># 要注意两个边界条件</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(x):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(y):</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">            dp[i][j] = a[i][j]</span><br><span class="line">        <span class="keyword">elif</span> j == <span class="number">0</span>:</span><br><span class="line">            dp[i][j] = a[i][j] + <span class="built_in">min</span>(dp[i-<span class="number">1</span>][j], dp[i-<span class="number">1</span>][j+<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">elif</span> j == y-<span class="number">1</span>:</span><br><span class="line">            dp[i][j] = a[i][j] + <span class="built_in">min</span>(dp[i-<span class="number">1</span>][j-<span class="number">1</span>], dp[i-<span class="number">1</span>][j])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dp[i][j] = a[i][j] + <span class="built_in">min</span>(dp[i-<span class="number">1</span>][j-<span class="number">1</span>], dp[i-<span class="number">1</span>][j], dp[i-<span class="number">1</span>][j+<span class="number">1</span>])</span><br><span class="line">            </span><br><span class="line">print(<span class="built_in">min</span>(dp[-<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
 
+<h3 id="3-M最长公共子串"><a href="#3-M最长公共子串" class="headerlink" title="3.M最长公共子串"></a>3.M最长公共子串</h3><h4 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a>思路</h4><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/8D59E0AEF6D5338A2881FB09B7427DA9.png"></p>
+<p>给定两个字符串str1和str2,输出两个字符串的最长公共子串</p>
+<p>题目保证str1和str2的最长公共子串存在且唯一。</p>
+<p><code>len(str1) &gt; len(str2)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">str1, str2 = <span class="string">&quot;1AB2345CD&quot;</span>, <span class="string">&quot;12345EF&quot;</span></span><br><span class="line">l1, l2 = <span class="built_in">len</span>(str1), <span class="built_in">len</span>(str2)</span><br><span class="line">dp = [[<span class="string">&#x27;&#x27;</span>] * (l1+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(l2+<span class="number">1</span>)]</span><br><span class="line">dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="string">&#x27;&#x27;</span></span><br><span class="line">ans = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, l1):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, l2):</span><br><span class="line">        <span class="keyword">if</span> str1[i] == str2[j]:</span><br><span class="line">            dp[i][j] = dp[i-<span class="number">1</span>][j-<span class="number">1</span>] + str1[i]</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(dp[i][j]) &gt; <span class="built_in">len</span>(ans):</span><br><span class="line">                ans = dp[i][j]</span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-H最长公共子序列"><a href="#4-H最长公共子序列" class="headerlink" title="4.H最长公共子序列"></a>4.H最长公共子序列</h3><h4 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a><strong>思路</strong></h4><p>LCS可以描述两段文字之间的“相似度”，即它们的雷同程度，从而能够用来辨别抄袭。另一方面，对一段文字进行修改之后，计算改动前后文字的最长公共子序列，将除此子序列外的部分提取出来，这种方法判断修改的部分，往往十分准确。简而言之，百度知道、百度百科都用得上。</p>
+<p>若xm=yn(最后一个字符相同)，则：<br>Xm与Yn的最长公共子序列Zk的最后一个字符必定为xm<br>zk=xm=yn<br>LCS(Xm,Yn) = LCS(Xm-1,Yn-1)+xm</p>
+<p>若xm≠yn，则：<br>LCS(Xm,Yn)= max{LCS(Xm-1,Yn),LCS(Xm,Yn-1)}</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用递归</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lcs</span>(<span class="params">str1, str2, m, n</span>):</span></span><br><span class="line">    <span class="keyword">if</span> m == <span class="number">0</span> <span class="keyword">or</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> str1[m-<span class="number">1</span>] == str2[n-<span class="number">1</span>]:</span><br><span class="line">        case1 = <span class="number">1</span> + lcs(str1, str2, m-<span class="number">1</span>, n-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> case1</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        case2 = <span class="built_in">max</span>(lcs(str1, str2, m-<span class="number">1</span>, n), lcs(str1, str2, m, n-<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">return</span> case2</span><br><span class="line">str1 = <span class="string">&#x27;bd&#x27;</span></span><br><span class="line">str2 = <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">m = <span class="built_in">len</span>(str1)</span><br><span class="line">n = <span class="built_in">len</span>(str2)</span><br><span class="line">res = lcs(str1, str2, m, n)</span><br><span class="line">print(res)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用暴力遍历求解</span></span><br><span class="line">str1, str2 = <span class="string">&quot;1AB2345C6D8&quot;</span>, <span class="string">&quot;12345E6F8&quot;</span></span><br><span class="line">l1, l2 = <span class="built_in">len</span>(str1), <span class="built_in">len</span>(str2)</span><br><span class="line">temp = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l1):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(l2):</span><br><span class="line">        <span class="keyword">if</span> str1[i] == str2[j]:</span><br><span class="line">            temp.append(str1[i])</span><br><span class="line"></span><br><span class="line">print(temp)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-M最长回文子串"><a href="#5-M最长回文子串" class="headerlink" title="5.M最长回文子串"></a>5.M最长回文子串</h3><p><strong>思路</strong></p>
+<p>对于一个字符串，请设计一个高效算法，计算其中最长回文子串的长度。</p>
+<p>给定字符串<strong>A</strong>以及它的长度<strong>n</strong>，请返回最长回文子串的长度。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入:&quot;abc1234321ab&quot;,12</span><br><span class="line">return:7</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getLongestPalindrome</span>(<span class="params">self, A, n</span>):</span></span><br><span class="line">        <span class="comment"># write code here</span></span><br><span class="line">        dp = [[<span class="number">0</span>]*(n) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">         </span><br><span class="line">        maxL = <span class="number">0</span></span><br><span class="line">             </span><br><span class="line">        <span class="keyword">for</span> right <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, n):</span><br><span class="line">            <span class="keyword">for</span> left <span class="keyword">in</span> <span class="built_in">range</span>(right,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> A[left] != A[right]:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">if</span> right - left &lt;= <span class="number">1</span>:</span><br><span class="line">                    dp[right][left] = <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[right][left] = dp[right-<span class="number">1</span>][left+<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">if</span> dp[right][left]==<span class="number">1</span> <span class="keyword">and</span> right-left+<span class="number">1</span> &gt; maxL:</span><br><span class="line">                    maxL = right-left+<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> maxL</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-E求路径"><a href="#6-E求路径" class="headerlink" title="6.E求路径"></a>6.E求路径</h3><p><strong>思路</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210719225203.png"></p>
+<p>一个机器人在m×n（col*row）大小的地图的左上角（起点）。机器人每次向下或向右移动。机器人要到达地图的右下角（终点）。可以有多少种不同的路径从起点走到终点？</p>
+<table>
+<thead>
+<tr>
+<th align="center">起点</th>
+<th></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td></td>
+<td align="center"><strong>终点</strong></td>
+</tr>
+</tbody></table>
+<p>对于其它位置来说，到达这个位置有两种情况：</p>
+<p>一种是从上面的格子走过来的</p>
+<p>另一种是从左边的格子走过来的</p>
+<p>所以，我们定义一个𝑚×𝑛大小的二维数组𝑑𝑝</p>
+<p>𝑑𝑝[𝑖][𝑗]表示从起点到达第𝑖行第𝑗列的方案数。</p>
+<p>先把第一行第一列赋值为1</p>
+<p>然后从第二行第二列的元素开始循环</p>
+<p>𝑑𝑝[𝑖][𝑗]=𝑑𝑝[𝑖−1][𝑗]+𝑑𝑝[𝑖][𝑗−1]</p>
+<p>右下角的dp值就是我们要求的答案</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># m, n = row * col</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">uniquePaths</span>(<span class="params">self , m , n </span>):</span></span><br><span class="line">        <span class="comment"># 创建DP时注意m，n的位置</span></span><br><span class="line">        dp = [[<span class="number">0</span>]*n <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line">        <span class="comment"># 先traverse col 再 traverse row</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">or</span> j == <span class="number">0</span>:</span><br><span class="line">                    dp[i][j] = <span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    dp[i][j] = dp[i-<span class="number">1</span>][j] + dp[i][j-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h2><h2 id="DFS-深度优先搜索"><a href="#DFS-深度优先搜索" class="headerlink" title="DFS[深度优先搜索]"></a>DFS[深度优先搜索]</h2><h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><h2 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h2><h3 id="1-寻找第k大-待解决"><a href="#1-寻找第k大-待解决" class="headerlink" title="1.寻找第k大[待解决]"></a>1.寻找第k大[待解决]</h3><h4 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a>思路</h4><p>快排+二分，与快排不同的是，利用二分法每次都减少了一半的不必要排序。<br>当high=low小于k的时候，在后半部分搜索，<br>当high=low大于k的时候，在前半部分搜索。</p>
+
+<h2 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h2><h2 id="DFS-深度优先搜索"><a href="#DFS-深度优先搜索" class="headerlink" title="DFS[深度优先搜索]"></a>DFS[深度优先搜索]</h2><h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><h2 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h2><h3 id="1-寻找第k大-待解决"><a href="#1-寻找第k大-待解决" class="headerlink" title="1.寻找第k大[待解决]"></a>1.寻找第k大[待解决]</h3><h4 id="思路-10"><a href="#思路-10" class="headerlink" title="思路"></a>思路</h4><p>快排+二分，与快排不同的是，利用二分法每次都减少了一半的不必要排序。<br>当high=low小于k的时候，在后半部分搜索，<br>当high=low大于k的时候，在前半部分搜索。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findKth</span>(<span class="params">a, start, end, K</span>):</span></span><br><span class="line">    low, high = start, end</span><br><span class="line">    key = a[start]</span><br><span class="line">    <span class="keyword">while</span> start &lt; end:</span><br><span class="line">        <span class="keyword">while</span> start &lt; end <span class="keyword">and</span> a[end] &lt;= key:</span><br><span class="line">            end -= <span class="number">1</span></span><br><span class="line">        a[start] = a[end]</span><br><span class="line">        <span class="keyword">while</span> start &lt; end <span class="keyword">and</span> a[start] &gt;= key:</span><br><span class="line">            start += <span class="number">1</span></span><br><span class="line">        a[end] = a[start]</span><br><span class="line">    a[start] = key</span><br><span class="line">    <span class="keyword">if</span> start &lt; K - <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> findKth(a, start + <span class="number">1</span>, high, K)</span><br><span class="line">    <span class="keyword">elif</span> start &gt; K - <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> findKth(a, low, start - <span class="number">1</span>, K)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> a[start]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>):</span><br><span class="line">        line = sys.stdin.readline()</span><br><span class="line">        <span class="keyword">if</span> line == <span class="string">&#x27;&#x27;</span>: <span class="keyword">break</span></span><br><span class="line">        lines = line.strip().replace(<span class="string">&#x27;[&#x27;</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;]&#x27;</span>, <span class="string">&#x27;&#x27;</span>).split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        lines = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, lines))</span><br><span class="line">        n, K = lines[-<span class="number">2</span>], lines[-<span class="number">1</span>]</span><br><span class="line">        val = findKth(lines, <span class="number">0</span>, n - <span class="number">1</span>, K)</span><br><span class="line">        print(val)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h2><h3 id="1-M设计LRU缓存结构-待解决"><a href="#1-M设计LRU缓存结构-待解决" class="headerlink" title="1.M设计LRU缓存结构[待解决]"></a>1.M设计LRU缓存结构[待解决]</h3><h4 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a>思路</h4><p>设计LRU缓存结构，该结构在构造时确定大小，假设大小为K，并有如下两个功能</p>
+<h2 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h2><h3 id="1-M设计LRU缓存结构-待解决"><a href="#1-M设计LRU缓存结构-待解决" class="headerlink" title="1.M设计LRU缓存结构[待解决]"></a>1.M设计LRU缓存结构[待解决]</h3><h4 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h4><p>设计LRU缓存结构，该结构在构造时确定大小，假设大小为K，并有如下两个功能</p>
 <ul>
 <li>set(key, value)：将记录(key, value)插入该结构</li>
 <li>get(key)：返回key对应的value值</li>
@@ -890,6 +1121,50 @@
 <p>先输入单词的个数n，再输入n个单词。 再输入一个单词，为待查找的单词x 最后输入数字k</p>
 <p><strong>输出描述</strong>：</p>
 <p>输出查找到x的兄弟单词的个数m 然后输出查找到的按照字典顺序排序后的第k个兄弟单词，没有符合第k个的话则不用输出。</p>
+<h3 id="28M按照输入顺序排序-star"><a href="#28M按照输入顺序排序-star" class="headerlink" title="28M按照输入顺序排序[:star:]"></a>28M按照输入顺序排序[:star:]</h3><p><strong>题目</strong></p>
+<p>输入一串英文字符(含大小写), 将英文字符在ascending的基础上对于A,a等按照输入顺序排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">input</span>().strip()</span><br><span class="line">temp = <span class="built_in">list</span>(a)</span><br><span class="line">print(temp)</span><br><span class="line">print(<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">sorted</span>(temp, key=<span class="keyword">lambda</span> x: x.lower())))</span><br><span class="line"></span><br><span class="line"><span class="comment"># key step</span></span><br><span class="line"><span class="built_in">sorted</span>(temp, key=<span class="keyword">lambda</span> x: x.lower())</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">addAeefERDAqa</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;f&#x27;</span>, <span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;R&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;q&#x27;</span>, <span class="string">&#x27;a&#x27;</span>]</span><br><span class="line">aAAaddDeeEfqR</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <hr>
 <h2 id="Leecode"><a href="#Leecode" class="headerlink" title="Leecode"></a>Leecode</h2><h3 id="1E-两数之和"><a href="#1E-两数之和" class="headerlink" title="1E.两数之和"></a>1E.两数之和</h3><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p>
 <p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
@@ -2519,671 +2794,6 @@
 
 
   
-    <article id="post-Python-Underlying-Structure" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/15/Python-Underlying-Structure/" class="article-date">
-  <time class="dt-published" datetime="2021-05-15T07:14:15.000Z" itemprop="datePublished">2021-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/15/Python-Underlying-Structure/">Python-Underlying-Structure</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="字典排序"><a href="#字典排序" class="headerlink" title="字典排序"></a>字典排序</h2><p><strong>【1.按照keys进行排序】</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dct = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">8</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">10</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">4</span>&#125;</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> <span class="built_in">sorted</span>(dct.keys()):</span><br><span class="line">    value = dct.get(key)</span><br><span class="line">    print(key, value, sep=<span class="string">&#x27;:&#x27;</span>, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    </span><br><span class="line">&gt;&gt;</span><br><span class="line">a:<span class="number">1</span> c:<span class="number">10</span> d:<span class="number">4</span> e:<span class="number">8</span> </span><br></pre></td></tr></table></figure>
-
-<p><strong>【2.按照values进行排序】</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dct = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">8</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">10</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">4</span>&#125;</span><br><span class="line"><span class="comment"># 使用items获得key-value，再使用sorted中的key=与lambda的匿名函数控制排序方式</span></span><br><span class="line">temp = <span class="built_in">sorted</span>(dct.items(), key=<span class="keyword">lambda</span> item: item[<span class="number">1</span>])</span><br><span class="line">print(<span class="built_in">dict</span>(temp))</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">item[<span class="number">1</span>]:按照value排序</span><br><span class="line">--&gt;&#123;&#x27;a&#x27;: 1, &#x27;d&#x27;: 4, &#x27;e&#x27;: 8, &#x27;c&#x27;: 10&#125;</span><br><span class="line">item[<span class="number">0</span>]:按照key排序</span><br><span class="line">--&gt;&#123;&#x27;a&#x27;: 1, &#x27;c&#x27;: 10, &#x27;d&#x27;: 4, &#x27;e&#x27;: 8&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>【3.降序排列，可以在sorted()中设置reverse】</strong></p>
-<p><strong>【4.集合无法进行排序】</strong></p>
-<p><strong>【0.注意】</strong></p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">set</span>()</span><br><span class="line">&gt;&gt; type(a) --&gt; set</span><br><span class="line"></span><br><span class="line">b = &#123;&#125;</span><br><span class="line">&gt;&gt; type(b) --&gt; dict</span><br></pre></td></tr></table></figure>
-
-<h2 id="Boolean运算优先级"><a href="#Boolean运算优先级" class="headerlink" title="Boolean运算优先级"></a>Boolean运算优先级</h2><p><strong>同一优先级默认从左往右计算。</strong></p>
-<ol>
-<li><strong>优先级是 not &gt; and &gt; or</strong></li>
-<li><strong>not</strong>：<strong>如果x是假的，则“非假”为真，否则x是真的，则非真为假</strong></li>
-<li><strong>and</strong>: <strong>找到并返回第一个False(假)或最后一个True(真)</strong></li>
-<li><strong>or</strong>: <strong>找到并返回第一个True(真)或最后一个False(假)</strong></li>
-</ol>
-<h2 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h2><p>当terminal中输出的是generator时,可以使用:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;<span class="built_in">list</span>(generator)</span><br><span class="line"></span><br><span class="line">&gt;&gt;<span class="keyword">for</span> i <span class="keyword">in</span> generator:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
-
-<p>查看迭代器的内容,而非输出其memory地址</p>
-<h2 id="浅拷贝-深拷贝"><a href="#浅拷贝-深拷贝" class="headerlink" title="浅拷贝/深拷贝"></a>浅拷贝/深拷贝</h2><p>首先需要了解下几个概念</p>
-<ul>
-<li>变量：是一个系统表的元素，拥有指向对象的连接空间</li>
-<li>对象：被分配的一块内存，存储其所代表的值</li>
-<li>引用：是自动形成的从变量到对象的指针</li>
-<li>类型：属于对象，而非变量</li>
-<li>不可变对象：一旦创建就不可修改的对象，包括字符串、元组、数值类型</li>
-</ul>
-<p><em>（该对象所指向的内存中的值不能被改变。当改变某个变量时候，由于其所指的值不能被改变，相当于把原来的值复制一份后再改变，这会开辟一个新的地址，变量再指向这个新的地址。）</em></p>
-<ul>
-<li>可变对象：可以修改的对象，包括列表、字典、集合</li>
-</ul>
-<p><em>（该对象所指向的内存中的值可以被改变。变量（准确的说是引用）改变后，实际上是其所指的值直接发生改变，并没有发生复制行为，也没有开辟新的地址，通俗点说就是原地改变。）</em></p>
-<p>当我们写：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = &#x27;python&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>Python解释器干的事情：</p>
-<p>\1. 创建变量a</p>
-<p>\2. 创建一个对象(分配一块内存)，来存储值 ‘python’</p>
-<p>\3. 将变量与对象，通过指针连接起来，从变量到对象的连接称之为引用(变量引用对象)</p>
-<hr>
-<p><strong>1.赋值: 只是复制了新对象的引用，不会开辟新的内存空间。</strong></p>
-<p>并不会产生一个独立的对象单独存在，只是将原有的数据块打上一个新标签，所以当其中一个标签被改变的时候，数据块就会发生变化，另一个标签也会随之改变。</p>
-<p><strong>2.浅拷贝: 创建新对象，其内容是原对象的引用。</strong></p>
-<p>浅拷贝有三种形式： 切片操作，工厂函数，copy模块中的copy函数。</p>
-<p>如： lst = [1,2,[3,4]]</p>
-<p>切片操作：lst1 = lst[:] 或者 lst1 = [each for each in lst]</p>
-<p>工厂函数：lst1 = list(lst)</p>
-<p>copy函数：lst1 = copy.copy(lst)</p>
-<p>浅拷贝之所以称为浅拷贝，是它仅仅只拷贝了一层，拷贝了最外围的对象本身，内部的元素都只是拷贝了一个引用而已，在lst中有一个嵌套的list[3,4]，如果我们修改了它，情况就不一样了。</p>
-<p>浅复制要分两种情况进行讨论：</p>
-<p>1）当浅复制的值是不可变对象（字符串、元组、数值类型）时和“赋值”的情况一样，对象的id值<em>（id()函数用于获取对象的内存地址）</em>与浅复制原来的值相同。</p>
-<p>2）当浅复制的值是可变对象（列表、字典、集合）时会产生一个“不是那么独立的对象”存在。有两种情况：</p>
-<p><em>第一种情况：复制的对象中无复杂子对象，原来值的改变并不会影响浅复制的值，同时浅复制的值改变也并不会影响原来的值。原来值的id值与浅复制原来的值不同。</em></p>
-<p><em>第二种情况：复制的对象中有复杂子对象（例如列表中的一个子元素是一个列表），如果不改变其中复杂子对象，浅复制的值改变并不会影响原来的值。 但是改变原来的值中的复杂子对象的值会影响浅复制的值。</em></p>
-<p><strong>3.深拷贝：和浅拷贝对应，深拷贝拷贝了对象的所有元素，包括多层嵌套的元素。深拷贝出来的对象是一个全新的对象，不再与原来的对象有任何关联。</strong></p>
-<p>所以改变原有被复制对象不会对已经复制出来的新对象产生影响。</p>
-<p>只有一种形式，copy模块中的deepcopy函数</p>
-<p><strong>对于不可变对象的深浅拷贝</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line">a=(1,2,3)</span><br><span class="line"></span><br><span class="line">print(&quot;=====赋值=====&quot;)</span><br><span class="line">b=a</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br><span class="line"></span><br><span class="line">print(&quot;=====浅拷贝=====&quot;)</span><br><span class="line">b=copy.copy(a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br><span class="line"></span><br><span class="line">print(&quot;=====深拷贝=====&quot;)</span><br><span class="line">b=copy.deepcopy(a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br></pre></td></tr></table></figure>
-
-<p>结果：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">=====赋值=====</span><br><span class="line">(1, 2, 3)</span><br><span class="line">(1, 2, 3)</span><br><span class="line">43481128</span><br><span class="line">43481128</span><br><span class="line">=====浅拷贝=====</span><br><span class="line">(1, 2, 3)</span><br><span class="line">(1, 2, 3)</span><br><span class="line">43481128</span><br><span class="line">43481128</span><br><span class="line">=====深拷贝=====</span><br><span class="line">(1, 2, 3)</span><br><span class="line">(1, 2, 3)</span><br><span class="line">43481128</span><br><span class="line">43481128</span><br></pre></td></tr></table></figure>
-
-<p>不可变对象类型，没有被拷贝的说法，即便是用深拷贝，查看id的话也是一样的，如果对其重新赋值，也只是新创建一个对象，替换掉旧的而已。</p>
-<p>一句话就是，不可变类型，不管是深拷贝还是浅拷贝，地址值和拷贝后的值都是一样的。</p>
-<p><strong>对于可变对象深浅拷贝</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line">a=[1,2,3]</span><br><span class="line"></span><br><span class="line">print(&quot;=====赋值=====&quot;)</span><br><span class="line">b=a</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br><span class="line"></span><br><span class="line">print(&quot;=====浅拷贝=====&quot;)</span><br><span class="line">b=copy.copy(a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br><span class="line"></span><br><span class="line">print(&quot;=====深拷贝=====&quot;)</span><br><span class="line">b=copy.deepcopy(a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br></pre></td></tr></table></figure>
-
-<p>结果：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">=====赋值=====</span><br><span class="line">[1, 2, 3]</span><br><span class="line">[1, 2, 3]</span><br><span class="line">37235144</span><br><span class="line">37235144</span><br><span class="line">=====浅拷贝=====</span><br><span class="line">[1, 2, 3]</span><br><span class="line">[1, 2, 3]</span><br><span class="line">37235144</span><br><span class="line">37191432</span><br><span class="line">=====深拷贝=====</span><br><span class="line">[1, 2, 3]</span><br><span class="line">[1, 2, 3]</span><br><span class="line">37235144</span><br><span class="line">37210184</span><br></pre></td></tr></table></figure>
-
-<p>赋值： 值相等，地址相等</p>
-<p>copy浅拷贝：值相等，地址不相等</p>
-<p>deepcopy深拷贝：值相等，地址不相等</p>
-<p><strong>对于可变对象深浅拷贝(外层改变元素)</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line">l=[1,2,3,[4, 5]]</span><br><span class="line"></span><br><span class="line">l1=l #赋值</span><br><span class="line">l2=copy.copy(l) #浅拷贝</span><br><span class="line">l3=copy.deepcopy(l) #深拷贝</span><br><span class="line">l.append(6)</span><br><span class="line"></span><br><span class="line">print(l)  </span><br><span class="line">print(l1)</span><br><span class="line">print(l2)</span><br><span class="line">print(l3)</span><br></pre></td></tr></table></figure>
-
-<p>结果：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, [4, 5], 6]     #l添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5], 6]     #l1跟着添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5]]        #l2保持不变</span><br><span class="line">[1, 2, 3, [4, 5]]        #l3保持不变</span><br></pre></td></tr></table></figure>
-
-<p><strong>对于可变对象深浅拷贝(内层改变元素)</strong></p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line">l=[1,2,3,[4, 5]]</span><br><span class="line"></span><br><span class="line">l1=l #赋值</span><br><span class="line">l2=copy.copy(l) #浅拷贝</span><br><span class="line">l3=copy.deepcopy(l) #深拷贝</span><br><span class="line">l[3].append(6) </span><br><span class="line"></span><br><span class="line">print(l) </span><br><span class="line">print(l1)</span><br><span class="line">print(l2)</span><br><span class="line">print(l3)</span><br></pre></td></tr></table></figure>
-
-<p>结果：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, [4, 5, 6]]      #l[3]添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5, 6]]      #l1跟着添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5, 6]]      #l2跟着添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5]]         #l3保持不变</span><br></pre></td></tr></table></figure>
-
-<p>1.外层添加元素时，浅拷贝不会随原列表变化而变化；内层添加元素时，浅拷贝才会变化。<br>2.无论原列表如何变化，深拷贝都保持不变。<br>3.赋值对象随着原列表一起变化。</p>
-<h2 id="几何-set"><a href="#几何-set" class="headerlink" title="几何[set]"></a>几何[set]</h2><p><a target="_blank" rel="noopener" href="http://c.biancheng.net/python/">Python</a> set 集合最常用的操作是向集合中添加、删除元素，以及集合之间做交集、并集、差集等运算，本节将一一讲解这些操作的具体实现。</p>
-<p><strong>向 set 集合中添加元素</strong></p>
-<p>set 集合中添加元素，可以使用 set 类型提供的 add() 方法实现，该方法的语法格式为：</p>
-<p>setname.add(element)</p>
-<p>其中，setname 表示要添加元素的集合，element 表示要添加的元素内容。</p>
-<p><strong>需要注意的是，使用 add() 方法添加的元素，只能是数字、字符串、元组或者布尔类型（True 和 False）值，不能添加列表、字典、集合这类可变的数据，否则 Python 解释器会报 TypeError 错误。例如：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;1,2,3&#125;a.add((1,2))print(a)a.add([1,2])print(a)</span><br></pre></td></tr></table></figure>
-
-<p>运行结果为：</p>
-<p>{(1, 2), 1, 2, 3}<br>Traceback (most recent call last):<br> File “C:\Users\mengma\Desktop\1.py”, line 4, in <module><br>  a.add([1,2])<br>TypeError: unhashable type: ‘list’</p>
-<p><strong>从set集合中删除元素</strong></p>
-<p>删除现有 set 集合中的指定元素，可以使用 remove() 方法，该方法的语法格式如下：</p>
-<p>setname.remove(element)</p>
-<p>使用此方法删除集合中元素，需要注意的是，如果被删除元素本就不包含在集合中，则此方法会抛出 KeyError 错误，例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;1,2,3&#125;a.remove(1)print(a)a.remove(1)print(a)</span><br></pre></td></tr></table></figure>
-
-<p>运行结果为：</p>
-<p>{2, 3}<br>Traceback (most recent call last):<br> File “C:\Users\mengma\Desktop\1.py”, line 4, in <module><br>  a.remove(1)<br>KeyError: 1</p>
-<p>上面程序中，由于集合中的元素 1 已被删除，因此当再次尝试使用 remove() 方法删除时，会引发 KeyError 错误。</p>
-<p>如果我们不想在删除失败时令解释器提示 KeyError 错误，还可以使用 discard() 方法，此方法和 remove() 方法的用法完全相同，唯一的区别就是，当删除集合中元素失败时，此方法不会抛出任何错误。</p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;1,2,3&#125;a.remove(1)print(a)a.discard(1)print(a)</span><br></pre></td></tr></table></figure>
-
-<p>运行结果为：</p>
-<p>{2, 3}<br>{2, 3}</p>
-<p><strong>Python set集合做交集、并集、差集运算</strong></p>
-<p>集合最常做的操作就是进行交集、并集、差集以及对称差集运算，首先有必要给大家普及一下各个运算的含义。</p>
-<p><img src="http://c.biancheng.net/uploads/allimg/190712/2-1ZG2132104150.gif" alt="img"><br>图 1 中，有 2 个集合，分别为 set1={1,2,3} 和 set2={3,4,5}，它们既有相同的元素，也有不同的元素。以这两个集合为例，分别做不同运算的结果如表 1 所示。</p>
-<table>
-<thead>
-<tr>
-<th>运算操作</th>
-<th>Python运算符</th>
-<th>含义</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>交集</td>
-<td>&amp;</td>
-<td>取两集合公共的元素</td>
-<td>&gt;&gt;&gt; set1 &amp; set2 {3}</td>
-</tr>
-<tr>
-<td>并集</td>
-<td>|</td>
-<td>取两集合全部的元素</td>
-<td>&gt;&gt;&gt; set1 | set2 {1,2,3,4,5}</td>
-</tr>
-<tr>
-<td>差集</td>
-<td>-</td>
-<td>取一个集合中另一集合没有的元素</td>
-<td>&gt;&gt;&gt; set1 - set2 {1,2} &gt;&gt;&gt; set2 - set1 {4,5}</td>
-</tr>
-<tr>
-<td>对称差集</td>
-<td>^</td>
-<td>取集合 A 和 B 中不属于 A&amp;B 的元素</td>
-<td>&gt;&gt;&gt; set1 ^ set2 {1,2,4,5}</td>
-</tr>
-</tbody></table>
-<h2 id="字典-dict"><a href="#字典-dict" class="headerlink" title="字典[dict]"></a>字典[dict]</h2><p>字典中的.pop()是指删除key-val并抛出val</p>
-<p>字典的访问：</p>
-<ul>
-<li>dic.get(key, default):访问key，如果没有key返回None，有key返回对应的value</li>
-<li>dic[key]：通过key访问value</li>
-<li>for key in dic.keys()：访问所有的keys</li>
-<li>for value in dic.values()：访问所有的values</li>
-<li>for key, value in dic.items()：访问所有的键值对</li>
-</ul>
-<hr>
-<ul>
-<li>for i in dict–&gt;access key</li>
-<li>for key in dict.keys–&gt;accsee key</li>
-<li>for key, val in dict.item–&gt;access key and val</li>
-<li>dict[key]–&gt;access key对应的val, 没有的话返回KeyError</li>
-<li>dict.get(key, val(default:None))–&gt;访问dict中key对应的值,没有的话返回val</li>
-</ul>
-<p>有与dict中的key不可以直接修改,如果要修改key需要以下操作</p>
-<p><strong>第一种方法：将需要修改的键对应的值用dict.pop() 的方法提取出来，并重新赋值给新的键，即dict[新的键] = dict.pop(旧的键)。</strong>（字典dict的pop是删除某个键及其对应的值，返回的是该键对应的值）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">dict</span>[<span class="string">&quot;c&quot;</span>] = <span class="built_in">dict</span>.pop(<span class="string">&quot;a&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>第二种方法：结合dict.pop() 和dict.update() 的方法。</strong>（字典dict的pop是删除某个键及其对应的值，返回的是该键对应的值）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">dict</span>.update(&#123;<span class="string">&#x27;c&#x27;</span>:<span class="built_in">dict</span>.pop(<span class="string">&quot;a&quot;</span>)&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>第三种方法：结合直接修改和del语句。</strong>先用直接修改的方式将旧键赋值给新的键，再用del语句删除原来的键名。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">dict</span>[<span class="string">&#x27;c&#x27;</span>]=<span class="built_in">dict</span>[<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"><span class="keyword">del</span> <span class="built_in">dict</span>[<span class="string">&#x27;a&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p><code>//</code>:rounding down ==&gt; 7//2 = 3.5 —&gt; 3</p>
-<p><code>[start:end]</code>==&gt;contains start except end</p>
-<p>[1, 2, 3, 4, 5] ==[2:]==&gt;[3, 4, 5]</p>
-<p>[1, 2, 3, 4, 5] ==[:2]==&gt;[1, 2]</p>
-<p>[1, 2, 3, 4, 5] ==[1:3]==&gt;[2, 3]</p>
-<p>切片操作[start:end]==&gt;[start， end)</p>
-<p><strong>[a::b]</strong></p>
-<p>这个是python的slice notation的特殊用法。<br>b = a[i:j] ==&gt;[i, j)==&gt;new list</p>
-<ul>
-<li>default(i)=0</li>
-<li>default(j)=len(alist)</li>
-</ul>
-<p>[i:j:s]==&gt;[i, j) step=s</p>
-<p>如果<code>s&lt;0</code></p>
-<ul>
-<li>i缺省时，默认为-1；</li>
-<li> j缺省时，默认为-len(a)-1</li>
-</ul>
-<p>所以a[::-1]相当于 a[-1:-len(a)-1:-1]，也就是从最后一个元素到第一个元素复制一遍。</p>
-<p>常见的譬如[::-1]==&gt;将list的所有元素反转</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">b1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>][::-<span class="number">1</span>]</span><br><span class="line">b2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>][::-<span class="number">2</span>]</span><br><span class="line">print(b1)</span><br><span class="line">print(b2)</span><br><span class="line">&gt;&gt;</span><br><span class="line">[<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">[<span class="number">4</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-<hr>
-<p>randint(start, end)==&gt;contains start and end==&gt;[start, end]</p>
-<p>example==&gt;randint(1, 3)==&gt;1, 2, 3</p>
-<h2 id="测试code性能"><a href="#测试code性能" class="headerlink" title="测试code性能"></a>测试code性能</h2><h3 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h3><h4 id="1-timeit"><a href="#1-timeit" class="headerlink" title="1.timeit"></a><strong>1.timeit</strong></h4><p>timeit只输出被测试代码的总运行时间</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>():</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">        a = i * i</span><br><span class="line"></span><br><span class="line">cost_time = timeit.timeit(<span class="string">&#x27;fun()&#x27;</span>, <span class="string">&#x27;from __main__ import fun&#x27;</span>, number=<span class="number">1000</span>)</span><br><span class="line">print(cost_time)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">0.0074794</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="2-profile-函数时间"><a href="#2-profile-函数时间" class="headerlink" title="2.profile[函数时间]"></a><strong>2.profile[函数时间]</strong></h4><p>profile：纯Python实现的性能测试模块，接口和cProfile一样。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>():</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">        a = i * i</span><br><span class="line">        </span><br><span class="line">profile.run(<span class="string">&#x27;fun()&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>ncall：函数运行次数</li>
-<li>tottime： 函数的总的运行时间，减去函数中调用子函数的运行时间</li>
-</ul>
-<p>第一个percall：percall = tottime / nclall</p>
-<ul>
-<li>cumtime:函数及其所有子函数调整的运行时间，也就是函数开始调用到结束的时间。</li>
-</ul>
-<p>第二个percall：percall = cumtime / nclall</p>
-<table>
-<thead>
-<tr>
-<th align="center">名称</th>
-<th align="center">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">ncalls</td>
-<td align="center">函数被调用次数</td>
-</tr>
-<tr>
-<td align="center">tottime</td>
-<td align="center">函数（除去子函数）总运行时间</td>
-</tr>
-<tr>
-<td align="center">percall</td>
-<td align="center">平均时间，等于tottime/ncalls</td>
-</tr>
-<tr>
-<td align="center">cumtime</td>
-<td align="center">函数（包括子函数）总运行时间</td>
-</tr>
-<tr>
-<td align="center">percall</td>
-<td align="center">平均时间，等于cumtime/ncalls</td>
-</tr>
-<tr>
-<td align="center">filename</td>
-<td align="center">文件：行号（函数）</td>
-</tr>
-</tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523203737.png"></p>
-<hr>
-<h4 id="3-cProfiler-函数时间"><a href="#3-cProfiler-函数时间" class="headerlink" title="3.cProfiler[函数时间]"></a><strong>3.cProfiler[函数时间]</strong></h4><p>profile：c语言实现的性能测试模块，接口和profile一样。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cProfile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>():</span></span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    b = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">        a = a + i * i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">        b += <span class="number">1</span></span><br><span class="line">        time.sleep(<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cProfile.run(<span class="string">&#x27;fun()&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>result：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523205439.png"></p>
-<p><strong>profiler 和 cProfiler 都只能检测整个函数的运行时间，要想知道每行代码运行所损耗的时间需要line_profiler或者memory_profiler（不仅可以得到每行代码运行的时间还可以统计每行代码所占用的内存大小）</strong></p>
-<hr>
-<h4 id="4-line-profiler-分段时间"><a href="#4-line-profiler-分段时间" class="headerlink" title="4.line_profiler[分段时间]"></a><strong>4.line_profiler[分段时间]</strong></h4><p>pip install line_profiler</p>
-<p>安装之后kernprof.py会加到环境变量中。</p>
-<p>line_profiler可以统计每行代码的执行次数和执行时间等，时间单位为微妙。</p>
-<p>该模块常通过装饰器来使用。在安装好该模块后，编写需要测试的python程序，并在需要测试的函数上方加入<code>@profile</code>，保存为<code>*.py</code>文件。在命令行使用<code>kernprof -l -v *.py</code>，在输出打印出程序结果之后会打印性能分析。</p>
-<p>输出结果的含义：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> line_profiler <span class="keyword">import</span> LineProfiler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_stuff</span>(<span class="params">numbers</span>):</span></span><br><span class="line">    s = <span class="built_in">sum</span>(numbers)</span><br><span class="line">    l = [numbers[i] / <span class="number">43</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(numbers))]</span><br><span class="line">    m = [<span class="string">&#x27;hello&#x27;</span> + <span class="built_in">str</span>(numbers[i]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(numbers))]</span><br><span class="line">    </span><br><span class="line">numbers = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>)]</span><br><span class="line"></span><br><span class="line">lp = LineProfiler(do_stuff)</span><br><span class="line">lp.runcall(do_stuff, numbers)</span><br><span class="line">lp.print_stats()</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th align="center">名称</th>
-<th align="center">意义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Timer unit</td>
-<td align="center">计时器单位，微秒</td>
-</tr>
-<tr>
-<td align="center">Total time</td>
-<td align="center">测试代码总运行时间</td>
-</tr>
-<tr>
-<td align="center">File</td>
-<td align="center">测试代码文件名</td>
-</tr>
-<tr>
-<td align="center">Hits</td>
-<td align="center">每行代码运行次数</td>
-</tr>
-<tr>
-<td align="center">Time</td>
-<td align="center">每行代码运行时间</td>
-</tr>
-<tr>
-<td align="center">Per Hit</td>
-<td align="center">每行代码运行一次的时间</td>
-</tr>
-<tr>
-<td align="center">% Time</td>
-<td align="center">每行代码运行时间的百分比</td>
-</tr>
-<tr>
-<td align="center">Line Contents</td>
-<td align="center">每行代码</td>
-</tr>
-</tbody></table>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523213913.png"></p>
-<ul>
-<li>Total Time：测试代码的总运行时间</li>
-<li>Hits：表示每行代码运行的次数</li>
-<li>Time：每行代码运行的总时间</li>
-<li>Per Hits：每行代码运行一次的时间</li>
-<li>% Time：每行代码运行时间的百分比</li>
-</ul>
-<hr>
-<h4 id="5-memory-profiler-内存"><a href="#5-memory-profiler-内存" class="headerlink" title="5.memory_profiler:[内存]"></a><strong>5.memory_profiler:[内存]</strong></h4><p>memory_profiler工具可以统计每行代码占用的内存大小。</p>
-<p><strong>测试代码：</strong></p>
-<p>使用方法同line_profiler模块，借助装饰器调用。在需要分析的函数上方加<code>@profile</code>。在命令行使用<code>python -m memory_profiler *.py</code>运行代码。<br>输出结果中：<br>Mem usage：内存使用情况<br>Increment：每行代码运行后内存增减情况</p>
-<p><strong>使用：</strong></p>
-<ol>
-<li>在需要测试的函数加上@profile装饰</li>
-<li>执行命令： python -m memory_profiler C:Python34 est.py</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将调试文件独立出xx.py</span></span><br><span class="line"><span class="comment"># 在pycharm 的 terminal windows中使用</span></span><br><span class="line"><span class="comment"># code: python -m memory_profiler memory_profiler</span></span><br><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span>():</span></span><br><span class="line">    c = []</span><br><span class="line">    a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] * (<span class="number">2</span> ** <span class="number">20</span>)</span><br><span class="line">    b = [<span class="number">1</span>] * (<span class="number">2</span> ** <span class="number">20</span>)</span><br><span class="line">    c.extend(a)</span><br><span class="line">    c.extend(b)</span><br><span class="line">    <span class="keyword">del</span> b</span><br><span class="line">    <span class="keyword">del</span> c</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test1()</span><br><span class="line"></span><br><span class="line">&gt;&gt;cmd -&gt;python version 3.7</span><br><span class="line">&gt;&gt;//terminal//</span><br><span class="line">&lt;python -m memory_profiler memory_profiler&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523232121.png"></p>
-<ul>
-<li><code>Mem usage</code> 为当前总内存</li>
-<li><code>Increment</code> 为增加的内存</li>
-</ul>
-<p>总结起来使用非常时间</p>
-<ul>
-<li>方法前加上 <code>@profile</code> 主键</li>
-<li>使用 <code>python -m memory_profiler</code> 来运行，不过直接用 <code>python</code> 运行也可以</li>
-</ul>
-<p>通过上面这段代码我们可以发现，<code>del</code> 语句只是将变量删除，并不能减少内存的消耗。</p>
-<p><strong>参数使用</strong></p>
-<ul>
-<li><code>precision</code> 显示小数点后的位数</li>
-</ul>
-<p>默认显示的内存单位为 <code>MiB</code>，小数点后显示一位，如果某行代码占用内存比较小，就可能显示不出来，此时可以通过调整小数点后的位数实现。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@profile(<span class="params">precision=<span class="number">4</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test3</span>():</span></span><br><span class="line">    a = [<span class="number">1</span>, <span class="number">2</span>] * (<span class="number">2</span> ** <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test3()</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>stream</code> 将结果输出到流中</li>
-</ul>
-<p>每次运行都要打印内存情况，势必会影响程序输出效果，我们可以将结果通过流输出到文件中</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile(<span class="params">precision=<span class="number">4</span>, @profile(<span class="params">precision=<span class="number">4</span>, stream=<span class="built_in">open</span>(<span class="params"><span class="string">&#x27;/tmp/memory_profiler.log&#x27;</span>,<span class="string">&#x27;w+&#x27;</span></span>)</span>)</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test3</span>():</span></span><br><span class="line">    a = [<span class="number">1</span>, <span class="number">2</span>] * (<span class="number">2</span> ** <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test3()</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h4 id="6-objgraph：-待完善"><a href="#6-objgraph：-待完善" class="headerlink" title="6.objgraph：[待完善]"></a>6.objgraph：[待完善]</h4><p>objgraph是一个实用模块,可以列出当前内存中存在的对象，可用于定位内存泄露。</p>
-<p>objgraph需要安装：</p>
-<p>pip install objgraph</p>
-<hr>
-<h3 id="Time"><a href="#Time" class="headerlink" title="Time"></a>Time</h3><p>计算Python的某个程序，或者是代码块运行的时间一般有三种方法。</p>
-<h4 id="1-datetime"><a href="#1-datetime" class="headerlink" title="1.datetime"></a><strong>1.datetime</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">start = datetime.datetime.now()</span><br><span class="line">run_function():</span><br><span class="line">    <span class="comment"># do something</span></span><br><span class="line"></span><br><span class="line">end = datetime.datetime.now()</span><br><span class="line"><span class="built_in">print</span> (end-start)</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-time–time"><a href="#2-time–time" class="headerlink" title="2.time–time"></a><strong>2.time–time</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">start = time.time()</span><br><span class="line">run_function()</span><br><span class="line">end = time.time()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">str</span>(end-start)</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-time-clock-version-lt-3-8"><a href="#3-time-clock-version-lt-3-8" class="headerlink" title="3.time-clock(version&lt;3.8)"></a><strong>3.time-clock(version&lt;3.8)</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">start = time.clock()</span><br><span class="line">run_function()</span><br><span class="line">end = time.clock()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">str</span>(end-start)</span><br></pre></td></tr></table></figure>
-
-<p>通过对以上方法的比较我们发现，方法二的精度比较高。方法一基本上是性能最差的。这个其实是和系统有关系的。一般我们推荐使用方法二和方法三。我的系统是Ubuntu，也就是Linux系统，方法二返回的是UTC时间。 在很多系统中time.time()的精度都是非常低的，包括windows。</p>
-<p>python 的标准库手册推荐在任何情况下尽量使用time.clock().但是这个函数在windows下返回的是真实时间（wall time）</p>
-<p><strong>方法一和方法二都包含了其他程序使用CPU的时间。方法三只计算了程序运行CPU的时间。</strong></p>
-<p>方法二和方法三都返回的是浮点数<br>究竟是使用 <strong>time.clock()</strong> 精度高，还是使用 <strong>time.time()</strong> 精度更高，要视乎所在的平台来决定。总概来讲，在 <strong>Unix</strong> 系统中，建议使用 **time.time()**，在 Windows 系统中，建议使用 **time.clock()**。</p>
-<p><strong>我们要实现跨平台的精度性，我们可以使用timeit 来代替time</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line">start = timeit.default_timer()</span><br><span class="line">do_func()</span><br><span class="line">end = timeit.default_timer()</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">str</span>(end-start)</span><br></pre></td></tr></table></figure>
-
-<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>随着问题规模的增加，<code>T(n)</code>变化最大的数量级称为时间复杂度<code>O(n)</code></p>
-<h2 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h2><p>Python2中默认的编码格式是 ASCII 格式，程序文件中如果包含中文字符（包括注释部分）需要在文件开头加上 <code># -*- coding: UTF-8 -*-</code> 或者 <code>#coding=utf-8</code> 就行了</p>
-<p>Python3默认支持Unicode</p>
-<h2 id="保留字（关键字）"><a href="#保留字（关键字）" class="headerlink" title="保留字（关键字）"></a>保留字（关键字）</h2><p>30个关键字</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">and exec    not</span><br><span class="line">assert  finally or</span><br><span class="line">break   for pass</span><br><span class="line">class   from    print</span><br><span class="line">continue global raise</span><br><span class="line">def if  return</span><br><span class="line">del import  try</span><br><span class="line">elif    in  while</span><br><span class="line">else    is  with</span><br><span class="line">except  lambda  yield</span><br></pre></td></tr></table></figure>
-
-<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h2><p>Python是动态语言，所以在定义变量的时候不需要申明类型，直接使用即可。<br>Python会根据值判断类型。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&quot;Zeta&quot;</span> <span class="comment"># 字符串变量</span></span><br><span class="line">age = <span class="number">38</span> <span class="comment"># 整数</span></span><br><span class="line">income = <span class="number">1.23</span> <span class="comment"># 浮点数</span></span><br></pre></td></tr></table></figure>
-
-<p>多变量赋值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a,b = <span class="number">1</span>,<span class="number">2</span> <span class="comment"># a=1; b=2</span></span><br><span class="line">c = d = <span class="number">3</span> <span class="comment"># c=3; d=3</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="标准数据类型"><a href="#标准数据类型" class="headerlink" title="标准数据类型"></a>标准数据类型</h2><h3 id="Python-的标准数据类型有："><a href="#Python-的标准数据类型有：" class="headerlink" title="Python 的标准数据类型有："></a>Python 的标准数据类型有：</h3><ul>
-<li>Boolean（布尔值）</li>
-<li>Number（数字）</li>
-<li>String（字符串）</li>
-<li>List（列表）</li>
-<li>Tuple（元组）</li>
-<li>Set（集合）</li>
-<li>Dictionary（字典）(hash map)—遇到hash冲突时,采用的是开放寻址法而不是链接法</li>
-</ul>
-<h3 id="Python标准数据结构有"><a href="#Python标准数据结构有" class="headerlink" title="Python标准数据结构有:"></a>Python标准数据结构有:</h3><p><code>有序结构,可以使用index下标进行检索数据,并且序列中的元素可以重复</code></p>
-<ul>
-<li>List</li>
-<li>Tuple</li>
-<li>String</li>
-</ul>
-<hr>
-<p><code>无序结构,不可以用index下标进行检索,序列中允许有重复元素</code></p>
-<ul>
-<li>Set</li>
-<li>Dictionary</li>
-</ul>
-<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><p>Python类型转换非常简单，用类型名作为函数名即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span>(n)            <span class="comment"># 将数字n转换为一个整数</span></span><br><span class="line"><span class="built_in">float</span>(n)          <span class="comment"># 将数字n转换到一个浮点数</span></span><br><span class="line"><span class="built_in">str</span>(o)            <span class="comment"># 将对象 obj 转换为字符串</span></span><br><span class="line"><span class="built_in">tuple</span>(s)          <span class="comment"># 将序列 s 转换为一个元组</span></span><br><span class="line"><span class="built_in">list</span>(s)           <span class="comment"># 将序列 s 转换为一个列表</span></span><br><span class="line"><span class="built_in">set</span>(s)            <span class="comment"># 将序列 s 转换为一个集合</span></span><br></pre></td></tr></table></figure>
-
-<p>另外，Python中可以直接转换数字字符串和数字：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&quot;123&quot;</span></span><br><span class="line">i = <span class="number">456</span></span><br><span class="line">print(<span class="built_in">int</span>(s), <span class="built_in">str</span>(i))</span><br></pre></td></tr></table></figure>
-
-<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><p>Python传统的判断语句如下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> name == <span class="string">&#x27;zeta&#x27;</span>:          <span class="comment"># 判断变量是否为 zeta </span></span><br><span class="line">    print(<span class="string">&#x27;Welcome boss&#x27;</span>)   <span class="comment"># 并输出欢迎信息</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&#x27;Hi, &#x27;</span> + name)</span><br></pre></td></tr></table></figure>
-
-<p>Python不支持三元表达式，但是可以用一种类似的替代办法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title = <span class="string">&quot;boss&quot;</span></span><br><span class="line">name = <span class="string">&quot;zeta&quot;</span> <span class="keyword">if</span> title == <span class="string">&quot;boss&quot;</span> <span class="keyword">else</span> <span class="string">&quot;chow&quot;</span></span><br><span class="line">print(name)</span><br></pre></td></tr></table></figure>
-
-<p>逻辑与用 <code>and</code> ，逻辑或用 <code>or</code></p>
-<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p>Python中有<code>while</code>和<code>for</code>两种循环，都可以使用<code>break</code>跳出循环和<code>continue</code>立即进入下一轮循环，另外，Python的循环语句还可以用<code>else</code>执行循环全部完毕后的代码，<code>break</code>跳出后不会执行<code>else</code>的代码</p>
-<p><strong>while</strong> 条件循环，</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> (count &lt; <span class="number">9</span>):    </span><br><span class="line">    print(<span class="string">&#x27;The count is:&#x27;</span>, count)    </span><br><span class="line">    count = count + <span class="number">1</span>    </span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">5</span>:        </span><br><span class="line">        <span class="keyword">break</span>   <span class="comment"># 可以比较以下break和不break的区别        </span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:    </span><br><span class="line">        print(<span class="string">&#x27;loop over&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>for</strong> 遍历循环，循环遍历所有序列对象的子项</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">names = [<span class="string">&#x27;zeta&#x27;</span>, <span class="string">&#x27;chow&#x27;</span>,  <span class="string">&#x27;world&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> names:    </span><br><span class="line">    print(<span class="string">&#x27;Hello, &#x27;</span> + n)    </span><br><span class="line">    <span class="keyword">if</span> n == <span class="string">&#x27;world&#x27;</span>:        </span><br><span class="line">        <span class="keyword">break</span>        </span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:    </span><br><span class="line">        print(<span class="string">&#x27;Good night!&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><code>for</code>循环中也可以用<code>else</code>，（注释掉代码中的<code>break</code>试试看。)</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>用<code>def</code>关键字定义函数，并且在Python中，作为脚本语言，调用函数必须在定义函数之后。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">name</span>):</span></span><br><span class="line">    print(<span class="string">&quot;hello, &quot;</span>+name)</span><br><span class="line">    passfoo(<span class="string">&quot;zeta&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>默认参数</strong> Python定义函数参数时，可以设置默认值，调用时如果没有传递该参数，函数内将使用默认值，默认值参数必须放在无默认值参数后面。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">name=<span class="string">&quot;zeta&quot;</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;hello, &quot;</span>+name)</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
-
-<p><strong>关键字参数</strong> 一般函数传递参数时，必须按照参数定于的顺序传递，但是Python中，允许使用关键字参数，这样通过指定参数明，可以不按照函数定义参数的顺序传递参数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">age, name=<span class="string">&quot;zeta&quot;</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;hello, &quot;</span>+name+<span class="string">&quot;; age=&quot;</span>+<span class="built_in">str</span>(age))</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">foo(name=<span class="string">&quot;chow&quot;</span>, age=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>不定长参数</strong>，Python支持不定长参数，用<code>*</code>定义参数名，调用时多个参数将作为一个元祖传递到函数内</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">*names</span>):</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> names:</span><br><span class="line">        print(<span class="string">&quot;hello, &quot;</span>+n)</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">foo(<span class="string">&quot;zeta&quot;</span>, <span class="string">&quot;chow&quot;</span>, <span class="string">&quot;world&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>return</strong> 返回函数结果。</p>
-<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><ul>
-<li>模块是一个.py文件</li>
-<li>模块在第一次被导入时执行</li>
-<li>一个下划线定义保护级变量和函数，两个下划线定义私有变量和函数</li>
-<li>导入模块习惯性在脚本顶部，但是不强制</li>
-</ul>
-<h2 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h2><p>在Python中，使用<code>import</code>导入模块。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python# -*- coding: UTF-8 -*- # 导入模块import support support.print_func(“Runoob”)</span></span><br></pre></td></tr></table></figure>
-
-<p>还可以使用<code>from import</code>导入模块指定部分</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> modname <span class="keyword">import</span> name1[, name2[, ... nameN]]</span><br></pre></td></tr></table></figure>
-
-<p>为导入的包设置别名用 <code>as</code>关键字</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime <span class="keyword">as</span> dt</span><br></pre></td></tr></table></figure>
-
-<h2 id="错误和异常"><a href="#错误和异常" class="headerlink" title="错误和异常"></a>错误和异常</h2><p>Python中用经典的 <code>try/except</code> 捕获异常</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:&lt;语句&gt;    <span class="comment">#运行别的代码</span></span><br><span class="line">    <span class="keyword">except</span> &lt;异常名称&gt;：&lt;语句&gt;        </span><br><span class="line">    <span class="comment">#except &lt;异常名称&gt;，&lt;数据&gt;:&lt;语句&gt; </span></span><br><span class="line">    <span class="comment">#如果引发了指定名称的异常，获得附加的数据</span></span><br></pre></td></tr></table></figure>
-
-<p>还提供了 <strong>else</strong> 和 <strong>finally</strong></p>
-<p>如果没发生异常的执行<code>else</code>语句块，<code>finally</code>块的代码无论是否捕获异常都会执行</p>
-<p>Python内建了很全面的异常类型名称，同时能自定义异常类型</p>
-<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><p>Python完全支持面向对象的。</p>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><ol>
-<li>使用<code>thread</code>模块中的<code>start_new_thread()</code>函数</li>
-<li>使用<code>threading</code>模块创建线程</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Python和Go分别在动态语言和静态语言中都是最易学易用的编程语言之一。</p>
-<p>它们并不存在取代关系，而是各自在其领域发挥自己的作用。</p>
-<p>Python的语法简单直观，除了程序员爱不释手外也非常适合于其他领域从业者使用。</p>
-<p>Go兼具语法简单和运行高效的有点，在多线程处理方面很优秀，非常适合已经掌握一定编程基础和一门主流语言的同学学习，不过，Go是不支持面向对象的，对于大多数支持面向对象语言的使用者在学习Go语言的时候，需要谨记并且转换编程思路。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/05/15/Python-Underlying-Structure/" data-id="ckopezsv70000cwf52kqmg664" data-title="Python-Underlying-Structure" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-我的工作实践" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/06/%E6%88%91%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%AE%9E%E8%B7%B5/" class="article-date">
-  <time class="dt-published" datetime="2021-05-06T00:09:25.000Z" itemprop="datePublished">2021-05-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/06/%E6%88%91%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%AE%9E%E8%B7%B5/">我的工作实践</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><h3 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h3><p>我是柳宇豪，是辽宁工程技术大学，信息与计算机科学专业的一名应届本科生。我将从四个方面介绍我自己</p>
-<p>一、竞赛方面：我参加过许多数学建模竞赛，曾获MCM/ICM国二、MathorCup省三等；</p>
-<p>二、校园经历方面：曾担任过礼仪队队长、舞蹈队队长以及女生部部长和学生会副主席，成功举办了女生月活动和最美面容活动，</p>
-<p>三、学习方面：绩点专业排名前十，曾获校优秀学生二等奖学金和三等奖学金以及三号学生等多项荣誉称号</p>
-<p>四、兴趣爱好方面：在整个大学生活中，兴趣爱好可以分两个阶段，第一阶段为大一大二时期，十分喜欢辩论演讲，曾在院赛多次获得最佳辩手称号，也荣获校第十四届辩论赛冠军队伍等荣誉称号；大三大四时期喜欢读马哲和毛选等书籍，完善了我的世界观和方法论，并创建阅读社区星火社</p>
-<p>总的来说，在生活中注重效率，喜欢思考，具有一定的组织能力以上是自我介绍的全部内容。</p>
-<h3 id="反问"><a href="#反问" class="headerlink" title="反问"></a>反问</h3><ol>
-<li>对于我应聘的这份工作来说，您认为需要的最重要的能力是什么？（体现了你的态度）</li>
-<li>您能说一下这个岗位在公司的的发展前景和晋升机制吗？（体现了你的发展规划与上进心）</li>
-<li>您能描述一下，您心中这个职位的理想候选人是什么样的吗？（体现了你的思考）</li>
-</ol>
-<hr>
-<p>0面试</p>
-<p>1试用期</p>
-<p>2实习期</p>
-<p>3入职</p>
-<p>4离职</p>
-<hr>
-<p>0公司制度</p>
-<p>1合同</p>
-<p>2违法与用法</p>
-<p>3节假日</p>
-<p>4公司文化</p>
-<hr>
-<h2 id="离职"><a href="#离职" class="headerlink" title="离职"></a>离职</h2><p>1.试用期提前三天申请离职就好。(双方灵活选择，节约彼此时间。新员工上手工作也不多，交接方便。)</p>
-<p>2.正式员工离职提前一个月申请。(部分岗位员工突然离职，但Ta手上的工作不能停，需要下一个人交接，或者找下一个人还需要时间，还需要带。So，立法考虑设立一个月)(一般的公司不会卡你时间，交接也简单，不排除有硬生生卡人一个月的公司，劳动者心理要做好准备)</p>
-<p>5.辞退除工资外，还应该有赔偿金（double）。</p>
-<p>13.离职最好要拿一份离职证明。</p>
-<hr>
-<h2 id="违法用法"><a href="#违法用法" class="headerlink" title="违法用法"></a>违法用法</h2><h3 id="违法"><a href="#违法" class="headerlink" title="违法"></a>违法</h3><p>3.公司单方面降薪不合法。</p>
-<p>4.不买社保，违法。公司缴纳大部分。(工资是工资，五险一金，六险一金，是社会福利保障。社保国家强制，一金是福利(已经是默认福利，正规公司一般情况应该有)，和那些定期团聚、出国游、开工红包、生日红包、节假日福利一样，不同公司不一样)</p>
-<p>14.一点要看清自己的工作职位和职责，不符合录用，经常会扯这里。(好在，法律规定，用人单位提供不符合录用证据，用人单位提供不出来，违法解除)</p>
-<p>15.合同里经常会有一条“领导安排的其他任务”或者“根据工作需要，可以岗位调整，安排其他事情”，就是针对14，设立的。</p>
-<p>43.试用期被辞退。同理，关注14点。看清楚自己岗位和职责内容（一开始你就要清楚知道胜任标准，效率完成工作内容）。用人单位辞退，对方要出示你确实不能胜任的证据，而不是说一句话，你不能胜任工作你可以走了。</p>
-<p>19.涉嫌歧视、人身攻击、肢体冲突可以举报、报警。</p>
-<p>34.用人单位忌讳，吸毒人员。还有一些受刑事处罚人员。我们也很难，搞不好就是歧视，只能从入职诚实信用入手。</p>
-<p>45.不要帮公司做违法的事情。之前遇到一个年轻小伙（女朋友卖婚房委托律师，哭着说从小到大成绩优秀，被抓了家人都不相信）帮公司开发一个理财软件（诈骗软件），一起进去了。</p>
-<p>46.用人单位不交社保，找Ta交。协商后单位仍旧不给缴，去用人单位所在地人力资源社会保障行政部门投诉（打电话就可以）（市长热线也可以），由社会保险费征收机构责令其限期缴纳或者补足。如果用人单位漏报或少报社会保险基数的，则可以向所在地社保经办机构稽核科投诉反映。 </p>
-<p>47.用人单位未在一个月内按规定缴纳的，劳动者可以解除劳动合同，可同时要求用人单位依法支付经济补偿。</p>
-<p>65.解除劳动合同VS终止劳动合同通知</p>
-<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>31.劳动仲裁不要钱，财政保障。程序很简单，自己都可以操作，你合情合理合法很容易赢。</p>
-<p>32.劳动争议诉讼10元。（仲裁是前置程序）（一般小问题，仲裁就可以了，不用后面诉讼）</p>
-<p>48.市长热线12345</p>
-<p>公共法律服务热线12348</p>
-<hr>
-<h2 id="就职"><a href="#就职" class="headerlink" title="就职"></a>就职</h2><p>6.大学生临近毕业（还有几个月毕业），没有拿到毕业证，可以签订劳动合同。</p>
-<p>7.一直不签劳动合同，违法。入职就应该签。(一个月后，该担心的应该是公司吧)</p>
-<blockquote>
-<p>中华人民共和国劳动合同法实施条例</p>
-<p>第五条自用工之日起一个月内，经用人单位书面通知后，劳动者不与用人单位订立书面劳动合同的，用人单位应当书面通知劳动者终止劳动关系，无需向劳动者支付经济补偿，但是应当依法向劳动者支付其实际工作时间的劳动报酬。</p>
-<p>第六条用人单位自用工之日起超过一个月不满一年未与劳动者订立书面劳动合同的，应当依照劳动合同法第八十二条的规定向劳动者每月支付两倍的工资，并与劳动者补订书面劳动合同;劳动者不与用人单位订立书面劳动合同的，用人单位应当书面通知劳动者终止劳动关系，并依照劳动合同法第四十七条的规定支付经济补偿。</p>
-<p>前款规定的用人单位向劳动者每月支付两倍工资的起算时间为用工之日起满一个月的次日，截止时间为补订书面劳动合同的前一日。</p>
-</blockquote>
-<p>10.入职身份证复印件上，注明，仅供入职使用。（所有使用身份证都可以注明）</p>
-<p>17.部分工作，该有防护的应该有防护工具（口罩等等）。</p>
-<p>18.简历，入职表不要乱填乱写，诚实信用原则。（一般合同有一条，作假不录取，已录取无条件辞退）</p>
-<hr>
-<h2 id="实习期"><a href="#实习期" class="headerlink" title="实习期"></a>实习期</h2><p>12.试用期工资不低于正式工资80%。（国家单位，国企试用期一般100%）</p>
-<p>20.试岗。法律规定试用期，就是为了双方考察选择。只是部分企业自己又设置了一个3-7天试岗，多数还表明还没有工资。这么🐶公司还是不要去了。</p>
-<p>52.面试前去“天眼查”“企查查”查一下，顺便看看有没有公司和前员工的劳动纠纷，看看公司态度。</p>
-<p>56.实习生。这个问题复杂，不过不是特别行业，法律、医学等，已经毕业的娃，还当什么实习生（试用期实习生，只是称呼吧?）。（大学生寒暑期实习，肯定叫实习生）（例如法律行业是那个证，要实习至少一年，也可以叫实习生，实习律师）（还有临近毕业，文中第6，有的公司说不能和你签合同，你还没毕业证，先做实习生。）</p>
-<hr>
-<h2 id="合同"><a href="#合同" class="headerlink" title="合同"></a>合同</h2><p>8.劳动合同一式两份，一定要保管好自己那一份。（不然纠纷的时候你劳动仲裁提交材料都没有）</p>
-<p>9.一般情况，不要给公司押东西（各类证件：毕业证、上一家离职证明等等），仅现场审核，然后自己带回去。『有押护照的，那就是大佬级别了』</p>
-<p>11.合同一年，一般就一个月试用期。偶尔两个月（🐶公司）。</p>
-<p>21.三年劳动合同，不超过6个月。三个月不满一年，1个月试用期。一年以上不满三年，试用期不超过2个月。『这个其实是约定，一个半月都可以。合法合规就好』</p>
-<p>67.有的公司三个月或六个月签一次，特别🐶。连续不间断签，最好不要去。</p>
-<p>68.还有些公司老板觉得自己开了一个公司，Ta就是王，Ta就是法。签一年Ta就要试用期三个月。连国家法律都不敬畏，有纠纷了有的扯。</p>
-<p>68.还有的公司，告诉你是他们关联/下属企业，为了人员管理/避税等等理由，合同上签的另外的公司。谨慎一点吧，首先看看那个公司注册下来了没有。</p>
-<h2 id="工资"><a href="#工资" class="headerlink" title="工资"></a>工资</h2><p>16.工资构成。假设工资8k。然后合同约定4k基本工资，1k交通补贴，1k吃饭补贴，2k技术津贴。他们告诉你还是8k，看上去也是。风险就在于以后很多东西（保险，请假等等，甚至劳动纠纷）看基本工资（基数）。</p>
-<p>22.工资不能低于当地最低工资标准。</p>
-<p>33.上班一周有没有工资?有。</p>
-<p>38.工资讨论。一般公司会设置这个，不准讨论。最好遵守规定。（违反公司制度辞退风险）实在忍不住，不要留证据，披个马甲，好吗。</p>
-<p>49.到手工资。可以问一句，工资到手多少。顺便推算，社保交几档。（一般情况，国家单位一、二档）其他，危。</p>
-<p>61.招聘软件上部分公司，工资跨度很大。一般情况看最低。面试前，也可以问问，岗位预算到底多少。</p>
-<h2 id="公司制度"><a href="#公司制度" class="headerlink" title="公司制度"></a>公司制度</h2><h3 id="绩效"><a href="#绩效" class="headerlink" title="绩效"></a>绩效</h3><p>这是大家关注的吧。公司单方随意改动违法。员工手册，我们一般不会设置绩效，因为这就是“递刀”。公司动员工工资，或者激励努力劳动，都是动这一款。一般是附件，改动也方便，不同部门也不一样。但是这些都属于规则制度一部分，也不能朝令夕改，要程序合法、大家同意(有时候职工代表已经代表你了😏)。(但是选职工代表你们有流程，要参与哦)</p>
-<p>24.迟到、请假等所有的公司规章制度，要合理合法合程序，应该经过公司民主程序制定，投票(全体员工或者职工代表)，规章制度公示（✔），报请工会（不一定）。规章制度员工必须知悉(✔)或同意签字留底等等。(签字留底表明知悉，是最周全的)『一般情况，职工代表是老板的人😂，老板对结果不my，换下一个职工代表😏』</p>
-<p>PS：不合理不合法的东西，在公司站得住脚，上了法庭站不住脚。(所以，很多时候，要员工同意并签字，例：奋斗者协议)</p>
-<p>什么是合理。假设某工厂记件，一天最快的10个，最慢的5个，平均6个。规定基本工资说5个就达标，7个良好，8个优秀。如果现在新厂长改变制度，说7个达标，10个良好，12个优秀。(有人能达到12吗，没有，除非技术变革)</p>
-<p>不合理VS明显不合理</p>
-<p>(提一句996/007，上面例子，我们确定最高10个。但是在实际生活中，法定时间是八个小时，007/996工作强度能不能接受，员工又“自愿接受”，变数太多。又加上员工自己签的“奋斗者协议”，自愿并同意。正规公司按时按量给你发加班工资，你不能阻止别人奋斗吧)</p>
-<p>⚡我发现一个问题，法院曾认可某一个公司“奋斗者协议”但不代表其他公司可以无限制、不顾员工身体，强制xxx。如果被发现强迫劳动也是违反《劳动法》《劳动合同法》等的，建议没有“南山必胜客”那样的法务团队的公司，不要乱搞，随便加班“强迫劳动”。⚡</p>
-<p>25.公司内部规章制度必须遵守相应法律法规，例如《劳动法》《劳动合同法》等等。</p>
-<h3 id="请假"><a href="#请假" class="headerlink" title="请假"></a>请假</h3><p>要符合公司规定流程。具体情况具体分析。紧急情况，要有电话录音或信息记录等等证据留底。此处风险，容易被记旷工。</p>
-<h3 id="内卷"><a href="#内卷" class="headerlink" title="内卷"></a>内卷</h3><p>奋斗者协议，这个嘛，法院认可过。不过具体问题具体分析。加班加班工资还要应该有的。一般公司，没有腾讯级别的法务部，不要瞎搞。这不是代表官方认可这个，只是个例。自愿和“被自愿”难道不好分清楚吗？</p>
-<h3 id="保密协议"><a href="#保密协议" class="headerlink" title="保密协议"></a>保密协议</h3><p>40.保密协议。应该保密就要保密。</p>
-<h3 id="竞业限制"><a href="#竞业限制" class="headerlink" title="竞业限制"></a>竞业限制</h3><p>41.竞业限制。慎重。如果你只有这个安身立命的本事，不要签。竞业限制签了，约定期限内，应该有补偿金。</p>
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>44.公司群不要“胡言乱语”，私下群不要“胡言乱语”，还是那句话，同事告密你就死了，匿名，马甲，不香吗。（最近的官方公众号推算案子，说领导“彩旗飘飘”“xxx”等等，被告密，被违法辞退，二审赔了10万。折腾好麻烦）</p>
-<p>50.服装。有的🐶公司，上班统一发（定制）服装，离职出现服装费（1-2-3千）。</p>
-<p>64.玩手机，抗辩理由很多。看工作群、和客户联系、父母急事。不太知道具体公司具体岗位情况。我们这行是结果导向，没有这一说。</p>
-<h2 id="培训进修"><a href="#培训进修" class="headerlink" title="培训进修"></a>培训进修</h2><p>26.培训。刚进去让你贷款培训公司有问题。公司为了劳动者更好劳动，适应岗位，一般情况，免费培训。</p>
-<p>27.进修。进修后要在用人单位工作服务几年。注意看清楚违约金多少。</p>
-<h2 id="工伤"><a href="#工伤" class="headerlink" title="工伤"></a>工伤</h2><p>28.工伤保险，包括上下班途中。（一）在合理时间内往返于工作地与住所地、经常居住地、单位宿舍的合理路线的上下班途中；（二）在合理时间内往返于工作地与配偶、父母、子女居住地的合理路线的上下班途中；（三）从事属于日常工作生活所需要的活动，且在合理时间和合理路线的上下班途中；（四）在合理时间内其他合理路线的上下班途中。</p>
-<p>29.外出做工作上的事情出事，工伤。</p>
-<p>PS：非本人原因的交通事故，工伤。就是公司认定工伤，肇事者还要赔。</p>
-<h2 id="换岗"><a href="#换岗" class="headerlink" title="换岗"></a>换岗</h2><p>35.劳动者患病或非因工受伤，确实不太适合现在的岗位。不是立马辞退。立法者考虑到这样的情况，首先，是给你换一个岗位，（给你一个挽救的机会）。（例如，工作是前台，嗓子??，不太适合前台沟通职责，可以换去后面行政。）</p>
-<h2 id="骚扰"><a href="#骚扰" class="headerlink" title="骚扰"></a>骚扰</h2><p>36.怀孕。让你3-5-7年内不能怀孕，违背公序良俗。</p>
-<p>36.正式员工怀孕时，不能被辞退，也不能降薪。</p>
-<p>37.女性遇到性骚扰，要学会保留证据，一击即中。</p>
-<p>38.试用期怀孕。《劳动合同法》第39条：“劳动者在试用期间被证明不符合录用条件，用人单位可以与劳动者解除劳动合同。也就是说，悬。</p>
-<h2 id="派遣"><a href="#派遣" class="headerlink" title="派遣"></a>派遣</h2><p>42.派遣。国家那种编外派遣，还差不多。其他的，仁者见仁。</p>
-<h2 id="三方协议"><a href="#三方协议" class="headerlink" title="三方协议"></a>三方协议</h2><p>51.三方协议，是学校为没有出校门、没有接受社会“关爱”，提供的保护你的好东西。</p>
-<h2 id="查看公司"><a href="#查看公司" class="headerlink" title="查看公司"></a>查看公司</h2><p>53.法定代表人还是有风险的。例：京D换人</p>
-<p>54.几个月没发工资了?跑路吧。</p>
-<p>55.股权激励，有些是饼有些是真的，看公司发展。</p>
-<h2 id="节假日"><a href="#节假日" class="headerlink" title="节假日"></a>节假日</h2><p>57.调休。先看最近的五一，这个话题，略。(为什么，有人看不懂五一梗，so，还是略)(谁说普通调休，我说企业三倍工资调休)</p>
-<p>58.法定节假日放假，带薪年假，病假(患病or非因工负伤，必须要给医疗期)有钱。婚假(女20岁、男22岁)3天，有工资。</p>
-<p>59.产假(98天，产前休假15天。难产+15，多胞胎+15)。怀孕流产也有假，不满4个月，15-30天;满4个月，42天。晚育，奖励30天，配偶10天护理假。(劳动时间内，还有一个小时哺乳时间。多胞胎，多一个，加一个小时。)</p>
-<p>63.离开工位。看离开时长。一般情况去洗手间，去接水喝水，不能制止我吧。如果是其他事情，较长时间，建议请假或者告知自己去干什么多少分钟回。(主要是急事现场找不到人，领导就火大，火大就惨了)不同公司具体规章不一样，严重情况且多次可能列为旷工。例如：一月旷工N次，就拜拜。</p>
-<h2 id="公司文化"><a href="#公司文化" class="headerlink" title="公司文化"></a>公司文化</h2><p>66.公司文化呢，要不是保护人权的区别于同行或其他公司的东西，还有就是拼搏(狼性)、奋斗、快乐、幸福等精神，包容、女性关怀、年轻员工等一些关爱措施。(卖身，那是不可能的)</p>
-<p>举例:我们这行还是有年轻律师起薪几个万元俱乐部;还有些给年轻律师配行政秘书的;还有给年轻妈妈设置专门的空间喂奶或小孩玩乐区域。等等。(健身房?那是让你更好的工作😏)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/05/06/%E6%88%91%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%AE%9E%E8%B7%B5/" data-id="ckooh4zj6000q78f5b85w42av" data-title="我的工作实践" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -3202,7 +2812,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -3212,7 +2822,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -3234,6 +2844,14 @@
       <ul>
         
           <li>
+            <a href="/2021/07/18/Linux/">Linux</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/18/MySQL/">MySQL</a>
+          </li>
+        
+          <li>
             <a href="/2021/07/11/Algorithm/">Algorithm</a>
           </li>
         
@@ -3243,14 +2861,6 @@
         
           <li>
             <a href="/2021/06/14/Postgraduate/">Postgraduate</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/13/LeeCode/">LeeCode</a>
-          </li>
-        
-          <li>
-            <a href="/2021/06/13/%E6%89%B9%E8%AF%84%E4%B8%8E%E8%87%AA%E6%88%91%E6%89%B9%E8%AF%84/">批评与自我批评</a>
           </li>
         
       </ul>
