@@ -13,17 +13,19 @@
 <meta property="og:site_name" content="Drink&#96;s Blog">
 <meta property="og:description" content="Python底层结构三元表达式条件为真时的结果 if 判段的条件 else 条件为假时的结果 1234x &#x3D; 4y &#x3D; 99 if x &gt; 3 else 999# if &#x3D; True execute front# else &#x3D; True execute else-clause  基础知识[Python里面如何生成随机数？] random模块**随机整数：random.randint(a,b)">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210724094932.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210724095445.png">
 <meta property="og:image" content="http://c.biancheng.net/uploads/allimg/190712/2-1ZG2132104150.gif">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523203737.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523205439.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523213913.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523232121.png">
 <meta property="article:published_time" content="2021-05-15T07:14:15.000Z">
-<meta property="article:modified_time" content="2021-07-20T09:00:21.971Z">
+<meta property="article:modified_time" content="2021-07-24T03:25:10.332Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://c.biancheng.net/uploads/allimg/190712/2-1ZG2132104150.gif">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210724094932.png">
   
     <link rel="alternate" href="/atom.xml" title="Drink`s Blog" type="application/atom+xml">
   
@@ -136,11 +138,32 @@
 <li><strong>and</strong>: <strong>找到并返回第一个False(假)或最后一个True(真)</strong></li>
 <li><strong>or</strong>: <strong>找到并返回第一个True(真)或最后一个False(假)</strong></li>
 </ol>
-<h2 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h2><p>当terminal中输出的是generator时,可以使用:</p>
+<h2 id="迭代器-生成器-迭代对象"><a href="#迭代器-生成器-迭代对象" class="headerlink" title="迭代器|生成器|迭代对象"></a>迭代器|生成器|迭代对象</h2><p><strong>生成器Generator</strong></p>
+<p>一种特殊的迭代器与迭代器定义一致</p>
+<p>他与迭代器的编程方式不一样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>L = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>L</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g = (x * x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g</span><br><span class="line">&lt;generator <span class="built_in">object</span> &lt;genexpr&gt; at <span class="number">0x1022ef630</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>迭代器定义</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.在class中定义__iter__和__next__方法</span><br><span class="line">2.__iter__中的方法返回本身即：self</span><br><span class="line">3.__next__中的方法需返下一个值，并且使用raise StopIteration抛出exception</span><br></pre></td></tr></table></figure>
+
+<p><strong>判断是否是迭代对象或者迭代器使用：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections.abc <span class="keyword">import</span> Iterator, Iterable</span><br><span class="line"></span><br><span class="line"><span class="built_in">isinstance</span>(obj, Iterable)</span><br><span class="line">判断是否为可迭代对象/迭代器对象</span><br><span class="line">依据是否有__iter__并<span class="keyword">return</span> Iterator（迭代器）</span><br><span class="line"></span><br><span class="line"><span class="built_in">isinstance</span>(obj, Iterator)</span><br><span class="line">判断是否为迭代器</span><br><span class="line">依据是__iter__、__next__ 并且在__next__中</span><br><span class="line"><span class="keyword">raise</span> StopIteration</span><br></pre></td></tr></table></figure>
+
+<p><strong>instance：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections.abc <span class="keyword">import</span> Iterator, Iterable</span><br><span class="line"></span><br><span class="line">v1 = [<span class="number">11</span>, <span class="number">22</span> ,<span class="number">33</span>]  <span class="comment"># 只有__iter__;return迭代器</span></span><br><span class="line">print(<span class="built_in">isinstance</span>(v1, Iterator))</span><br><span class="line">&gt;&gt; <span class="literal">False</span></span><br><span class="line"><span class="comment"># 判断是否是迭代器，判断依据是__iter__和__next__</span></span><br><span class="line"></span><br><span class="line">v2 = v1.__iter__()  <span class="comment"># __iter__ return iterator </span></span><br><span class="line">print(<span class="built_in">isinstance</span>(v2, Iterator)) </span><br><span class="line">&gt;&gt; <span class="literal">False</span></span><br><span class="line"><span class="comment"># 因为可迭代对象</span></span><br></pre></td></tr></table></figure>
+
+<p>可迭代对象内部有<code>__iter__</code>方法，retun一个迭代器</p>
+<p>当terminal中输出的是generator时,可以使用:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;<span class="built_in">list</span>(generator)</span><br><span class="line"></span><br><span class="line">&gt;&gt;<span class="keyword">for</span> i <span class="keyword">in</span> generator:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
 
 <p>查看迭代器的内容,而非输出其memory地址</p>
-<h2 id="浅拷贝-深拷贝"><a href="#浅拷贝-深拷贝" class="headerlink" title="浅拷贝/深拷贝"></a>浅拷贝/深拷贝</h2><p>首先需要了解下几个概念</p>
+<h2 id="浅拷贝-深拷贝"><a href="#浅拷贝-深拷贝" class="headerlink" title="浅拷贝/深拷贝"></a>浅拷贝/深拷贝</h2><p>【<strong>copy解决的是容器中可迭代的值：应用于可变类型对象</strong>】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210724094932.png"></p>
+<p>要想切断浅拷贝中第二层的值，可以通过重新引用来实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c[<span class="number">3</span>] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment"># c中的第四个数据将引用新的值，并与之前=赋的值不再有联系</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210724095445.png"></p>
+<p>首先需要了解下几个概念</p>
 <ul>
 <li>变量：是一个系统表的元素，拥有指向对象的连接空间</li>
 <li>对象：被分配的一块内存，存储其所代表的值</li>
@@ -640,7 +663,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -650,7 +673,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -672,23 +695,23 @@
       <ul>
         
           <li>
+            <a href="/2021/07/25/Eternal-Spirit/">Eternal-Spirit</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/25/Pythonon-Source-Code/">Pythonon_Source_Code</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/24/Object-Oriented-Programming/">Object_Oriented_Programming</a>
+          </li>
+        
+          <li>
             <a href="/2021/07/22/django/">django</a>
           </li>
         
           <li>
             <a href="/2021/07/21/%E5%90%8E%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/">后端工程师</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/18/Linux/">Linux</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/18/MySQL/">MySQL</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/11/Algorithm/">Algorithm</a>
           </li>
         
       </ul>
