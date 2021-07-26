@@ -6,15 +6,15 @@
   
   <title>django | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="DjangoBlog0.前言CD命令12345# 切换路径xxx:cd &#x2F;d D:+绝对路径# 返回上一层xxx:cd..  requirements.txt项目依赖可以是项目在另一个环境上重新构建项目所需要运行的环境依赖包 【将依赖包目录打包到项目里】 12使用之前先在terminal里使用cd切换好路径xxx： cd &#x2F;d +绝对路径  第一种【适合但虚拟环境】 12# terminal wi">
+  <meta name="description" content="DjangoBlog0.前言python连接数据库 在mysql中创建一个数据库mydb 在python中import pymysql 连接数据库  1234567891011121314151617181920212223242526272829303132333435363738394041import pymysql# 这些信息可以去mysql的GUI查询db &#x3D; pymysql.conne">
 <meta property="og:type" content="article">
 <meta property="og:title" content="django">
 <meta property="og:url" content="https://drinkle.top/2021/07/22/django/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
-<meta property="og:description" content="DjangoBlog0.前言CD命令12345# 切换路径xxx:cd &#x2F;d D:+绝对路径# 返回上一层xxx:cd..  requirements.txt项目依赖可以是项目在另一个环境上重新构建项目所需要运行的环境依赖包 【将依赖包目录打包到项目里】 12使用之前先在terminal里使用cd切换好路径xxx： cd &#x2F;d +绝对路径  第一种【适合但虚拟环境】 12# terminal wi">
+<meta property="og:description" content="DjangoBlog0.前言python连接数据库 在mysql中创建一个数据库mydb 在python中import pymysql 连接数据库  1234567891011121314151617181920212223242526272829303132333435363738394041import pymysql# 这些信息可以去mysql的GUI查询db &#x3D; pymysql.conne">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-22T13:56:14.000Z">
-<meta property="article:modified_time" content="2021-07-23T03:33:32.064Z">
+<meta property="article:modified_time" content="2021-07-26T08:40:09.575Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="django">
 <meta name="twitter:card" content="summary">
@@ -96,7 +96,30 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="DjangoBlog"><a href="#DjangoBlog" class="headerlink" title="DjangoBlog"></a>DjangoBlog</h1><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h2><h3 id="CD命令"><a href="#CD命令" class="headerlink" title="CD命令"></a>CD命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切换路径</span></span><br><span class="line">xxx:cd /d D:+绝对路径</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回上一层</span></span><br><span class="line">xxx:cd..</span><br></pre></td></tr></table></figure>
+        <h1 id="DjangoBlog"><a href="#DjangoBlog" class="headerlink" title="DjangoBlog"></a>DjangoBlog</h1><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0.前言"></a>0.前言</h2><h3 id="python连接数据库"><a href="#python连接数据库" class="headerlink" title="python连接数据库"></a>python连接数据库</h3><ol>
+<li>在mysql中创建一个数据库mydb</li>
+<li>在python中import pymysql</li>
+<li>连接数据库</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这些信息可以去mysql的GUI查询</span></span><br><span class="line">db = pymysql.connect(host=<span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">                     user=<span class="string">&#x27;root&#x27;</span>,</span><br><span class="line">                     password=<span class="string">&#x27;*****&#x27;</span>,</span><br><span class="line">                     port=<span class="number">3306</span>,</span><br><span class="line">                     db=<span class="string">&#x27;mydb&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># python控制mysql的逻辑是模拟cursor</span></span><br><span class="line">cursor = db.cursor()</span><br><span class="line"></span><br><span class="line"><span class="comment"># define sql语句</span></span><br><span class="line">sql = <span class="string">&#x27;SELECT STUDENT_NAME, SCORE\</span></span><br><span class="line"><span class="string">	   FORM STUDENT\</span></span><br><span class="line"><span class="string">	   WHERE SCORE &gt;= 60\</span></span><br><span class="line"><span class="string">	   ORDER BY SCORE DESC&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行sql语句</span></span><br><span class="line">cursor.execute(sql)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将cursor.fetall()return的tuple 赋值给result</span></span><br><span class="line">result = cursor.fetall()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示data</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> result:</span><br><span class="line">    print(item, end=<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每次运行后为了保障安全建议关闭db</span></span><br><span class="line">db.close()</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">(<span class="string">&#x27;小红&#x27;</span>, <span class="number">95</span>)</span><br><span class="line">(<span class="string">&#x27;spark&#x27;</span>, <span class="number">88</span>)</span><br><span class="line">(<span class="string">&#x27;小白&#x27;</span>, <span class="number">82</span>)</span><br><span class="line">(<span class="string">&#x27;DRINK&#x27;</span>, <span class="number">80</span>)</span><br><span class="line">(<span class="string">&#x27;NEW&#x27;</span>, <span class="number">80</span>)</span><br><span class="line">(<span class="string">&#x27;OLD&#x27;</span>, <span class="number">78</span>)</span><br><span class="line">(<span class="string">&#x27;SPARK&#x27;</span>, <span class="number">72</span>)</span><br><span class="line">(<span class="string">&#x27;TANT&#x27;</span>, <span class="number">70</span>)</span><br><span class="line">(<span class="string">&#x27;小红&#x27;</span>, <span class="number">60</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Python查询Mysql使用fetchone（）方法获取单条数据，使用fetchall（）方法获取多条数据。</p>
+<ul>
+<li><strong>fetchone（）：该方法获取下一个查询结果集。结果集是一个对象[return single tuple]</strong></li>
+<li><strong>fetchall（）：接收全部的返回结果行。[return multiple tuples]</strong></li>
+<li><strong>rowcount：这是一个只读属性，并返回执行execute（）方法后影响的行数。</strong></li>
+</ul>
+<h3 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h3><p>在terminal中输入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在当前目录中创建虚拟环境</span></span><br><span class="line">python -m venv myvenv[虚拟环境的名字]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 激活虚拟环境</span></span><br><span class="line">cd myvenv\Scripts&gt;activate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出虚拟环境</span></span><br><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+<p><strong>虚拟环境的优点</strong></p>
+<ol>
+<li>使不同应用开发环境独立</li>
+<li>环境升级不影响其他应用，也不会影响全局的python环境</li>
+<li>它可以防止系统中出现包管理混乱和版本的冲突</li>
+</ol>
+<p><code>pip list</code>查看已经安装的module</p>
+<h3 id="CD命令"><a href="#CD命令" class="headerlink" title="CD命令"></a>CD命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切换路径</span></span><br><span class="line">xxx:cd /d D:+绝对路径</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回上一层</span></span><br><span class="line">xxx:cd..</span><br></pre></td></tr></table></figure>
 
 <h3 id="requirements-txt项目依赖"><a href="#requirements-txt项目依赖" class="headerlink" title="requirements.txt项目依赖"></a>requirements.txt项目依赖</h3><p>可以是项目在另一个环境上重新构建项目所需要运行的环境依赖包</p>
 <p><strong>【将依赖包目录打包到项目里】</strong></p>
