@@ -4,14 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>归档 | Drink`s Blog</title>
+  <title>每日复盘 | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Drink&#96;s Blog">
-<meta property="og:url" content="https://drinkle.top/archives/page/3/index.html">
+  <meta name="description" content="2021&#x2F;7&#x2F;28   linux的查找ordering，locate|find|grep的区别？    mysql locate(substr, str),对大小写的敏感性，源码？    如何查看database|table的信息？ 123456789101112131415# 查看所有信息1.查看所有数据库 show databases2.查看所有表	show tables	show full">
+<meta property="og:type" content="article">
+<meta property="og:title" content="每日复盘">
+<meta property="og:url" content="https://drinkle.top/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
+<meta property="og:description" content="2021&#x2F;7&#x2F;28   linux的查找ordering，locate|find|grep的区别？    mysql locate(substr, str),对大小写的敏感性，源码？    如何查看database|table的信息？ 123456789101112131415# 查看所有信息1.查看所有数据库 show databases2.查看所有表	show tables	show full">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-26T12:28:52.000Z">
+<meta property="article:modified_time" content="2021-07-28T13:18:39.723Z">
 <meta property="article:author" content="Drink">
+<meta property="article:tag" content="Daily Plan">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Drink`s Blog" type="application/atom+xml">
@@ -69,216 +74,103 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/04/30/Nerual-Network/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-04-30T02:06:39.000Z" itemprop="datePublished">4月 30</time>
+        <section id="main"><article id="post-每日复盘" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/" class="article-date">
+  <time class="dt-published" datetime="2021-07-26T12:28:52.000Z" itemprop="datePublished">2021-07-26</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/30/Nerual-Network/">Nerual-Network</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      每日复盘
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/04/16/Python-Problems/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-04-16T04:38:04.000Z" itemprop="datePublished">4月 16</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/16/Python-Problems/">Python-Problems</a>
-    </h1>
-  
+        <h2 id="2021-7-28"><a href="#2021-7-28" class="headerlink" title="2021/7/28"></a>2021/7/28</h2><ul>
+<li><p><input disabled="" type="checkbox">  linux的查找ordering，locate|find|grep的区别？</p>
+</li>
+<li><p><input disabled="" type="checkbox">  mysql locate(substr, str),对大小写的敏感性，源码？</p>
+</li>
+<li><p><input disabled="" type="checkbox">  如何查看database|table的信息？</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 查看所有信息</span><br><span class="line"><span class="number">1.</span>查看所有数据库 <span class="keyword">show</span> databases</span><br><span class="line"><span class="number">2.</span>查看所有表</span><br><span class="line">	<span class="keyword">show</span> tables</span><br><span class="line">	<span class="keyword">show</span> <span class="keyword">full</span> tables</span><br><span class="line">	</span><br><span class="line"># 查看详细信息</span><br><span class="line"><span class="number">1.</span>查看表 </span><br><span class="line">	<span class="keyword">desc</span> table_name</span><br><span class="line">	<span class="keyword">show</span> columns <span class="keyword">from</span> student</span><br><span class="line"></span><br><span class="line"># summary</span><br><span class="line"><span class="keyword">show</span> clause can `<span class="keyword">show</span>` <span class="keyword">table</span> <span class="keyword">and</span> databasew</span><br><span class="line"></span><br><span class="line">des can <span class="keyword">only</span> <span class="keyword">describe</span> </span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/04/15/English-Study-4/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-04-15T14:37:30.000Z" itemprop="datePublished">4月 15</time>
-</a>
+
+</li>
+</ul>
+<h2 id="2021-7-27"><a href="#2021-7-27" class="headerlink" title="2021/7/27"></a>2021/7/27</h2><ul>
+<li><input disabled="" type="checkbox"> python中函数参数的传递是值传递和引用传递？</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">引用</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input disabled="" type="checkbox"> linux中如何查看进程？</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">静态查看</span><br><span class="line">ps -elf（更详细，supPID、subPID）</span><br><span class="line">ps -aux</span><br><span class="line">动态查看</span><br><span class="line">top</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><input disabled="" type="checkbox"> mysql中innodb的优点？</li>
+<li><input disabled="" type="checkbox"> 什么是事务型数据库，有什么特点？</li>
+<li><input disabled="" type="checkbox"> hash table的实现原理？</li>
+<li><input disabled="" type="checkbox"> tuple与list的底层结构有什么不同？</li>
+<li><input disabled="" type="checkbox"> class中new和init的魔法方法有什么区别？谁return实例谁什么也不返回</li>
+<li><input disabled="" type="checkbox"> bubble sort是怎么实现，quick sort是怎么实现的，时间复杂度是多少？</li>
+<li><input disabled="" type="checkbox"> 链接表是怎么实现的？</li>
+<li><input disabled="" type="checkbox"> 有序链表中，如何检测其子序列的和与target number是否相等？</li>
+</ul>
+<h2 id="2021-7-26"><a href="#2021-7-26" class="headerlink" title="2021/7/26"></a>2021/7/26</h2><ul>
+<li><p><input disabled="" type="checkbox">  linux的操作逻辑是什么？</p>
+</li>
+<li><p><input disabled="" type="checkbox">  linux对于file的operations是？</p>
+</li>
+<li><p><input disabled="" type="checkbox">  linux对于directory的operations是？</p>
+</li>
+</ul>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/15/English-Study-4/">English-Study-4</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/04/14/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A%E7%AB%A0%E7%A8%8B/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-04-14T15:01:46.000Z" itemprop="datePublished">4月 14</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/" data-id="ckrurzwfj0000wsf5gt8n4lfb" data-title="每日复盘" class="article-share-link">分享</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/14/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A%E7%AB%A0%E7%A8%8B/">左翼同盟会章程</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/04/11/English-Study-3/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-04-11T09:00:04.000Z" itemprop="datePublished">4月 11</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/11/English-Study-3/">English-Study-3</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/04/10/DataStructure/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-04-10T11:09:15.000Z" itemprop="datePublished">4月 10</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/10/DataStructure/">DataStructure</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/02/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          独到科技
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/25/Eternal-Spirit/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Eternal-Spirit</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/04/10/%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AE%BA/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-04-10T06:34:49.000Z" itemprop="datePublished">4月 10</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/10/%E4%B8%96%E7%95%8C%E8%A7%82%E4%B8%8E%E6%96%B9%E6%B3%95%E8%AE%BA/">世界观与方法论</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/04/06/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-04-06T14:35:16.000Z" itemprop="datePublished">4月 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/04/06/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/">致你的一封信</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/03/30/GoodNotes/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-03-30T06:39:00.000Z" itemprop="datePublished">3月 30</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/30/GoodNotes/">GoodNotes</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/03/27/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-03-27T08:25:11.000Z" itemprop="datePublished">3月 27</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/27/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/">新闻联播</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; 上一页</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">下一页 &raquo;</a>
-  </nav>
 
 </section>
         

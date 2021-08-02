@@ -14,7 +14,7 @@
 <meta property="og:description" content="0.安装 官网上获得版本偶数版为稳定版，奇数版位测试版 下载VMware14pro，安装码百度即可 选择编辑添加新虚拟机 其中虚拟机设置里将CD&#x2F;DVD 2（IED）设置为centOS-8-×86_64-1905-dcd.iso的路径  如果开始时出现 Pane is dead.窗格已死，解决方法为： ​    1、把内存从1G升到2G，不管用。 ​    2、按住 Ctrl+alt+F2， 然后">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-18T05:45:13.000Z">
-<meta property="article:modified_time" content="2021-07-19T07:25:50.739Z">
+<meta property="article:modified_time" content="2021-07-28T12:26:52.075Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -108,6 +108,40 @@
 <p>​    2、按住 Ctrl+alt+F2， 然后输出 reboot， 依然不行。</p>
 <p>​    3、更改ISO默认的映像文件，【step4】</p>
 <p>安装时选择工作站版即可</p>
+<h2 id="linux指令"><a href="#linux指令" class="headerlink" title="linux指令"></a>linux指令</h2><h3 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h3><p><strong>用户标识</strong></p>
+<ul>
+<li>$表示普通用户</li>
+<li>#表示超级用户，也就是root用户</li>
+</ul>
+<p><strong>0.创建common user$</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd username</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.切换common user$</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su username</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.切换到root#</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
+
+<p><strong>【用户操作】</strong></p>
+<ol>
+<li>在终端输入exit或logout或使用快捷方式ctrl+d，可以退回到原来用户</li>
+<li>在切换用户时，如果想在切换用户之后使用新用户的工作环境，可以在su和username之间加-，例如：【su - root】</li>
+</ol>
+<h3 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h3><p><strong>【静态查看进程信息】</strong></p>
+<p>ps命令</p>
+<ul>
+<li><p>ps -aux</p>
+</li>
+<li><p>ps -elf</p>
+</li>
+</ul>
+<p>信息更详细些，包括 PPID (对应的父进程 的PID 号)</p>
+<p><strong>【动态查看进程信息】</strong></p>
+<p>top命令</p>
+<p><code>M: sorted by memory</code></p>
+<p><code>N: sorted by time</code></p>
+<p><code>p: sorted by GPU</code></p>
+<p><code>q: 退出</code></p>
 
       
     </div>
@@ -156,7 +190,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" rel="tag">独到科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -166,7 +200,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -175,7 +209,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
     </div>
   </div>
 
@@ -188,6 +222,14 @@
       <ul>
         
           <li>
+            <a href="/2021/08/02/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/">独到科技</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/">每日复盘</a>
+          </li>
+        
+          <li>
             <a href="/2021/07/25/Eternal-Spirit/">Eternal-Spirit</a>
           </li>
         
@@ -197,14 +239,6 @@
         
           <li>
             <a href="/2021/07/24/Object-Oriented-Programming/">Object_Oriented_Programming</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/22/django/">django</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/21/%E5%90%8E%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88/">后端工程师</a>
           </li>
         
       </ul>
