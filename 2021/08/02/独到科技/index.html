@@ -6,15 +6,15 @@
   
   <title>独到科技 | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="推荐阅读mongodb官网手册|官网 kafaka基本操作|知乎 如何高效操作pycharm|个人 Target   celery    Cabana    Rabitmq     redis    git    docker    kafak    tornado    Day15体系 uid与wxid打通&#x3D;&#x3D;&gt;生态闭环 分销&#x3D;&#x3D;&gt;打通ERP 目前主打社群沉淀与私域流量维护 to">
+  <meta name="description" content="推荐阅读mongodb官网手册|官网 kafaka基本操作|知乎 如何高效操作pycharm|个人 [MongoDB教程](document&#x2F;mongodb · heguangchuan&#x2F;rainmeter - 码云 - 开源中国 (gitee.com)) Target   celery    Cabana    Rabitmq     redis    git    docker    kaf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="独到科技">
 <meta property="og:url" content="https://drinkle.top/2021/08/02/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
-<meta property="og:description" content="推荐阅读mongodb官网手册|官网 kafaka基本操作|知乎 如何高效操作pycharm|个人 Target   celery    Cabana    Rabitmq     redis    git    docker    kafak    tornado    Day15体系 uid与wxid打通&#x3D;&#x3D;&gt;生态闭环 分销&#x3D;&#x3D;&gt;打通ERP 目前主打社群沉淀与私域流量维护 to">
+<meta property="og:description" content="推荐阅读mongodb官网手册|官网 kafaka基本操作|知乎 如何高效操作pycharm|个人 [MongoDB教程](document&#x2F;mongodb · heguangchuan&#x2F;rainmeter - 码云 - 开源中国 (gitee.com)) Target   celery    Cabana    Rabitmq     redis    git    docker    kaf">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-02T13:33:16.000Z">
-<meta property="article:modified_time" content="2021-08-24T15:16:33.698Z">
+<meta property="article:modified_time" content="2021-08-25T14:19:55.278Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="独到科技">
 <meta name="twitter:card" content="summary">
@@ -100,6 +100,7 @@
 <h2 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h2><p><strong><a target="_blank" rel="noopener" href="https://docs.mongoing.com/">mongodb官网手册|官网</a></strong></p>
 <p><strong><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/74063251">kafaka基本操作|知乎</a></strong></p>
 <p><strong><a target="_blank" rel="noopener" href="https://pycharm.iswbm.com/index.html">如何高效操作pycharm|个人</a></strong></p>
+<p><strong>[MongoDB教程](<a target="_blank" rel="noopener" href="https://gitee.com/heguangchuan/rainmeter/tree/master/document/mongodb">document/mongodb · heguangchuan/rainmeter - 码云 - 开源中国 (gitee.com)</a>)</strong></p>
 <h2 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h2><ul>
 <li><p><input disabled="" type="checkbox">  celery</p>
 </li>
@@ -119,6 +120,94 @@
 </li>
 </ul>
 <hr>
+<h2 id="Day16"><a href="#Day16" class="headerlink" title="Day16"></a>Day16</h2><h3 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h3><p>python eval() 函数的功能：将字符串str当成有效的表达式来求值并返回计算结果。</p>
+<p>语法：</p>
+<p><code>eval(source[, globals[, locals]]) -&gt; value</code></p>
+<p>参数：</p>
+<ul>
+<li><p>source：一个Python表达式或函数compile()返回的代码对象</p>
+</li>
+<li><p>globals：可选。必须是dictionary</p>
+</li>
+<li><p>locals：可选。任意map对象</p>
+</li>
+</ul>
+<p>如果提供了globals参数，那么它必须是dictionary类型；如果提供了locals参数，那么它可以是任意的map对象。</p>
+<h3 id="使用GIT进行版本控制"><a href="#使用GIT进行版本控制" class="headerlink" title="使用GIT进行版本控制"></a>使用GIT进行版本控制</h3><p><strong>以Mac为例</strong></p>
+<ol>
+<li>查看git version</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>安装git</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>配置git</li>
+</ol>
+<p><code>git跟踪谁修改了项目, git必须知道你的用户名, 但你可以使用一个虚假的emial</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;username&quot;</span><br><span class="line">git config --global user.email &quot;email&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>创建项目|以下操作非必要说明均在<code>sub_dir</code>中使用命令</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd super_directory</span><br><span class="line">mkdir sub_dir</span><br><span class="line">cd sub_dir</span><br><span class="line">touch project.py test.py</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>初始化仓库</li>
+</ol>
+<p>git在对应的目录中初始化一个空的仓库,  仓库是指程序中被git主动追踪的一组文件.  git用来管理仓库的文件都存储在.git/这个隐藏目录中, 包括index/ local git,  .git存放着项目的所有历史记录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加忽略追踪文件</span></span><br><span class="line">.gitignore</span><br><span class="line">text.py</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>检查状态</li>
+</ol>
+<p>git中一个分支代表一个版本对应一般开发一个功能</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br><span class="line"><span class="meta">#</span><span class="bash"> on branch master</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment"># initial commit</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment"># untracked files</span></span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="bash"><span class="comment"># .gitignore</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> test.py</span></span><br><span class="line"></span><br><span class="line">git add .</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">将项目中未被跟踪的所有文件全部加入到仓库中, 但是并不提交他们, 只是让git开始关注它们</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">git commit -m &quot;info&quot;</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">将被追踪的文件提交到本地仓库</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>查看历史提交</li>
+</ol>
+<p>每次提交时, git都会生成一个包含40字符的UID, 记录提交是谁执行的|提交的时间以及提交的指定信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br><span class="line"></span><br><span class="line">git log --pretty=oneline</span><br><span class="line"><span class="meta">#</span><span class="bash"> 只显示提交引用的UID和提交时的info</span></span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>撤销修改</li>
+</ol>
+<p><code>git checkout</code>命令用于切换分支或恢复工作树文件。<code>git checkout</code>是git最常用的命令之一，同时也是一个很危险的命令，因为这条命令会重写工作区。</p>
+<p>放弃修改, 恢复到前一个可执行状态</p>
+<p>将working的修改放弃, 回到最近一次commit代码, 如果已经通过add进入indexing则无法撤回</p>
+<p><strong>注意</strong>:在checkout时会影响到working code, 因此必须在checkout时先add -commit或者stash push</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 撤销当前working代码, 回到前一次commit</span></span><br><span class="line">git checkout .</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 切换分支</span></span><br><span class="line">git checkout taget_branch</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 切换工作树</span></span><br><span class="line">git checkout UID的前六位</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;</span></span><br><span class="line">提示目前在历史分支树上</span><br><span class="line">detached: 分离的</span><br><span class="line">HEAD detached at 81ba859</span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>回退分支</li>
+</ol>
+<p><strong>版本–分支–code</strong></p>
+<p><code>git rest --hard HEAD^</code>：回退到上一版；<br><code>git rest --hard HEAD^^</code>：回退到倒数第二版；<br><code>git rest --hard 3628164</code>：回退到commit id为3628164的版本；</p>
+<h3 id="lunix"><a href="#lunix" class="headerlink" title="lunix"></a>lunix</h3><p>Apt: advanced packaging tool 高级封装工具</p>
+<ul>
+<li>下载软件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install package_name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新软件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt package_name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除软件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt remove package_name</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新所有可升级软件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">列出所有可更新的软件清单命令：sudo apt update</span><br><span class="line"></span><br><span class="line">升级软件包：sudo apt upgrade</span><br><span class="line"></span><br><span class="line">列出可更新的软件包及版本信息：apt list --upgradeable</span><br><span class="line"></span><br><span class="line">升级软件包，升级前先删除需要更新软件包：sudo apt full-upgrade</span><br></pre></td></tr></table></figure>
+
 <h2 id="Day15"><a href="#Day15" class="headerlink" title="Day15"></a>Day15</h2><h3 id="体系"><a href="#体系" class="headerlink" title="体系"></a>体系</h3><ul>
 <li>uid与wxid打通==&gt;生态闭环</li>
 <li>分销==&gt;打通ERP</li>
@@ -161,7 +250,7 @@
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">a = [[<span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]]</span><br><span class="line">b = [[<span class="number">1</span>], [<span class="number">2</span>, <span class="number">2</span>]]</span><br><span class="line">c = itertools.chain(a, b)</span><br><span class="line">d = itertools.chain(*a, b)</span><br><span class="line">e = itertools.chain(a, *b)</span><br><span class="line">f = itertools.chain(*a, *b)</span><br><span class="line">g = itertools.chain(*(a, b))</span><br><span class="line"></span><br><span class="line">print(<span class="built_in">list</span>(c))</span><br><span class="line">print(<span class="built_in">list</span>(d))</span><br><span class="line">print(<span class="built_in">list</span>(e))</span><br><span class="line">print(<span class="built_in">list</span>(f))</span><br><span class="line">print(<span class="built_in">list</span>(g))</span><br><span class="line">&gt;&gt;</span><br><span class="line">[[<span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">1</span>], [<span class="number">2</span>, <span class="number">2</span>]]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, [<span class="number">1</span>], [<span class="number">2</span>, <span class="number">2</span>]]</span><br><span class="line">[[<span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>]</span><br><span class="line">[[<span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">1</span>], [<span class="number">2</span>, <span class="number">2</span>]]</span><br></pre></td></tr></table></figure>
 
-<p>string:不可迭代对象</p>
+<p><strong>string:可迭代对象</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">a = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;aa&#x27;</span>, <span class="string">&#x27;aaa&#x27;</span>]</span><br><span class="line">b = itertools.chain(a)</span><br><span class="line">c = itertools.chain(*a)</span><br><span class="line">print(a)</span><br><span class="line">print(<span class="built_in">list</span>(b))</span><br><span class="line">print(<span class="built_in">list</span>(c))</span><br><span class="line">&gt;&gt;</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;aa&#x27;</span>, <span class="string">&#x27;aaa&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;aa&#x27;</span>, <span class="string">&#x27;aaa&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># ------split-------</span></span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line">a = [[<span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]]</span><br><span class="line">b = itertools.chain(a)</span><br><span class="line">c = itertools.chain(*a)</span><br><span class="line">print(a)</span><br><span class="line">print(<span class="built_in">list</span>(b))</span><br><span class="line">print(<span class="built_in">list</span>(c))</span><br><span class="line">&gt;&gt;</span><br><span class="line">[[<span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]]</span><br><span class="line">[[<span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
 
 <h2 id="Day14"><a href="#Day14" class="headerlink" title="Day14"></a>Day14</h2><h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p><strong>filter()</strong> 函数用于过滤序列，过滤掉不符合条件的元素，返回由符合条件元素组成的新列表。</p>
@@ -897,6 +986,15 @@
     
 <nav id="article-nav">
   
+    <a href="/2021/08/25/English-Study-5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          English-Study-5
+        
+      </div>
+    </a>
+  
   
     <a href="/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
@@ -952,6 +1050,10 @@
       <ul>
         
           <li>
+            <a href="/2021/08/25/English-Study-5/">English-Study-5</a>
+          </li>
+        
+          <li>
             <a href="/2021/08/02/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/">独到科技</a>
           </li>
         
@@ -965,10 +1067,6 @@
         
           <li>
             <a href="/2021/07/25/Pythonon-Source-Code/">Pythonon_Source_Code</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/24/Object-Oriented-Programming/">Object_Oriented_Programming</a>
           </li>
         
       </ul>
