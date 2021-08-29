@@ -71,6 +71,233 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据库索引原理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2021-08-29T05:41:59.000Z" itemprop="datePublished">2021-08-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/08/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/">数据库索引原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="数据库索引原理"><a href="#数据库索引原理" class="headerlink" title="数据库索引原理"></a>数据库索引原理</h2><h3 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a><strong>推荐阅读</strong></h3><p><a target="_blank" rel="noopener" href="https://liuchenyang0515.blog.csdn.net/article/details/118004118"><strong>MySQL索引——入门进阶必备</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34115899/article/details/118308424"><strong>MySQL中B+树索引的应用场景大全</strong></a></p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://haicoder.net/mongodb/mongodb-index-principle.html"><strong>MongoDB索引原理</strong></a></p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/348074129"><strong>关系型数据库和非关系型数据库之间的区别</strong></a></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1784274"><strong>非关系型数据库（NOSQL）和关系型数据库（SQL）区别详解</strong></a></p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lh_hebine/article/details/99051646"><strong>什么是事务？事务的四大特性是什么？</strong></a></p>
+<p>B+树索引是B+树在数据库中的一种实现，是最常见也是数据库中使用最为频繁的一种索引。B+树中的B代表平衡（balance），而不是二叉（binary），因为B+树是从最早的平衡二叉树演化而来的。在讲B+树之前必须先了解二叉查找树、平衡二叉树（AVLTree）和平衡多路查找树（B-Tree），B+树即由这些树逐步优化而来。</p>
+<h3 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h3><p>二叉树具有以下性质：左子树的键值小于根的键值，右子树的键值大于根的键值。<br>如下图所示就是一棵二叉查找树，</p>
+<p><img src="https://img-blog.csdn.net/20160202203355523" alt="索引"></p>
+<p>对该二叉树的节点进行查找发现深度为1的节点的查找次数为1，深度为2的查找次数为2，深度为n的节点的查找次数为n，因此其平均查找次数为 (1+2+2+3+3+3) / 6 = 2.3次</p>
+<p>二叉查找树可以任意地构造，同样是2,3,5,6,7,8这六个数字，也可以按照下图的方式来构造：</p>
+<p><img src="https://img-blog.csdn.net/20160202203448944" alt="索引"></p>
+<p>但是这棵二叉树的查询效率就低了。因此若想二叉树的查询效率尽可能高，需要这棵二叉树是平衡的，从而引出新的定义——平衡二叉树，或称AVL树。</p>
+<h3 id="平衡二叉树（AVL-Tree）"><a href="#平衡二叉树（AVL-Tree）" class="headerlink" title="平衡二叉树（AVL Tree）"></a>平衡二叉树（AVL Tree）</h3><p>平衡二叉树（AVL树）在符合二叉查找树的条件下，还满足任何节点的两个子树的高度最大差为1。下面的两张图片，左边是AVL树，它的任何节点的两个子树的高度差&lt;=1；右边的不是AVL树，其根节点的左子树高度为3，而右子树高度为1；</p>
+<p><img src="https://img-blog.csdn.net/20160202203554663" alt="索引"></p>
+<p>如果在AVL树中进行插入或删除节点，可能导致AVL树失去平衡，这种失去平衡的二叉树可以概括为四种姿态：LL（左左）、RR（右右）、LR（左右）、RL（右左）。它们的示意图如下：</p>
+<p><img src="https://img-blog.csdn.net/20160202203648148" alt="索引"></p>
+<p>这四种失去平衡的姿态都有各自的定义：</p>
+<ul>
+<li><p><strong>LL</strong>：LeftLeft，也称“左左”。插入或删除一个节点后，根节点的左孩子（Left Child）的左孩子（Left Child）还有非空节点，导致根节点的左子树高度比右子树高度高2，AVL树失去平衡。</p>
+</li>
+<li><p><strong>RR</strong>：RightRight，也称“右右”。插入或删除一个节点后，根节点的右孩子（Right Child）的右孩子（Right Child）还有非空节点，导致根节点的右子树高度比左子树高度高2，AVL树失去平衡。</p>
+</li>
+<li><p><strong>LR</strong>：LeftRight，也称“左右”。插入或删除一个节点后，根节点的左孩子（Left Child）的右孩子（Right Child）还有非空节点，导致根节点的左子树高度比右子树高度高2，AVL树失去平衡。</p>
+</li>
+<li><p><strong>RL</strong>：RightLeft，也称“右左”。插入或删除一个节点后，根节点的右孩子（Right Child）的左孩子（Left Child）还有非空节点，导致根节点的右子树高度比左子树高度高2，AVL树失去平衡。</p>
+</li>
+</ul>
+<p>AVL树失去平衡之后，可以通过旋转使其恢复平衡。下面分别介绍四种失去平衡的情况下对应的旋转方法。</p>
+<p>LL的旋转。LL失去平衡的情况下，可以通过一次旋转让AVL树恢复平衡。步骤如下：</p>
+<ol>
+<li>将根节点的左孩子作为新根节点。</li>
+<li>将新根节点的右孩子作为原根节点的左孩子。</li>
+<li>将原根节点作为新根节点的右孩子。</li>
+</ol>
+<p><strong>LL旋转示意图如下：</strong></p>
+<p><img src="https://img-blog.csdn.net/20160202204113994" alt="索引"></p>
+<p><strong>RR的旋转：</strong>RR失去平衡的情况下，旋转方法与LL旋转对称，步骤如下：</p>
+<ol>
+<li>将根节点的右孩子作为新根节点。</li>
+<li>将新根节点的左孩子作为原根节点的右孩子。</li>
+<li>将原根节点作为新根节点的左孩子。</li>
+</ol>
+<p><strong>RR旋转示意图如下：</strong></p>
+<p><img src="https://img-blog.csdn.net/20160202204207963" alt="索引"></p>
+<p>LR的旋转：LR失去平衡的情况下，需要进行两次旋转，步骤如下：</p>
+<ol>
+<li>围绕根节点的左孩子进行RR旋转。</li>
+<li>围绕根节点进行LL旋转。</li>
+</ol>
+<p><strong>LR的旋转示意图如下：</strong></p>
+<p><img src="https://img-blog.csdn.net/20160202204257369" alt="索引"></p>
+<p>RL的旋转：RL失去平衡的情况下也需要进行两次旋转，旋转方法与LR旋转对称，步骤如下：</p>
+<ol>
+<li>围绕根节点的右孩子进行LL旋转。</li>
+<li>围绕根节点进行RR旋转。</li>
+</ol>
+<p><strong>RL的旋转示意图如下：</strong></p>
+<p><img src="https://img-blog.csdn.net/20160202204331073" alt="索引"></p>
+<h3 id="平衡多路查找树（B-Tree）"><a href="#平衡多路查找树（B-Tree）" class="headerlink" title="平衡多路查找树（B-Tree）"></a>平衡多路查找树（B-Tree）</h3><p>B-Tree是为磁盘等外存储设备设计的一种平衡查找树。因此在讲B-Tree之前先了解下磁盘的相关知识。</p>
+<p>系统从磁盘读取数据到内存时是以磁盘块（block）为基本单位的，位于同一个磁盘块中的数据会被一次性读取出来，而不是需要什么取什么。</p>
+<p>InnoDB存储引擎中有页（Page）的概念，页是其磁盘管理的最小单位。InnoDB存储引擎中默认每个页的大小为16KB，可通过参数innodb_page_size将页的大小设置为4K、8K、16K，在MySQL中可通过如下命令查看页的大小：</p>
+<p><code>mysql&gt; show variables like &#39;innodb_page_size&#39;;</code></p>
+<p>而系统一个磁盘块的存储空间往往没有这么大，因此InnoDB每次申请磁盘空间时都会是若干地址连续磁盘块来达到页的大小16KB。InnoDB在把磁盘数据读入到磁盘时会以页为基本单位，在查询数据时如果一个页中的每条数据都能有助于定位数据记录的位置，这将会减少磁盘I/O次数，提高查询效率。</p>
+<p>B-Tree结构的数据可以让系统高效的找到数据所在的磁盘块。为了描述B-Tree，首先定义一条记录为一个二元组[key, data] ，key为记录的键值，对应表中的主键值，data为一行记录中除主键外的数据。对于不同的记录，key值互不相同。</p>
+<p>一棵m阶的B-Tree有如下特性：</p>
+<ol>
+<li>每个节点最多有m个孩子。</li>
+<li>除了根节点和叶子节点外，其它每个节点至少有Ceil(m/2)个孩子。</li>
+<li>若根节点不是叶子节点，则至少有2个孩子</li>
+<li>所有叶子节点都在同一层，且不包含其它关键字信息</li>
+<li>每个非终端节点包含n个关键字信息（P0,P1,…Pn, k1,…kn）</li>
+<li>关键字的个数n满足：ceil(m/2)-1 &lt;= n &lt;= m-1</li>
+<li>ki(i=1,…n)为关键字，且关键字升序排序。</li>
+<li>Pi(i=1,…n)为指向子树根节点的指针。P(i-1)指向的子树的所有节点关键字均小于ki，但都大于k(i-1)</li>
+</ol>
+<p>B-Tree中的每个节点根据实际情况可以包含大量的关键字信息和分支，如下图所示为一个3阶的B-Tree：</p>
+<p><img src="https://img-blog.csdn.net/20160202204827368" alt="索引"></p>
+<p>每个节点占用一个盘块的磁盘空间，一个节点上有两个升序排序的关键字和三个指向子树根节点的指针，指针存储的是子节点所在磁盘块的地址。两个关键词划分成的三个范围域对应三个指针指向的子树的数据的范围域。以根节点为例，关键字为17和35，P1指针指向的子树的数据范围为小于17，P2指针指向的子树的数据范围为17~35，P3指针指向的子树的数据范围为大于35。</p>
+<p><strong>模拟查找关键字29的过程：</strong></p>
+<ol>
+<li>根据根节点找到磁盘块1，读入内存。【磁盘I/O操作第1次】</li>
+<li>比较关键字29在区间（17,35），找到磁盘块1的指针P2。</li>
+<li>根据P2指针找到磁盘块3，读入内存。【磁盘I/O操作第2次】</li>
+<li>比较关键字29在区间（26,30），找到磁盘块3的指针P2。</li>
+<li>根据P2指针找到磁盘块8，读入内存。【磁盘I/O操作第3次】</li>
+<li>在磁盘块8中的关键字列表中找到关键字29。</li>
+</ol>
+<p>分析上面过程，发现需要3次磁盘I/O操作，和3次内存查找操作。由于内存中的关键字是一个有序表结构，可以利用二分法查找提高效率。而3次磁盘I/O操作是影响整个B-Tree查找效率的决定因素。B-Tree相对于AVLTree缩减了节点个数，使每次磁盘I/O取到内存的数据都发挥了作用，从而提高了查询效率。</p>
+<h3 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B+Tree"></a>B+Tree</h3><p>B+Tree是在B-Tree基础上的一种优化，使其更适合实现外存储索引结构，InnoDB存储引擎就是用B+Tree实现其索引结构。</p>
+<p>从上一节中的B-Tree结构图中可以看到每个节点中不仅包含数据的key值，还有data值。而每一个页的存储空间是有限的，如果data数据较大时将会导致每个节点（即一个页）能存储的key的数量很小，当存储的数据量很大时同样会导致B-Tree的深度较大，增大查询时的磁盘I/O次数，进而影响查询效率。在B+Tree中，所有数据记录节点都是按照键值大小顺序存放在同一层的叶子节点上，而非叶子节点上只存储key值信息，这样可以大大加大每个节点存储的key值数量，降低B+Tree的高度。</p>
+<p>B+Tree相对于B-Tree有几点不同：</p>
+<ol>
+<li>非叶子节点只存储键值信息。</li>
+<li>所有叶子节点之间都有一个链指针。</li>
+<li>数据记录都存放在叶子节点中。</li>
+</ol>
+<p>将上一节中的B-Tree优化，由于B+Tree的非叶子节点只存储键值信息，假设每个磁盘块能存储4个键值及指针信息，则变成B+Tree后其结构如下图所示：</p>
+<p><img src="https://img-blog.csdn.net/20160202205105560" alt="索引"></p>
+<p>通常在B+Tree上有两个头指针，一个指向根节点，另一个指向关键字最小的叶子节点，而且所有叶子节点（即数据节点）之间是一种链式环结构。因此可以对B+Tree进行两种查找运算：一种是对于主键的范围查找和分页查找，另一种是从根节点开始，进行随机查找。</p>
+<p>可能上面例子中只有22条数据记录，看不出B+Tree的优点，下面做一个推算：</p>
+<p>InnoDB存储引擎中页的大小为16KB，一般表的主键类型为INT（占用4个字节）或BIGINT（占用8个字节），指针类型也一般为4或8个字节，也就是说一个页（B+Tree中的一个节点）中大概存储16KB/(8B+8B)=1K个键值（因为是估值，为方便计算，这里的K取值为10^3^)。也就是说一个深度为3的B+Tree索引可以维护10^3 * 10^3 * 10^3 = 10亿 条记录。</p>
+<p>实际情况中每个节点可能不能填充满，因此在数据库中，B+Tree的高度一般都在2<del>4层。MySQL的InnoDB存储引擎在设计时是将根节点常驻内存的，也就是说查找某一键值的行记录时最多只需要1</del>3次磁盘I/O操作。</p>
+<p>数据库中的B+Tree索引可以分为聚集索引（clustered index）和辅助索引（secondary index）。上面的B+Tree示例图在数据库中的实现即为聚集索引，聚集索引的B+Tree中的叶子节点存放的是整张表的行记录数据。辅助索引与聚集索引的区别在于辅助索引的叶子节点并不包含行记录的全部数据，而是存储相应行数据的聚集索引键，即主键。当通过辅助索引来查询数据时，InnoDB存储引擎会遍历辅助索引找到主键，然后再通过主键在聚集索引中找到完整的行记录数据。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/08/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/" data-id="ckswtcg150001kcf5gvrl6l3n" data-title="数据库索引原理" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DataBase/" rel="tag">DataBase</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Mongodb" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/28/Mongodb/" class="article-date">
+  <time class="dt-published" datetime="2021-08-28T03:38:04.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/08/28/Mongodb/">Mongodb</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Mongodb"><a href="#Mongodb" class="headerlink" title="Mongodb"></a>Mongodb</h1><h2 id="id"><a href="#id" class="headerlink" title="_id"></a>_id</h2><p>打开 MongoDB 数据库中的任何一个文档，你会注意到文档中有一个 _id 字段，实际上，ObjectId 或 _id 是每个 MongoDB 文档中都存在的字段。</p>
+<h3 id="bjectId-的结构"><a href="#bjectId-的结构" class="headerlink" title="bjectId 的结构"></a>bjectId 的结构</h3><p>这些是 _id 的一些主要特征的摘要：</p>
+<ul>
+<li>_id 是集合中文档的主键，用于区分文档（记录）。</li>
+<li>_id自动编入索引。指定 { _id: } 的查找将 _id 索引作为其指南。</li>
+<li>默认情况下，_id 字段的类型为 ObjectID，是 MongoDB 的 BSON 类型之一。如果需要，用户还可以将 _id 覆盖为 ObjectID 以外的其他内容。</li>
+</ul>
+<p>ObjectID 长度为 12 字节，由几个 2-4 字节的链组成。每个链代表并指定文档身份的具体内容。以下的值构成了完整的 12 字节组合：</p>
+<ul>
+<li>一个 4 字节的值，表示自 Unix 纪元以来的秒数</li>
+<li>一个 3 字节的机器标识符</li>
+<li>一个 2 字节的进程 ID</li>
+<li>一个 3 字节的计数器，以随机值开始</li>
+</ul>
+<p><img src="http://www.navicat.com.cn/link/Blog/Image/2019/20190326/_id.png" alt="img"></p>
+<p>通常，你不必担心要如何生成 ObjectID。如果文档尚未分配 _id 值，MongoDB 将自动生成一个 _id 值。</p>
+<h3 id="创建新的-ObjectId"><a href="#创建新的-ObjectId" class="headerlink" title="创建新的 ObjectId"></a>创建新的 ObjectId</h3><p>如果你想自己生成新的 ObjectId，可以使用以下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newObjectId = ObjectId()</span><br></pre></td></tr></table></figure>
+
+<p>你也可以直接在 Navicat 编辑器中输入它。</p>
+<p>这将会生成一个唯一的 _id，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectId(&quot;5349b4ddd2781d08c09890f3&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>或者，你亦可以提供一个 12 字节的 ID：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myObjectId = ObjectId(&quot;5349b4ddd2781d08c09890f4&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="文档的创建时间戳"><a href="#文档的创建时间戳" class="headerlink" title="文档的创建时间戳"></a>文档的创建时间戳</h3><p>由于 _id ObjectId 默认存储了 4 字节的时间戳，因此在大多数情况下，你不需要存储任何文档的创建时间。你可以使用 getTimestamp 方法获取文档的创建时间：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectId(&quot;5349b4ddd2781d08c09890f4&quot;).getTimestamp()</span><br></pre></td></tr></table></figure>
+
+<p>这将以 ISO 日期格式返回此文档的创建时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ISODate(&quot;2019-09-12T30:39:17Z&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="将-ObjectId-转换为字符串（String）"><a href="#将-ObjectId-转换为字符串（String）" class="headerlink" title="将 ObjectId 转换为字符串（String）"></a>将 ObjectId 转换为字符串（String）</h3><p>在某些情况下，你可能需要得到字符串格式的 ObjectId 值。若要转换 ObjectId 为字符串，请使用以下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newObjectId.str</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码将返回 Guid 的字符串格式的 ObjectId：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5349b4ddd2781d08c09890f3</span><br></pre></td></tr></table></figure>
+
+<h3 id="文档排序"><a href="#文档排序" class="headerlink" title="文档排序"></a>文档排序</h3><p>由于每个 ObjectId 都包含一个时间戳，因此你可以用 _id 字段将文档按创建时间排序。但请务必注意，此排序方法并不代表排序是严格或精确的，因为 ID 的其他组件也会影响，导致次序会反映其他变量，而不仅仅是创建时间。</p>
+<h3 id="更改-ObjectId"><a href="#更改-ObjectId" class="headerlink" title="更改 ObjectId"></a>更改 ObjectId</h3><p>_id 字段基本上是不可变的。在创建文档之后，根据定义，它已被分配了一个无法更改的 _id。话虽如此，在插入新文档时是可以覆盖 _id 的。覆盖文档的 _id 字段可能有其用处，但是当这样做时，你有责任确保每个文档的 _id 值都是唯一的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/08/28/Mongodb/" data-id="ckswtcg130000kcf5h35y6ngc" data-title="Mongodb" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mongodb/" rel="tag">Mongodb</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-English-Study-5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/08/25/English-Study-5/" class="article-date">
@@ -164,6 +391,53 @@
 </li>
 </ul>
 <hr>
+<h2 id="Day17"><a href="#Day17" class="headerlink" title="Day17"></a>Day17</h2><h3 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h3><p><strong>格林威治时间1970年01月01日00时00分00秒</strong>起至现在的总秒数</p>
+<h3 id="查看log"><a href="#查看log" class="headerlink" title="查看log"></a>查看log</h3><ol>
+<li>进入服务器</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@ip</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查看镜像</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>根据kibana-index进入对应的镜像内</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 静态查询</span></span><br><span class="line">docker logs --tail 100 celery_newmsg</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 动态查询</span></span><br><span class="line">docker logs -f --tail 100 image_name</span><br></pre></td></tr></table></figure>
+
+<p><strong>查询技巧</strong></p>
+<ul>
+<li>显示所有log</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示某个指定容器<span class="built_in">log</span></span></span><br><span class="line">docker logs [options] 容器ID or 容器name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示docker compose启动的所有容器<span class="built_in">log</span></span></span><br><span class="line">docker-compose logs</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示实时log</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f [docker_id] or [docker_name]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>动态显示log尾部</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f --tail 100 [docker_id] or [docker_name]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用grep过滤log</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查找所有包含<span class="string">&quot;error&quot;</span>的<span class="built_in">log</span></span></span><br><span class="line">docker logs | grep error</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>根据时间进行log的查找</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs --since 2021-08-25T12:01:46.452616Z [容器Id] or [容器name]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>组合查询</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f --tail 100 容器id | grep info</span><br></pre></td></tr></table></figure>
+
 <h2 id="Day16"><a href="#Day16" class="headerlink" title="Day16"></a>Day16</h2><h3 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h3><p>python eval() 函数的功能：将字符串str当成有效的表达式来求值并返回计算结果。</p>
 <p>语法：</p>
 <p><code>eval(source[, globals[, locals]]) -&gt; value</code></p>
@@ -1783,179 +2057,6 @@
 
 
   
-    <article id="post-Linux" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/07/18/Linux/" class="article-date">
-  <time class="dt-published" datetime="2021-07-18T05:45:13.000Z" itemprop="datePublished">2021-07-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/07/18/Linux/">Linux</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="0-安装"><a href="#0-安装" class="headerlink" title="0.安装"></a>0.安装</h2><ol>
-<li>官网上获得版本偶数版为稳定版，奇数版位测试版</li>
-<li>下载VMware14pro，安装码百度即可</li>
-<li>选择编辑添加新虚拟机</li>
-<li>其中虚拟机设置里将CD/DVD 2（IED）设置为<code>centOS-8-×86_64-1905-dcd.iso</code>的路径</li>
-</ol>
-<p>如果开始时出现</p>
-<p><strong>Pane is dead.窗格已死，解决方法为：</strong></p>
-<p>​    1、把内存从1G升到2G，不管用。</p>
-<p>​    2、按住 Ctrl+alt+F2， 然后输出 reboot， 依然不行。</p>
-<p>​    3、更改ISO默认的映像文件，【step4】</p>
-<p>安装时选择工作站版即可</p>
-<h2 id="linux指令"><a href="#linux指令" class="headerlink" title="linux指令"></a>linux指令</h2><h3 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h3><p><strong>用户标识</strong></p>
-<ul>
-<li>$表示普通用户</li>
-<li>#表示超级用户，也就是root用户</li>
-</ul>
-<p><strong>0.创建common user$</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd username</span><br></pre></td></tr></table></figure>
-
-<p><strong>1.切换common user$</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su username</span><br></pre></td></tr></table></figure>
-
-<p><strong>2.切换到root#</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
-
-<p><strong>【用户操作】</strong></p>
-<ol>
-<li>在终端输入exit或logout或使用快捷方式ctrl+d，可以退回到原来用户</li>
-<li>在切换用户时，如果想在切换用户之后使用新用户的工作环境，可以在su和username之间加-，例如：【su - root】</li>
-</ol>
-<h3 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h3><p><strong>【静态查看进程信息】</strong></p>
-<p>ps命令</p>
-<ul>
-<li><p>ps -aux</p>
-</li>
-<li><p>ps -elf</p>
-</li>
-</ul>
-<p>信息更详细些，包括 PPID (对应的父进程 的PID 号)</p>
-<p><strong>【动态查看进程信息】</strong></p>
-<p>top命令</p>
-<p><code>M: sorted by memory</code></p>
-<p><code>N: sorted by time</code></p>
-<p><code>p: sorted by GPU</code></p>
-<p><code>q: 退出</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/07/18/Linux/" data-id="ckrarjjgi00008of52xj2aau5" data-title="Linux" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-MySQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/07/18/MySQL/" class="article-date">
-  <time class="dt-published" datetime="2021-07-18T05:43:55.000Z" itemprop="datePublished">2021-07-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/07/18/MySQL/">MySQL</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="1-MySQL"><a href="#1-MySQL" class="headerlink" title="1.MySQL"></a>1.MySQL</h2><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="round"><a href="#round" class="headerlink" title="round"></a>round</h3><p>【round(avg(COL_1), NUM)】:计算col_1的平均值并保留num有效数字</p>
-<p>四舍五入</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ROUND(<span class="built_in">AVG</span>(SCORE), <span class="number">1</span>) <span class="keyword">AS</span> `AVEAGE SCORE`</span><br><span class="line"><span class="keyword">FROM</span> STUDNET</span><br><span class="line"><span class="operator">&gt;&gt;</span></span><br><span class="line"><span class="number">90.1</span></span><br><span class="line"><span class="number">80.2</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h3 id="length"><a href="#length" class="headerlink" title="length"></a>length</h3><p>length(‘char’)</p>
-<ul>
-<li>中文算三个长度</li>
-<li>alpha和number算一个长度</li>
-</ul>
-<h2 id="快捷指令"><a href="#快捷指令" class="headerlink" title="快捷指令"></a>快捷指令</h2><p>常用快捷键：</p>
-<p><strong>1、执行整篇sql脚本</strong></p>
-<p><code>【Ctrl】+【Shift】+【Enter】</code></p>
-<p><strong>2、执行当前行：</strong></p>
-<p><code>【Ctrl】+【Enter】</code></p>
-<p><strong>3、注释/取消注释：</strong></p>
-<p><code>【Ctrl】+【/】</code></p>
-<p><strong>4、格式化sql语句（美化sql语句）：</strong></p>
-<p><code>【Ctrl】+【B】 </code></p>
-<p>5、（貌似和输入法有冲突）自动补全：【Ctrl】+【Space】 ，还可以使用edit-&gt;Auto-complete手动展示补全。如果有冲突可以去下面的文件找到Auto complete进行修改。Modifier的意思就是Ctrl键。</p>
-<p>修改快捷键：</p>
-<p>在安装根目录查到\data\main_menu.xml这个文件（Ubuntu放在/usr/share/mysql-workbench）。</p>
-<p><strong>6.MySQL Clint清屏</strong></p>
-<p><code>system cls</code></p>
-<h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>Error Code: 1054. Unknown column ‘%%’ in ‘where clause’</p>
-<p>出现类似的语法错误时，首先考虑是 <strong>‘</strong> 还是 <strong>`</strong> 出错了</p>
-<p>一个是syntax error 一个是通配符使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT COL_NAME</span><br><span class="line">FROM TABLE_NAME</span><br><span class="line">WHERE STUDENT_NAME LIKE &#39;小%&#39;;</span><br><span class="line"></span><br><span class="line">SELECT &#96;COL_NAME&#96;</span><br><span class="line">FROM &#96;DATABASE_NAME&#96;.&#96;TABLE_NAME&#96;</span><br></pre></td></tr></table></figure>
-
-<p>`DataBase/Table``     ‘wildcard’ </p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="Schema和DataBase是否等同？"><a href="#Schema和DataBase是否等同？" class="headerlink" title="Schema和DataBase是否等同？"></a>Schema和DataBase是否等同？</h3><p><strong>schema是数据库的组织和结构，是数据库对象的集合，集合包括表，视图，储存过程，索引等。</strong></p>
-<p>（1）MySQL的文档中指出，在物理上，模式与数据库是同义的，所以，模式和数据库是一回事。</p>
-<p>（2）但是，Oracle的文档却指出，某些对象可以存储在数据库中，但不能存储在schema中。 因此，模式和数据库不是一回事。</p>
-<p>（3）而根据这篇SQL Server技术文章<a target="_blank" rel="noopener" href="https://technet.microsoft.com/en-us/library/dd283095(v=sql.100).aspx">SQLServer technical article</a>，schema是数据库SQL Server内部的一个独立的实体。 所以，他们也不是一回事。</p>
-<p>因此，取决于您使用的RDBMS，模式和数据库可能不一样。</p>
-<h3 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h3><p><img src="https://upload-images.jianshu.io/upload_images/11464886-82267cb5926d26fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="img"></p>
-<p><strong>【InnoDB】事务性数据库</strong></p>
-<p><strong>【事务】</strong></p>
-<p>子性、一致性、隔离性、持久性。这四个属性通常称为<strong>ACID特性</strong>。</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">原子性（atomicity）。一个事务是一个不可分割的工作单位，事务中包括的操作要么都做，要么都不做。</span><br><span class="line"></span><br><span class="line">一致性（consistency）。事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的。</span><br><span class="line"></span><br><span class="line">隔离性（isolation）。一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</span><br><span class="line"></span><br><span class="line">持久性（durability）。持久性也称永久性（permanence），指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响。</span><br></pre></td></tr></table></figure>
-
-<p>具有<strong>提交、回滚、崩溃恢复能力</strong>的事物安全（ACID兼容）能力，并要求实现并发控制同时支持外键</p>
-<p><strong>【MyISAM】</strong></p>
-<p>数据表主要用来<strong>插入</strong>和<strong>查询记录</strong>MyISAM引擎能提供较高的处理效率</p>
-<p><strong>【Memory】</strong></p>
-<p>如果<strong>只是临时存放数据，</strong>数据量不大，并且不需要较高的数据安全性，可以选择将数据保存在内存中的Memory引擎，<strong>MySQL中使用该引擎作为临时表</strong>，存放查询的中间结果</p>
-<p><strong>【Archive】仓库型数据库</strong></p>
-<p>如果只有<strong>INSERT和SELECT操作</strong>，可以选择Archive，Archive支持高并发的插入操作，但是本身不是事务安全的。Archive非常适合存储归档数据，如记录日志信息可以使用Archive</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/07/18/MySQL/" data-id="ckrarjjgm00018of58kwa2icz" data-title="MySQL" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1974,7 +2075,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" rel="tag">独到科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataBase/" rel="tag">DataBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/" rel="tag">Mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" rel="tag">独到科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -1984,7 +2085,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/DataBase/" style="font-size: 10px;">DataBase</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -2006,6 +2107,14 @@
       <ul>
         
           <li>
+            <a href="/2021/08/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/">数据库索引原理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/28/Mongodb/">Mongodb</a>
+          </li>
+        
+          <li>
             <a href="/2021/08/25/English-Study-5/">English-Study-5</a>
           </li>
         
@@ -2015,14 +2124,6 @@
         
           <li>
             <a href="/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/">每日复盘</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/25/Eternal-Spirit/">Eternal-Spirit</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/25/Pythonon-Source-Code/">Pythonon_Source_Code</a>
           </li>
         
       </ul>

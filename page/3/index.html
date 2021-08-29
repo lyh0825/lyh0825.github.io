@@ -71,6 +71,717 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Python-Underlying-Structure" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/15/Python-Underlying-Structure/" class="article-date">
+  <time class="dt-published" datetime="2021-05-15T07:14:15.000Z" itemprop="datePublished">2021-05-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/15/Python-Underlying-Structure/">Python-Underlying-Structure</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Python底层结构"><a href="#Python底层结构" class="headerlink" title="Python底层结构"></a>Python底层结构</h1><h2 id="三元表达式"><a href="#三元表达式" class="headerlink" title="三元表达式"></a>三元表达式</h2><p>条件为真时的结果 if 判段的条件 else 条件为假时的结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">4</span></span><br><span class="line">y = <span class="number">99</span> <span class="keyword">if</span> x &gt; <span class="number">3</span> <span class="keyword">else</span> <span class="number">999</span></span><br><span class="line"><span class="comment"># if = True execute front</span></span><br><span class="line"><span class="comment"># else = True execute else-clause</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p><strong>[Python里面如何生成随机数？]</strong></p>
+<p>random模块<br>**随机整数：random.randint(a,b)**：返回随机整数x,a&lt;=x&lt;=b<br>random.randrange(start,stop,[,step])：返回一个范围在(start,stop,step)之间的随机整数，不包括结束值。<br>**随机实数：random.random( ):**返回0到1之间的浮点数<br>random.uniform(a,b):返回指定范围内的浮点数。</p>
+<p><strong>[python复制一个对象]</strong></p>
+<p>Python里面如何拷贝一个对象？（赋值，浅拷贝，深拷贝的区别）<br>答：赋值（=），就是创建了对象的一个新的引用，修改其中任意一个变量都会影响到另一个。<br>浅拷贝：创建一个新的对象，但它包含的是对原始对象中包含项的引用（如果用引用的方式修改其中一个对象，另外一个也会修改改变）{1,完全切片方法；2，工厂函数，如list()；3，copy模块的copy()函数}<br>深拷贝：创建一个新的对象，并且递归的复制它所包含的对象（修改其中一个，另外一个不会改变）{copy模块的deep.deepcopy()函数}</p>
+<p><strong>[is与==的区别]</strong></p>
+<p>在 Python 中，”==” 和 “is” 的区别可类比这个例子 ，**==是相等性比较，比较的是两个对象中的值是否相等，is是一致性比较，比较的是两个对象的内存空间地址是否相同。**</p>
+<p><strong>[列表由于是可以增删的(可变化)因此不能做为hashtable的key]</strong></p>
+<p><strong>[python不支持的数据类型是什么？]</strong></p>
+<p>python不支持的数据类型是char 、byte类型。Python没有char或byte类型来保存单一字符或 8 比特整数。你可以使用长度为 1 的字符串表示字符或 8 比特整数。</p>
+<p>python的数据类型有：</p>
+<p>数字(int)、浮点(float)、字符串(str)，列表(list)、元组(tuple)、字典(dict)、集合(set)、</p>
+<p><strong>byte 是字节数据类型 ，是有符号型的，可以表示-128—127 的数；</strong></p>
+<p><strong>char 是字符数据类型 ，是无符号型的，可以表示一个整数，不能表示负数。</strong></p>
+<h2 id="字典排序"><a href="#字典排序" class="headerlink" title="字典排序"></a>字典排序</h2><p><strong>【1.按照keys进行排序】</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dct = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">8</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">10</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">4</span>&#125;</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> <span class="built_in">sorted</span>(dct.keys()):</span><br><span class="line">    value = dct.get(key)</span><br><span class="line">    print(key, value, sep=<span class="string">&#x27;:&#x27;</span>, end=<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    </span><br><span class="line">&gt;&gt;</span><br><span class="line">a:<span class="number">1</span> c:<span class="number">10</span> d:<span class="number">4</span> e:<span class="number">8</span> </span><br></pre></td></tr></table></figure>
+
+<p><strong>【2.按照values进行排序】</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dct = &#123;<span class="string">&#x27;a&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">8</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">10</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">4</span>&#125;</span><br><span class="line"><span class="comment"># 使用items获得key-value，再使用sorted中的key=与lambda的匿名函数控制排序方式</span></span><br><span class="line">temp = <span class="built_in">sorted</span>(dct.items(), key=<span class="keyword">lambda</span> item: item[<span class="number">1</span>])</span><br><span class="line">print(<span class="built_in">dict</span>(temp))</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">item[<span class="number">1</span>]:按照value排序</span><br><span class="line">--&gt;&#123;&#x27;a&#x27;: 1, &#x27;d&#x27;: 4, &#x27;e&#x27;: 8, &#x27;c&#x27;: 10&#125;</span><br><span class="line">item[<span class="number">0</span>]:按照key排序</span><br><span class="line">--&gt;&#123;&#x27;a&#x27;: 1, &#x27;c&#x27;: 10, &#x27;d&#x27;: 4, &#x27;e&#x27;: 8&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>【3.降序排列，可以在sorted()中设置reverse】</strong></p>
+<p><strong>【4.集合无法进行排序】</strong></p>
+<p><strong>【0.注意】</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">set</span>()</span><br><span class="line">&gt;&gt; type(a) --&gt; set</span><br><span class="line"></span><br><span class="line">b = &#123;&#125;</span><br><span class="line">&gt;&gt; type(b) --&gt; dict</span><br></pre></td></tr></table></figure>
+
+<h2 id="Boolean运算优先级"><a href="#Boolean运算优先级" class="headerlink" title="Boolean运算优先级"></a>Boolean运算优先级</h2><p><strong>同一优先级默认从左往右计算。</strong></p>
+<ol>
+<li><strong>优先级是 not &gt; and &gt; or</strong></li>
+<li><strong>not</strong>：<strong>如果x是假的，则“非假”为真，否则x是真的，则非真为假</strong></li>
+<li><strong>and</strong>: <strong>找到并返回第一个False(假)或最后一个True(真)</strong></li>
+<li><strong>or</strong>: <strong>找到并返回第一个True(真)或最后一个False(假)</strong></li>
+</ol>
+<h2 id="迭代器-生成器-迭代对象"><a href="#迭代器-生成器-迭代对象" class="headerlink" title="迭代器|生成器|迭代对象"></a>迭代器|生成器|迭代对象</h2><p><strong>生成器Generator</strong></p>
+<p>一种特殊的迭代器与迭代器定义一致</p>
+<p>他与迭代器的编程方式不一样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>L = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>L</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">36</span>, <span class="number">49</span>, <span class="number">64</span>, <span class="number">81</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g = (x * x <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>g</span><br><span class="line">&lt;generator <span class="built_in">object</span> &lt;genexpr&gt; at <span class="number">0x1022ef630</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>迭代器定义</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.在class中定义__iter__和__next__方法</span><br><span class="line">2.__iter__中的方法返回本身即：self</span><br><span class="line">3.__next__中的方法需返下一个值，并且使用raise StopIteration抛出exception</span><br></pre></td></tr></table></figure>
+
+<p><strong>判断是否是迭代对象或者迭代器使用：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections.abc <span class="keyword">import</span> Iterator, Iterable</span><br><span class="line"></span><br><span class="line"><span class="built_in">isinstance</span>(obj, Iterable)</span><br><span class="line">判断是否为可迭代对象/迭代器对象</span><br><span class="line">依据是否有__iter__并<span class="keyword">return</span> Iterator（迭代器）</span><br><span class="line"></span><br><span class="line"><span class="built_in">isinstance</span>(obj, Iterator)</span><br><span class="line">判断是否为迭代器</span><br><span class="line">依据是__iter__、__next__ 并且在__next__中</span><br><span class="line"><span class="keyword">raise</span> StopIteration</span><br></pre></td></tr></table></figure>
+
+<p><strong>instance：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections.abc <span class="keyword">import</span> Iterator, Iterable</span><br><span class="line"></span><br><span class="line">v1 = [<span class="number">11</span>, <span class="number">22</span> ,<span class="number">33</span>]  <span class="comment"># 只有__iter__;return迭代器</span></span><br><span class="line">print(<span class="built_in">isinstance</span>(v1, Iterator))</span><br><span class="line">&gt;&gt; <span class="literal">False</span></span><br><span class="line"><span class="comment"># 判断是否是迭代器，判断依据是__iter__和__next__</span></span><br><span class="line"></span><br><span class="line">v2 = v1.__iter__()  <span class="comment"># __iter__ return iterator </span></span><br><span class="line">print(<span class="built_in">isinstance</span>(v2, Iterator)) </span><br><span class="line">&gt;&gt; <span class="literal">False</span></span><br><span class="line"><span class="comment"># 因为可迭代对象</span></span><br></pre></td></tr></table></figure>
+
+<p>可迭代对象内部有<code>__iter__</code>方法，retun一个迭代器</p>
+<p>当terminal中输出的是generator时,可以使用:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;<span class="built_in">list</span>(generator)</span><br><span class="line"></span><br><span class="line">&gt;&gt;<span class="keyword">for</span> i <span class="keyword">in</span> generator:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+
+<p>查看迭代器的内容,而非输出其memory地址</p>
+<h2 id="浅拷贝-深拷贝"><a href="#浅拷贝-深拷贝" class="headerlink" title="浅拷贝/深拷贝"></a>浅拷贝/深拷贝</h2><p>【<strong>copy解决的是容器中可迭代的值：应用于可变类型对象</strong>】</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210724094932.png"></p>
+<p>要想切断浅拷贝中第二层的值，可以通过重新引用来实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c[<span class="number">3</span>] = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="comment"># c中的第四个数据将引用新的值，并与之前=赋的值不再有联系</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210724095445.png"></p>
+<p>首先需要了解下几个概念</p>
+<ul>
+<li>变量：是一个系统表的元素，拥有指向对象的连接空间</li>
+<li>对象：被分配的一块内存，存储其所代表的值</li>
+<li>引用：是自动形成的从变量到对象的指针</li>
+<li>类型：属于对象，而非变量</li>
+<li>不可变对象：一旦创建就不可修改的对象，包括字符串、元组、数值类型</li>
+</ul>
+<p><em>（该对象所指向的内存中的值不能被改变。当改变某个变量时候，由于其所指的值不能被改变，相当于把原来的值复制一份后再改变，这会开辟一个新的地址，变量再指向这个新的地址。）</em></p>
+<ul>
+<li>可变对象：可以修改的对象，包括列表、字典、集合</li>
+</ul>
+<p><em>（该对象所指向的内存中的值可以被改变。变量（准确的说是引用）改变后，实际上是其所指的值直接发生改变，并没有发生复制行为，也没有开辟新的地址，通俗点说就是原地改变。）</em></p>
+<p>当我们写：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = &#x27;python&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>Python解释器干的事情：</p>
+<p>\1. 创建变量a</p>
+<p>\2. 创建一个对象(分配一块内存)，来存储值 ‘python’</p>
+<p>\3. 将变量与对象，通过指针连接起来，从变量到对象的连接称之为引用(变量引用对象)</p>
+<hr>
+<p><strong>1.赋值: 只是复制了新对象的引用，不会开辟新的内存空间。</strong></p>
+<p>并不会产生一个独立的对象单独存在，只是将原有的数据块打上一个新标签，所以当其中一个标签被改变的时候，数据块就会发生变化，另一个标签也会随之改变。</p>
+<p><strong>2.浅拷贝: 创建新对象，其内容是原对象的引用。</strong></p>
+<p>浅拷贝有三种形式： 切片操作，工厂函数，copy模块中的copy函数。</p>
+<p>如： lst = [1,2,[3,4]]</p>
+<p>切片操作：lst1 = lst[:] 或者 lst1 = [each for each in lst]</p>
+<p>工厂函数：lst1 = list(lst)</p>
+<p>copy函数：lst1 = copy.copy(lst)</p>
+<p>浅拷贝之所以称为浅拷贝，是它仅仅只拷贝了一层，拷贝了最外围的对象本身，内部的元素都只是拷贝了一个引用而已，在lst中有一个嵌套的list[3,4]，如果我们修改了它，情况就不一样了。</p>
+<p>浅复制要分两种情况进行讨论：</p>
+<p>1）当浅复制的值是不可变对象（字符串、元组、数值类型）时和“赋值”的情况一样，对象的id值<em>（id()函数用于获取对象的内存地址）</em>与浅复制原来的值相同。</p>
+<p>2）当浅复制的值是可变对象（列表、字典、集合）时会产生一个“不是那么独立的对象”存在。有两种情况：</p>
+<p>​        <strong>第一种情况：复制的对象中无复杂子对象，原来值的改变并不会影响浅复制的值，同时浅复制的值改变也并不会影响原来的值。原来值的id值与浅复制原来的值不同。</strong></p>
+<p>​        <strong>第二种情况：复制的对象中有复杂子对象（例如列表中的一个子元素是一个列表），如果不改变其中复杂子对象，浅复制的值改变并不会影响原来的值。 但是改变原来的值中的复杂子对象的值会影响浅复制的值。</strong></p>
+<p><strong>3.深拷贝：和浅拷贝对应，深拷贝拷贝了对象的所有元素，包括多层嵌套的元素。深拷贝出来的对象是一个全新的对象，不再与原来的对象有任何关联。</strong></p>
+<p>所以改变原有被复制对象不会对已经复制出来的新对象产生影响。</p>
+<p>只有一种形式，copy模块中的deepcopy函数</p>
+<p><strong>对于不可变对象的深浅拷贝</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line">a=(1,2,3)</span><br><span class="line"></span><br><span class="line">print(&quot;=====赋值=====&quot;)</span><br><span class="line">b=a</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br><span class="line"></span><br><span class="line">print(&quot;=====浅拷贝=====&quot;)</span><br><span class="line">b=copy.copy(a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br><span class="line"></span><br><span class="line">print(&quot;=====深拷贝=====&quot;)</span><br><span class="line">b=copy.deepcopy(a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">=====赋值=====</span><br><span class="line">(1, 2, 3)</span><br><span class="line">(1, 2, 3)</span><br><span class="line">43481128</span><br><span class="line">43481128</span><br><span class="line">=====浅拷贝=====</span><br><span class="line">(1, 2, 3)</span><br><span class="line">(1, 2, 3)</span><br><span class="line">43481128</span><br><span class="line">43481128</span><br><span class="line">=====深拷贝=====</span><br><span class="line">(1, 2, 3)</span><br><span class="line">(1, 2, 3)</span><br><span class="line">43481128</span><br><span class="line">43481128</span><br></pre></td></tr></table></figure>
+
+<p>不可变对象类型，没有被拷贝的说法，即便是用深拷贝，查看id的话也是一样的，如果对其重新赋值，也只是新创建一个对象，替换掉旧的而已。</p>
+<p>一句话就是，不可变类型，不管是深拷贝还是浅拷贝，地址值和拷贝后的值都是一样的。</p>
+<p><strong>对于可变对象深浅拷贝</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line">a=[1,2,3]</span><br><span class="line"></span><br><span class="line">print(&quot;=====赋值=====&quot;)</span><br><span class="line">b=a</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br><span class="line"></span><br><span class="line">print(&quot;=====浅拷贝=====&quot;)</span><br><span class="line">b=copy.copy(a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br><span class="line"></span><br><span class="line">print(&quot;=====深拷贝=====&quot;)</span><br><span class="line">b=copy.deepcopy(a)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">=====赋值=====</span><br><span class="line">[1, 2, 3]</span><br><span class="line">[1, 2, 3]</span><br><span class="line">37235144</span><br><span class="line">37235144</span><br><span class="line">=====浅拷贝=====</span><br><span class="line">[1, 2, 3]</span><br><span class="line">[1, 2, 3]</span><br><span class="line">37235144</span><br><span class="line">37191432</span><br><span class="line">=====深拷贝=====</span><br><span class="line">[1, 2, 3]</span><br><span class="line">[1, 2, 3]</span><br><span class="line">37235144</span><br><span class="line">37210184</span><br></pre></td></tr></table></figure>
+
+<p>赋值： 值相等，地址相等</p>
+<p>copy浅拷贝：值相等，地址不相等</p>
+<p>deepcopy深拷贝：值相等，地址不相等</p>
+<p><strong>对于可变对象深浅拷贝(外层改变元素)</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line">l=[1,2,3,[4, 5]]</span><br><span class="line"></span><br><span class="line">l1=l #赋值</span><br><span class="line">l2=copy.copy(l) #浅拷贝</span><br><span class="line">l3=copy.deepcopy(l) #深拷贝</span><br><span class="line">l.append(6)</span><br><span class="line"></span><br><span class="line">print(l)  </span><br><span class="line">print(l1)</span><br><span class="line">print(l2)</span><br><span class="line">print(l3)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, [4, 5], 6]     #l添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5], 6]     #l1跟着添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5]]        #l2保持不变</span><br><span class="line">[1, 2, 3, [4, 5]]        #l3保持不变</span><br></pre></td></tr></table></figure>
+
+<p><strong>对于可变对象深浅拷贝(内层改变元素)</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import copy</span><br><span class="line">l=[1,2,3,[4, 5]]</span><br><span class="line"></span><br><span class="line">l1=l #赋值</span><br><span class="line">l2=copy.copy(l) #浅拷贝</span><br><span class="line">l3=copy.deepcopy(l) #深拷贝</span><br><span class="line">l[3].append(6) </span><br><span class="line"></span><br><span class="line">print(l) </span><br><span class="line">print(l1)</span><br><span class="line">print(l2)</span><br><span class="line">print(l3)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3, [4, 5, 6]]      #l[3]添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5, 6]]      #l1跟着添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5, 6]]      #l2跟着添加一个元素6</span><br><span class="line">[1, 2, 3, [4, 5]]         #l3保持不变</span><br></pre></td></tr></table></figure>
+
+<p>1.外层添加元素时，浅拷贝不会随原列表变化而变化；内层添加元素时，浅拷贝才会变化。<br>2.无论原列表如何变化，深拷贝都保持不变。<br>3.赋值对象随着原列表一起变化。</p>
+<h2 id="几何-set"><a href="#几何-set" class="headerlink" title="几何[set]"></a>几何[set]</h2><p><a target="_blank" rel="noopener" href="http://c.biancheng.net/python/">Python</a> set 集合最常用的操作是向集合中添加、删除元素，以及集合之间做交集、并集、差集等运算，本节将一一讲解这些操作的具体实现。</p>
+<p><strong>向 set 集合中添加元素</strong></p>
+<p>set 集合中添加元素，可以使用 set 类型提供的 add() 方法实现，该方法的语法格式为：</p>
+<p>setname.add(element)</p>
+<p>其中，setname 表示要添加元素的集合，element 表示要添加的元素内容。</p>
+<p><strong>需要注意的是，使用 add() 方法添加的元素，只能是数字、字符串、元组或者布尔类型（True 和 False）值，不能添加列表、字典、集合这类可变的数据，否则 Python 解释器会报 TypeError 错误。例如：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;1,2,3&#125;a.add((1,2))print(a)a.add([1,2])print(a)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果为：</p>
+<p>{(1, 2), 1, 2, 3}<br>Traceback (most recent call last):<br> File “C:\Users\mengma\Desktop\1.py”, line 4, in <module><br>  a.add([1,2])<br>TypeError: unhashable type: ‘list’</p>
+<p><strong>从set集合中删除元素</strong></p>
+<p>删除现有 set 集合中的指定元素，可以使用 remove() 方法，该方法的语法格式如下：</p>
+<p>setname.remove(element)</p>
+<p>使用此方法删除集合中元素，需要注意的是，如果被删除元素本就不包含在集合中，则此方法会抛出 KeyError 错误，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;1,2,3&#125;a.remove(1)print(a)a.remove(1)print(a)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果为：</p>
+<p>{2, 3}<br>Traceback (most recent call last):<br> File “C:\Users\mengma\Desktop\1.py”, line 4, in <module><br>  a.remove(1)<br>KeyError: 1</p>
+<p>上面程序中，由于集合中的元素 1 已被删除，因此当再次尝试使用 remove() 方法删除时，会引发 KeyError 错误。</p>
+<p>如果我们不想在删除失败时令解释器提示 KeyError 错误，还可以使用 discard() 方法，此方法和 remove() 方法的用法完全相同，唯一的区别就是，当删除集合中元素失败时，此方法不会抛出任何错误。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#123;1,2,3&#125;a.remove(1)print(a)a.discard(1)print(a)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果为：</p>
+<p>{2, 3}<br>{2, 3}</p>
+<p><strong>Python set集合做交集、并集、差集运算</strong></p>
+<p>集合最常做的操作就是进行交集、并集、差集以及对称差集运算，首先有必要给大家普及一下各个运算的含义。</p>
+<p><img src="http://c.biancheng.net/uploads/allimg/190712/2-1ZG2132104150.gif" alt="img"><br>图 1 中，有 2 个集合，分别为 set1={1,2,3} 和 set2={3,4,5}，它们既有相同的元素，也有不同的元素。以这两个集合为例，分别做不同运算的结果如表 1 所示。</p>
+<table>
+<thead>
+<tr>
+<th>运算操作</th>
+<th>Python运算符</th>
+<th>含义</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>交集</td>
+<td>&amp;</td>
+<td>取两集合公共的元素</td>
+<td>&gt;&gt;&gt; set1 &amp; set2 {3}</td>
+</tr>
+<tr>
+<td>并集</td>
+<td>|</td>
+<td>取两集合全部的元素</td>
+<td>&gt;&gt;&gt; set1 | set2 {1,2,3,4,5}</td>
+</tr>
+<tr>
+<td>差集</td>
+<td>-</td>
+<td>取一个集合中另一集合没有的元素</td>
+<td>&gt;&gt;&gt; set1 - set2 {1,2} &gt;&gt;&gt; set2 - set1 {4,5}</td>
+</tr>
+<tr>
+<td>对称差集</td>
+<td>^</td>
+<td>取集合 A 和 B 中不属于 A&amp;B 的元素</td>
+<td>&gt;&gt;&gt; set1 ^ set2 {1,2,4,5}</td>
+</tr>
+</tbody></table>
+<h2 id="字典-dict"><a href="#字典-dict" class="headerlink" title="字典[dict]"></a>字典[dict]</h2><p>字典中的.pop()是指删除key-val并抛出val</p>
+<p>字典的访问：</p>
+<ul>
+<li>dic.get(key, default):访问key，如果没有key返回None，有key返回对应的value</li>
+<li>dic[key]：通过key访问value</li>
+<li>for key in dic.keys()：访问所有的keys</li>
+<li>for value in dic.values()：访问所有的values</li>
+<li>for key, value in dic.items()：访问所有的键值对</li>
+</ul>
+<hr>
+<ul>
+<li>for i in dict–&gt;access key</li>
+<li>for key in dict.keys–&gt;accsee key</li>
+<li>for key, val in dict.item–&gt;access key and val</li>
+<li>dict[key]–&gt;access key对应的val, 没有的话返回KeyError</li>
+<li>dict.get(key, val(default:None))–&gt;访问dict中key对应的值,没有的话返回val</li>
+</ul>
+<p>有与dict中的key不可以直接修改,如果要修改key需要以下操作</p>
+<p><strong>第一种方法：将需要修改的键对应的值用dict.pop() 的方法提取出来，并重新赋值给新的键，即dict[新的键] = dict.pop(旧的键)。</strong>（字典dict的pop是删除某个键及其对应的值，返回的是该键对应的值）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">dict</span>[<span class="string">&quot;c&quot;</span>] = <span class="built_in">dict</span>.pop(<span class="string">&quot;a&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二种方法：结合dict.pop() 和dict.update() 的方法。</strong>（字典dict的pop是删除某个键及其对应的值，返回的是该键对应的值）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">dict</span>.update(&#123;<span class="string">&#x27;c&#x27;</span>:<span class="built_in">dict</span>.pop(<span class="string">&quot;a&quot;</span>)&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>第三种方法：结合直接修改和del语句。</strong>先用直接修改的方式将旧键赋值给新的键，再用del语句删除原来的键名。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dict</span>=&#123;<span class="string">&#x27;a&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;b&#x27;</span>:<span class="number">2</span>&#125;</span><br><span class="line"><span class="built_in">dict</span>[<span class="string">&#x27;c&#x27;</span>]=<span class="built_in">dict</span>[<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line"><span class="keyword">del</span> <span class="built_in">dict</span>[<span class="string">&#x27;a&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p><code>//</code>:rounding down ==&gt; 7//2 = 3.5 —&gt; 3</p>
+<p><code>[start:end]</code>==&gt;contains start except end</p>
+<p>[1, 2, 3, 4, 5] ==[2:]==&gt;[3, 4, 5]</p>
+<p>[1, 2, 3, 4, 5] ==[:2]==&gt;[1, 2]</p>
+<p>[1, 2, 3, 4, 5] ==[1:3]==&gt;[2, 3]</p>
+<p>切片操作[start:end]==&gt;[start， end)</p>
+<p><strong>[a::b]</strong></p>
+<p>这个是python的slice notation的特殊用法。<br>b = a[i:j] ==&gt;[i, j)==&gt;new list</p>
+<ul>
+<li>default(i)=0</li>
+<li>default(j)=len(alist)</li>
+</ul>
+<p>[i:j:s]==&gt;[i, j) step=s</p>
+<p>如果<code>s&lt;0</code></p>
+<ul>
+<li>i缺省时，默认为-1；</li>
+<li> j缺省时，默认为-len(a)-1</li>
+</ul>
+<p>所以a[::-1]相当于 a[-1:-len(a)-1:-1]，也就是从最后一个元素到第一个元素复制一遍。</p>
+<p>常见的譬如[::-1]==&gt;将list的所有元素反转</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">b1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>][::-<span class="number">1</span>]</span><br><span class="line">b2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>][::-<span class="number">2</span>]</span><br><span class="line">print(b1)</span><br><span class="line">print(b2)</span><br><span class="line">&gt;&gt;</span><br><span class="line">[<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">[<span class="number">4</span>, <span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<hr>
+<p>randint(start, end)==&gt;contains start and end==&gt;[start, end]</p>
+<p>example==&gt;randint(1, 3)==&gt;1, 2, 3</p>
+<h2 id="测试code性能"><a href="#测试code性能" class="headerlink" title="测试code性能"></a>测试code性能</h2><h3 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h3><h4 id="1-timeit"><a href="#1-timeit" class="headerlink" title="1.timeit"></a><strong>1.timeit</strong></h4><p>timeit只输出被测试代码的总运行时间</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>():</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">        a = i * i</span><br><span class="line"></span><br><span class="line">cost_time = timeit.timeit(<span class="string">&#x27;fun()&#x27;</span>, <span class="string">&#x27;from __main__ import fun&#x27;</span>, number=<span class="number">1000</span>)</span><br><span class="line">print(cost_time)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">0.0074794</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-profile-函数时间"><a href="#2-profile-函数时间" class="headerlink" title="2.profile[函数时间]"></a><strong>2.profile[函数时间]</strong></h4><p>profile：纯Python实现的性能测试模块，接口和cProfile一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>():</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">        a = i * i</span><br><span class="line">        </span><br><span class="line">profile.run(<span class="string">&#x27;fun()&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ncall：函数运行次数</li>
+<li>tottime： 函数的总的运行时间，减去函数中调用子函数的运行时间</li>
+</ul>
+<p>第一个percall：percall = tottime / nclall</p>
+<ul>
+<li>cumtime:函数及其所有子函数调整的运行时间，也就是函数开始调用到结束的时间。</li>
+</ul>
+<p>第二个percall：percall = cumtime / nclall</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ncalls</td>
+<td align="center">函数被调用次数</td>
+</tr>
+<tr>
+<td align="center">tottime</td>
+<td align="center">函数（除去子函数）总运行时间</td>
+</tr>
+<tr>
+<td align="center">percall</td>
+<td align="center">平均时间，等于tottime/ncalls</td>
+</tr>
+<tr>
+<td align="center">cumtime</td>
+<td align="center">函数（包括子函数）总运行时间</td>
+</tr>
+<tr>
+<td align="center">percall</td>
+<td align="center">平均时间，等于cumtime/ncalls</td>
+</tr>
+<tr>
+<td align="center">filename</td>
+<td align="center">文件：行号（函数）</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523203737.png"></p>
+<hr>
+<h4 id="3-cProfiler-函数时间"><a href="#3-cProfiler-函数时间" class="headerlink" title="3.cProfiler[函数时间]"></a><strong>3.cProfiler[函数时间]</strong></h4><p>profile：c语言实现的性能测试模块，接口和profile一样。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cProfile</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span>():</span></span><br><span class="line">    a = <span class="number">0</span></span><br><span class="line">    b = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">        a = a + i * i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">        b += <span class="number">1</span></span><br><span class="line">        time.sleep(<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cProfile.run(<span class="string">&#x27;fun()&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>result：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523205439.png"></p>
+<p><strong>profiler 和 cProfiler 都只能检测整个函数的运行时间，要想知道每行代码运行所损耗的时间需要line_profiler或者memory_profiler（不仅可以得到每行代码运行的时间还可以统计每行代码所占用的内存大小）</strong></p>
+<hr>
+<h4 id="4-line-profiler-分段时间"><a href="#4-line-profiler-分段时间" class="headerlink" title="4.line_profiler[分段时间]"></a><strong>4.line_profiler[分段时间]</strong></h4><p>pip install line_profiler</p>
+<p>安装之后kernprof.py会加到环境变量中。</p>
+<p>line_profiler可以统计每行代码的执行次数和执行时间等，时间单位为微妙。</p>
+<p>该模块常通过装饰器来使用。在安装好该模块后，编写需要测试的python程序，并在需要测试的函数上方加入<code>@profile</code>，保存为<code>*.py</code>文件。在命令行使用<code>kernprof -l -v *.py</code>，在输出打印出程序结果之后会打印性能分析。</p>
+<p>输出结果的含义：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> line_profiler <span class="keyword">import</span> LineProfiler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_stuff</span>(<span class="params">numbers</span>):</span></span><br><span class="line">    s = <span class="built_in">sum</span>(numbers)</span><br><span class="line">    l = [numbers[i] / <span class="number">43</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(numbers))]</span><br><span class="line">    m = [<span class="string">&#x27;hello&#x27;</span> + <span class="built_in">str</span>(numbers[i]) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(numbers))]</span><br><span class="line">    </span><br><span class="line">numbers = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>)]</span><br><span class="line"></span><br><span class="line">lp = LineProfiler(do_stuff)</span><br><span class="line">lp.runcall(do_stuff, numbers)</span><br><span class="line">lp.print_stats()</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Timer unit</td>
+<td align="center">计时器单位，微秒</td>
+</tr>
+<tr>
+<td align="center">Total time</td>
+<td align="center">测试代码总运行时间</td>
+</tr>
+<tr>
+<td align="center">File</td>
+<td align="center">测试代码文件名</td>
+</tr>
+<tr>
+<td align="center">Hits</td>
+<td align="center">每行代码运行次数</td>
+</tr>
+<tr>
+<td align="center">Time</td>
+<td align="center">每行代码运行时间</td>
+</tr>
+<tr>
+<td align="center">Per Hit</td>
+<td align="center">每行代码运行一次的时间</td>
+</tr>
+<tr>
+<td align="center">% Time</td>
+<td align="center">每行代码运行时间的百分比</td>
+</tr>
+<tr>
+<td align="center">Line Contents</td>
+<td align="center">每行代码</td>
+</tr>
+</tbody></table>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523213913.png"></p>
+<ul>
+<li>Total Time：测试代码的总运行时间</li>
+<li>Hits：表示每行代码运行的次数</li>
+<li>Time：每行代码运行的总时间</li>
+<li>Per Hits：每行代码运行一次的时间</li>
+<li>% Time：每行代码运行时间的百分比</li>
+</ul>
+<hr>
+<h4 id="5-memory-profiler-内存"><a href="#5-memory-profiler-内存" class="headerlink" title="5.memory_profiler:[内存]"></a><strong>5.memory_profiler:[内存]</strong></h4><p>memory_profiler工具可以统计每行代码占用的内存大小。</p>
+<p><strong>测试代码：</strong></p>
+<p>使用方法同line_profiler模块，借助装饰器调用。在需要分析的函数上方加<code>@profile</code>。在命令行使用<code>python -m memory_profiler *.py</code>运行代码。<br>输出结果中：<br>Mem usage：内存使用情况<br>Increment：每行代码运行后内存增减情况</p>
+<p><strong>使用：</strong></p>
+<ol>
+<li>在需要测试的函数加上@profile装饰</li>
+<li>执行命令： python -m memory_profiler C:Python34 est.py</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将调试文件独立出xx.py</span></span><br><span class="line"><span class="comment"># 在pycharm 的 terminal windows中使用</span></span><br><span class="line"><span class="comment"># code: python -m memory_profiler memory_profiler</span></span><br><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span>():</span></span><br><span class="line">    c = []</span><br><span class="line">    a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] * (<span class="number">2</span> ** <span class="number">20</span>)</span><br><span class="line">    b = [<span class="number">1</span>] * (<span class="number">2</span> ** <span class="number">20</span>)</span><br><span class="line">    c.extend(a)</span><br><span class="line">    c.extend(b)</span><br><span class="line">    <span class="keyword">del</span> b</span><br><span class="line">    <span class="keyword">del</span> c</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test1()</span><br><span class="line"></span><br><span class="line">&gt;&gt;cmd -&gt;python version 3.7</span><br><span class="line">&gt;&gt;//terminal//</span><br><span class="line">&lt;python -m memory_profiler memory_profiler&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210523232121.png"></p>
+<ul>
+<li><code>Mem usage</code> 为当前总内存</li>
+<li><code>Increment</code> 为增加的内存</li>
+</ul>
+<p>总结起来使用非常时间</p>
+<ul>
+<li>方法前加上 <code>@profile</code> 主键</li>
+<li>使用 <code>python -m memory_profiler</code> 来运行，不过直接用 <code>python</code> 运行也可以</li>
+</ul>
+<p>通过上面这段代码我们可以发现，<code>del</code> 语句只是将变量删除，并不能减少内存的消耗。</p>
+<p><strong>参数使用</strong></p>
+<ul>
+<li><code>precision</code> 显示小数点后的位数</li>
+</ul>
+<p>默认显示的内存单位为 <code>MiB</code>，小数点后显示一位，如果某行代码占用内存比较小，就可能显示不出来，此时可以通过调整小数点后的位数实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@profile(<span class="params">precision=<span class="number">4</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test3</span>():</span></span><br><span class="line">    a = [<span class="number">1</span>, <span class="number">2</span>] * (<span class="number">2</span> ** <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test3()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>stream</code> 将结果输出到流中</li>
+</ul>
+<p>每次运行都要打印内存情况，势必会影响程序输出效果，我们可以将结果通过流输出到文件中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> memory_profiler <span class="keyword">import</span> profile</span><br><span class="line"></span><br><span class="line"><span class="meta">@profile(<span class="params">precision=<span class="number">4</span>, @profile(<span class="params">precision=<span class="number">4</span>, stream=<span class="built_in">open</span>(<span class="params"><span class="string">&#x27;/tmp/memory_profiler.log&#x27;</span>,<span class="string">&#x27;w+&#x27;</span></span>)</span>)</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test3</span>():</span></span><br><span class="line">    a = [<span class="number">1</span>, <span class="number">2</span>] * (<span class="number">2</span> ** <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    test3()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="6-objgraph：-待完善"><a href="#6-objgraph：-待完善" class="headerlink" title="6.objgraph：[待完善]"></a>6.objgraph：[待完善]</h4><p>objgraph是一个实用模块,可以列出当前内存中存在的对象，可用于定位内存泄露。</p>
+<p>objgraph需要安装：</p>
+<p>pip install objgraph</p>
+<hr>
+<h3 id="Time"><a href="#Time" class="headerlink" title="Time"></a>Time</h3><p>计算Python的某个程序，或者是代码块运行的时间一般有三种方法。</p>
+<h4 id="1-datetime"><a href="#1-datetime" class="headerlink" title="1.datetime"></a><strong>1.datetime</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">start = datetime.datetime.now()</span><br><span class="line">run_function():</span><br><span class="line">    <span class="comment"># do something</span></span><br><span class="line"></span><br><span class="line">end = datetime.datetime.now()</span><br><span class="line"><span class="built_in">print</span> (end-start)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-time–time"><a href="#2-time–time" class="headerlink" title="2.time–time"></a><strong>2.time–time</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">start = time.time()</span><br><span class="line">run_function()</span><br><span class="line">end = time.time()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">str</span>(end-start)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-time-clock-version-lt-3-8"><a href="#3-time-clock-version-lt-3-8" class="headerlink" title="3.time-clock(version&lt;3.8)"></a><strong>3.time-clock(version&lt;3.8)</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line">start = time.clock()</span><br><span class="line">run_function()</span><br><span class="line">end = time.clock()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">str</span>(end-start)</span><br></pre></td></tr></table></figure>
+
+<p>通过对以上方法的比较我们发现，方法二的精度比较高。方法一基本上是性能最差的。这个其实是和系统有关系的。一般我们推荐使用方法二和方法三。我的系统是Ubuntu，也就是Linux系统，方法二返回的是UTC时间。 在很多系统中time.time()的精度都是非常低的，包括windows。</p>
+<p>python 的标准库手册推荐在任何情况下尽量使用time.clock().但是这个函数在windows下返回的是真实时间（wall time）</p>
+<p><strong>方法一和方法二都包含了其他程序使用CPU的时间。方法三只计算了程序运行CPU的时间。</strong></p>
+<p>方法二和方法三都返回的是浮点数<br>究竟是使用 <strong>time.clock()</strong> 精度高，还是使用 <strong>time.time()</strong> 精度更高，要视乎所在的平台来决定。总概来讲，在 <strong>Unix</strong> 系统中，建议使用 **time.time()**，在 Windows 系统中，建议使用 **time.clock()**。</p>
+<p><strong>我们要实现跨平台的精度性，我们可以使用timeit 来代替time</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> timeit</span><br><span class="line"></span><br><span class="line">start = timeit.default_timer()</span><br><span class="line">do_func()</span><br><span class="line">end = timeit.default_timer()</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">str</span>(end-start)</span><br></pre></td></tr></table></figure>
+
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>随着问题规模的增加，<code>T(n)</code>变化最大的数量级称为时间复杂度<code>O(n)</code></p>
+<h2 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h2><p>Python2中默认的编码格式是 ASCII 格式，程序文件中如果包含中文字符（包括注释部分）需要在文件开头加上 <code># -*- coding: UTF-8 -*-</code> 或者 <code>#coding=utf-8</code> 就行了</p>
+<p>Python3默认支持Unicode</p>
+<h2 id="保留字（关键字）"><a href="#保留字（关键字）" class="headerlink" title="保留字（关键字）"></a>保留字（关键字）</h2><p>30个关键字</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">and exec    not</span><br><span class="line">assert  finally or</span><br><span class="line">break   for pass</span><br><span class="line">class   from    print</span><br><span class="line">continue global raise</span><br><span class="line">def if  return</span><br><span class="line">del import  try</span><br><span class="line">elif    in  while</span><br><span class="line">else    is  with</span><br><span class="line">except  lambda  yield</span><br></pre></td></tr></table></figure>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">多行注释</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h2><p>Python是动态语言，所以在定义变量的时候不需要申明类型，直接使用即可。<br>Python会根据值判断类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&quot;Zeta&quot;</span> <span class="comment"># 字符串变量</span></span><br><span class="line">age = <span class="number">38</span> <span class="comment"># 整数</span></span><br><span class="line">income = <span class="number">1.23</span> <span class="comment"># 浮点数</span></span><br></pre></td></tr></table></figure>
+
+<p>多变量赋值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a,b = <span class="number">1</span>,<span class="number">2</span> <span class="comment"># a=1; b=2</span></span><br><span class="line">c = d = <span class="number">3</span> <span class="comment"># c=3; d=3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="标准数据类型"><a href="#标准数据类型" class="headerlink" title="标准数据类型"></a>标准数据类型</h2><h3 id="Python-的标准数据类型有："><a href="#Python-的标准数据类型有：" class="headerlink" title="Python 的标准数据类型有："></a>Python 的标准数据类型有：</h3><ul>
+<li>Boolean（布尔值）</li>
+<li>Number（数字）</li>
+<li>String（字符串）</li>
+<li>List（列表）</li>
+<li>Tuple（元组）</li>
+<li>Set（集合）</li>
+<li>Dictionary（字典）(hash map)—遇到hash冲突时,采用的是开放寻址法而不是链接法</li>
+</ul>
+<h3 id="Python标准数据结构有"><a href="#Python标准数据结构有" class="headerlink" title="Python标准数据结构有:"></a>Python标准数据结构有:</h3><p><code>有序结构,可以使用index下标进行检索数据,并且序列中的元素可以重复</code></p>
+<ul>
+<li>List</li>
+<li>Tuple</li>
+<li>String</li>
+</ul>
+<hr>
+<p><code>无序结构,不可以用index下标进行检索,序列中允许有重复元素</code></p>
+<ul>
+<li>Set</li>
+<li>Dictionary</li>
+</ul>
+<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><p>Python类型转换非常简单，用类型名作为函数名即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span>(n)            <span class="comment"># 将数字n转换为一个整数</span></span><br><span class="line"><span class="built_in">float</span>(n)          <span class="comment"># 将数字n转换到一个浮点数</span></span><br><span class="line"><span class="built_in">str</span>(o)            <span class="comment"># 将对象 obj 转换为字符串</span></span><br><span class="line"><span class="built_in">tuple</span>(s)          <span class="comment"># 将序列 s 转换为一个元组</span></span><br><span class="line"><span class="built_in">list</span>(s)           <span class="comment"># 将序列 s 转换为一个列表</span></span><br><span class="line"><span class="built_in">set</span>(s)            <span class="comment"># 将序列 s 转换为一个集合</span></span><br></pre></td></tr></table></figure>
+
+<p>另外，Python中可以直接转换数字字符串和数字：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&quot;123&quot;</span></span><br><span class="line">i = <span class="number">456</span></span><br><span class="line">print(<span class="built_in">int</span>(s), <span class="built_in">str</span>(i))</span><br></pre></td></tr></table></figure>
+
+<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><p>Python传统的判断语句如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> name == <span class="string">&#x27;zeta&#x27;</span>:          <span class="comment"># 判断变量是否为 zeta </span></span><br><span class="line">    print(<span class="string">&#x27;Welcome boss&#x27;</span>)   <span class="comment"># 并输出欢迎信息</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">&#x27;Hi, &#x27;</span> + name)</span><br></pre></td></tr></table></figure>
+
+<p>Python不支持三元表达式，但是可以用一种类似的替代办法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title = <span class="string">&quot;boss&quot;</span></span><br><span class="line">name = <span class="string">&quot;zeta&quot;</span> <span class="keyword">if</span> title == <span class="string">&quot;boss&quot;</span> <span class="keyword">else</span> <span class="string">&quot;chow&quot;</span></span><br><span class="line">print(name)</span><br></pre></td></tr></table></figure>
+
+<p>逻辑与用 <code>and</code> ，逻辑或用 <code>or</code></p>
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p>Python中有<code>while</code>和<code>for</code>两种循环，都可以使用<code>break</code>跳出循环和<code>continue</code>立即进入下一轮循环，另外，Python的循环语句还可以用<code>else</code>执行循环全部完毕后的代码，<code>break</code>跳出后不会执行<code>else</code>的代码</p>
+<p><strong>while</strong> 条件循环，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> (count &lt; <span class="number">9</span>):    </span><br><span class="line">    print(<span class="string">&#x27;The count is:&#x27;</span>, count)    </span><br><span class="line">    count = count + <span class="number">1</span>    </span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">5</span>:        </span><br><span class="line">        <span class="keyword">break</span>   <span class="comment"># 可以比较以下break和不break的区别        </span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:    </span><br><span class="line">        print(<span class="string">&#x27;loop over&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>for</strong> 遍历循环，循环遍历所有序列对象的子项</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">names = [<span class="string">&#x27;zeta&#x27;</span>, <span class="string">&#x27;chow&#x27;</span>,  <span class="string">&#x27;world&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> names:    </span><br><span class="line">    print(<span class="string">&#x27;Hello, &#x27;</span> + n)    </span><br><span class="line">    <span class="keyword">if</span> n == <span class="string">&#x27;world&#x27;</span>:        </span><br><span class="line">        <span class="keyword">break</span>        </span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:    </span><br><span class="line">        print(<span class="string">&#x27;Good night!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>for</code>循环中也可以用<code>else</code>，（注释掉代码中的<code>break</code>试试看。)</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>用<code>def</code>关键字定义函数，并且在Python中，作为脚本语言，调用函数必须在定义函数之后。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">name</span>):</span></span><br><span class="line">    print(<span class="string">&quot;hello, &quot;</span>+name)</span><br><span class="line">    passfoo(<span class="string">&quot;zeta&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>默认参数</strong> Python定义函数参数时，可以设置默认值，调用时如果没有传递该参数，函数内将使用默认值，默认值参数必须放在无默认值参数后面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">name=<span class="string">&quot;zeta&quot;</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;hello, &quot;</span>+name)</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键字参数</strong> 一般函数传递参数时，必须按照参数定于的顺序传递，但是Python中，允许使用关键字参数，这样通过指定参数明，可以不按照函数定义参数的顺序传递参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">age, name=<span class="string">&quot;zeta&quot;</span></span>):</span></span><br><span class="line">    print(<span class="string">&quot;hello, &quot;</span>+name+<span class="string">&quot;; age=&quot;</span>+<span class="built_in">str</span>(age))</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">foo(name=<span class="string">&quot;chow&quot;</span>, age=<span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>不定长参数</strong>，Python支持不定长参数，用<code>*</code>定义参数名，调用时多个参数将作为一个元祖传递到函数内</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span>(<span class="params">*names</span>):</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> names:</span><br><span class="line">        print(<span class="string">&quot;hello, &quot;</span>+n)</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">foo(<span class="string">&quot;zeta&quot;</span>, <span class="string">&quot;chow&quot;</span>, <span class="string">&quot;world&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>return</strong> 返回函数结果。</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><ul>
+<li>模块是一个.py文件</li>
+<li>模块在第一次被导入时执行</li>
+<li>一个下划线定义保护级变量和函数，两个下划线定义私有变量和函数</li>
+<li>导入模块习惯性在脚本顶部，但是不强制</li>
+</ul>
+<h2 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h2><p>在Python中，使用<code>import</code>导入模块。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python# -*- coding: UTF-8 -*- # 导入模块import support support.print_func(“Runoob”)</span></span><br></pre></td></tr></table></figure>
+
+<p>还可以使用<code>from import</code>导入模块指定部分</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> modname <span class="keyword">import</span> name1[, name2[, ... nameN]]</span><br></pre></td></tr></table></figure>
+
+<p>为导入的包设置别名用 <code>as</code>关键字</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime <span class="keyword">as</span> dt</span><br></pre></td></tr></table></figure>
+
+<h2 id="错误和异常"><a href="#错误和异常" class="headerlink" title="错误和异常"></a>错误和异常</h2><p>Python中用经典的 <code>try/except</code> 捕获异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:&lt;语句&gt;    <span class="comment">#运行别的代码</span></span><br><span class="line">    <span class="keyword">except</span> &lt;异常名称&gt;：&lt;语句&gt;        </span><br><span class="line">    <span class="comment">#except &lt;异常名称&gt;，&lt;数据&gt;:&lt;语句&gt; </span></span><br><span class="line">    <span class="comment">#如果引发了指定名称的异常，获得附加的数据</span></span><br></pre></td></tr></table></figure>
+
+<p>还提供了 <strong>else</strong> 和 <strong>finally</strong></p>
+<p>如果没发生异常的执行<code>else</code>语句块，<code>finally</code>块的代码无论是否捕获异常都会执行</p>
+<p>Python内建了很全面的异常类型名称，同时能自定义异常类型</p>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><p>Python完全支持面向对象的。</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><ol>
+<li>使用<code>thread</code>模块中的<code>start_new_thread()</code>函数</li>
+<li>使用<code>threading</code>模块创建线程</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Python和Go分别在动态语言和静态语言中都是最易学易用的编程语言之一。</p>
+<p>它们并不存在取代关系，而是各自在其领域发挥自己的作用。</p>
+<p>Python的语法简单直观，除了程序员爱不释手外也非常适合于其他领域从业者使用。</p>
+<p>Go兼具语法简单和运行高效的有点，在多线程处理方面很优秀，非常适合已经掌握一定编程基础和一门主流语言的同学学习，不过，Go是不支持面向对象的，对于大多数支持面向对象语言的使用者在学习Go语言的时候，需要谨记并且转换编程思路。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/05/15/Python-Underlying-Structure/" data-id="ckopezsv70000cwf52kqmg664" data-title="Python-Underlying-Structure" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-我的工作实践" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/05/06/%E6%88%91%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%AE%9E%E8%B7%B5/" class="article-date">
+  <time class="dt-published" datetime="2021-05-06T00:09:25.000Z" itemprop="datePublished">2021-05-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/05/06/%E6%88%91%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%AE%9E%E8%B7%B5/">我的工作实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><h3 id="Python开发工程师"><a href="#Python开发工程师" class="headerlink" title="Python开发工程师"></a>Python开发工程师</h3><ul>
+<li>python基础</li>
+<li>数据结构与算法分析</li>
+<li>linux系统</li>
+<li>Mysql数据库</li>
+<li>python Django框架</li>
+<li>git命令</li>
+</ul>
+<h3 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h3><p>我是柳宇豪，是辽宁工程技术大学，信息与计算机科学专业的一名应届本科生。我将从四个方面介绍我自己</p>
+<p>一、竞赛方面：我参加过许多数学建模竞赛，曾获MCM/ICM国二、MathorCup省三等；</p>
+<p>二、校园经历方面：曾担任过礼仪队队长、舞蹈队队长以及女生部部长和学生会副主席，成功举办了女生月活动和最美面容活动，</p>
+<p>三、学习方面：绩点专业排名前十，曾获校优秀学生二等奖学金和三等奖学金以及三号学生等多项荣誉称号</p>
+<p>四、兴趣爱好方面：在整个大学生活中，兴趣爱好可以分两个阶段，第一阶段为大一大二时期，十分喜欢辩论演讲，曾在院赛多次获得最佳辩手称号，也荣获校第十四届辩论赛冠军队伍等荣誉称号；大三大四时期喜欢读马哲和毛选等书籍，完善了我的世界观和方法论，并创建阅读社区星火社</p>
+<p>总的来说，在生活中注重效率，喜欢思考，具有一定的组织能力以上是自我介绍的全部内容。</p>
+<h3 id="反问"><a href="#反问" class="headerlink" title="反问"></a>反问</h3><ol>
+<li>对于我应聘的这份工作来说，您认为需要的最重要的能力是什么？（体现了你的态度）</li>
+<li><em>您能说一下这个岗位在公司的的发展前景和晋升机制吗？（体现了你的发展规划与上进心）</em></li>
+<li>您能描述一下，您心中这个职位的理想候选人是什么样的吗？（体现了你的思考）</li>
+<li>你点评下我次面试的大体情况</li>
+</ol>
+<hr>
+<p>0面试</p>
+<p>1试用期</p>
+<p>2实习期</p>
+<p>3入职</p>
+<p>4离职</p>
+<hr>
+<p>0公司制度</p>
+<p>1合同</p>
+<p>2违法与用法</p>
+<p>3节假日</p>
+<p>4公司文化</p>
+<hr>
+<h2 id="离职"><a href="#离职" class="headerlink" title="离职"></a>离职</h2><p>1.试用期提前三天申请离职就好。(双方灵活选择，节约彼此时间。新员工上手工作也不多，交接方便。)</p>
+<p>2.正式员工离职提前一个月申请。(部分岗位员工突然离职，但Ta手上的工作不能停，需要下一个人交接，或者找下一个人还需要时间，还需要带。So，立法考虑设立一个月)(一般的公司不会卡你时间，交接也简单，不排除有硬生生卡人一个月的公司，劳动者心理要做好准备)</p>
+<p>5.辞退除工资外，还应该有赔偿金（double）。</p>
+<p>13.离职最好要拿一份离职证明。</p>
+<hr>
+<h2 id="违法用法"><a href="#违法用法" class="headerlink" title="违法用法"></a>违法用法</h2><h3 id="违法"><a href="#违法" class="headerlink" title="违法"></a>违法</h3><p>3.公司单方面降薪不合法。</p>
+<p>4.不买社保，违法。公司缴纳大部分。(工资是工资，五险一金，六险一金，是社会福利保障。社保国家强制，一金是福利(已经是默认福利，正规公司一般情况应该有)，和那些定期团聚、出国游、开工红包、生日红包、节假日福利一样，不同公司不一样)</p>
+<p>14.一点要看清自己的工作职位和职责，不符合录用，经常会扯这里。(好在，法律规定，用人单位提供不符合录用证据，用人单位提供不出来，违法解除)</p>
+<p>15.合同里经常会有一条“领导安排的其他任务”或者“根据工作需要，可以岗位调整，安排其他事情”，就是针对14，设立的。</p>
+<p>43.试用期被辞退。同理，关注14点。看清楚自己岗位和职责内容（一开始你就要清楚知道胜任标准，效率完成工作内容）。用人单位辞退，对方要出示你确实不能胜任的证据，而不是说一句话，你不能胜任工作你可以走了。</p>
+<p>19.涉嫌歧视、人身攻击、肢体冲突可以举报、报警。</p>
+<p>34.用人单位忌讳，吸毒人员。还有一些受刑事处罚人员。我们也很难，搞不好就是歧视，只能从入职诚实信用入手。</p>
+<p>45.不要帮公司做违法的事情。之前遇到一个年轻小伙（女朋友卖婚房委托律师，哭着说从小到大成绩优秀，被抓了家人都不相信）帮公司开发一个理财软件（诈骗软件），一起进去了。</p>
+<p>46.用人单位不交社保，找Ta交。协商后单位仍旧不给缴，去用人单位所在地人力资源社会保障行政部门投诉（打电话就可以）（市长热线也可以），由社会保险费征收机构责令其限期缴纳或者补足。如果用人单位漏报或少报社会保险基数的，则可以向所在地社保经办机构稽核科投诉反映。 </p>
+<p>47.用人单位未在一个月内按规定缴纳的，劳动者可以解除劳动合同，可同时要求用人单位依法支付经济补偿。</p>
+<p>65.解除劳动合同VS终止劳动合同通知</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>31.劳动仲裁不要钱，财政保障。程序很简单，自己都可以操作，你合情合理合法很容易赢。</p>
+<p>32.劳动争议诉讼10元。（仲裁是前置程序）（一般小问题，仲裁就可以了，不用后面诉讼）</p>
+<p>48.市长热线12345</p>
+<p>公共法律服务热线12348</p>
+<hr>
+<h2 id="就职"><a href="#就职" class="headerlink" title="就职"></a>就职</h2><p>6.大学生临近毕业（还有几个月毕业），没有拿到毕业证，可以签订劳动合同。</p>
+<p>7.一直不签劳动合同，违法。入职就应该签。(一个月后，该担心的应该是公司吧)</p>
+<blockquote>
+<p>中华人民共和国劳动合同法实施条例</p>
+<p>第五条自用工之日起一个月内，经用人单位书面通知后，劳动者不与用人单位订立书面劳动合同的，用人单位应当书面通知劳动者终止劳动关系，无需向劳动者支付经济补偿，但是应当依法向劳动者支付其实际工作时间的劳动报酬。</p>
+<p>第六条用人单位自用工之日起超过一个月不满一年未与劳动者订立书面劳动合同的，应当依照劳动合同法第八十二条的规定向劳动者每月支付两倍的工资，并与劳动者补订书面劳动合同;劳动者不与用人单位订立书面劳动合同的，用人单位应当书面通知劳动者终止劳动关系，并依照劳动合同法第四十七条的规定支付经济补偿。</p>
+<p>前款规定的用人单位向劳动者每月支付两倍工资的起算时间为用工之日起满一个月的次日，截止时间为补订书面劳动合同的前一日。</p>
+</blockquote>
+<p>10.入职身份证复印件上，注明，仅供入职使用。（所有使用身份证都可以注明）</p>
+<p>17.部分工作，该有防护的应该有防护工具（口罩等等）。</p>
+<p>18.简历，入职表不要乱填乱写，诚实信用原则。（一般合同有一条，作假不录取，已录取无条件辞退）</p>
+<hr>
+<h2 id="实习期"><a href="#实习期" class="headerlink" title="实习期"></a>实习期</h2><p>12.试用期工资不低于正式工资80%。（国家单位，国企试用期一般100%）</p>
+<p>20.试岗。法律规定试用期，就是为了双方考察选择。只是部分企业自己又设置了一个3-7天试岗，多数还表明还没有工资。这么🐶公司还是不要去了。</p>
+<p>52.面试前去“天眼查”“企查查”查一下，顺便看看有没有公司和前员工的劳动纠纷，看看公司态度。</p>
+<p>56.实习生。这个问题复杂，不过不是特别行业，法律、医学等，已经毕业的娃，还当什么实习生（试用期实习生，只是称呼吧?）。（大学生寒暑期实习，肯定叫实习生）（例如法律行业是那个证，要实习至少一年，也可以叫实习生，实习律师）（还有临近毕业，文中第6，有的公司说不能和你签合同，你还没毕业证，先做实习生。）</p>
+<hr>
+<h2 id="合同"><a href="#合同" class="headerlink" title="合同"></a>合同</h2><p>8.劳动合同一式两份，一定要保管好自己那一份。（不然纠纷的时候你劳动仲裁提交材料都没有）</p>
+<p>9.一般情况，不要给公司押东西（各类证件：毕业证、上一家离职证明等等），仅现场审核，然后自己带回去。『有押护照的，那就是大佬级别了』</p>
+<p>11.合同一年，一般就一个月试用期。偶尔两个月（🐶公司）。</p>
+<p>21.三年劳动合同，不超过6个月。三个月不满一年，1个月试用期。一年以上不满三年，试用期不超过2个月。『这个其实是约定，一个半月都可以。合法合规就好』</p>
+<p>67.有的公司三个月或六个月签一次，特别🐶。连续不间断签，最好不要去。</p>
+<p>68.还有些公司老板觉得自己开了一个公司，Ta就是王，Ta就是法。签一年Ta就要试用期三个月。连国家法律都不敬畏，有纠纷了有的扯。</p>
+<p>68.还有的公司，告诉你是他们关联/下属企业，为了人员管理/避税等等理由，合同上签的另外的公司。谨慎一点吧，首先看看那个公司注册下来了没有。</p>
+<h2 id="工资"><a href="#工资" class="headerlink" title="工资"></a>工资</h2><p>16.工资构成。假设工资8k。然后合同约定4k基本工资，1k交通补贴，1k吃饭补贴，2k技术津贴。他们告诉你还是8k，看上去也是。风险就在于以后很多东西（保险，请假等等，甚至劳动纠纷）看基本工资（基数）。</p>
+<p>22.工资不能低于当地最低工资标准。</p>
+<p>33.上班一周有没有工资?有。</p>
+<p>38.工资讨论。一般公司会设置这个，不准讨论。最好遵守规定。（违反公司制度辞退风险）实在忍不住，不要留证据，披个马甲，好吗。</p>
+<p>49.到手工资。可以问一句，工资到手多少。顺便推算，社保交几档。（一般情况，国家单位一、二档）其他，危。</p>
+<p>61.招聘软件上部分公司，工资跨度很大。一般情况看最低。面试前，也可以问问，岗位预算到底多少。</p>
+<h2 id="公司制度"><a href="#公司制度" class="headerlink" title="公司制度"></a>公司制度</h2><h3 id="绩效"><a href="#绩效" class="headerlink" title="绩效"></a>绩效</h3><p>这是大家关注的吧。公司单方随意改动违法。员工手册，我们一般不会设置绩效，因为这就是“递刀”。公司动员工工资，或者激励努力劳动，都是动这一款。一般是附件，改动也方便，不同部门也不一样。但是这些都属于规则制度一部分，也不能朝令夕改，要程序合法、大家同意(有时候职工代表已经代表你了😏)。(但是选职工代表你们有流程，要参与哦)</p>
+<p>24.迟到、请假等所有的公司规章制度，要合理合法合程序，应该经过公司民主程序制定，投票(全体员工或者职工代表)，规章制度公示（✔），报请工会（不一定）。规章制度员工必须知悉(✔)或同意签字留底等等。(签字留底表明知悉，是最周全的)『一般情况，职工代表是老板的人😂，老板对结果不my，换下一个职工代表😏』</p>
+<p>PS：不合理不合法的东西，在公司站得住脚，上了法庭站不住脚。(所以，很多时候，要员工同意并签字，例：奋斗者协议)</p>
+<p>什么是合理。假设某工厂记件，一天最快的10个，最慢的5个，平均6个。规定基本工资说5个就达标，7个良好，8个优秀。如果现在新厂长改变制度，说7个达标，10个良好，12个优秀。(有人能达到12吗，没有，除非技术变革)</p>
+<p>不合理VS明显不合理</p>
+<p>(提一句996/007，上面例子，我们确定最高10个。但是在实际生活中，法定时间是八个小时，007/996工作强度能不能接受，员工又“自愿接受”，变数太多。又加上员工自己签的“奋斗者协议”，自愿并同意。正规公司按时按量给你发加班工资，你不能阻止别人奋斗吧)</p>
+<p>⚡我发现一个问题，法院曾认可某一个公司“奋斗者协议”但不代表其他公司可以无限制、不顾员工身体，强制xxx。如果被发现强迫劳动也是违反《劳动法》《劳动合同法》等的，建议没有“南山必胜客”那样的法务团队的公司，不要乱搞，随便加班“强迫劳动”。⚡</p>
+<p>25.公司内部规章制度必须遵守相应法律法规，例如《劳动法》《劳动合同法》等等。</p>
+<h3 id="请假"><a href="#请假" class="headerlink" title="请假"></a>请假</h3><p>要符合公司规定流程。具体情况具体分析。紧急情况，要有电话录音或信息记录等等证据留底。此处风险，容易被记旷工。</p>
+<h3 id="内卷"><a href="#内卷" class="headerlink" title="内卷"></a>内卷</h3><p>奋斗者协议，这个嘛，法院认可过。不过具体问题具体分析。加班加班工资还要应该有的。一般公司，没有腾讯级别的法务部，不要瞎搞。这不是代表官方认可这个，只是个例。自愿和“被自愿”难道不好分清楚吗？</p>
+<h3 id="保密协议"><a href="#保密协议" class="headerlink" title="保密协议"></a>保密协议</h3><p>40.保密协议。应该保密就要保密。</p>
+<h3 id="竞业限制"><a href="#竞业限制" class="headerlink" title="竞业限制"></a>竞业限制</h3><p>41.竞业限制。慎重。如果你只有这个安身立命的本事，不要签。竞业限制签了，约定期限内，应该有补偿金。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>44.公司群不要“胡言乱语”，私下群不要“胡言乱语”，还是那句话，同事告密你就死了，匿名，马甲，不香吗。（最近的官方公众号推算案子，说领导“彩旗飘飘”“xxx”等等，被告密，被违法辞退，二审赔了10万。折腾好麻烦）</p>
+<p>50.服装。有的🐶公司，上班统一发（定制）服装，离职出现服装费（1-2-3千）。</p>
+<p>64.玩手机，抗辩理由很多。看工作群、和客户联系、父母急事。不太知道具体公司具体岗位情况。我们这行是结果导向，没有这一说。</p>
+<h2 id="培训进修"><a href="#培训进修" class="headerlink" title="培训进修"></a>培训进修</h2><p>26.培训。刚进去让你贷款培训公司有问题。公司为了劳动者更好劳动，适应岗位，一般情况，免费培训。</p>
+<p>27.进修。进修后要在用人单位工作服务几年。注意看清楚违约金多少。</p>
+<h2 id="工伤"><a href="#工伤" class="headerlink" title="工伤"></a>工伤</h2><p>28.工伤保险，包括上下班途中。（一）在合理时间内往返于工作地与住所地、经常居住地、单位宿舍的合理路线的上下班途中；（二）在合理时间内往返于工作地与配偶、父母、子女居住地的合理路线的上下班途中；（三）从事属于日常工作生活所需要的活动，且在合理时间和合理路线的上下班途中；（四）在合理时间内其他合理路线的上下班途中。</p>
+<p>29.外出做工作上的事情出事，工伤。</p>
+<p>PS：非本人原因的交通事故，工伤。就是公司认定工伤，肇事者还要赔。</p>
+<h2 id="换岗"><a href="#换岗" class="headerlink" title="换岗"></a>换岗</h2><p>35.劳动者患病或非因工受伤，确实不太适合现在的岗位。不是立马辞退。立法者考虑到这样的情况，首先，是给你换一个岗位，（给你一个挽救的机会）。（例如，工作是前台，嗓子??，不太适合前台沟通职责，可以换去后面行政。）</p>
+<h2 id="骚扰"><a href="#骚扰" class="headerlink" title="骚扰"></a>骚扰</h2><p>36.怀孕。让你3-5-7年内不能怀孕，违背公序良俗。</p>
+<p>36.正式员工怀孕时，不能被辞退，也不能降薪。</p>
+<p>37.女性遇到性骚扰，要学会保留证据，一击即中。</p>
+<p>38.试用期怀孕。《劳动合同法》第39条：“劳动者在试用期间被证明不符合录用条件，用人单位可以与劳动者解除劳动合同。也就是说，悬。</p>
+<h2 id="派遣"><a href="#派遣" class="headerlink" title="派遣"></a>派遣</h2><p>42.派遣。国家那种编外派遣，还差不多。其他的，仁者见仁。</p>
+<h2 id="三方协议"><a href="#三方协议" class="headerlink" title="三方协议"></a>三方协议</h2><p>51.三方协议，是学校为没有出校门、没有接受社会“关爱”，提供的保护你的好东西。</p>
+<h2 id="查看公司"><a href="#查看公司" class="headerlink" title="查看公司"></a>查看公司</h2><p>53.法定代表人还是有风险的。例：京D换人</p>
+<p>54.几个月没发工资了?跑路吧。</p>
+<p>55.股权激励，有些是饼有些是真的，看公司发展。</p>
+<h2 id="节假日"><a href="#节假日" class="headerlink" title="节假日"></a>节假日</h2><p>57.调休。先看最近的五一，这个话题，略。(为什么，有人看不懂五一梗，so，还是略)(谁说普通调休，我说企业三倍工资调休)</p>
+<p>58.法定节假日放假，带薪年假，病假(患病or非因工负伤，必须要给医疗期)有钱。婚假(女20岁、男22岁)3天，有工资。</p>
+<p>59.产假(98天，产前休假15天。难产+15，多胞胎+15)。怀孕流产也有假，不满4个月，15-30天;满4个月，42天。晚育，奖励30天，配偶10天护理假。(劳动时间内，还有一个小时哺乳时间。多胞胎，多一个，加一个小时。)</p>
+<p>63.离开工位。看离开时长。一般情况去洗手间，去接水喝水，不能制止我吧。如果是其他事情，较长时间，建议请假或者告知自己去干什么多少分钟回。(主要是急事现场找不到人，领导就火大，火大就惨了)不同公司具体规章不一样，严重情况且多次可能列为旷工。例如：一月旷工N次，就拜拜。</p>
+<h2 id="公司文化"><a href="#公司文化" class="headerlink" title="公司文化"></a>公司文化</h2><p>66.公司文化呢，要不是保护人权的区别于同行或其他公司的东西，还有就是拼搏(狼性)、奋斗、快乐、幸福等精神，包容、女性关怀、年轻员工等一些关爱措施。(卖身，那是不可能的)</p>
+<p>举例:我们这行还是有年轻律师起薪几个万元俱乐部;还有些给年轻律师配行政秘书的;还有给年轻妈妈设置专门的空间喂奶或小孩玩乐区域。等等。(健身房?那是让你更好的工作😏)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/05/06/%E6%88%91%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%AE%9E%E8%B7%B5/" data-id="ckooh4zj6000q78f5b85w42av" data-title="我的工作实践" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Infectious-Disease-Model" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/04/30/Infectious-Disease-Model/" class="article-date">
@@ -683,7 +1394,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Use-Stack-Implement-Queue"><a href="#Use-Stack-Implement-Queue" class="headerlink" title="Use Stack Implement Queue"></a>Use Stack Implement Queue</h2><h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><ul>
+        <h1 id="DataStructure"><a href="#DataStructure" class="headerlink" title="DataStructure"></a>DataStructure</h1><h2 id="Part3Queue-Stack"><a href="#Part3Queue-Stack" class="headerlink" title="Part3Queue-Stack"></a>Part3Queue-Stack</h2><h3 id="Use-Stack-Implement-Queue"><a href="#Use-Stack-Implement-Queue" class="headerlink" title="Use Stack Implement Queue"></a>Use Stack Implement Queue</h3><h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><ul>
 <li><p>push–&gt;append</p>
 </li>
 <li><p>pop–&gt;pop</p>
@@ -853,216 +1564,6 @@
 
 
   
-    <article id="post-致你的一封信" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/06/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" class="article-date">
-  <time class="dt-published" datetime="2021-04-06T14:35:16.000Z" itemprop="datePublished">2021-04-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/06/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/">致你的一封信</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><h2 id="四月"><a href="#四月" class="headerlink" title="四月"></a>四月</h2><p>严格地说这并不是一封信。</p>
-<p>我是一个比较怀旧和喜欢记录的人，我并不相信爱情，或者说不相信自己能遇到爱情，但是最近不断在我脑海里出现的思想，已经严重影响了我的正常生活，那就去正视和解决吧。</p>
-<p>最初，对你只有感谢，多次建模合作后，也没感觉你有什么特别，考研时，甚至觉得你些许讨厌。</p>
-<p>经过断断续续的了解和认识，我发现自己喜欢上了你，理性让我克制并淡化这种感觉，但，在此我并不想讨论感性与理性，也不想讨论世界观和方法论，我只知道此刻我喜欢上了你，这绝不是一时的冲动和激情，是的，我喜欢你。</p>
-<p>我尝试用自己的世界观去解释这一切，去用一切可以想到的观念来掩盖我对你的喜欢，但我发现这是自己对自己的欺骗，我喜欢你的一切，我也愿意接受你的一切。</p>
-<p>不得不承认这是我们之间一对特殊的矛盾，我也有过很坏的打算，可能最后除了一段经历外，我们得不到任何有关双方的一切，不过我不后悔，正如我做其他事情一样，我从不后悔经过自己思考后所做地决定和判断，但是却又不得不思考一些问题，那就先做个最坏的打算，留下有关我们的一封信吧，是给你，也是给我自己。</p>
-<p>我爱你，正如我爱这封信一样，我当然希望你我能一直陪伴下去，但我也知道现实总是处处有意外，矛盾也始终在斗争。</p>
-<p>如果你我有离别的一天，我希望你还不介意看到这封信，我也希望自己还有勇气给予你这封信，它承载了我们在大学美好的回忆，如果，我们有了未来，我也会在合适的时间把这封信给你，让你坐在我身边，我读给你听。</p>
-<p>想到了最坏的结局是不是意味着我就对你的爱就会因此而有所保留或潜意识里朝着最坏的结局去了呢？恰恰相反，认识最坏的结局恰恰是为了避免它，而我对你的爱并不会因为有个可能的最坏的结局而减少丝毫。</p>
-<p>已经23:35了，电脑快要没电了，有电也写不完我此刻想说的话和对你的爱，那么这篇序就到这里了。</p>
-<p>最后，我喜欢你。</p>
-<p>写于二零二一年四月六日二十三点三十七分辽宁工程技术大学七舍四三三</p>
-<h3 id="2021-4-5"><a href="#2021-4-5" class="headerlink" title="2021.4.5"></a>2021.4.5</h3><p>纪念日</p>
-<h3 id="2021-4-6"><a href="#2021-4-6" class="headerlink" title="2021.4.6"></a>2021.4.6</h3><p>9:25</p>
-<p>请原谅我没在QQ和朋友圈特意发文公开你的存在，我并不认为两个人的爱情需要得到其他人的关注，不过你放心，我会将你逐一介绍给我所有的朋友和家人。</p>
-<p>22:35</p>
-<p>什么是喜欢？这个问题困扰着我，我反复思索着，尝试用尽自己的一切知识着解释喜欢，现在我明白了，喜欢是想多看你一眼。</p>
-<h3 id="2021-4-7"><a href="#2021-4-7" class="headerlink" title="2021.4.7"></a>2021.4.7</h3><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/IMG_2378.PNG"></p>
-<p>第一次以伴侣的方式通话</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/IMG_2379.PNG"></p>
-<h3 id="2021-4-8"><a href="#2021-4-8" class="headerlink" title="2021.4.8"></a>2021.4.8</h3><p>21:57</p>
-<p>还记得今天火锅和你说的一句话，是要把娶你这件事放到日程了</p>
-<p>图书馆里偷偷看你，很美</p>
-<p>咬了你的手，嘴感尚可</p>
-<h3 id="2021-4-9"><a href="#2021-4-9" class="headerlink" title="2021.4.9"></a>2021.4.9</h3><p>21:29</p>
-<p>毕业去哪是个问题也不是个问题，你只要好好考研等我娶你</p>
-<p>你说研究生毕业稳定后父母才考虑，我也知道你不并想让自己“耽误”了我</p>
-<p>那么还有三四年时间，我爱你，虽然在这以后时间段里可能会做出与爱你相反的决定</p>
-<p>比如去了一个较远的地方工作，比如默默无闻创业</p>
-<p>不要紧，我相信你能理解我，这一切都是为了更加接近你</p>
-<h3 id="2021-4-10"><a href="#2021-4-10" class="headerlink" title="2021.4.10"></a>2021.4.10</h3><p>5:14</p>
-<p>有两件事，这两天应该和你谈谈，</p>
-<p>一、你现在的主要任务是学习，是考研， 不要多想我怎么办和以后怎么办，这些问题并不是你当前的主要问题</p>
-<p>二、你产生该怎么办这一想法的根本原因在于我的不稳定性，不过你放心，我知道自己应该怎么做</p>
-<p>宝儿，我认为这是我们目前乃至未来几年的主要矛盾，虽然在形式上是两个问题，但本质上是一个问题，即关于我的问题，我只有稳定了，这一矛盾才会慢慢解决，分析到这，我也要好好学习，好好努力。</p>
-<p>接下来就是找个合适的时间去交流，我们不用逃避这些问题和矛盾，恰恰相反，我们应该好好面对它。</p>
-<p>目前的重心：宝儿是好好学习，我是好好在自己的方向努力，虽然表面上看重心并不是谈恋爱，但本质上还是为了我们能走的更远，当然这些问题和矛盾并不会使我对你的爱减少一分。</p>
-<p>现在乃至未来几年我们需要做的是：</p>
-<ul>
-<li>宝儿好好学习，把重心放在学习上，考研过程中遇到什么烦心事告诉我，我会为你解决思想上的问题，并在精神上和物质上给予你最大的帮助</li>
-<li>我先去大厂磨炼一两年，积累经验并阅读更多书，为自己想做的事打下思想和物质的基础</li>
-</ul>
-<p>当这两件事完成之后，我想那时我已经稳定，到时候我会找你，并向你求婚。</p>
-<p>已经5:52了该洗漱了，还有希望宝儿这两天快好起来，我去洗漱了，最后，我爱你。</p>
-<p>22:30</p>
-<p>很高兴你从伤心的情绪中恢复过来，事物的发展总是内部矛盾作用的结果，你我作为物质的载体也是事物，你能很快地从伤心的环节中走出来让我很欣慰，按照事物发展的规律，在备战考研期间你还会有或大或小的情绪波动，那我们也不怕，有了这次经验你也懂了如何处理这对矛盾了。对了还有一件事，我想吻你。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/kissyou.png"></p>
-<h3 id="2021-4-11"><a href="#2021-4-11" class="headerlink" title="2021.4.11"></a>2021.4.11</h3><p>22:38</p>
-<p>今天发生很多开心的事，在图书馆我吻了你的额头和脸颊，虽然可能不算吻，但我很开心。</p>
-<p>我还问了你<code>昨天我想吻你,你说我太逗了的原因</code>，你有点害羞，不让我追问，我能看出来，你也期待着吻你，那就找个合适的时机。</p>
-<p>当询问我明天是否升旗时说“爱你哟”，我无法形容此刻的心情，就像碰到一本好书，我很开心。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/loveyou1.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/loveyou2.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/loveyou3.png"></p>
-<h3 id="2021-4-12"><a href="#2021-4-12" class="headerlink" title="2021.4.12"></a>2021.4.12</h3><p>22:07</p>
-<p>今天你吻了我脸颊，我也吻了你，</p>
-<p>这是我除了看书之外最喜欢的事情</p>
-<p>我还想吻你，天天吻你。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/2021.4.12.png"></p>
-<p>我再给你写这封信呢，爱你，我要天天吻你。</p>
-<h3 id="2021-4-13"><a href="#2021-4-13" class="headerlink" title="2021.4.13"></a>2021.4.13</h3><p>22:13</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/4.13.png"></p>
-<h3 id="2021-4-14"><a href="#2021-4-14" class="headerlink" title="2021.4.14"></a>2021.4.14</h3><p>15:10</p>
-<p>电话里你说考研期间会好好听话，会学习，不会乱玩，我当然相信你。</p>
-<h3 id="2021-4-15"><a href="#2021-4-15" class="headerlink" title="2021.4.15"></a>2021.4.15</h3><p>22:16</p>
-<p>和于漫交流后你问以后我们会不会吵架？答案是否定的，当然这并不意味着我们在相处的过程中没有矛盾，一个人还会有自我矛盾的时候更何况两个人，之所以说我们不会吵架是因为吵架是处理矛盾的一种方式，我并不喜欢这种方式且认为它单纯的是一种情绪的宣泄对于问题的解决没有任何作用。</p>
-<p>我喜欢解决矛盾，在我们有矛盾爆发的情况下，我更害怕你会冷战不交流，一个人去解决两个人之间的矛盾其结果必然是灾难，我希望在矛盾爆发的时候，你我都能冷静，即是那时你不喜欢讲道理也没关系，只要交流，你我之间的小插曲总会解决，因为我爱你，我也相信你不会触及原则性问题，正如我会娶你，你也要相信我。</p>
-<h3 id="2021-4-16"><a href="#2021-4-16" class="headerlink" title="2021.4.16"></a>2021.4.16</h3><p>21:22</p>
-<p>好像有点事情想和你说，又忽然不知道怎么告诉你，或者说还没把我说清楚，那就等清楚再告诉你吧。</p>
-<p>对了还有一件趣事，从另一层面也表明了最近不午休状态是比较差的，应该把我俩的聊天框与群聊天框分离开来。</p>
-<h3 id="2021-4-17"><a href="#2021-4-17" class="headerlink" title="2021.4.17"></a>2021.4.17</h3><p>22:27</p>
-<p>吻你是我一天中最期待的时刻，我喜欢吻你，喜欢吻你的耳朵、脸庞、嘴唇和你的一切。</p>
-<h3 id="2021-4-18"><a href="#2021-4-18" class="headerlink" title="2021.4.18"></a>2021.4.18</h3><p>22:23</p>
-<p>今天是目前为止吻你最多的一天，也touch you，and it can be bigger after touching.</p>
-<p>拍了四张照片我都喜欢，更喜欢可爱的你。</p>
-<p>晚上我们也讨论了很多，首先一点，你很美，尤其在我眼里，这一点不要质疑。</p>
-<p>我们都要努力。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/4.18.png"></p>
-<p>不要怕宝儿，五一之前能好的。</p>
-<h3 id="2021-4-19"><a href="#2021-4-19" class="headerlink" title="2021.4.19"></a>2021.4.19</h3><p>22:45</p>
-<p>中午有些不自在，不自在在主要原因在于你我对待异性关系的差异性或者说处理异性关系的差异性，对于你说都认识/都是熟人/怕尴尬这样的词汇让我觉得很不自在，因为上次也是有人这样对我说的，我当然知道你和别人不同，不过还是有点心情上的落差，我很怕你不会处理或者处理的不好让别人误以为你没伴侣，但同时我又相信你能处理好，这种矛盾我想会一直持续很长时间，我也要慢慢克服这种感觉。看书吧，我想多看些书，或者多了解下你，你让我着迷又让我害怕。好像很久没在这里说过我爱你了…</p>
-<p>我爱你。</p>
-<h3 id="2021-4-20-2021-4-24"><a href="#2021-4-20-2021-4-24" class="headerlink" title="2021.4.20-2021.4.24"></a>2021.4.20-2021.4.24</h3><p>22:40</p>
-<p>一个错误，我不应该老说“讨厌你”这样的话，尽管我知道你明白我的意思，其实我并不是真正的讨厌你，而是我对于当时的判断误以为你很不尊重我的想法，这使得我不愿意和你交谈太多，当然并不是那种“讨厌”，很抱歉说出这样让你伤心的话，我保证这样的错误不会再犯，我会注重自己的表达，相信我。</p>
-<h3 id="2021-4-25-2021-4-29"><a href="#2021-4-25-2021-4-29" class="headerlink" title="2021.4.25-2021.4.29"></a>2021.4.25-2021.4.29</h3><h3 id="2021-4-30"><a href="#2021-4-30" class="headerlink" title="2021.4.30"></a>2021.4.30</h3><p>22:35</p>
-<p>今天玩得很愉快，我很开心。中午吃过饭去唱歌，这是宝儿第一次帮我。</p>
-<p>另外你说你喜欢我喊你宝宝，那么，宝宝我爱你。</p>
-<h2 id="五月"><a href="#五月" class="headerlink" title="五月"></a>五月</h2><h3 id="2021-5-1"><a href="#2021-5-1" class="headerlink" title="2021.5.1"></a>2021.5.1</h3><p>9:35</p>
-<p>虽然我知道我们终有离别的那一天，我也早有心理准备，但当今早这一时刻到来时，我却显得那么不自然，我想和你在一起，想一直陪在你身边，我又明白现在的我们时刻在一起是件不可能的事。</p>
-<p>11:05</p>
-<p>我想你宝宝，每时每刻都在想你。</p>
-<p>23:45</p>
-<p>爱你。</p>
-<h3 id="2021-5-2"><a href="#2021-5-2" class="headerlink" title="2021.5.2"></a>2021.5.2</h3><p>11:03</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/5.2.1.png"></p>
-<h3 id="2021-5-3-2021-5-6"><a href="#2021-5-3-2021-5-6" class="headerlink" title="2021.5.3-2021.5.6"></a>2021.5.3-2021.5.6</h3><p>23:24</p>
-<p>捏它的话什么感觉</p>
-<p>害羞更多</p>
-<p>有一丢丢心跳加速</p>
-<h3 id="2021-5-17"><a href="#2021-5-17" class="headerlink" title="2021.5.17"></a>2021.5.17</h3><p>15:31</p>
-<p>有段时间没写了，昨天你告诉我很久没说爱你了，我爱你。</p>
-<p>最近事情有很多，我也要赶快调整下状态了。</p>
-<h2 id="六月"><a href="#六月" class="headerlink" title="六月"></a>六月</h2><p>这个月是我最开心也是最不舍的一个月，我想陪着你，可以你也知道短暂的分离是在所难免的，我喜欢什么也不干地看着你，我知道异地难免有许多未知的事情发生，我知道你喜欢我，我也想让你知道和你分别我很难过，我想让你知道我很爱你。我对你的爱并不会很明显的表达</p>
-<p>…</p>
-<h2 id="七月"><a href="#七月" class="headerlink" title="七月"></a>七月</h2><h3 id="2021-7-1"><a href="#2021-7-1" class="headerlink" title="2021.7.1"></a>2021.7.1</h3><p>19:06</p>
-<p>宝贝今天中午我送你到车站，一直忍住没哭，可是晚上吃饭时我才发现，我想你宝宝，我想和你一起去吃你吃不完的筷尚客，我们还点鲅鱼酸菜和牛肉酸菜；我想和你一起去吃摇滚三国；我想和你一起去吃先买鸭货后喝牛肉辣汤的韩盛源；我想和你一起去都是小孩才去的华莱士。</p>
-<p>我还没和你逛够万达城的街，我还没和你逛够都是跑步人的操场，我还没有习惯你不在的每一顿饭，我还没有习惯你离我太远，我爱你宝宝，我真的很爱你。</p>
-<p>我始终觉得咱们俩一定能走到最后，我想你了。</p>
-<p>不能再写了，你好好吃饭，我爱你。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210701191624.png"></p>
-<h3 id="2021-7-2"><a href="#2021-7-2" class="headerlink" title="2021.7.2"></a>2021.7.2</h3><p>21:15</p>
-<p>今天下午你说我们要去50个地方</p>
-<p>我想陪你去</p>
-<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20210703211813.png"></p>
-<h3 id="2021-7-3"><a href="#2021-7-3" class="headerlink" title="2021.7.3"></a>2021.7.3</h3><p>今天可以说是下了一天雨，中午我休息了会儿，</p>
-<p>我不太喜欢下雨天，却喜欢听雨声，</p>
-<p>下雨天特别容易想你，</p>
-<p>你说下雨天喜欢吃火锅</p>
-<p>等我们见面一定要在雨天吃次火锅</p>
-<p>你点辣锅，我吃清汤锅</p>
-<p>点两份肉、一个豆皮、一个娃娃菜还有你最喜欢的火锅粉。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/04/06/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" data-id="ckooh4zjf000v78f5hm29gl80" data-title="致你的一封信" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-GoodNotes" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/03/30/GoodNotes/" class="article-date">
-  <time class="dt-published" datetime="2021-03-30T06:39:00.000Z" itemprop="datePublished">2021-03-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/03/30/GoodNotes/">GoodNotes</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Python数据结构与算法"><a href="#Python数据结构与算法" class="headerlink" title="Python数据结构与算法"></a>Python数据结构与算法</h2><h3 id="Part1数据结构介绍"><a href="#Part1数据结构介绍" class="headerlink" title="Part1数据结构介绍"></a>Part1数据结构介绍</h3><p>数据结构: 实现抽象数据类型的过程叫做数据结构</p>
-<p>编程: 包括控制语句(control statement)和数据类型(data type)两个方面构成</p>
-<p>控制语句包括:</p>
-<p>序列执行(sequential execution)/决策分支(decision branch)/循环迭代(loop iteration)</p>
-<p>数据类型:</p>
-<p>原子数据类型(atomic data type):float/integer/string</p>
-<p>集合数据类型(collection data type):</p>
-<p>​        ordered collection : string、list、tuple（can ues [index]）可以有repetitive element</p>
-<p>​        unordered collection：set、dictionary（hash map），其中set不允许具有重复元素（duplication）不能使用subscriptable(下标index)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/03/30/GoodNotes/" data-id="ckooh4zi7000c78f56ezydvc9" data-title="GoodNotes" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1081,7 +1582,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" rel="tag">独到科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataBase/" rel="tag">DataBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/" rel="tag">Mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" rel="tag">独到科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -1091,7 +1592,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/DataBase/" style="font-size: 10px;">DataBase</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -1113,6 +1614,14 @@
       <ul>
         
           <li>
+            <a href="/2021/08/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/">数据库索引原理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/28/Mongodb/">Mongodb</a>
+          </li>
+        
+          <li>
             <a href="/2021/08/25/English-Study-5/">English-Study-5</a>
           </li>
         
@@ -1122,14 +1631,6 @@
         
           <li>
             <a href="/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/">每日复盘</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/25/Eternal-Spirit/">Eternal-Spirit</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/25/Pythonon-Source-Code/">Pythonon_Source_Code</a>
           </li>
         
       </ul>

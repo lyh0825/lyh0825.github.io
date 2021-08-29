@@ -14,7 +14,7 @@
 <meta property="og:description" content="推荐阅读mongodb官网手册|官网 kafaka基本操作|知乎 如何高效操作pycharm|个人 [MongoDB教程](document&#x2F;mongodb · heguangchuan&#x2F;rainmeter - 码云 - 开源中国 (gitee.com)) Target   celery    Cabana    Rabitmq     redis    git    docker    kaf">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-02T13:33:16.000Z">
-<meta property="article:modified_time" content="2021-08-25T14:19:55.278Z">
+<meta property="article:modified_time" content="2021-08-28T03:36:44.732Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="独到科技">
 <meta name="twitter:card" content="summary">
@@ -120,6 +120,53 @@
 </li>
 </ul>
 <hr>
+<h2 id="Day17"><a href="#Day17" class="headerlink" title="Day17"></a>Day17</h2><h3 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h3><p><strong>格林威治时间1970年01月01日00时00分00秒</strong>起至现在的总秒数</p>
+<h3 id="查看log"><a href="#查看log" class="headerlink" title="查看log"></a>查看log</h3><ol>
+<li>进入服务器</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@ip</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查看镜像</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>根据kibana-index进入对应的镜像内</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 静态查询</span></span><br><span class="line">docker logs --tail 100 celery_newmsg</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 动态查询</span></span><br><span class="line">docker logs -f --tail 100 image_name</span><br></pre></td></tr></table></figure>
+
+<p><strong>查询技巧</strong></p>
+<ul>
+<li>显示所有log</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示某个指定容器<span class="built_in">log</span></span></span><br><span class="line">docker logs [options] 容器ID or 容器name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示docker compose启动的所有容器<span class="built_in">log</span></span></span><br><span class="line">docker-compose logs</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示实时log</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f [docker_id] or [docker_name]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>动态显示log尾部</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f --tail 100 [docker_id] or [docker_name]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用grep过滤log</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查找所有包含<span class="string">&quot;error&quot;</span>的<span class="built_in">log</span></span></span><br><span class="line">docker logs | grep error</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>根据时间进行log的查找</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs --since 2021-08-25T12:01:46.452616Z [容器Id] or [容器name]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>组合查询</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f --tail 100 容器id | grep info</span><br></pre></td></tr></table></figure>
+
 <h2 id="Day16"><a href="#Day16" class="headerlink" title="Day16"></a>Day16</h2><h3 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h3><p>python eval() 函数的功能：将字符串str当成有效的表达式来求值并返回计算结果。</p>
 <p>语法：</p>
 <p><code>eval(source[, globals[, locals]]) -&gt; value</code></p>
@@ -1018,7 +1065,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" rel="tag">独到科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataBase/" rel="tag">DataBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/" rel="tag">Mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" rel="tag">独到科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
     </div>
   </div>
 
@@ -1028,7 +1075,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 10px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/DataBase/" style="font-size: 10px;">DataBase</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -1050,6 +1097,14 @@
       <ul>
         
           <li>
+            <a href="/2021/08/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/">数据库索引原理</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/28/Mongodb/">Mongodb</a>
+          </li>
+        
+          <li>
             <a href="/2021/08/25/English-Study-5/">English-Study-5</a>
           </li>
         
@@ -1059,14 +1114,6 @@
         
           <li>
             <a href="/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/">每日复盘</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/25/Eternal-Spirit/">Eternal-Spirit</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/25/Pythonon-Source-Code/">Pythonon_Source_Code</a>
           </li>
         
       </ul>

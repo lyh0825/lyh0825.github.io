@@ -4,15 +4,22 @@
   <meta charset="utf-8">
   
   
-  <title>归档: 2021/6 | Drink`s Blog</title>
+  <title>Mongodb | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Drink&#96;s Blog">
-<meta property="og:url" content="https://drinkle.top/archives/2021/06/index.html">
+  <meta name="description" content="Mongodb_id打开 MongoDB 数据库中的任何一个文档，你会注意到文档中有一个 _id 字段，实际上，ObjectId 或 _id 是每个 MongoDB 文档中都存在的字段。 bjectId 的结构这些是 _id 的一些主要特征的摘要：  _id 是集合中文档的主键，用于区分文档（记录）。 _id自动编入索引。指定 { _id: } 的查找将 _id 索引作为其指南。 默认情况下，_i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mongodb">
+<meta property="og:url" content="https://drinkle.top/2021/08/28/Mongodb/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
+<meta property="og:description" content="Mongodb_id打开 MongoDB 数据库中的任何一个文档，你会注意到文档中有一个 _id 字段，实际上，ObjectId 或 _id 是每个 MongoDB 文档中都存在的字段。 bjectId 的结构这些是 _id 的一些主要特征的摘要：  _id 是集合中文档的主键，用于区分文档（记录）。 _id自动编入索引。指定 { _id: } 的查找将 _id 索引作为其指南。 默认情况下，_i">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.navicat.com.cn/link/Blog/Image/2019/20190326/_id.png">
+<meta property="article:published_time" content="2021-08-28T03:38:04.000Z">
+<meta property="article:modified_time" content="2021-08-28T03:49:21.818Z">
 <meta property="article:author" content="Drink">
+<meta property="article:tag" content="Mongodb">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.navicat.com.cn/link/Blog/Image/2019/20190326/_id.png">
   
     <link rel="alternate" href="/atom.xml" title="Drink`s Blog" type="application/atom+xml">
   
@@ -69,115 +76,103 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/06/14/Postgraduate/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-06-14T14:46:18.000Z" itemprop="datePublished">6月 14</time>
+        <section id="main"><article id="post-Mongodb" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/28/Mongodb/" class="article-date">
+  <time class="dt-published" datetime="2021-08-28T03:38:04.000Z" itemprop="datePublished">2021-08-28</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/14/Postgraduate/">Postgraduate</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Mongodb
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/06/13/LeeCode/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-06-13T09:15:54.000Z" itemprop="datePublished">6月 13</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/13/LeeCode/">LeeCode</a>
-    </h1>
-  
+        <h1 id="Mongodb"><a href="#Mongodb" class="headerlink" title="Mongodb"></a>Mongodb</h1><h2 id="id"><a href="#id" class="headerlink" title="_id"></a>_id</h2><p>打开 MongoDB 数据库中的任何一个文档，你会注意到文档中有一个 _id 字段，实际上，ObjectId 或 _id 是每个 MongoDB 文档中都存在的字段。</p>
+<h3 id="bjectId-的结构"><a href="#bjectId-的结构" class="headerlink" title="bjectId 的结构"></a>bjectId 的结构</h3><p>这些是 _id 的一些主要特征的摘要：</p>
+<ul>
+<li>_id 是集合中文档的主键，用于区分文档（记录）。</li>
+<li>_id自动编入索引。指定 { _id: } 的查找将 _id 索引作为其指南。</li>
+<li>默认情况下，_id 字段的类型为 ObjectID，是 MongoDB 的 BSON 类型之一。如果需要，用户还可以将 _id 覆盖为 ObjectID 以外的其他内容。</li>
+</ul>
+<p>ObjectID 长度为 12 字节，由几个 2-4 字节的链组成。每个链代表并指定文档身份的具体内容。以下的值构成了完整的 12 字节组合：</p>
+<ul>
+<li>一个 4 字节的值，表示自 Unix 纪元以来的秒数</li>
+<li>一个 3 字节的机器标识符</li>
+<li>一个 2 字节的进程 ID</li>
+<li>一个 3 字节的计数器，以随机值开始</li>
+</ul>
+<p><img src="http://www.navicat.com.cn/link/Blog/Image/2019/20190326/_id.png" alt="img"></p>
+<p>通常，你不必担心要如何生成 ObjectID。如果文档尚未分配 _id 值，MongoDB 将自动生成一个 _id 值。</p>
+<h3 id="创建新的-ObjectId"><a href="#创建新的-ObjectId" class="headerlink" title="创建新的 ObjectId"></a>创建新的 ObjectId</h3><p>如果你想自己生成新的 ObjectId，可以使用以下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newObjectId = ObjectId()</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/06/13/%E6%89%B9%E8%AF%84%E4%B8%8E%E8%87%AA%E6%88%91%E6%89%B9%E8%AF%84/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-06-13T09:00:06.000Z" itemprop="datePublished">6月 13</time>
-</a>
+<p>你也可以直接在 Navicat 编辑器中输入它。</p>
+<p>这将会生成一个唯一的 _id，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectId(&quot;5349b4ddd2781d08c09890f3&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>或者，你亦可以提供一个 12 字节的 ID：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myObjectId = ObjectId(&quot;5349b4ddd2781d08c09890f4&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="文档的创建时间戳"><a href="#文档的创建时间戳" class="headerlink" title="文档的创建时间戳"></a>文档的创建时间戳</h3><p>由于 _id ObjectId 默认存储了 4 字节的时间戳，因此在大多数情况下，你不需要存储任何文档的创建时间。你可以使用 getTimestamp 方法获取文档的创建时间：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectId(&quot;5349b4ddd2781d08c09890f4&quot;).getTimestamp()</span><br></pre></td></tr></table></figure>
+
+<p>这将以 ISO 日期格式返回此文档的创建时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ISODate(&quot;2019-09-12T30:39:17Z&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="将-ObjectId-转换为字符串（String）"><a href="#将-ObjectId-转换为字符串（String）" class="headerlink" title="将 ObjectId 转换为字符串（String）"></a>将 ObjectId 转换为字符串（String）</h3><p>在某些情况下，你可能需要得到字符串格式的 ObjectId 值。若要转换 ObjectId 为字符串，请使用以下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newObjectId.str</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码将返回 Guid 的字符串格式的 ObjectId：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5349b4ddd2781d08c09890f3</span><br></pre></td></tr></table></figure>
+
+<h3 id="文档排序"><a href="#文档排序" class="headerlink" title="文档排序"></a>文档排序</h3><p>由于每个 ObjectId 都包含一个时间戳，因此你可以用 _id 字段将文档按创建时间排序。但请务必注意，此排序方法并不代表排序是严格或精确的，因为 ID 的其他组件也会影响，导致次序会反映其他变量，而不仅仅是创建时间。</p>
+<h3 id="更改-ObjectId"><a href="#更改-ObjectId" class="headerlink" title="更改 ObjectId"></a>更改 ObjectId</h3><p>_id 字段基本上是不可变的。在创建文档之后，根据定义，它已被分配了一个无法更改的 _id。话虽如此，在插入新文档时是可以覆盖 _id 的。覆盖文档的 _id 字段可能有其用处，但是当这样做时，你有责任确保每个文档的 _id 值都是唯一的。</p>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/13/%E6%89%B9%E8%AF%84%E4%B8%8E%E8%87%AA%E6%88%91%E6%89%B9%E8%AF%84/">批评与自我批评</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/06/13/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E8%A7%82/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-06-13T08:59:48.000Z" itemprop="datePublished">6月 13</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/08/28/Mongodb/" data-id="ckswtcg130000kcf5h35y6ngc" data-title="Mongodb" class="article-share-link">分享</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/13/%E6%88%91%E7%9A%84%E4%B8%96%E7%95%8C%E8%A7%82/">我的世界观</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/06/06/Python-BuiltIn/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-06-06T12:46:32.000Z" itemprop="datePublished">6月 6</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/06/06/Python-BuiltIn/">Python-BuiltIn</a>
-    </h1>
-  
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mongodb/" rel="tag">Mongodb</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/29/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          数据库索引原理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/25/English-Study-5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">English-Study-5</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
