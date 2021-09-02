@@ -393,6 +393,50 @@
 </li>
 </ul>
 <hr>
+<h2 id="Day18"><a href="#Day18" class="headerlink" title="Day18"></a>Day18</h2><h3 id="nosql四大类型"><a href="#nosql四大类型" class="headerlink" title="nosql四大类型"></a>nosql四大类型</h3><table>
+<thead>
+<tr>
+<th align="center"><strong>分类</strong></th>
+<th><strong>举例</strong></th>
+<th><strong>典型应用场景</strong></th>
+<th><strong>数据模型</strong></th>
+<th><strong>优点</strong></th>
+<th><strong>缺点</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>键值</strong></td>
+<td>Tokyo Cabinet/Tyrant, Redis, Voldemort, Oracle BDB</td>
+<td>内容缓存，主要用于处理大量数据的高访问负载，也用于一些日志系统等等。</td>
+<td>Key 指向 Value 的键值对，通常用hash table来实现</td>
+<td>查找速度快</td>
+<td>数据无结构化，通常只被当作字符串或者二进制数据</td>
+</tr>
+<tr>
+<td align="center"><strong>列存储数据库</strong></td>
+<td>Cassandra, HBase, Riak</td>
+<td>分布式的文件系统</td>
+<td>以列簇式存储，将同一列数据存在一起</td>
+<td>查找速度快，可扩展性强，更容易进行分布式扩展</td>
+<td>功能相对局限</td>
+</tr>
+<tr>
+<td align="center"><strong>文档型数据库</strong></td>
+<td>CouchDB, MongoDb</td>
+<td>Web应用（与Key-Value类似，Value是结构化的，不同的是数据库能够了解Value的内容）</td>
+<td>Key-Value对应的键值对，Value为结构化数据</td>
+<td>数据结构要求不严格，表结构可变，不需要像关系型数据库一样需要预先定义表结构</td>
+<td>查询性能不高，而且缺乏统一的查询语法。</td>
+</tr>
+<tr>
+<td align="center"><strong>图形(Graph)数据库</strong></td>
+<td>Neo4J, InfoGrid, Infinite Graph</td>
+<td>社交网络，推荐系统等。专注于构建关系图谱</td>
+<td>图结构</td>
+<td>利用图结构相关算法。比如最短路径寻址，N度关系查找等</td>
+<td>很多时候需要对整个图做计算才能得出需要的信息，而且这种结构不太好做分布式的集群</td>
+</tr>
+</tbody></table>
 <h2 id="Day17"><a href="#Day17" class="headerlink" title="Day17"></a>Day17</h2><h3 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h3><p><strong>格林威治时间1970年01月01日00时00分00秒</strong>起至现在的总秒数</p>
 <h3 id="查看log"><a href="#查看log" class="headerlink" title="查看log"></a>查看log</h3><ol>
 <li>进入服务器</li>
