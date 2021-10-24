@@ -93,19 +93,40 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Q6Docker链接失败"><a href="#Q6Docker链接失败" class="headerlink" title="Q6Docker链接失败"></a>Q6Docker链接失败</h2><h3 id="Info"><a href="#Info" class="headerlink" title="-Info"></a>-Info</h3><p>使用<code>docker ps</code>出现</p>
+        <h2 id="Q7Docker-run后自动stop"><a href="#Q7Docker-run后自动stop" class="headerlink" title="Q7Docker run后自动stop"></a>Q7Docker run后自动stop</h2><h3 id="Info"><a href="#Info" class="headerlink" title="-Info"></a>-Info</h3><blockquote>
+<p>在docker run xxxcontainer后, docker ps查看容器发现已经停止</p>
+</blockquote>
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<li>docker容器运行必须有一个前台进程， 如果没有前台进程执行，容器认为空闲，就会自行退出</li>
+<li>容器运行的命令如果不是那些一直挂起的命令（ 运行top，tail、循环等），就是会自动退出</li>
+<li>这个是 docker 的机制问题</li>
+</ol>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="-Solution"></a>-Solution</h3><ol>
+<li>在run命令时添加挂起命令tail</li>
+</ol>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> -d -it --name mysql0 mysql tail -f dev/null</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在dockerfile中添加命令</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"><span class="keyword">MAINTAINER</span> &lt;DRINK <span class="number">1982164667</span>@QQ.COM&gt;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">&quot;tail&quot;</span>]</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">&quot;-f&quot;</span>, <span class="string">&quot;dev/null&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Review"><a href="#Review" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<li>dev/null 文件通常用于丢弃不需要的数据输出， 或用于输入流的空文件</li>
+</ul>
+<h2 id="Q6Docker链接失败"><a href="#Q6Docker链接失败" class="headerlink" title="Q6Docker链接失败"></a>Q6Docker链接失败</h2><h3 id="Info-1"><a href="#Info-1" class="headerlink" title="-Info"></a>-Info</h3><p>使用<code>docker ps</code>出现</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker Cannot connect to the Docker daemon at unix:///var/run/docker.sock.</span><br></pre></td></tr></table></figure>
 
-<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>此时已确定Docker本身已经安装正常。 问题原因是因为docker服务没有启动，所以在相应的/var/run/ 路径下找不到docker的进程。 </p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="-Solution"></a>-Solution</h3><p>执行<code>service docker start </code>命令，启动docker服务，返回<code>docker start/running, process 2662</code> 此时进程启动成功，再执行docker ps，问题解决</p>
+<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>此时已确定Docker本身已经安装正常。 问题原因是因为docker服务没有启动，所以在相应的/var/run/ 路径下找不到docker的进程。 </p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="-Solution"></a>-Solution</h3><p>执行<code>service docker start </code>命令，启动docker服务，返回<code>docker start/running, process 2662</code> 此时进程启动成功，再执行docker ps，问题解决</p>
 <h2 id="Q5SSH连接VCM断开"><a href="#Q5SSH连接VCM断开" class="headerlink" title="Q5SSH连接VCM断开"></a>Q5SSH连接VCM断开</h2><h3 id="Question"><a href="#Question" class="headerlink" title="-Question"></a>-Question</h3><p><strong>报错信息</strong></p>
 <p><strong>info1</strong></p>
 <p>client_loop: send disconnect: Broken pipe</p>
 <p><strong>info2</strong></p>
 <p>yum-config-manager client_loop: send disconnect: Broken pipe</p>
-<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="-Analysis"></a>-Analysis</h3><p><strong>info1</strong></p>
+<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="-Analysis"></a>-Analysis</h3><p><strong>info1</strong></p>
 <p>终端连接服务器无响应且没用自动间隔连接配置<strong>VCM的问题</strong></p>
-<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="-Solution"></a>-Solution</h3><p><strong>info1</strong></p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="-Solution"></a>-Solution</h3><p><strong>info1</strong></p>
 <p>修改<code>/etc/ssh/sshd_config</code>文件, 修改<code>ClientAliveInterval 120</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过每 300 秒（每 5 分钟）进行响应确认来保持连接。 我认为这个部分的数字可以是60或120。</span></span><br><span class="line">&gt;/etc/ssh/sshd_config</span><br><span class="line"><span class="comment">#PermitUserEnvironment no</span></span><br><span class="line"><span class="comment">#Compression delayed</span></span><br><span class="line">ClientAliveInterval 60</span><br><span class="line"><span class="comment">#ClientAliveCountMax 3</span></span><br></pre></td></tr></table></figure>
 
@@ -122,7 +143,7 @@
 <p>重新启动ssh服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
 
-<h2 id="Review"><a href="#Review" class="headerlink" title="-Review"></a>-Review</h2><p><strong>1.在服务端进行修改</strong></p>
+<h2 id="Review-1"><a href="#Review-1" class="headerlink" title="-Review"></a>-Review</h2><p><strong>1.在服务端进行修改</strong></p>
 <p>在服务器端， 可以让服务器发送“心跳”信号测试提醒客户端进行保持连接</p>
 <p>通过修改 sshd 的配置文件，能够让 SSH Server 发送“心跳”信号来维持持续连接，下面是设置的内容</p>
 <p>打开服务器 <code>/etc/ssh/sshd_config</code>，我在最后增加一行</p>
@@ -138,10 +159,10 @@
 <h2 id="Q4vim安装失败"><a href="#Q4vim安装失败" class="headerlink" title="Q4vim安装失败"></a>Q4vim安装失败</h2><h3 id="Question-1"><a href="#Question-1" class="headerlink" title="-Question"></a>-Question</h3><ol>
 <li>在使用<code>vim</code>时发现报错<code>bash: vim: command not found</code></li>
 </ol>
-<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>使用<code>cat /proc/version</code>查看系统版本</p>
+<h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>使用<code>cat /proc/version</code>查看系统版本</p>
 <p>![image-20210928202753365](/Users/edy/Library/Application Support/typora-user-images/image-20210928202753365.png)</p>
 <p>查看系统镜像中是否有<code>vim</code>, 发现<code>red hat 5</code>才有<code>vim</code></p>
-<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="-Solution"></a>-Solution</h3><ul>
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="-Solution"></a>-Solution</h3><ul>
 <li>使用<code>apt install vim </code>安装<code>vim</code></li>
 <li>发现<code>Unable to locate package vim</code></li>
 </ul>
@@ -150,7 +171,7 @@
 <li>需要输入：<code>apt-get update</code>（作用是：同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包）</li>
 <li>之后再输入<code>apt-get install vim</code>安装（非root用户登录，<code>root apt-get intall vim</code>）</li>
 </ul>
-<h3 id="Review-1"><a href="#Review-1" class="headerlink" title="-Review"></a>-Review</h3><p><strong>docker常用命令</strong></p>
+<h3 id="Review-2"><a href="#Review-2" class="headerlink" title="-Review"></a>-Review</h3><p><strong>docker常用命令</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改了image内的文件后重启image</span></span><br><span class="line">docker restart image_id</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动container中的所有image</span></span><br><span class="line">docker start $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 停止container中的所有image</span></span><br><span class="line">docker stop $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除container中的所有image</span></span><br><span class="line">docker rm $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br></pre></td></tr></table></figure>
 
 <h2 id="Q3镜像部署失败"><a href="#Q3镜像部署失败" class="headerlink" title="Q3镜像部署失败"></a>Q3镜像部署失败</h2><h3 id="Question-2"><a href="#Question-2" class="headerlink" title="-Question"></a>-Question</h3><ol>
@@ -160,13 +181,13 @@
 <ol start="2">
 <li>有正在运行的container, 无法部署</li>
 </ol>
-<h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
+<h3 id="Analysis-4"><a href="#Analysis-4" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
 <li>在部署的过程中存在正在运行的container</li>
 <li>需要将所有的正在运行的container停下来或者删除所有正在运行的container中的image</li>
 </ul>
-<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动所有imagedocker start $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)# 停止运行所有imagedocker stop $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)# 删除container中的所有imagedocker rm $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)# 重新部署sh deploy-debug.sh 1.0.0.65</span></span><br></pre></td></tr></table></figure>
+<h3 id="Solution-4"><a href="#Solution-4" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动所有imagedocker start $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)# 停止运行所有imagedocker stop $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)# 删除container中的所有imagedocker rm $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)# 重新部署sh deploy-debug.sh 1.0.0.65</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="Review-2"><a href="#Review-2" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<h3 id="Review-3"><a href="#Review-3" class="headerlink" title="-Review"></a>-Review</h3><ul>
 <li>使用<code>docker ps -a</code>container中的所有image包括正在运行和未运行的</li>
 <li><code>docker rmi -f &#39;docker iamges&#39; </code>删除的已经存在但未运行的image</li>
 <li><code>docker rm image_id</code>删除正在运行的image</li>
@@ -178,17 +199,17 @@
 <ol start="2">
 <li>RabbitMQ只有生产者没有消费者</li>
 </ol>
-<h3 id="Analysis-4"><a href="#Analysis-4" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<h3 id="Analysis-5"><a href="#Analysis-5" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
 <li>部分服务器没起来</li>
 </ol>
-<h3 id="Solution-4"><a href="#Solution-4" class="headerlink" title="-Solution"></a>-Solution</h3><ol>
+<h3 id="Solution-5"><a href="#Solution-5" class="headerlink" title="-Solution"></a>-Solution</h3><ol>
 <li><code>docker logs -f image_name </code>查看对应的image日志</li>
 <li>找到报错信息</li>
 </ol>
 <p>![image-20210928095931103](/Users/edy/Library/Application Support/typora-user-images/image-20210928095931103.png)</p>
 <p><code>cerely can&#39;t find module name &#39;component.task.member_change_task.component&#39;</code></p>
 <p><strong>cerely配置错误</strong></p>
-<h3 id="Review-3"><a href="#Review-3" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<h3 id="Review-4"><a href="#Review-4" class="headerlink" title="-Review"></a>-Review</h3><ul>
 <li>docker logs -f </li>
 <li>command r 搜索已经使用的order</li>
 </ul>
@@ -206,7 +227,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="Analysis-5"><a href="#Analysis-5" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<h3 id="Analysis-6"><a href="#Analysis-6" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
 <li>登陆紫豆服务器<code>ssh root@ip</code><ul>
 <li>报错显示disk overflower</li>
 </ul>
@@ -214,7 +235,7 @@
 <li><code>df -h</code>查看disk存储情况</li>
 </ol>
 <p><img src="file:///Users/edy/Library/Application%20Support/typora-user-images/image-20210926170428181.png?lastModify=1632625187" alt="image-20210926170428181"></p>
-<h3 id="Solution-5"><a href="#Solution-5" class="headerlink" title="-Solution"></a><strong>-Solution</strong></h3><ol>
+<h3 id="Solution-6"><a href="#Solution-6" class="headerlink" title="-Solution"></a><strong>-Solution</strong></h3><ol>
 <li><p>删除不用的container|容器修剪</p>
 <ul>
 <li>PRO环境具有一定的风险</li>
@@ -558,7 +579,11 @@
 <h3 id="底层源码"><a href="#底层源码" class="headerlink" title="底层源码"></a>底层源码</h3><ul>
 <li><input disabled="" type="checkbox"> </li>
 </ul>
-<h2 id="目前学习"><a href="#目前学习" class="headerlink" title="目前学习"></a>目前学习</h2><h3 id="Docker基础"><a href="#Docker基础" class="headerlink" title="Docker基础"></a>Docker基础</h3><p><strong>source：b站|狂神</strong></p>
+<h2 id="目前学习"><a href="#目前学习" class="headerlink" title="目前学习"></a>目前学习</h2><h3 id="网络基础原理"><a href="#网络基础原理" class="headerlink" title="网络基础原理"></a>网络基础原理</h3><p><strong>source: wait</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> 网络基础原理</li>
+</ul>
+<h3 id="Docker基础"><a href="#Docker基础" class="headerlink" title="Docker基础"></a>Docker基础</h3><p><strong>source：b站|狂神</strong></p>
 <ul>
 <li><input disabled="" type="checkbox"> Docker基本概念</li>
 <li><input disabled="" type="checkbox"> Docker基本语法</li>
@@ -576,6 +601,7 @@
 </ul>
 <h2 id="计划学习"><a href="#计划学习" class="headerlink" title="计划学习"></a>计划学习</h2><ul>
 <li><input disabled="" type="checkbox"> Nginx</li>
+<li><input disabled="" type="checkbox"> 网络基础</li>
 <li><input disabled="" type="checkbox"> Celery</li>
 <li><input disabled="" type="checkbox"> RabbitMQ</li>
 <li><input disabled="" type="checkbox"> Docker</li>
@@ -868,7 +894,18 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Day6"><a href="#Day6" class="headerlink" title="Day6"></a>Day6</h2><ul>
+        <h2 id="Day7"><a href="#Day7" class="headerlink" title="Day7"></a>Day7</h2><ul>
+<li><input disabled="" type="checkbox"> detach |蒂塔迟～| n v 分离 分开 派遣</li>
+<li><input disabled="" type="checkbox"> STDIN  标准输入</li>
+<li><input disabled="" type="checkbox"> interactive |艾特.rua^棵.忒.夫.| adj  web n 交互的 相互配合的</li>
+<li><input disabled="" type="checkbox"> isolation |艾涩.雷神.| n adj web 隔离 分离 分析 绝缘</li>
+</ul>
+<hr>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-i, --interactive                    </span><br><span class="line">	 Keep STDIN open even if not attached</span><br><span class="line">	 </span><br><span class="line">     --ip string</span><br><span class="line">     IPv4 address (e.g., 172.30.100.104)</span><br><span class="line">     </span><br><span class="line">     --ip6 string</span><br><span class="line">     IPv6 address (e.g., 2001:db8::33)</span><br><span class="line">     </span><br><span class="line">     --ipc string</span><br><span class="line">     IPC mode to use</span><br><span class="line">     </span><br><span class="line">     --isolation string</span><br><span class="line">     Container isolation technology</span><br><span class="line">     </span><br><span class="line">     --kernel-memory bytes</span><br><span class="line">     Kernel memory limit</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Day6"><a href="#Day6" class="headerlink" title="Day6"></a>Day6</h2><ul>
 <li><input disabled="" type="checkbox"> digest |得艾.杰.斯特| n 摘要 汇编 v 消化 理解 领会 web 忍受</li>
 <li><input disabled="" type="checkbox"> suffix |撒.费.刻丝-| n 后缀</li>
 <li><input disabled="" type="checkbox"> discard|滴.斯.嘎得.| n 抛弃 垫出的牌 v 抛弃 解雇 web 丢弃</li>
@@ -2065,13 +2102,100 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Q4vim安装失败"><a href="#Q4vim安装失败" class="headerlink" title="Q4vim安装失败"></a>Q4vim安装失败</h2><h3 id="Question"><a href="#Question" class="headerlink" title="-Question"></a>-Question</h3><ol>
+        <h2 id="Q9Mongodb保存-插入字段失败"><a href="#Q9Mongodb保存-插入字段失败" class="headerlink" title="Q9Mongodb保存|插入字段失败"></a>Q9Mongodb保存|插入字段失败</h2><ul>
+<li><input disabled="" type="checkbox"> 1.查看Table定义==&gt;fiedls = fiedls.<strong>IntFields()</strong>   ==&gt;需要加()</li>
+</ul>
+<h2 id="Q8虚拟环境配置"><a href="#Q8虚拟环境配置" class="headerlink" title="Q8虚拟环境配置"></a>Q8虚拟环境配置</h2><ul>
+<li><input disabled="" type="checkbox"> 拉取项目后如何配置虚拟环境?</li>
+<li><input disabled="" type="checkbox"> 如何激活虚拟环境, 并每次进入pycharm的terminal都保证是venv?</li>
+</ul>
+<ol>
+<li>venv的目录和interpreter的目录要配置相同</li>
+</ol>
+<p>![image-20211018164551110](/Users/edy/Library/Application Support/typora-user-images/image-20211018164551110.png)</p>
+<p>![image-20211018164714977](/Users/edy/Library/Application Support/typora-user-images/image-20211018164714977.png)</p>
+<ol start="2">
+<li>terminal的配置如下</li>
+</ol>
+<p>![image-20211018164922890](/Users/edy/Library/Application Support/typora-user-images/image-20211018164922890.png)</p>
+<h2 id="Q7Nginx-Timeout-504"><a href="#Q7Nginx-Timeout-504" class="headerlink" title="Q7Nginx Timeout 504"></a>Q7Nginx Timeout 504</h2><h3 id="Info"><a href="#Info" class="headerlink" title="-Info"></a>-Info</h3><p>在前端导出excel时, 导出失败并返回<code>GateWay TimeOut 504</code></p>
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
+<li>重新导出查看log</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url: /channel/get_excel?token=ab5c40fa9da40d74f5a2ba17d84dcf63</span><br><span class="line">GET /channel/get_excel?token=ab5c40fa9da40d74f5a2ba17d84dcf63 (183.81.181.194) 67000.83ms</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>说明导出正常, 其中导出时间大于<code>60s</code></li>
+<li>nginx做反向代理，默认请求是有一个60秒的超时，如果http请求超过了60秒，再返回，连接就会被nginx中断，前端就会得到504的错误：gateway time-out。</li>
+</ul>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="-Solution"></a>-Solution</h3><blockquote>
+<p>修改nginx的配置, 将超时设置延长至300s</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">docker ps </span><br><span class="line"></span><br><span class="line">docker exec -it nginx_container_id bash</span><br><span class="line"></span><br><span class="line">whereis nginx.conf</span><br><span class="line"></span><br><span class="line">cd /etc/config</span><br><span class="line"></span><br><span class="line">vim nginx.conf</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">		...</span><br><span class="line">		keepalive_timeout 300;</span><br><span class="line">		proxy_connect_timeout 300;</span><br><span class="line">    proxy_send_timeout 300;</span><br><span class="line">    proxy_read_timeout 300;</span><br><span class="line">    send_timeout 300</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Review"><a href="#Review" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<li>如果程序正常, log也没有报错, 很可能是配置的原因</li>
+</ul>
+<h2 id="Q6mongodb插入数据报错"><a href="#Q6mongodb插入数据报错" class="headerlink" title="Q6mongodb插入数据报错"></a>Q6mongodb插入数据报错</h2><h3 id="Info-1"><a href="#Info-1" class="headerlink" title="-Info"></a>-Info</h3><p>在mongodb中插入数据报错<code>&#123;&#39;code&#39;: -1, &#39;msg&#39;: &#39;exception&#39;&#125;</code></p>
+<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>经过排查不是以下原因:</p>
+<ul>
+<li>插入字段类型与定义不符</li>
+<li>缺少必要字段</li>
+</ul>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="-Solution"></a>-Solution</h3><p>在mongodb表中定义字段如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 群发任务</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AssistantBatchSend</span>(<span class="params">BaseModel</span>):</span></span><br><span class="line">    __table__ = <span class="string">&#x27;assistant_batch_send&#x27;</span></span><br><span class="line">    client_id = fields.IntField()     <span class="comment"># 创建人</span></span><br><span class="line">    task_id = fields.IntField()       <span class="comment"># 任务标识</span></span><br><span class="line">    message_list = fields.JsonField()  <span class="comment"># 发送内容</span></span><br><span class="line">    bot_username_list = fields.JsonField()  <span class="comment"># 机器人id</span></span><br></pre></td></tr></table></figure>
+
+<p>在插入的数据中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">task_identification = <span class="built_in">int</span>(<span class="built_in">str</span>(self.user_info.client_id) + <span class="built_in">str</span>(<span class="built_in">int</span>(time.time()*<span class="number">1000000</span>))) <span class="comment"># 任务标识</span></span><br><span class="line">immediate_info = CM(Table.AssistantBatchSend)</span><br><span class="line">immediate_info.task_id = task_identification</span><br></pre></td></tr></table></figure>
+
+<p>其中task_id定义为<code>intfiled</code>长度最大</p>
+<p>为:</p>
+<p>![image-20211011134300296](/Users/edy/Library/Application Support/typora-user-images/image-20211011134300296.png)</p>
+<p>但是传入的长度为<code>22</code>, 应该把此字段定义为<code>StringField</code></p>
+<h2 id="Q5SSH连接VCM断开"><a href="#Q5SSH连接VCM断开" class="headerlink" title="Q5SSH连接VCM断开"></a>Q5SSH连接VCM断开</h2><h3 id="Question"><a href="#Question" class="headerlink" title="-Question"></a>-Question</h3><p><strong>报错信息</strong></p>
+<p><strong>info1</strong></p>
+<p>client_loop: send disconnect: Broken pipe</p>
+<p><strong>info2</strong></p>
+<p>yum-config-manager client_loop: send disconnect: Broken pipe</p>
+<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="-Analysis"></a>-Analysis</h3><p><strong>info1</strong></p>
+<p>终端连接服务器无响应且没用自动间隔连接配置<strong>VCM的问题</strong></p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="-Solution"></a>-Solution</h3><p><strong>info1</strong></p>
+<p>修改<code>/etc/ssh/sshd_config</code>文件, 修改<code>ClientAliveInterval 120</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过每 300 秒（每 5 分钟）进行响应确认来保持连接。 我认为这个部分的数字可以是60或120。</span></span><br><span class="line">&gt;/etc/ssh/sshd_config</span><br><span class="line"><span class="comment">#PermitUserEnvironment no</span></span><br><span class="line"><span class="comment">#Compression delayed</span></span><br><span class="line">ClientAliveInterval 60</span><br><span class="line"><span class="comment">#ClientAliveCountMax 3</span></span><br></pre></td></tr></table></figure>
+
+<p>重新启动ssh服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<p>或者在客户端进行更改<code>/etc/ssh/ssh_config</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加参数</span></span><br><span class="line">TCPKeepAlive yes</span><br><span class="line">ServerAliveInterval 60</span><br></pre></td></tr></table></figure>
+
+<p><strong>info2</strong></p>
+<p>配置<code>/etc/ssh/ssh_config</code>文件，增加以下内容即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">				IPQoS=throughput</span><br><span class="line">        <span class="comment"># 断开时重试连接的次数</span></span><br><span class="line">        ServerAliveCountMax 5</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 每隔5秒自动发送一个空的请求以保持连接</span></span><br><span class="line">        ServerAliveInterval 5</span><br></pre></td></tr></table></figure>
+
+<p>重新启动ssh服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<h3 id="Review-1"><a href="#Review-1" class="headerlink" title="-Review"></a>-Review</h3><p><strong>1.在服务端进行修改</strong></p>
+<p>在服务器端， 可以让服务器发送“心跳”信号测试提醒客户端进行保持连接</p>
+<p>通过修改 sshd 的配置文件，能够让 SSH Server 发送“心跳”信号来维持持续连接，下面是设置的内容</p>
+<p>打开服务器 <code>/etc/ssh/sshd_config</code>，我在最后增加一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ClientAliveInterval 60</span><br><span class="line">ClientAliveCountMax 1</span><br></pre></td></tr></table></figure>
+
+<p>这样，SSH Server 每 60 秒就会自动发送一个信号给 Client，而等待 Client 回应，（注意：是服务器发心跳信号，不是客户端，这个有别于一些 FTP Client 发送的 KeepAlives 信号），如果客户端没有回应，会记录下来直到记录数超过 ClientAliveCountMax 的值时，才会断开连接。</p>
+<p><strong>2.在客户端进行修改</strong></p>
+<p>只要在/etc/ssh/ssh_config文件里加两个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TCPKeepAlive yes</span><br><span class="line">ServerAliveInterval 60</span><br></pre></td></tr></table></figure>
+
+<p>前一个参数是说要保持连接，后一个参数表示每过1分钟发一个数据包到服务器表示“我还活着”</p>
+<p>如果你没有root权限，修改或者创建~/.ssh/ssh_config也是可以的</p>
+<h2 id="Q4vim安装失败"><a href="#Q4vim安装失败" class="headerlink" title="Q4vim安装失败"></a>Q4vim安装失败</h2><h3 id="Question-1"><a href="#Question-1" class="headerlink" title="-Question"></a>-Question</h3><ol>
 <li>在使用<code>vim</code>时发现报错<code>bash: vim: command not found</code></li>
 </ol>
-<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>使用<code>cat /proc/version</code>查看系统版本</p>
+<h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>使用<code>cat /proc/version</code>查看系统版本</p>
 <p>![image-20210928202753365](/Users/edy/Library/Application Support/typora-user-images/image-20210928202753365.png)</p>
 <p>查看系统镜像中是否有<code>vim</code>, 发现<code>red hat 5</code>才有<code>vim</code></p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="-Solution"></a>-Solution</h3><ul>
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="-Solution"></a>-Solution</h3><ul>
 <li>使用<code>apt install vim </code>安装<code>vim</code></li>
 <li>发现<code>Unable to locate package vim</code></li>
 </ul>
@@ -2080,49 +2204,49 @@
 <li>需要输入：<code>apt-get update</code>（作用是：同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包）</li>
 <li>之后再输入<code>apt-get install vim</code>安装（非root用户登录，<code>root apt-get intall vim</code>）</li>
 </ul>
-<h3 id="Review"><a href="#Review" class="headerlink" title="-Review"></a>-Review</h3><p><strong>docker常用命令</strong></p>
+<h3 id="Review-2"><a href="#Review-2" class="headerlink" title="-Review"></a>-Review</h3><p><strong>docker常用命令</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改了image内的文件后重启image</span></span><br><span class="line">docker restart image_id</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动container中的所有image</span></span><br><span class="line">docker start $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 停止container中的所有image</span></span><br><span class="line">docker stop $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除container中的所有image</span></span><br><span class="line">docker rm $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br></pre></td></tr></table></figure>
 
-<h2 id="Q3镜像部署失败"><a href="#Q3镜像部署失败" class="headerlink" title="Q3镜像部署失败"></a>Q3镜像部署失败</h2><h3 id="Question-1"><a href="#Question-1" class="headerlink" title="-Question"></a>-Question</h3><ol>
+<h2 id="Q3镜像部署失败"><a href="#Q3镜像部署失败" class="headerlink" title="Q3镜像部署失败"></a>Q3镜像部署失败</h2><h3 id="Question-2"><a href="#Question-2" class="headerlink" title="-Question"></a>-Question</h3><ol>
 <li>部署对应的tag的时候出现<code>error</code></li>
 </ol>
 <p>![image-20210928155639667](/Users/edy/Library/Application Support/typora-user-images/image-20210928155639667.png)</p>
 <ol start="2">
 <li>有正在运行的container, 无法部署</li>
 </ol>
-<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
+<h3 id="Analysis-4"><a href="#Analysis-4" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
 <li>在部署的过程中存在正在运行的container</li>
 <li>需要将所有的正在运行的container停下来或者删除所有正在运行的container中的image</li>
 </ul>
-<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动所有image</span></span><br><span class="line">docker start $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止运行所有image</span></span><br><span class="line">docker stop $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除container中的所有image</span></span><br><span class="line">docker rm $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新部署</span></span><br><span class="line">sh deploy-debug.sh 1.0.0.65</span><br></pre></td></tr></table></figure>
+<h3 id="Solution-4"><a href="#Solution-4" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动所有image</span></span><br><span class="line">docker start $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止运行所有image</span></span><br><span class="line">docker stop $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除container中的所有image</span></span><br><span class="line">docker rm $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新部署</span></span><br><span class="line">sh deploy-debug.sh 1.0.0.65</span><br></pre></td></tr></table></figure>
 
-<h3 id="Review-1"><a href="#Review-1" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<h3 id="Review-3"><a href="#Review-3" class="headerlink" title="-Review"></a>-Review</h3><ul>
 <li>使用<code>docker ps -a</code>container中的所有image包括正在运行和未运行的</li>
 <li><code>docker rmi -f &#39;docker iamges&#39; </code>删除的已经存在但未运行的image</li>
 <li><code>docker rm image_id</code>删除正在运行的image</li>
 </ul>
-<h2 id="Q2镜像重启"><a href="#Q2镜像重启" class="headerlink" title="Q2镜像重启"></a>Q2镜像重启</h2><h3 id="Question-2"><a href="#Question-2" class="headerlink" title="-Question"></a>-Question</h3><ol>
+<h2 id="Q2镜像重启"><a href="#Q2镜像重启" class="headerlink" title="Q2镜像重启"></a>Q2镜像重启</h2><h3 id="Question-3"><a href="#Question-3" class="headerlink" title="-Question"></a>-Question</h3><ol>
 <li>Docker ps 查看镜像状态显示<code>restart</code></li>
 </ol>
 <p>![image-20210928095953991](/Users/edy/Library/Application Support/typora-user-images/image-20210928095953991.png)</p>
 <ol start="2">
 <li>RabbitMQ只有生产者没有消费者</li>
 </ol>
-<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<h3 id="Analysis-5"><a href="#Analysis-5" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
 <li>部分服务器没起来</li>
 </ol>
-<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="-Solution"></a>-Solution</h3><ol>
+<h3 id="Solution-5"><a href="#Solution-5" class="headerlink" title="-Solution"></a>-Solution</h3><ol>
 <li><code>docker logs -f image_name </code>查看对应的image日志</li>
 <li>找到报错信息</li>
 </ol>
 <p>![image-20210928095931103](/Users/edy/Library/Application Support/typora-user-images/image-20210928095931103.png)</p>
 <p><code>cerely can&#39;t find module name &#39;component.task.member_change_task.component&#39;</code></p>
 <p><strong>cerely配置错误</strong></p>
-<h3 id="Review-2"><a href="#Review-2" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<h3 id="Review-4"><a href="#Review-4" class="headerlink" title="-Review"></a>-Review</h3><ul>
 <li>docker logs -f </li>
 <li>command r 搜索已经使用的order</li>
 </ul>
-<h2 id="Q1磁盘溢出"><a href="#Q1磁盘溢出" class="headerlink" title="Q1磁盘溢出"></a>Q1磁盘溢出</h2><h3 id="Question-3"><a href="#Question-3" class="headerlink" title="-Question"></a>-<strong>Question</strong></h3><ol>
+<h2 id="Q1磁盘溢出"><a href="#Q1磁盘溢出" class="headerlink" title="Q1磁盘溢出"></a>Q1磁盘溢出</h2><h3 id="Question-4"><a href="#Question-4" class="headerlink" title="-Question"></a>-<strong>Question</strong></h3><ol>
 <li>mongodb连接失败报错<ul>
 <li><code>failed to read 4 bytes from socket within 300000 milliseconds</code></li>
 </ul>
@@ -2136,7 +2260,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<h3 id="Analysis-6"><a href="#Analysis-6" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
 <li>登陆紫豆服务器<code>ssh root@ip</code><ul>
 <li>报错显示disk overflower</li>
 </ul>
@@ -2144,7 +2268,7 @@
 <li><code>df -h</code>查看disk存储情况</li>
 </ol>
 <p><img src="file:///Users/edy/Library/Application%20Support/typora-user-images/image-20210926170428181.png?lastModify=1632625187" alt="image-20210926170428181"></p>
-<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="-Solution"></a><strong>-Solution</strong></h3><ol>
+<h3 id="Solution-6"><a href="#Solution-6" class="headerlink" title="-Solution"></a><strong>-Solution</strong></h3><ol>
 <li><p>删除不用的container|容器修剪</p>
 <ul>
 <li>PRO环境具有一定的风险</li>
