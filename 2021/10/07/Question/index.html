@@ -6,16 +6,16 @@
   
   <title>Question | Drink`s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Q7Docker run后自动stop-Info 在docker run xxxcontainer后, docker ps查看容器发现已经停止  -Analysis docker容器运行必须有一个前台进程， 如果没有前台进程执行，容器认为空闲，就会自行退出 容器运行的命令如果不是那些一直挂起的命令（ 运行top，tail、循环等），就是会自动退出 这个是 docker 的机制问题  -Soluti">
+  <meta name="description" content="Q21 SSLError-Info在使用AsyncHTTPClient调用API时, 出现错误 12AsyncHTTPClientssl.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:852)  -Analysis1234url &#x3D; &quot;https:&#x2F;&#x2F;txm.zidouchat.c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Question">
 <meta property="og:url" content="https://drinkle.top/2021/10/07/Question/index.html">
 <meta property="og:site_name" content="Drink&#96;s Blog">
-<meta property="og:description" content="Q7Docker run后自动stop-Info 在docker run xxxcontainer后, docker ps查看容器发现已经停止  -Analysis docker容器运行必须有一个前台进程， 如果没有前台进程执行，容器认为空闲，就会自行退出 容器运行的命令如果不是那些一直挂起的命令（ 运行top，tail、循环等），就是会自动退出 这个是 docker 的机制问题  -Soluti">
+<meta property="og:description" content="Q21 SSLError-Info在使用AsyncHTTPClient调用API时, 出现错误 12AsyncHTTPClientssl.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:852)  -Analysis1234url &#x3D; &quot;https:&#x2F;&#x2F;txm.zidouchat.c">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="file:///Users/edy/Library/Application%20Support/typora-user-images/image-20210926170428181.png?lastModify=1632625187">
 <meta property="article:published_time" content="2021-10-07T11:39:08.000Z">
-<meta property="article:modified_time" content="2021-10-24T14:22:30.312Z">
+<meta property="article:modified_time" content="2022-01-09T14:17:11.702Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="Drink">
 <meta name="twitter:card" content="summary">
@@ -98,40 +98,166 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Q7Docker-run后自动stop"><a href="#Q7Docker-run后自动stop" class="headerlink" title="Q7Docker run后自动stop"></a>Q7Docker run后自动stop</h2><h3 id="Info"><a href="#Info" class="headerlink" title="-Info"></a>-Info</h3><blockquote>
-<p>在docker run xxxcontainer后, docker ps查看容器发现已经停止</p>
+        <h2 id="Q21-SSLError"><a href="#Q21-SSLError" class="headerlink" title="Q21 SSLError"></a>Q21 SSLError</h2><h3 id="Info"><a href="#Info" class="headerlink" title="-Info"></a>-Info</h3><p>在使用<code>AsyncHTTPClient</code>调用<code>API</code>时, 出现错误</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AsyncHTTPClient</span><br><span class="line">ssl.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:<span class="number">852</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="-Analysis"></a>-Analysis</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">&quot;https://txm.zidouchat.com/wx/get_access_token&quot;</span></span><br><span class="line">data = &#123;<span class="string">&quot;token&quot;</span>: <span class="string">&quot;doododisagreatcompany&quot;</span>&#125;</span><br><span class="line">body = json.dumps(data)</span><br><span class="line">response = <span class="keyword">await</span> httpclient.fetch(url, method=<span class="string">&quot;POST&quot;</span>, body=body)</span><br></pre></td></tr></table></figure>
+
+<p>debug排查:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">print(ssl_options, host)</span><br><span class="line"><span class="keyword">if</span> ssl_options <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">	<span class="keyword">if</span> timeout <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">		stream = <span class="keyword">yield</span> gen.with_timeout(timeout, stream.start_tls(<span class="literal">False</span>, ssl_options=ssl_options, server_hostname=host))</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		stream = <span class="keyword">yield</span> stream.start_tls(<span class="literal">False</span>, ssl_options=ssl_options,server_hostname=host)</span><br><span class="line"><span class="keyword">raise</span> gen.Return(stream)</span><br></pre></td></tr></table></figure>
+
+<p>此网站的ssl证书验证失败</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ssl.SSLContext <span class="built_in">object</span> at <span class="number">0x7f9f0d393ac8</span>&gt;   txm.zidouchat.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="-Solution"></a>-Solution</h3><p>方法一</p>
+<blockquote>
+<p>在使用http链接建立请求时关闭ssl验证</p>
 </blockquote>
-<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
-<li>docker容器运行必须有一个前台进程， 如果没有前台进程执行，容器认为空闲，就会自行退出</li>
-<li>容器运行的命令如果不是那些一直挂起的命令（ 运行top，tail、循环等），就是会自动退出</li>
-<li>这个是 docker 的机制问题</li>
-</ol>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="-Solution"></a>-Solution</h3><ol>
-<li>在run命令时添加挂起命令tail</li>
-</ol>
-<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> -d -it --name mysql0 mysql tail -f dev/null</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加ssl跳过验证</span></span><br><span class="line"><span class="keyword">import</span> ssl</span><br><span class="line">ssl_options = &#123;<span class="string">&quot;ssl_version&quot;</span>: ssl.PROTOCOL_TLSv1&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加ssl跳过验证</span></span><br><span class="line"><span class="keyword">if</span> ssl_options <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">	<span class="keyword">if</span> timeout <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">		stream = <span class="keyword">yield</span> gen.with_timeout(timeout, stream.start_tls(<span class="literal">False</span>, ssl_options=ssl_options, server_hostname=host))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        stream = <span class="keyword">yield</span> stream.start_tls(<span class="literal">False</span>, ssl_options=ssl_options,</span><br><span class="line">                                                server_hostname=host)</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>在dockerfile中添加命令</li>
-</ol>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"><span class="keyword">MAINTAINER</span> &lt;DRINK <span class="number">1982164667</span>@QQ.COM&gt;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">&quot;tail&quot;</span>]</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">&quot;-f&quot;</span>, <span class="string">&quot;dev/null&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+<p>方法二</p>
+<blockquote>
+<p>在实例化时赋予属性 validate_cert=False, 有一定风险仍然使用old_ssl</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tornado.httpclient</span><br><span class="line"></span><br><span class="line">request = tornado.httpclient.HTTPRequest(</span><br><span class="line">    url=<span class="string">&quot;https://myhostname.com:9001&quot;</span>,</span><br><span class="line">    method=<span class="string">&quot;GET&quot;</span>,</span><br><span class="line">    validate_cert=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span> tornado.httpclient.HTTPClient().fetch(request)</span><br></pre></td></tr></table></figure>
 
-<h3 id="Review"><a href="#Review" class="headerlink" title="-Review"></a>-Review</h3><ul>
-<li>dev/null 文件通常用于丢弃不需要的数据输出， 或用于输入流的空文件</li>
+<h3 id="Review"><a href="#Review" class="headerlink" title="-Review"></a>-Review</h3><p><code>curl http_address -k</code></p>
+<p>可以跳过ssl验证</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I<span class="string">&#x27;m trying to use tornado&#x27;</span>s http client to fetch a URL. I<span class="string">&#x27;ve done this before many times, but I&#x27;</span>m getting a really odd SSL error this time. The endpoint I<span class="string">&#x27;m trying to consume does not have a valid cert, but a -k on a curl call still proves it works.</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Q20-Docker-Compose"><a href="#Q20-Docker-Compose" class="headerlink" title="Q20 Docker Compose"></a>Q20 Docker Compose</h2><h3 id="Info-1"><a href="#Info-1" class="headerlink" title="-Info"></a>-Info</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 拉取镜像报错</span></span><br><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
+
+<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="-Analysis"></a>-Analysis</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 报错信息</span></span><br><span class="line">ERROR: write /var/lib/docker/tmp/GetImageBlob264931462: no space left on device</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指宿主机内部没有空间写入docker文件</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看内存使用</span></span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 清除宿主机内不在使用的imgaes</span></span><br><span class="line">docker rmi $ (docker images -aq)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q19GIt-PUll失败"><a href="#Q19GIt-PUll失败" class="headerlink" title="Q19GIt PUll失败"></a>Q19GIt PUll失败</h2><h3 id="Info-2"><a href="#Info-2" class="headerlink" title="-Info"></a>-Info</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(venv) edy@bogon TXM % git pull</span><br><span class="line"></span><br><span class="line">Your configuration specifies to merge <span class="keyword">with</span> the ref <span class="string">&#x27;refs/heads/watsons_uat&#x27;</span></span><br><span class="line"><span class="keyword">from</span> the remote, but no such ref was fetched.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<li>远程仓库不存在要pull的分支</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">本地仓库当前分支是a，但是a的远程分支被删除掉了，pull的时候就会报错，这时候使用</span><br><span class="line">git remote prune origin</span><br><span class="line">同步下远程分支，并清除掉已删除的分支，再清除掉当前分支（如果当前分支在工作区的话）就可以了</span><br><span class="line"></span><br><span class="line">建议：使用命令行拉取新分支代码前使用：git fetch -p 获取最新分支 然后获取远程分支代码</span><br><span class="line">git fetch -p</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切换到其他分支, 建议master分支</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步远程分支, 并清楚已经删除的分支</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 清除被删除的分支</span></span><br><span class="line">git remote prune origin  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在获取之前，删除远程上不再存在的任何远程跟踪引用</span></span><br><span class="line">git fetch -p  </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 切换到出现问题的分支</span></span><br><span class="line">git checkout target_branch</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关联分支</span></span><br><span class="line">git branch --set-upstream-to=origin/master &lt;target_branch&gt;</span><br><span class="line"></span><br><span class="line">git push --set-upstream origin &lt;local_branch&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q18mogodb更新失败"><a href="#Q18mogodb更新失败" class="headerlink" title="Q18mogodb更新失败"></a>Q18mogodb更新失败</h2><h3 id="Info-3"><a href="#Info-3" class="headerlink" title="-Info"></a>-Info</h3><p>在更新ipdate_one()时出现update error</p>
+<h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>查看所使用的是否是原生语法, 如果使用http连接更新, 则尝试使用原生语句进行更新</p>
+<h2 id="Q17linux连接目标主机报错-ssh"><a href="#Q17linux连接目标主机报错-ssh" class="headerlink" title="Q17linux连接目标主机报错[ssh]"></a>Q17linux连接目标主机报错[ssh]</h2><h3 id="Info-4"><a href="#Info-4" class="headerlink" title="-Info"></a>-Info</h3><p><strong>问题一</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过linux主机，远程其他linux服务器时报错：Unable to negotiate with xx.xxx.xxx.x port 22:no matching cipher found. Their offer: aes128-cbc,aes256-cbc,3des-cbc,des-cbc</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题二</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">远程其他linux服务器时又报错：Unable to negotiate with xx.xx.xx.xx port 22: no matching key exchange method.found.Their.offer:diffie-hellman-group-exchange-sha1,diffie-hellman-group1-sha1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Analysis-4"><a href="#Analysis-4" class="headerlink" title="-Analysis"></a>-Analysis</h3><p><strong>问题一</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由于发起远程访问端的主机openssh版本过高（我的这台主机为最新8.1版本），导致不支持对低版本的远程连接主机的ssh解密，故报错。</span><br></pre></td></tr></table></figure>
+
+<p><strong>问题二</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">根据提示，ssh不能远程登录的原因为：没有找到相关的主机密钥类型。</span><br></pre></td></tr></table></figure>
+
+<h3 id="Soultion"><a href="#Soultion" class="headerlink" title="-Soultion"></a>-Soultion</h3><p><strong>问题一</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改发起远程访问的本机SSH客户端配置（/etc/ssh/ssh_config）文件，将默认注释的：</span></span><br><span class="line">Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用即可。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>问题二</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改发起远程访问的本机SSH客户端配置（/etc/ssh/ssh_config）文件，在最后加上一行：</span></span><br><span class="line">KexAlgorithms +diffie-hellman-group1-sha1</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q16Docker连接redis失败"><a href="#Q16Docker连接redis失败" class="headerlink" title="Q16Docker连接redis失败"></a>Q16Docker连接redis失败</h2><h3 id="Info-5"><a href="#Info-5" class="headerlink" title="-Info"></a>-Info</h3><p>在docker-container中发现container重启</p>
+<p><code>docker logs -f --tail 100 container_id&lt;container name&gt;</code></p>
+<p>发现是连接redis报错</p>
+<h3 id="Analysis-5"><a href="#Analysis-5" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>分析发现是docker连接不到redis</p>
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看docker状态</span></span><br><span class="line">services docker status</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启docker</span></span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Q15Docker运行脚本"><a href="#Q15Docker运行脚本" class="headerlink" title="Q15Docker运行脚本"></a>Q15Docker运行脚本</h2><h3 id="Info-6"><a href="#Info-6" class="headerlink" title="-Info"></a>-Info</h3><p>在需要跑数据时, 可以 [根据场景选择] :</p>
+<ol>
+<li>写script</li>
+<li>写临时API</li>
+</ol>
+<h3 id="Solution-4"><a href="#Solution-4" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> config.config <span class="keyword">import</span> Table</span><br><span class="line"><span class="keyword">from</span> model.base_model <span class="keyword">import</span> BaseModel</span><br><span class="line"></span><br><span class="line">phone = [<span class="string">&#x27;16620132242&#x27;</span>, <span class="string">&#x27;16676748179&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">export_excel</span>():</span></span><br><span class="line">    friend_count = []</span><br><span class="line">    <span class="keyword">for</span> sim <span class="keyword">in</span> phone:</span><br><span class="line">        print(<span class="string">f&#x27;---------sim:<span class="subst">&#123;sim&#125;</span>&#x27;</span>)</span><br><span class="line">        bot_username = <span class="keyword">await</span> BaseModel.fetch_one(</span><br><span class="line">            Table.BotInfo,</span><br><span class="line">            <span class="string">&quot;*&quot;</span>,</span><br><span class="line">            BaseModel.where_dict(&#123;<span class="string">&quot;sim&quot;</span>: sim&#125;)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> bot_username:</span><br><span class="line">            friend_count.append(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        friend_count_info = <span class="keyword">await</span> BaseModel.count_(</span><br><span class="line">            Table.Friend,</span><br><span class="line">            BaseModel.where_dict(&#123;<span class="string">&quot;bot_username&quot;</span>: bot_username.username, <span class="string">&quot;is_friend&quot;</span>: <span class="number">1</span>&#125;)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        friend_count.append(friend_count_info)</span><br><span class="line">    <span class="keyword">return</span> friend_count</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    task = asyncio.Task(export_excel())</span><br><span class="line">    done, pending = <span class="keyword">await</span> asyncio.wait(&#123;task&#125;)</span><br><span class="line">    <span class="keyword">if</span> task <span class="keyword">in</span> done:</span><br><span class="line">        print(task)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">  	<span class="comment"># 需要初始化BaseModel的model_dict()</span></span><br><span class="line">    BaseModel.init_model_dict()</span><br><span class="line">    loop = asyncio.get_event_loop()</span><br><span class="line">    loop.run_until_complete(main())</span><br><span class="line">    loop.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Review-1"><a href="#Review-1" class="headerlink" title="-Review"></a>-Review</h3><p>使用到的命令:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># copy file from linux-server to another linux-server</span></span><br><span class="line">scp source_file root@remote_ip:/target_directory/</span><br><span class="line"></span><br><span class="line"><span class="comment"># create file</span></span><br><span class="line">vim target_file.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># copy file from linux-server to linux-server-container</span></span><br><span class="line">docker cp source_file container_id[name]:/target_directory/</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需要初始化BaseModel的model_dict()</span></span><br><span class="line">BaseModel.init_model_dict()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出excel</span></span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">people_count_list = [<span class="number">4190</span>, <span class="number">1415</span>]</span><br><span class="line">book = Workbook()</span><br><span class="line">sheet = book.active</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> index, value <span class="keyword">in</span> <span class="built_in">enumerate</span>(people_count_list):</span><br><span class="line">    sheet[<span class="string">f&quot;A<span class="subst">&#123;index+<span class="number">1</span>&#125;</span>&quot;</span>] = value</span><br><span class="line">    print(value)</span><br><span class="line"></span><br><span class="line">book.save(<span class="string">&quot;/Users/edy/Desktop/sample.xlsx&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q14导出大数据Excel"><a href="#Q14导出大数据Excel" class="headerlink" title="Q14导出大数据Excel"></a>Q14导出大数据Excel</h2><h3 id="Info-7"><a href="#Info-7" class="headerlink" title="-Info"></a>-Info</h3><p>在导出群-机器人数据时, 涉及到群数据量很大导出excel失败</p>
+<h3 id="Solution-5"><a href="#Solution-5" class="headerlink" title="-Solution"></a>-Solution</h3><p>使用page pagesize进行分页导出</p>
+<h2 id="Q13字典获取key"><a href="#Q13字典获取key" class="headerlink" title="Q13字典获取key"></a>Q13字典获取key</h2><p>获取dict中key所对应的vaule, 使用. get [“key”]有什么区别?</p>
+<h2 id="Q12unhashed-type-dict"><a href="#Q12unhashed-type-dict" class="headerlink" title="Q12unhashed type dict"></a>Q12unhashed type dict</h2><h3 id="Info-8"><a href="#Info-8" class="headerlink" title="-Info"></a>-Info</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR: unhashed <span class="built_in">type</span> <span class="built_in">dict</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Analysis-6"><a href="#Analysis-6" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>字典不能存储在集合</p>
+<h2 id="Q11生成器对象不可下标"><a href="#Q11生成器对象不可下标" class="headerlink" title="Q11生成器对象不可下标"></a>Q11生成器对象不可下标</h2><h3 id="Infolocal"><a href="#Infolocal" class="headerlink" title="-Infolocal"></a>-Infolocal</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: ‘generator’ <span class="built_in">object</span> <span class="keyword">is</span> <span class="keyword">not</span> subscriptable </span><br></pre></td></tr></table></figure>
+
+<h3 id="Analysis-7"><a href="#Analysis-7" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>通常是list.append(generator)</p>
+<h3 id="Solution-6"><a href="#Solution-6" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = []</span><br><span class="line">b = []</span><br><span class="line">a.append([<span class="keyword">for</span> item <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">5</span>)])</span><br><span class="line">b.extend(<span class="keyword">for</span> item <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表生成器</span></span><br><span class="line">[<span class="keyword">for</span> item <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">5</span>)]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q10导入包含同名文件冲突"><a href="#Q10导入包含同名文件冲突" class="headerlink" title="Q10导入包含同名文件冲突"></a>Q10导入包含同名文件冲突</h2><h3 id="Info-9"><a href="#Info-9" class="headerlink" title="-Info"></a>-Info</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import resolves to its containing file</span><br><span class="line"></span><br><span class="line">file&gt; component</span><br><span class="line">import time</span><br></pre></td></tr></table></figure>
+
+<h3 id="Analysis-8"><a href="#Analysis-8" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>在<code>component</code>目录下有<code>time</code>文件,且import 了 time(python) 与python自带的第三方time库冲突</p>
+<h3 id="Solution-7"><a href="#Solution-7" class="headerlink" title="-Solution"></a>-Solution</h3><h2 id="Q9Mongodb保存-插入字段失败"><a href="#Q9Mongodb保存-插入字段失败" class="headerlink" title="Q9Mongodb保存|插入字段失败"></a>Q9Mongodb保存|插入字段失败</h2><ul>
+<li><input disabled="" type="checkbox"> 1.查看Table定义==&gt;fiedls = fiedls.<strong>IntFields()</strong>   ==&gt;需要加()</li>
 </ul>
-<h2 id="Q6Docker链接失败"><a href="#Q6Docker链接失败" class="headerlink" title="Q6Docker链接失败"></a>Q6Docker链接失败</h2><h3 id="Info-1"><a href="#Info-1" class="headerlink" title="-Info"></a>-Info</h3><p>使用<code>docker ps</code>出现</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker Cannot connect to the Docker daemon at unix:///var/run/docker.sock.</span><br></pre></td></tr></table></figure>
+<h2 id="Q8虚拟环境配置"><a href="#Q8虚拟环境配置" class="headerlink" title="Q8虚拟环境配置"></a>Q8虚拟环境配置</h2><ul>
+<li><input disabled="" type="checkbox"> 拉取项目后如何配置虚拟环境?</li>
+<li><input disabled="" type="checkbox"> 如何激活虚拟环境, 并每次进入pycharm的terminal都保证是venv?</li>
+</ul>
+<ol>
+<li>venv的目录和interpreter的目录要配置相同</li>
+</ol>
+<p>![image-20211018164551110](/Users/edy/Library/Application Support/typora-user-images/image-20211018164551110.png)</p>
+<p>![image-20211018164714977](/Users/edy/Library/Application Support/typora-user-images/image-20211018164714977.png)</p>
+<ol start="2">
+<li>terminal的配置如下</li>
+</ol>
+<p>![image-20211018164922890](/Users/edy/Library/Application Support/typora-user-images/image-20211018164922890.png)</p>
+<h2 id="Q7Nginx-Timeout-504"><a href="#Q7Nginx-Timeout-504" class="headerlink" title="Q7Nginx Timeout 504"></a>Q7Nginx Timeout 504</h2><h3 id="Info-10"><a href="#Info-10" class="headerlink" title="-Info"></a>-Info</h3><p>在前端导出excel时, 导出失败并返回<code>GateWay TimeOut 504</code></p>
+<h3 id="Analysis-9"><a href="#Analysis-9" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
+<li>重新导出查看log</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url: /channel/get_excel?token=ab5c40fa9da40d74f5a2ba17d84dcf63</span><br><span class="line">GET /channel/get_excel?token=ab5c40fa9da40d74f5a2ba17d84dcf63 (183.81.181.194) 67000.83ms</span><br></pre></td></tr></table></figure>
 
-<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>此时已确定Docker本身已经安装正常。 问题原因是因为docker服务没有启动，所以在相应的/var/run/ 路径下找不到docker的进程。 </p>
-<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="-Solution"></a>-Solution</h3><p>执行<code>service docker start </code>命令，启动docker服务，返回<code>docker start/running, process 2662</code> 此时进程启动成功，再执行docker ps，问题解决</p>
+<ul>
+<li>说明导出正常, 其中导出时间大于<code>60s</code></li>
+<li>nginx做反向代理，默认请求是有一个60秒的超时，如果http请求超过了60秒，再返回，连接就会被nginx中断，前端就会得到504的错误：gateway time-out。</li>
+</ul>
+<h3 id="Solution-8"><a href="#Solution-8" class="headerlink" title="-Solution"></a>-Solution</h3><blockquote>
+<p>修改nginx的配置, 将超时设置延长至300s</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">docker ps </span><br><span class="line"></span><br><span class="line">docker exec -it nginx_container_id bash</span><br><span class="line"></span><br><span class="line">whereis nginx.conf</span><br><span class="line"></span><br><span class="line">cd /etc/config</span><br><span class="line"></span><br><span class="line">vim nginx.conf</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    keepalive_timeout 300;</span><br><span class="line">    proxy_connect_timeout 300;</span><br><span class="line">    proxy_send_timeout 300;</span><br><span class="line">    proxy_read_timeout 300;</span><br><span class="line">    send_timeout 300;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用挂载修复</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入服务器</span></span><br><span class="line">ssh root@xxx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑volumne</span></span><br><span class="line">vim docker-compose.yaml</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加挂载</span></span><br><span class="line"> nginx-proxy:</span><br><span class="line">    image: registry.cn-beijing.aliyuncs.com/doododmain/nginx-proxy:20mbody</span><br><span class="line">    container_name: nginx-proxy</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;80:80&quot;</span><br><span class="line">      - &quot;443:443&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - /certs:/etc/nginx/certs</span><br><span class="line">      - /var/run/docker.sock:/tmp/docker.sock:ro</span><br><span class="line">      - /root/nginx/nginx.conf:/etx/nginx/nginx.conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在外部创建对应的挂载文件[宿主机]</span></span><br><span class="line">vim /root/nginx/nginx.conf</span><br><span class="line"></span><br><span class="line">user  nginx;</span><br><span class="line">worker_processes  auto;</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span><br><span class="line">                      &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">                      &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line"></span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout 300;</span><br><span class="line"></span><br><span class="line">    proxy_connect_timeout 300;</span><br><span class="line"></span><br><span class="line">    proxy_send_timeout 300;</span><br><span class="line"></span><br><span class="line">    proxy_read_timeout 300;</span><br><span class="line"></span><br><span class="line">    send_timeout 300;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line"></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br><span class="line">daemon off;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Review-2"><a href="#Review-2" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<li>如果程序正常, log也没有报错, 很可能是配置的原因</li>
+</ul>
+<h2 id="Q6mongodb插入数据报错"><a href="#Q6mongodb插入数据报错" class="headerlink" title="Q6mongodb插入数据报错"></a>Q6mongodb插入数据报错</h2><h3 id="Info-11"><a href="#Info-11" class="headerlink" title="-Info"></a>-Info</h3><p>在mongodb中插入数据报错<code>&#123;&#39;code&#39;: -1, &#39;msg&#39;: &#39;exception&#39;&#125;</code></p>
+<h3 id="Analysis-10"><a href="#Analysis-10" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>经过排查不是以下原因:</p>
+<ul>
+<li>插入字段类型与定义不符</li>
+<li>缺少必要字段</li>
+</ul>
+<h3 id="Solution-9"><a href="#Solution-9" class="headerlink" title="-Solution"></a>-Solution</h3><p>在mongodb表中定义字段如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 群发任务</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AssistantBatchSend</span>(<span class="params">BaseModel</span>):</span></span><br><span class="line">    __table__ = <span class="string">&#x27;assistant_batch_send&#x27;</span></span><br><span class="line">    client_id = fields.IntField()     <span class="comment"># 创建人</span></span><br><span class="line">    task_id = fields.IntField()       <span class="comment"># 任务标识</span></span><br><span class="line">    message_list = fields.JsonField()  <span class="comment"># 发送内容</span></span><br><span class="line">    bot_username_list = fields.JsonField()  <span class="comment"># 机器人id</span></span><br></pre></td></tr></table></figure>
+
+<p>在插入的数据中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">task_identification = <span class="built_in">int</span>(<span class="built_in">str</span>(self.user_info.client_id) + <span class="built_in">str</span>(<span class="built_in">int</span>(time.time()*<span class="number">1000000</span>))) <span class="comment"># 任务标识</span></span><br><span class="line">immediate_info = CM(Table.AssistantBatchSend)</span><br><span class="line">immediate_info.task_id = task_identification</span><br></pre></td></tr></table></figure>
+
+<p>其中task_id定义为<code>intfiled</code>长度最大</p>
+<p>为:</p>
+<p>![image-20211011134300296](/Users/edy/Library/Application Support/typora-user-images/image-20211011134300296.png)</p>
+<p>但是传入的长度为<code>22</code>, 应该把此字段定义为<code>StringField</code></p>
 <h2 id="Q5SSH连接VCM断开"><a href="#Q5SSH连接VCM断开" class="headerlink" title="Q5SSH连接VCM断开"></a>Q5SSH连接VCM断开</h2><h3 id="Question"><a href="#Question" class="headerlink" title="-Question"></a>-Question</h3><p><strong>报错信息</strong></p>
 <p><strong>info1</strong></p>
 <p>client_loop: send disconnect: Broken pipe</p>
 <p><strong>info2</strong></p>
 <p>yum-config-manager client_loop: send disconnect: Broken pipe</p>
-<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="-Analysis"></a>-Analysis</h3><p><strong>info1</strong></p>
+<h3 id="Analysis-11"><a href="#Analysis-11" class="headerlink" title="-Analysis"></a>-Analysis</h3><p><strong>info1</strong></p>
 <p>终端连接服务器无响应且没用自动间隔连接配置<strong>VCM的问题</strong></p>
-<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="-Solution"></a>-Solution</h3><p><strong>info1</strong></p>
+<h3 id="Solution-10"><a href="#Solution-10" class="headerlink" title="-Solution"></a>-Solution</h3><p><strong>info1</strong></p>
 <p>修改<code>/etc/ssh/sshd_config</code>文件, 修改<code>ClientAliveInterval 120</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过每 300 秒（每 5 分钟）进行响应确认来保持连接。 我认为这个部分的数字可以是60或120。</span></span><br><span class="line">&gt;/etc/ssh/sshd_config</span><br><span class="line"><span class="comment">#PermitUserEnvironment no</span></span><br><span class="line"><span class="comment">#Compression delayed</span></span><br><span class="line">ClientAliveInterval 60</span><br><span class="line"><span class="comment">#ClientAliveCountMax 3</span></span><br></pre></td></tr></table></figure>
 
@@ -143,12 +269,12 @@
 
 <p><strong>info2</strong></p>
 <p>配置<code>/etc/ssh/ssh_config</code>文件，增加以下内容即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">		IPQoS=throughput</span><br><span class="line">        <span class="comment"># 断开时重试连接的次数</span></span><br><span class="line">        ServerAliveCountMax 5</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 每隔5秒自动发送一个空的请求以保持连接</span></span><br><span class="line">        ServerAliveInterval 5</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">				IPQoS=throughput</span><br><span class="line">        <span class="comment"># 断开时重试连接的次数</span></span><br><span class="line">        ServerAliveCountMax 5</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 每隔5秒自动发送一个空的请求以保持连接</span></span><br><span class="line">        ServerAliveInterval 5</span><br></pre></td></tr></table></figure>
 
 <p>重新启动ssh服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
 
-<h2 id="Review-1"><a href="#Review-1" class="headerlink" title="-Review"></a>-Review</h2><p><strong>1.在服务端进行修改</strong></p>
+<h3 id="Review-3"><a href="#Review-3" class="headerlink" title="-Review"></a>-Review</h3><p><strong>1.在服务端进行修改</strong></p>
 <p>在服务器端， 可以让服务器发送“心跳”信号测试提醒客户端进行保持连接</p>
 <p>通过修改 sshd 的配置文件，能够让 SSH Server 发送“心跳”信号来维持持续连接，下面是设置的内容</p>
 <p>打开服务器 <code>/etc/ssh/sshd_config</code>，我在最后增加一行</p>
@@ -164,10 +290,10 @@
 <h2 id="Q4vim安装失败"><a href="#Q4vim安装失败" class="headerlink" title="Q4vim安装失败"></a>Q4vim安装失败</h2><h3 id="Question-1"><a href="#Question-1" class="headerlink" title="-Question"></a>-Question</h3><ol>
 <li>在使用<code>vim</code>时发现报错<code>bash: vim: command not found</code></li>
 </ol>
-<h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>使用<code>cat /proc/version</code>查看系统版本</p>
+<h3 id="Analysis-12"><a href="#Analysis-12" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>使用<code>cat /proc/version</code>查看系统版本</p>
 <p>![image-20210928202753365](/Users/edy/Library/Application Support/typora-user-images/image-20210928202753365.png)</p>
 <p>查看系统镜像中是否有<code>vim</code>, 发现<code>red hat 5</code>才有<code>vim</code></p>
-<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="-Solution"></a>-Solution</h3><ul>
+<h3 id="Solution-11"><a href="#Solution-11" class="headerlink" title="-Solution"></a>-Solution</h3><ul>
 <li>使用<code>apt install vim </code>安装<code>vim</code></li>
 <li>发现<code>Unable to locate package vim</code></li>
 </ul>
@@ -176,7 +302,7 @@
 <li>需要输入：<code>apt-get update</code>（作用是：同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包）</li>
 <li>之后再输入<code>apt-get install vim</code>安装（非root用户登录，<code>root apt-get intall vim</code>）</li>
 </ul>
-<h3 id="Review-2"><a href="#Review-2" class="headerlink" title="-Review"></a>-Review</h3><p><strong>docker常用命令</strong></p>
+<h3 id="Review-4"><a href="#Review-4" class="headerlink" title="-Review"></a>-Review</h3><p><strong>docker常用命令</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改了image内的文件后重启image</span></span><br><span class="line">docker restart image_id</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动container中的所有image</span></span><br><span class="line">docker start $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 停止container中的所有image</span></span><br><span class="line">docker stop $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除container中的所有image</span></span><br><span class="line">docker rm $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br></pre></td></tr></table></figure>
 
 <h2 id="Q3镜像部署失败"><a href="#Q3镜像部署失败" class="headerlink" title="Q3镜像部署失败"></a>Q3镜像部署失败</h2><h3 id="Question-2"><a href="#Question-2" class="headerlink" title="-Question"></a>-Question</h3><ol>
@@ -186,13 +312,13 @@
 <ol start="2">
 <li>有正在运行的container, 无法部署</li>
 </ol>
-<h3 id="Analysis-4"><a href="#Analysis-4" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
+<h3 id="Analysis-13"><a href="#Analysis-13" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
 <li>在部署的过程中存在正在运行的container</li>
 <li>需要将所有的正在运行的container停下来或者删除所有正在运行的container中的image</li>
 </ul>
-<h3 id="Solution-4"><a href="#Solution-4" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动所有imagedocker start $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)# 停止运行所有imagedocker stop $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)# 删除container中的所有imagedocker rm $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)# 重新部署sh deploy-debug.sh 1.0.0.65</span></span><br></pre></td></tr></table></figure>
+<h3 id="Solution-12"><a href="#Solution-12" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动所有image</span></span><br><span class="line">docker start $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止运行所有image</span></span><br><span class="line">docker stop $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除container中的所有image</span></span><br><span class="line">docker rm $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新部署</span></span><br><span class="line">sh deploy-debug.sh 1.0.0.65</span><br></pre></td></tr></table></figure>
 
-<h3 id="Review-3"><a href="#Review-3" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<h3 id="Review-5"><a href="#Review-5" class="headerlink" title="-Review"></a>-Review</h3><ul>
 <li>使用<code>docker ps -a</code>container中的所有image包括正在运行和未运行的</li>
 <li><code>docker rmi -f &#39;docker iamges&#39; </code>删除的已经存在但未运行的image</li>
 <li><code>docker rm image_id</code>删除正在运行的image</li>
@@ -204,17 +330,17 @@
 <ol start="2">
 <li>RabbitMQ只有生产者没有消费者</li>
 </ol>
-<h3 id="Analysis-5"><a href="#Analysis-5" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<h3 id="Analysis-14"><a href="#Analysis-14" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
 <li>部分服务器没起来</li>
 </ol>
-<h3 id="Solution-5"><a href="#Solution-5" class="headerlink" title="-Solution"></a>-Solution</h3><ol>
+<h3 id="Solution-13"><a href="#Solution-13" class="headerlink" title="-Solution"></a>-Solution</h3><ol>
 <li><code>docker logs -f image_name </code>查看对应的image日志</li>
 <li>找到报错信息</li>
 </ol>
 <p>![image-20210928095931103](/Users/edy/Library/Application Support/typora-user-images/image-20210928095931103.png)</p>
 <p><code>cerely can&#39;t find module name &#39;component.task.member_change_task.component&#39;</code></p>
 <p><strong>cerely配置错误</strong></p>
-<h3 id="Review-4"><a href="#Review-4" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<h3 id="Review-6"><a href="#Review-6" class="headerlink" title="-Review"></a>-Review</h3><ul>
 <li>docker logs -f </li>
 <li>command r 搜索已经使用的order</li>
 </ul>
@@ -232,7 +358,7 @@
 </ul>
 </li>
 </ol>
-<h3 id="Analysis-6"><a href="#Analysis-6" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<h3 id="Analysis-15"><a href="#Analysis-15" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
 <li>登陆紫豆服务器<code>ssh root@ip</code><ul>
 <li>报错显示disk overflower</li>
 </ul>
@@ -240,13 +366,13 @@
 <li><code>df -h</code>查看disk存储情况</li>
 </ol>
 <p><img src="file:///Users/edy/Library/Application%20Support/typora-user-images/image-20210926170428181.png?lastModify=1632625187" alt="image-20210926170428181"></p>
-<h3 id="Solution-6"><a href="#Solution-6" class="headerlink" title="-Solution"></a><strong>-Solution</strong></h3><ol>
+<h3 id="Solution-14"><a href="#Solution-14" class="headerlink" title="-Solution"></a><strong>-Solution</strong></h3><ol>
 <li><p>删除不用的container|容器修剪</p>
 <ul>
 <li>PRO环境具有一定的风险</li>
 <li><code>docker system prune</code>  <code>docker container prune</code></li>
 </ul>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container pruneWARNING! This will remove all stopped containers.Are you sure you want to continue? [y/N] yDeleted Containers:<span class="number">4</span>a7f7eebae0f63178aff7eb0aa39cd3f0627a203ab2df258c1a00b456cf20063f98f9c2aa1eaf727e4ec9c0283bc7d4aa4762fbdba7f26191f26c97f64090360Total reclaimed space: <span class="number">212</span> B</span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker container prune</span><br><span class="line">WARNING! This will remove all stopped containers.</span><br><span class="line">Are you sure you want to continue? [y/N] y</span><br><span class="line">Deleted Containers:</span><br><span class="line"><span class="number">4</span>a7f7eebae0f63178aff7eb0aa39cd3f0627a203ab2df258c1a00b456cf20063</span><br><span class="line">f98f9c2aa1eaf727e4ec9c0283bc7d4aa4762fbdba7f26191f26c97f64090360</span><br><span class="line"></span><br><span class="line">Total reclaimed space: <span class="number">212</span> B</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>删除镜像[优先选择]</strong></p>
 <ul>
@@ -266,7 +392,7 @@
 <p><strong>docker prune 命令</strong></p>
 <p>prune 命令用来删除不再使用的 docker 对象。</p>
 <p>删除所有未被 tag 标记和未被容器使用的镜像:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker image pruneWARNING! This will remove all dangling images.Are you sure you want to <span class="built_in">continue</span>? [y/N] y</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker image prune</span><br><span class="line">WARNING! This will remove all dangling images.</span><br><span class="line">Are you sure you want to <span class="built_in">continue</span>? [y/N] y</span><br></pre></td></tr></table></figure>
 
 <p>删除所有未被容器使用的镜像:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker image prune -a</span><br></pre></td></tr></table></figure>
@@ -284,7 +410,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker system prune</span><br></pre></td></tr></table></figure>
 
 <p><strong>docker system prune</strong> 命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">This will remove:        </span><br><span class="line">- all stopped containers        </span><br><span class="line">- all networks not used by at least one container        </span><br><span class="line">- all dangling images        </span><br><span class="line">- all dangling build cache</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">This will remove:</span><br><span class="line">        - all stopped containers</span><br><span class="line">        - all networks not used by at least one container</span><br><span class="line">        - all dangling images</span><br><span class="line">        - all dangling build cache</span><br></pre></td></tr></table></figure>
 
 <p>删除停止的容器、删除所有未被容器使用的网络、删除所有none的镜像。</p>
 
