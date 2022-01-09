@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MySQL | Drink`s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.MySQL函数round【round(avg(COL_1), NUM)】:计算col_1的平均值并保留num有效数字 四舍五入 123456SELECT ROUND(AVG(SCORE), 1) AS &#96;AVEAGE SCORE&#96;FROM STUDNET&gt;&gt;90.180.2...  lengthlength(‘char’)  中文算三个长度 alpha和number算一个长度  快">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL">
+<meta property="og:url" content="https://drinkle.top/2021/07/18/MySQL/index.html">
+<meta property="og:site_name" content="Drink&#96;s Blog">
+<meta property="og:description" content="1.MySQL函数round【round(avg(COL_1), NUM)】:计算col_1的平均值并保留num有效数字 四舍五入 123456SELECT ROUND(AVG(SCORE), 1) AS &#96;AVEAGE SCORE&#96;FROM STUDNET&gt;&gt;90.180.2...  lengthlength(‘char’)  中文算三个长度 alpha和number算一个长度  快">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11464886-82267cb5926d26fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+<meta property="article:published_time" content="2021-07-18T05:43:55.000Z">
+<meta property="article:modified_time" content="2021-07-28T04:13:59.028Z">
+<meta property="article:author" content="Drink">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/11464886-82267cb5926d26fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+  
+    <link rel="alternate" href="/atom.xml" title="Drink`s Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Drink`s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://drinkle.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-MySQL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/18/MySQL/" class="article-date">
+  <time class="dt-published" datetime="2021-07-18T05:43:55.000Z" itemprop="datePublished">2021-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MySQL
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-MySQL"><a href="#1-MySQL" class="headerlink" title="1.MySQL"></a>1.MySQL</h2><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="round"><a href="#round" class="headerlink" title="round"></a>round</h3><p>【round(avg(COL_1), NUM)】:计算col_1的平均值并保留num有效数字</p>
+<p>四舍五入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ROUND(<span class="built_in">AVG</span>(SCORE), <span class="number">1</span>) <span class="keyword">AS</span> `AVEAGE SCORE`</span><br><span class="line"><span class="keyword">FROM</span> STUDNET</span><br><span class="line"><span class="operator">&gt;&gt;</span></span><br><span class="line"><span class="number">90.1</span></span><br><span class="line"><span class="number">80.2</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h3 id="length"><a href="#length" class="headerlink" title="length"></a>length</h3><p>length(‘char’)</p>
+<ul>
+<li>中文算三个长度</li>
+<li>alpha和number算一个长度</li>
+</ul>
+<h2 id="快捷指令"><a href="#快捷指令" class="headerlink" title="快捷指令"></a>快捷指令</h2><p>常用快捷键：</p>
+<p><strong>1、执行整篇sql脚本</strong></p>
+<p><code>【Ctrl】+【Shift】+【Enter】</code></p>
+<p><strong>2、执行当前行：</strong></p>
+<p><code>【Ctrl】+【Enter】</code></p>
+<p><strong>3、注释/取消注释：</strong></p>
+<p><code>【Ctrl】+【/】</code></p>
+<p><strong>4、格式化sql语句（美化sql语句）：</strong></p>
+<p><code>【Ctrl】+【B】 </code></p>
+<p>5、（貌似和输入法有冲突）自动补全：【Ctrl】+【Space】 ，还可以使用edit-&gt;Auto-complete手动展示补全。如果有冲突可以去下面的文件找到Auto complete进行修改。Modifier的意思就是Ctrl键。</p>
+<p>修改快捷键：</p>
+<p>在安装根目录查到\data\main_menu.xml这个文件（Ubuntu放在/usr/share/mysql-workbench）。</p>
+<p><strong>6.MySQL Clint清屏</strong></p>
+<p><code>system cls</code></p>
+<h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><p>Error Code: 1054. Unknown column ‘%%’ in ‘where clause’</p>
+<p>出现类似的语法错误时，首先考虑是 <strong>‘</strong> 还是 <strong>`</strong> 出错了</p>
+<p>一个是syntax error 一个是通配符使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT COL_NAME</span><br><span class="line">FROM TABLE_NAME</span><br><span class="line">WHERE STUDENT_NAME LIKE &#39;小%&#39;;</span><br><span class="line"></span><br><span class="line">SELECT &#96;COL_NAME&#96;</span><br><span class="line">FROM &#96;DATABASE_NAME&#96;.&#96;TABLE_NAME&#96;</span><br></pre></td></tr></table></figure>
+
+<p>`DataBase/Table``     ‘wildcard’ </p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="Schema和DataBase是否等同？"><a href="#Schema和DataBase是否等同？" class="headerlink" title="Schema和DataBase是否等同？"></a>Schema和DataBase是否等同？</h3><p><strong>schema是数据库的组织和结构，是数据库对象的集合，集合包括表，视图，储存过程，索引等。</strong></p>
+<p>（1）MySQL的文档中指出，在物理上，模式与数据库是同义的，所以，模式和数据库是一回事。</p>
+<p>（2）但是，Oracle的文档却指出，某些对象可以存储在数据库中，但不能存储在schema中。 因此，模式和数据库不是一回事。</p>
+<p>（3）而根据这篇SQL Server技术文章<a target="_blank" rel="noopener" href="https://technet.microsoft.com/en-us/library/dd283095(v=sql.100).aspx">SQLServer technical article</a>，schema是数据库SQL Server内部的一个独立的实体。 所以，他们也不是一回事。</p>
+<p>因此，取决于您使用的RDBMS，模式和数据库可能不一样。</p>
+<h3 id="引擎"><a href="#引擎" class="headerlink" title="引擎"></a>引擎</h3><p><img src="https://upload-images.jianshu.io/upload_images/11464886-82267cb5926d26fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="img"></p>
+<p><strong>【InnoDB】事务性数据库</strong></p>
+<p><strong>【事务】</strong></p>
+<p>子性、一致性、隔离性、持久性。这四个属性通常称为<strong>ACID特性</strong>。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">原子性（atomicity）。一个事务是一个不可分割的工作单位，事务中包括的操作要么都做，要么都不做。</span><br><span class="line"></span><br><span class="line">一致性（consistency）。事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的。</span><br><span class="line"></span><br><span class="line">隔离性（isolation）。一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</span><br><span class="line"></span><br><span class="line">持久性（durability）。持久性也称永久性（permanence），指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响。</span><br></pre></td></tr></table></figure>
+
+<p>具有<strong>提交、回滚、崩溃恢复能力</strong>的事物安全（ACID兼容）能力，并要求实现并发控制同时支持外键</p>
+<p><strong>【MyISAM】</strong></p>
+<p>数据表主要用来<strong>插入</strong>和<strong>查询记录</strong>MyISAM引擎能提供较高的处理效率</p>
+<p><strong>【Memory】</strong></p>
+<p>如果<strong>只是临时存放数据，</strong>数据量不大，并且不需要较高的数据安全性，可以选择将数据保存在内存中的Memory引擎，<strong>MySQL中使用该引擎作为临时表</strong>，存放查询的中间结果</p>
+<p><strong>【Archive】仓库型数据库</strong></p>
+<p>如果只有<strong>INSERT和SELECT操作</strong>，可以选择Archive，Archive支持高并发的插入操作，但是本身不是事务安全的。Archive非常适合存储归档数据，如记录日志信息可以使用Archive</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/07/18/MySQL/" data-id="ckrarjjgm00018of58kwa2icz" data-title="MySQL" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/07/18/Linux/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Linux
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/07/11/Algorithm/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Algorithm</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataBase/" rel="tag">DataBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drink/" rel="tag">Drink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/" rel="tag">Mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" rel="tag">独到科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 15px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/Data-Structure/" style="font-size: 10px;">Data Structure</a> <a href="/tags/DataBase/" style="font-size: 10px;">DataBase</a> <a href="/tags/Drink/" style="font-size: 15px;">Drink</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/14/%E7%BB%8F%E6%B5%8E%E5%88%86%E6%9E%90-1/">经济分析[1]</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/14/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD-2/">新闻联播[2]</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/07/Question/">Question</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/07/My-Project/">My-Project</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/25/%E6%88%91%E7%9A%84%E5%AD%A6%E4%B9%A0/">我的学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Drink<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
