@@ -71,6 +71,259 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-每日复盘" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/" class="article-date">
+  <time class="dt-published" datetime="2021-07-26T12:28:52.000Z" itemprop="datePublished">2021-07-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/">每日复盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Q9Mongodb保存-插入字段失败"><a href="#Q9Mongodb保存-插入字段失败" class="headerlink" title="Q9Mongodb保存|插入字段失败"></a>Q9Mongodb保存|插入字段失败</h2><ul>
+<li><input disabled="" type="checkbox"> 1.查看Table定义==&gt;fiedls = fiedls.<strong>IntFields()</strong>   ==&gt;需要加()</li>
+</ul>
+<h2 id="Q8虚拟环境配置"><a href="#Q8虚拟环境配置" class="headerlink" title="Q8虚拟环境配置"></a>Q8虚拟环境配置</h2><ul>
+<li><input disabled="" type="checkbox"> 拉取项目后如何配置虚拟环境?</li>
+<li><input disabled="" type="checkbox"> 如何激活虚拟环境, 并每次进入pycharm的terminal都保证是venv?</li>
+</ul>
+<ol>
+<li>venv的目录和interpreter的目录要配置相同</li>
+</ol>
+<p>![image-20211018164551110](/Users/edy/Library/Application Support/typora-user-images/image-20211018164551110.png)</p>
+<p>![image-20211018164714977](/Users/edy/Library/Application Support/typora-user-images/image-20211018164714977.png)</p>
+<ol start="2">
+<li>terminal的配置如下</li>
+</ol>
+<p>![image-20211018164922890](/Users/edy/Library/Application Support/typora-user-images/image-20211018164922890.png)</p>
+<h2 id="Q7Nginx-Timeout-504"><a href="#Q7Nginx-Timeout-504" class="headerlink" title="Q7Nginx Timeout 504"></a>Q7Nginx Timeout 504</h2><h3 id="Info"><a href="#Info" class="headerlink" title="-Info"></a>-Info</h3><p>在前端导出excel时, 导出失败并返回<code>GateWay TimeOut 504</code></p>
+<h3 id="Analysis"><a href="#Analysis" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
+<li>重新导出查看log</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url: /channel/get_excel?token=ab5c40fa9da40d74f5a2ba17d84dcf63</span><br><span class="line">GET /channel/get_excel?token=ab5c40fa9da40d74f5a2ba17d84dcf63 (183.81.181.194) 67000.83ms</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>说明导出正常, 其中导出时间大于<code>60s</code></li>
+<li>nginx做反向代理，默认请求是有一个60秒的超时，如果http请求超过了60秒，再返回，连接就会被nginx中断，前端就会得到504的错误：gateway time-out。</li>
+</ul>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="-Solution"></a>-Solution</h3><blockquote>
+<p>修改nginx的配置, 将超时设置延长至300s</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">docker ps </span><br><span class="line"></span><br><span class="line">docker exec -it nginx_container_id bash</span><br><span class="line"></span><br><span class="line">whereis nginx.conf</span><br><span class="line"></span><br><span class="line">cd /etc/config</span><br><span class="line"></span><br><span class="line">vim nginx.conf</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">		...</span><br><span class="line">		keepalive_timeout 300;</span><br><span class="line">		proxy_connect_timeout 300;</span><br><span class="line">    proxy_send_timeout 300;</span><br><span class="line">    proxy_read_timeout 300;</span><br><span class="line">    send_timeout 300</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Review"><a href="#Review" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<li>如果程序正常, log也没有报错, 很可能是配置的原因</li>
+</ul>
+<h2 id="Q6mongodb插入数据报错"><a href="#Q6mongodb插入数据报错" class="headerlink" title="Q6mongodb插入数据报错"></a>Q6mongodb插入数据报错</h2><h3 id="Info-1"><a href="#Info-1" class="headerlink" title="-Info"></a>-Info</h3><p>在mongodb中插入数据报错<code>&#123;&#39;code&#39;: -1, &#39;msg&#39;: &#39;exception&#39;&#125;</code></p>
+<h3 id="Analysis-1"><a href="#Analysis-1" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>经过排查不是以下原因:</p>
+<ul>
+<li>插入字段类型与定义不符</li>
+<li>缺少必要字段</li>
+</ul>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="-Solution"></a>-Solution</h3><p>在mongodb表中定义字段如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 群发任务</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AssistantBatchSend</span>(<span class="params">BaseModel</span>):</span></span><br><span class="line">    __table__ = <span class="string">&#x27;assistant_batch_send&#x27;</span></span><br><span class="line">    client_id = fields.IntField()     <span class="comment"># 创建人</span></span><br><span class="line">    task_id = fields.IntField()       <span class="comment"># 任务标识</span></span><br><span class="line">    message_list = fields.JsonField()  <span class="comment"># 发送内容</span></span><br><span class="line">    bot_username_list = fields.JsonField()  <span class="comment"># 机器人id</span></span><br></pre></td></tr></table></figure>
+
+<p>在插入的数据中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">task_identification = <span class="built_in">int</span>(<span class="built_in">str</span>(self.user_info.client_id) + <span class="built_in">str</span>(<span class="built_in">int</span>(time.time()*<span class="number">1000000</span>))) <span class="comment"># 任务标识</span></span><br><span class="line">immediate_info = CM(Table.AssistantBatchSend)</span><br><span class="line">immediate_info.task_id = task_identification</span><br></pre></td></tr></table></figure>
+
+<p>其中task_id定义为<code>intfiled</code>长度最大</p>
+<p>为:</p>
+<p>![image-20211011134300296](/Users/edy/Library/Application Support/typora-user-images/image-20211011134300296.png)</p>
+<p>但是传入的长度为<code>22</code>, 应该把此字段定义为<code>StringField</code></p>
+<h2 id="Q5SSH连接VCM断开"><a href="#Q5SSH连接VCM断开" class="headerlink" title="Q5SSH连接VCM断开"></a>Q5SSH连接VCM断开</h2><h3 id="Question"><a href="#Question" class="headerlink" title="-Question"></a>-Question</h3><p><strong>报错信息</strong></p>
+<p><strong>info1</strong></p>
+<p>client_loop: send disconnect: Broken pipe</p>
+<p><strong>info2</strong></p>
+<p>yum-config-manager client_loop: send disconnect: Broken pipe</p>
+<h3 id="Analysis-2"><a href="#Analysis-2" class="headerlink" title="-Analysis"></a>-Analysis</h3><p><strong>info1</strong></p>
+<p>终端连接服务器无响应且没用自动间隔连接配置<strong>VCM的问题</strong></p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="-Solution"></a>-Solution</h3><p><strong>info1</strong></p>
+<p>修改<code>/etc/ssh/sshd_config</code>文件, 修改<code>ClientAliveInterval 120</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过每 300 秒（每 5 分钟）进行响应确认来保持连接。 我认为这个部分的数字可以是60或120。</span></span><br><span class="line">&gt;/etc/ssh/sshd_config</span><br><span class="line"><span class="comment">#PermitUserEnvironment no</span></span><br><span class="line"><span class="comment">#Compression delayed</span></span><br><span class="line">ClientAliveInterval 60</span><br><span class="line"><span class="comment">#ClientAliveCountMax 3</span></span><br></pre></td></tr></table></figure>
+
+<p>重新启动ssh服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<p>或者在客户端进行更改<code>/etc/ssh/ssh_config</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加参数</span></span><br><span class="line">TCPKeepAlive yes</span><br><span class="line">ServerAliveInterval 60</span><br></pre></td></tr></table></figure>
+
+<p><strong>info2</strong></p>
+<p>配置<code>/etc/ssh/ssh_config</code>文件，增加以下内容即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Host *</span><br><span class="line">				IPQoS=throughput</span><br><span class="line">        <span class="comment"># 断开时重试连接的次数</span></span><br><span class="line">        ServerAliveCountMax 5</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 每隔5秒自动发送一个空的请求以保持连接</span></span><br><span class="line">        ServerAliveInterval 5</span><br></pre></td></tr></table></figure>
+
+<p>重新启动ssh服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
+<h3 id="Review-1"><a href="#Review-1" class="headerlink" title="-Review"></a>-Review</h3><p><strong>1.在服务端进行修改</strong></p>
+<p>在服务器端， 可以让服务器发送“心跳”信号测试提醒客户端进行保持连接</p>
+<p>通过修改 sshd 的配置文件，能够让 SSH Server 发送“心跳”信号来维持持续连接，下面是设置的内容</p>
+<p>打开服务器 <code>/etc/ssh/sshd_config</code>，我在最后增加一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ClientAliveInterval 60</span><br><span class="line">ClientAliveCountMax 1</span><br></pre></td></tr></table></figure>
+
+<p>这样，SSH Server 每 60 秒就会自动发送一个信号给 Client，而等待 Client 回应，（注意：是服务器发心跳信号，不是客户端，这个有别于一些 FTP Client 发送的 KeepAlives 信号），如果客户端没有回应，会记录下来直到记录数超过 ClientAliveCountMax 的值时，才会断开连接。</p>
+<p><strong>2.在客户端进行修改</strong></p>
+<p>只要在/etc/ssh/ssh_config文件里加两个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TCPKeepAlive yes</span><br><span class="line">ServerAliveInterval 60</span><br></pre></td></tr></table></figure>
+
+<p>前一个参数是说要保持连接，后一个参数表示每过1分钟发一个数据包到服务器表示“我还活着”</p>
+<p>如果你没有root权限，修改或者创建~/.ssh/ssh_config也是可以的</p>
+<h2 id="Q4vim安装失败"><a href="#Q4vim安装失败" class="headerlink" title="Q4vim安装失败"></a>Q4vim安装失败</h2><h3 id="Question-1"><a href="#Question-1" class="headerlink" title="-Question"></a>-Question</h3><ol>
+<li>在使用<code>vim</code>时发现报错<code>bash: vim: command not found</code></li>
+</ol>
+<h3 id="Analysis-3"><a href="#Analysis-3" class="headerlink" title="-Analysis"></a>-Analysis</h3><p>使用<code>cat /proc/version</code>查看系统版本</p>
+<p>![image-20210928202753365](/Users/edy/Library/Application Support/typora-user-images/image-20210928202753365.png)</p>
+<p>查看系统镜像中是否有<code>vim</code>, 发现<code>red hat 5</code>才有<code>vim</code></p>
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="-Solution"></a>-Solution</h3><ul>
+<li>使用<code>apt install vim </code>安装<code>vim</code></li>
+<li>发现<code>Unable to locate package vim</code></li>
+</ul>
+<p>![image-20210928203059115](/Users/edy/Library/Application Support/typora-user-images/image-20210928203059115.png)</p>
+<ul>
+<li>需要输入：<code>apt-get update</code>（作用是：同步 /etc/apt/sources.list 和 /etc/apt/sources.list.d 中列出的源的索引，这样才能获取到最新的软件包）</li>
+<li>之后再输入<code>apt-get install vim</code>安装（非root用户登录，<code>root apt-get intall vim</code>）</li>
+</ul>
+<h3 id="Review-2"><a href="#Review-2" class="headerlink" title="-Review"></a>-Review</h3><p><strong>docker常用命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改了image内的文件后重启image</span></span><br><span class="line">docker restart image_id</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动container中的所有image</span></span><br><span class="line">docker start $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 停止container中的所有image</span></span><br><span class="line">docker stop $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除container中的所有image</span></span><br><span class="line">docker rm $(docker ps -a | awk &#x27;&#123; print $1&#125;&#x27; | tail -n +2)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Q3镜像部署失败"><a href="#Q3镜像部署失败" class="headerlink" title="Q3镜像部署失败"></a>Q3镜像部署失败</h2><h3 id="Question-2"><a href="#Question-2" class="headerlink" title="-Question"></a>-Question</h3><ol>
+<li>部署对应的tag的时候出现<code>error</code></li>
+</ol>
+<p>![image-20210928155639667](/Users/edy/Library/Application Support/typora-user-images/image-20210928155639667.png)</p>
+<ol start="2">
+<li>有正在运行的container, 无法部署</li>
+</ol>
+<h3 id="Analysis-4"><a href="#Analysis-4" class="headerlink" title="-Analysis"></a>-Analysis</h3><ul>
+<li>在部署的过程中存在正在运行的container</li>
+<li>需要将所有的正在运行的container停下来或者删除所有正在运行的container中的image</li>
+</ul>
+<h3 id="Solution-4"><a href="#Solution-4" class="headerlink" title="-Solution"></a>-Solution</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动所有image</span></span><br><span class="line">docker start $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止运行所有image</span></span><br><span class="line">docker stop $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除container中的所有image</span></span><br><span class="line">docker rm $(docker ps -a | awk <span class="string">&#x27;&#123; print $1&#125;&#x27;</span> | tail -n +2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新部署</span></span><br><span class="line">sh deploy-debug.sh 1.0.0.65</span><br></pre></td></tr></table></figure>
+
+<h3 id="Review-3"><a href="#Review-3" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<li>使用<code>docker ps -a</code>container中的所有image包括正在运行和未运行的</li>
+<li><code>docker rmi -f &#39;docker iamges&#39; </code>删除的已经存在但未运行的image</li>
+<li><code>docker rm image_id</code>删除正在运行的image</li>
+</ul>
+<h2 id="Q2镜像重启"><a href="#Q2镜像重启" class="headerlink" title="Q2镜像重启"></a>Q2镜像重启</h2><h3 id="Question-3"><a href="#Question-3" class="headerlink" title="-Question"></a>-Question</h3><ol>
+<li>Docker ps 查看镜像状态显示<code>restart</code></li>
+</ol>
+<p>![image-20210928095953991](/Users/edy/Library/Application Support/typora-user-images/image-20210928095953991.png)</p>
+<ol start="2">
+<li>RabbitMQ只有生产者没有消费者</li>
+</ol>
+<h3 id="Analysis-5"><a href="#Analysis-5" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<li>部分服务器没起来</li>
+</ol>
+<h3 id="Solution-5"><a href="#Solution-5" class="headerlink" title="-Solution"></a>-Solution</h3><ol>
+<li><code>docker logs -f image_name </code>查看对应的image日志</li>
+<li>找到报错信息</li>
+</ol>
+<p>![image-20210928095931103](/Users/edy/Library/Application Support/typora-user-images/image-20210928095931103.png)</p>
+<p><code>cerely can&#39;t find module name &#39;component.task.member_change_task.component&#39;</code></p>
+<p><strong>cerely配置错误</strong></p>
+<h3 id="Review-4"><a href="#Review-4" class="headerlink" title="-Review"></a>-Review</h3><ul>
+<li>docker logs -f </li>
+<li>command r 搜索已经使用的order</li>
+</ul>
+<h2 id="Q1磁盘溢出"><a href="#Q1磁盘溢出" class="headerlink" title="Q1磁盘溢出"></a>Q1磁盘溢出</h2><h3 id="Question-4"><a href="#Question-4" class="headerlink" title="-Question"></a>-<strong>Question</strong></h3><ol>
+<li>mongodb连接失败报错<ul>
+<li><code>failed to read 4 bytes from socket within 300000 milliseconds</code></li>
+</ul>
+</li>
+<li>紫豆超管后台登陆失败<ul>
+<li><code>login 无响应</code></li>
+</ul>
+</li>
+<li>机器人正常但不可用<ul>
+<li><code>机器人上报heartbeat给服务器但服务器不callback</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="Analysis-6"><a href="#Analysis-6" class="headerlink" title="-Analysis"></a>-Analysis</h3><ol>
+<li>登陆紫豆服务器<code>ssh root@ip</code><ul>
+<li>报错显示disk overflower</li>
+</ul>
+</li>
+<li><code>df -h</code>查看disk存储情况</li>
+</ol>
+<p><img src="file:///Users/edy/Library/Application%20Support/typora-user-images/image-20210926170428181.png?lastModify=1632625187" alt="image-20210926170428181"></p>
+<h3 id="Solution-6"><a href="#Solution-6" class="headerlink" title="-Solution"></a><strong>-Solution</strong></h3><ol>
+<li><p>删除不用的container|容器修剪</p>
+<ul>
+<li>PRO环境具有一定的风险</li>
+<li><code>docker system prune</code>  <code>docker container prune</code></li>
+</ul>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker container prune</span><br><span class="line">WARNING! This will remove all stopped containers.</span><br><span class="line">Are you sure you want to continue? [y/N] y</span><br><span class="line">Deleted Containers:</span><br><span class="line"><span class="number">4</span>a7f7eebae0f63178aff7eb0aa39cd3f0627a203ab2df258c1a00b456cf20063</span><br><span class="line">f98f9c2aa1eaf727e4ec9c0283bc7d4aa4762fbdba7f26191f26c97f64090360</span><br><span class="line"></span><br><span class="line">Total reclaimed space: <span class="number">212</span> B</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除镜像[优先选择]</strong></p>
+<ul>
+<li><pre><code class="bahs">docker rmi -f `docker images`
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   - docker image需&#96;</span><br><span class="line"></span><br><span class="line">   - **删除已经存在的镜像「不包括正在运行的」**</span><br><span class="line"></span><br><span class="line">### -Review</span><br><span class="line"></span><br><span class="line">**docker rmi :** 删除本地一个或多个镜像。</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;docker</span><br><span class="line">docker rmi [OPTIONS] IMAGE [IMAGE...]</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>OPTIONS说明：</strong></p>
+<ul>
+<li>**-f :**强制删除；</li>
+<li>**–no-prune :**不移除该镜像的过程镜像，默认移除；</li>
+</ul>
+<hr>
+<p><strong>docker prune 命令</strong></p>
+<p>prune 命令用来删除不再使用的 docker 对象。</p>
+<p>删除所有未被 tag 标记和未被容器使用的镜像:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker image prune</span><br><span class="line">WARNING! This will remove all dangling images.</span><br><span class="line">Are you sure you want to <span class="built_in">continue</span>? [y/N] y</span><br></pre></td></tr></table></figure>
+
+<p>删除所有未被容器使用的镜像:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker image prune -a</span><br></pre></td></tr></table></figure>
+
+<p>删除所有停止运行的容器:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker container prune</span><br></pre></td></tr></table></figure>
+
+<p>删除所有未被挂载的卷:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker volume prune</span><br></pre></td></tr></table></figure>
+
+<p>删除所有网络:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker network prune</span><br></pre></td></tr></table></figure>
+
+<p>删除 docker 所有资源:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker system prune</span><br></pre></td></tr></table></figure>
+
+<p><strong>docker system prune</strong> 命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">This will remove:</span><br><span class="line">        - all stopped containers</span><br><span class="line">        - all networks not used by at least one container</span><br><span class="line">        - all dangling images</span><br><span class="line">        - all dangling build cache</span><br></pre></td></tr></table></figure>
+
+<p>删除停止的容器、删除所有未被容器使用的网络、删除所有none的镜像。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2021/07/26/%E6%AF%8F%E6%97%A5%E5%A4%8D%E7%9B%98/" data-id="ckrurzwfj0000wsf5gt8n4lfb" data-title="每日复盘" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Eternal-Spirit" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/25/Eternal-Spirit/" class="article-date">
@@ -1426,149 +1679,6 @@
 
 
   
-    <article id="post-Postgraduate" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/06/14/Postgraduate/" class="article-date">
-  <time class="dt-published" datetime="2021-06-14T14:46:18.000Z" itemprop="datePublished">2021-06-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/06/14/Postgraduate/">Postgraduate</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="985"><a href="#985" class="headerlink" title="985"></a><strong>985</strong></h2><ol>
-<li>北京交通大学：数一、英一、（925）数据结构</li>
-<li>中国农业大学（自划线院校）：（821）数据结构</li>
-<li>大连理工大学（自划线院校）：数一、英一、（810）数据结构</li>
-<li>北京化工大学：（842）数据结构</li>
-<li>中央民族大学：（852）信号与系统或数据结构</li>
-<li>中南大学（自划线院校）：（943）数据结构</li>
-</ol>
-<h2 id="211"><a href="#211" class="headerlink" title="211"></a>211</h2><ol>
-<li>北京林业大学：（839）数据结构</li>
-<li>中国传媒大学：数一、英一、（824）数据结构</li>
-<li>中国矿业大学（北京）：数一、英一、（854）数据结构</li>
-<li>华北电力大学：（844）数据结构</li>
-<li>大连海事大学：（808）数据结构</li>
-<li>中国矿业大学：（874）数据结构</li>
-<li>山东大学（自划线院校）：（909）数据结构</li>
-<li>中国石油大学（华东）：（859）数据结构</li>
-<li>暨南大学：（830）数据结构</li>
-<li>西北大学：数一、英一、（851）数据结构</li>
-</ol>
-<h2 id="双非"><a href="#双非" class="headerlink" title="双非"></a>双非</h2><ol>
-<li>北方工业大学：（861）数据结构</li>
-<li>北京工商大学：（818）数据结构</li>
-<li>北京电子科技学院：数一、英一、（831）数据结构</li>
-<li>太原科技大学：（828）数据结构</li>
-<li>中北大学：（811）数据结构</li>
-<li>内蒙古科技大学：（810）数据结构</li>
-<li>内蒙古工业大学：（808）数据结构</li>
-<li>沈阳工业大学：（808）数据结构</li>
-<li>辽宁工程技术大学：（810）数据结构 B</li>
-<li>辽宁石油化工大学：（951）数据结构</li>
-<li>沈阳化工大学：（817）算法与数据结构</li>
-<li>大连工业大学：（822）数据结构</li>
-<li>辽宁工业大学：（915）数据结构</li>
-<li>大连民族大学：（802）数据结构与算法设计</li>
-<li>长春理工大学：（809）数据结构</li>
-<li>东北电力大学：（851）数据结构</li>
-<li>长春工业大学：（809）数据结构</li>
-<li>东北石油大学：（820）数据结构</li>
-<li>黑龙江八一农垦大学：（923）数据结构</li>
-<li>上海电力大学：（840）数据结构</li>
-<li>上海应用技术大学：（816）数据结构与算法</li>
-<li>上海工程技术大学：（809）数据结构</li>
-<li>南京邮电大学：（811）数据结构</li>
-<li>南京林业大学：（883）数据结构</li>
-<li>南通大学：（822）数据结构</li>
-<li>南京审计大学：（911）数据结构</li>
-<li>陆军工程大学：（811）数据结构</li>
-<li>南京信息工程大学：（853）数据结构与算法分析</li>
-<li>宁波大学：（916）数据结构与算法分析</li>
-<li>安徽工业大学：（861）数据结构</li>
-<li>安徽理工大学：（841）数据结构</li>
-<li>阜阳师范大学：（908）数据结构</li>
-<li>安徽建筑大学：（909）数据结构</li>
-<li>华侨大学：（826）数据结构</li>
-<li>华东交通大学：（829）数据结构</li>
-<li>东华理工大学：（811）数据结构（含C程序设计）</li>
-<li>南昌航空大学：（961）数据结构（C语言版）</li>
-<li>江西理工大学：（873）数据结构</li>
-<li>青岛科技大学：（861）数据结构</li>
-<li>济南大学：（846）数据结构</li>
-<li>青岛理工大学：（813）数据结构</li>
-<li>齐鲁工业大学：（872）数据结构</li>
-<li>山东理工大学：（880）数据结构</li>
-<li>山东中医药大学：（803）数据结构</li>
-<li>山东师范大学：（915）数据结构B</li>
-<li>曲阜师范大学：（870）数据结构与算法设计</li>
-<li>临沂大学：（810）数据结构</li>
-<li>青岛大学：（910）数据结构</li>
-<li>烟台大学：（846）数据结构（李春葆主编）</li>
-<li>华北水利水电大学：（967）数据结构</li>
-<li>河南工业大学：（830）数据结构</li>
-<li>河南科技大学：（825）数据结构</li>
-<li>河南理工大学：（857）数据结构</li>
-<li>武汉纺织大学：（848）数据结构</li>
-<li>湖北大学：（811）数据结构</li>
-<li>三峡大学：（836）数据结构</li>
-<li>长沙理工大学：（850）数据结构</li>
-<li>湖南工商大学：（808）数据结构</li>
-<li>南华大学：（881）数据结构</li>
-<li>广东财经大学：英一、（809）数据结构</li>
-<li>广州大学：（914）数据结构</li>
-<li>五邑大学：（810）数据结构</li>
-<li>广东外语外贸大学：（846）数据结构</li>
-<li>桂林电子科技大学：（823）数据结构</li>
-<li>广西师范大学：（826）数据结构（含C程序设计）</li>
-<li>海南师范大学：（918）数据结构</li>
-<li>重庆理工大学：（812）数据结构</li>
-<li>重庆邮电大学：（802）数据结构</li>
-<li>四川轻化工大学：（816）数据结构与算法</li>
-<li>西华大学：（823）数据结构</li>
-<li>西华师范大学：（821）数据结构</li>
-<li>昆明理工大学：（877）数据结构与算法分析</li>
-<li>西安理工大学：（863）数据结构</li>
-<li>西安科技大学：（824）数据结构与算法设计</li>
-<li>陕西科技大学：（902）数据结构</li>
-<li>西京学院：（861）数据结构</li>
-<li>西安邮电大学：（826）数据结构</li>
-<li>兰州理工大学：（892）数据结构</li>
-<li>兰州交通大学：（828）数据结构</li>
-<li>新疆大学：（824）数据结构</li>
-<li>新疆师范大学：（864）数据结构</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://drinkle.top/2021/06/14/Postgraduate/" data-id="ckpzhgufu00006of5b09539u9" data-title="Postgraduate" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1597,7 +1707,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 15px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/Data-Structure/" style="font-size: 10px;">Data Structure</a> <a href="/tags/DataBase/" style="font-size: 10px;">DataBase</a> <a href="/tags/Drink/" style="font-size: 15px;">Drink</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 15px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 15px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 13.33px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/Data-Structure/" style="font-size: 10px;">Data Structure</a> <a href="/tags/DataBase/" style="font-size: 10px;">DataBase</a> <a href="/tags/Drink/" style="font-size: 13.33px;">Drink</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 13.33px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
     </div>
   </div>
 
@@ -1606,7 +1716,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
     </div>
   </div>
 
@@ -1617,6 +1727,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/02/06/%E6%B5%81%E7%95%85%E7%9A%84python/">流畅的python</a>
+          </li>
         
           <li>
             <a href="/2021/11/14/%E7%BB%8F%E6%B5%8E%E5%88%86%E6%9E%90-1/">经济分析[1]</a>
@@ -1632,10 +1746,6 @@
         
           <li>
             <a href="/2021/10/07/My-Project/">My-Project</a>
-          </li>
-        
-          <li>
-            <a href="/2021/09/25/%E6%88%91%E7%9A%84%E5%AD%A6%E4%B9%A0/">我的学习</a>
           </li>
         
       </ul>

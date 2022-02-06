@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>流畅的python | Drink`s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Part1.DataModelClass1234567obj[key]本质上调用的是__getitem__magic method 又称为 dunder method 及双下滑线魔法方法for-in-loop&#x3D;&#x3D;&gt; __contains__ 迭代通常是隐式的  1.具名元组Python元组的升级版本 – namedtuple(具名元组) 因为元组的局限性：不能为元组内部的数据进行命名，所以往">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流畅的python">
+<meta property="og:url" content="https://drinkle.top/2022/02/06/%E6%B5%81%E7%95%85%E7%9A%84python/index.html">
+<meta property="og:site_name" content="Drink&#96;s Blog">
+<meta property="og:description" content="Part1.DataModelClass1234567obj[key]本质上调用的是__getitem__magic method 又称为 dunder method 及双下滑线魔法方法for-in-loop&#x3D;&#x3D;&gt; __contains__ 迭代通常是隐式的  1.具名元组Python元组的升级版本 – namedtuple(具名元组) 因为元组的局限性：不能为元组内部的数据进行命名，所以往">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-06T10:02:01.000Z">
+<meta property="article:modified_time" content="2022-02-06T12:08:20.089Z">
+<meta property="article:author" content="Drink">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Drink`s Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Drink`s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://drinkle.top"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-流畅的python" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/06/%E6%B5%81%E7%95%85%E7%9A%84python/" class="article-date">
+  <time class="dt-published" datetime="2022-02-06T10:02:01.000Z" itemprop="datePublished">2022-02-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      流畅的python
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Part1-DataModel"><a href="#Part1-DataModel" class="headerlink" title="Part1.DataModel"></a>Part1.DataModel</h1><h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">obj[key]</span><br><span class="line">本质上调用的是__getitem__</span><br><span class="line"></span><br><span class="line">magic method 又称为 dunder method 及双下滑线魔法方法</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>-<span class="keyword">in</span>-loop</span><br><span class="line">==&gt; __contains__ 迭代通常是隐式的</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-具名元组"><a href="#1-具名元组" class="headerlink" title="1.具名元组"></a>1.具名元组</h2><p>Python元组的升级版本 – namedtuple(具名元组)</p>
+<p>因为元组的局限性：不能为元组内部的数据进行命名，所以往往我们并不知道一个元组所要表达的意义，所以在这里引入了 collections.namedtuple 这个工厂函数，来构造一个带字段名的元组。具名元组的实例和普通元组消耗的内存一样多，因为字段名都被存在对应的类里面。这个类跟普通的对象实例比起来也要小一些，因为 Python 不会用 <strong>dict</strong> 来存放这些实例的属性。</p>
+<p>namedtuple 对象的定义如以下格式：</p>
+<p><code>collections.namedtuple(typename, field_names, verbose=False, rename=False)</code><br>返回一个具名元组子类 typename，其中参数的意义如下：</p>
+<ul>
+<li>typename：元组名称</li>
+<li>field_names: 元组中元素的名称</li>
+<li>rename: 如果元素名称中含有 python 的关键字，则必须设置为 rename=True</li>
+<li>verbose: 默认就好</li>
+</ul>
+<p>下面来看看声明一个具名元组及其实例化的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"></span><br><span class="line">两种方法来给 namedtuple 定义方法名</span><br><span class="line">User = collections.namedtuple(<span class="string">&#x27;User&#x27;</span>, [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;id&#x27;</span>])</span><br><span class="line">User = collections.namedtuple(<span class="string">&#x27;User&#x27;</span>, <span class="string">&#x27;name age id&#x27;</span>)</span><br><span class="line">user = User(<span class="string">&#x27;tester&#x27;</span>, <span class="string">&#x27;22&#x27;</span>, <span class="string">&#x27;464643123&#x27;</span>)</span><br><span class="line"></span><br><span class="line">print(user)</span><br><span class="line">collections.namedtuple(<span class="string">&#x27;User&#x27;</span>, <span class="string">&#x27;name age id&#x27;</span>) 创建一个具名元组，需要两个参数，一个是类名，另一个是类的各个字段名。后者可以是有多个字符串组成的可迭代对象，或者是有空格分隔开的字段名组成的字符串（比如本示例）。具名元组可以通过字段名或者位置来获取一个字段的信息。</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line"></span><br><span class="line">User(name=<span class="string">&#x27;tester&#x27;</span>, age=<span class="string">&#x27;22&#x27;</span>, <span class="built_in">id</span>=<span class="string">&#x27;464643123&#x27;</span>)</span><br><span class="line">具名元组的特有属性:</span><br><span class="line"></span><br><span class="line">类属性 _fields：包含这个类所有字段名的元组 类方法 _make(iterable)：接受一个可迭代对象来生产这个类的实例 实例方法 _asdict()：把具名元组以 collections.OrdereDict 的形式返回，可以利用它来把元组里的信息友好的展示出来</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个namedtuple类型User，并包含name，sex和age属性。</span></span><br><span class="line">User = namedtuple(<span class="string">&#x27;User&#x27;</span>, [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>, <span class="string">&#x27;age&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个User对象</span></span><br><span class="line">user = User(name=<span class="string">&#x27;Runoob&#x27;</span>, sex=<span class="string">&#x27;male&#x27;</span>, age=<span class="number">12</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取所有字段名</span></span><br><span class="line">print( user._fields )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以通过一个list来创建一个User对象，这里注意需要使用&quot;_make&quot;方法</span></span><br><span class="line">user = User._make([<span class="string">&#x27;Runoob&#x27;</span>, <span class="string">&#x27;male&#x27;</span>, <span class="number">12</span>])</span><br><span class="line"></span><br><span class="line">print( user )</span><br><span class="line"><span class="comment"># User(name=&#x27;user1&#x27;, sex=&#x27;male&#x27;, age=12)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取用户的属性</span></span><br><span class="line">print( user.name )</span><br><span class="line">print( user.sex )</span><br><span class="line">print( user.age )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改对象属性，注意要使用&quot;_replace&quot;方法</span></span><br><span class="line">user = user._replace(age=<span class="number">22</span>)</span><br><span class="line">print( user )</span><br><span class="line"><span class="comment"># User(name=&#x27;user1&#x27;, sex=&#x27;male&#x27;, age=21)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将User对象转换成字典，注意要使用&quot;_asdict&quot;</span></span><br><span class="line">print( user._asdict() )</span><br><span class="line"><span class="comment"># OrderedDict([(&#x27;name&#x27;, &#x27;Runoob&#x27;), (&#x27;sex&#x27;, &#x27;male&#x27;), (&#x27;age&#x27;, 22)])</span></span><br><span class="line">以上实例输出结果为：</span><br><span class="line"></span><br><span class="line">(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>, <span class="string">&#x27;age&#x27;</span>)</span><br><span class="line">User(name=<span class="string">&#x27;Runoob&#x27;</span>, sex=<span class="string">&#x27;male&#x27;</span>, age=<span class="number">12</span>)</span><br><span class="line">Runoob</span><br><span class="line">male</span><br><span class="line"><span class="number">12</span></span><br><span class="line">User(name=<span class="string">&#x27;Runoob&#x27;</span>, sex=<span class="string">&#x27;male&#x27;</span>, age=<span class="number">22</span>)</span><br><span class="line">OrderedDict([(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;Runoob&#x27;</span>), (<span class="string">&#x27;sex&#x27;</span>, <span class="string">&#x27;male&#x27;</span>), (<span class="string">&#x27;age&#x27;</span>, <span class="number">22</span>)])</span><br></pre></td></tr></table></figure>
+
+<h2 id="列表表达式"><a href="#列表表达式" class="headerlink" title="列表表达式"></a>列表表达式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 两者相等</span></span><br><span class="line">print([(i, j) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">11</span>, <span class="number">20</span>)])</span><br><span class="line">res = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">11</span>, <span class="number">20</span>):</span><br><span class="line">        res.append((i, j))</span><br><span class="line">print(res)</span><br><span class="line"></span><br><span class="line"><span class="comment"># essential</span></span><br><span class="line">fun() <span class="keyword">for</span>-<span class="keyword">in</span>-loop_1 <span class="keyword">for</span>-<span class="keyword">in</span>-loop_2</span><br><span class="line">&lt;==&gt;</span><br><span class="line"><span class="keyword">for</span>-<span class="keyword">in</span>-loop_1:</span><br><span class="line">    <span class="keyword">for</span>-<span class="keyword">in</span>-loop_2:</span><br><span class="line">        fun()</span><br></pre></td></tr></table></figure>
+
+<h2 id="random-choice"><a href="#random-choice" class="headerlink" title="random choice"></a>random choice</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> choice</span><br><span class="line">choice(obj) -&gt; obj: can iterable</span><br><span class="line">==&gt; this module can choice a random element from obj</span><br></pre></td></tr></table></figure>
+<h2 id="Magic-Method"><a href="#Magic-Method" class="headerlink" title="Magic Method"></a>Magic Method</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">obj[key]   --&gt;  self.__getitem__</span><br><span class="line"></span><br><span class="line">迭代通常是隐式的,如果一个集合类型没有实现slef.__contains__,</span><br><span class="line">那么<span class="keyword">in</span>运算符就会按照顺序做一次迭代搜索</span><br><span class="line"></span><br><span class="line">len(obj)   --&gt;   self.__len__</span><br><span class="line">注意如果obj是python内置的类型比如（<span class="built_in">list</span>、<span class="built_in">str</span>、bytearry）等Cpython会抄个近路，__len__实际上会直接返回PyVarObject的self.ob_size这个属性，而不是执行self.__len__这个方法</span><br><span class="line"></span><br><span class="line">for item in x:   --&gt;  self.__iter__</span><br><span class="line">x 必须是可迭代的</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代器与生成器"><a href="#迭代器与生成器" class="headerlink" title="迭代器与生成器"></a>迭代器与生成器</h3><h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>迭代是Python最强大的功能之一，是访问集合元素的一种方式。</p>
+<p>迭代器是一个可以记住遍历的位置的对象。</p>
+<p>迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。</p>
+<p>迭代器有两个基本的方法：<strong>iter()</strong> 和 **next()**。</p>
+<p>字符串，列表或元组对象都可用于创建迭代器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">list</span>=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">it = <span class="built_in">iter</span>(<span class="built_in">list</span>)    <span class="comment"># 创建迭代器对象</span></span><br><span class="line"><span class="built_in">print</span> (<span class="built_in">next</span>(it))   <span class="comment"># 输出迭代器的下一个元素</span></span><br><span class="line">&gt;<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span> (<span class="built_in">next</span>(it))</span><br><span class="line">&gt;<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>迭代器对象可以使用常规for语句进行遍历</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">list</span>=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">it = <span class="built_in">iter</span>(<span class="built_in">list</span>)    <span class="comment"># 创建迭代器对象</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> it:</span><br><span class="line">    <span class="built_in">print</span> (x, end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    </span><br><span class="line">&gt; <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>也可以使用 next() 函数：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> sys         <span class="comment"># 引入 sys 模块</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">list</span>=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">it = <span class="built_in">iter</span>(<span class="built_in">list</span>)    <span class="comment"># 创建迭代器对象</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span> (<span class="built_in">next</span>(it))</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        sys.exit()</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建一个迭代器"><a href="#创建一个迭代器" class="headerlink" title="创建一个迭代器"></a>创建一个迭代器</h3><p>把一个类作为一个迭代器使用需要在类中实现两个方法 <strong>iter</strong>() 与 <strong>next</strong>() </p>
+<p>在定义类的时候都有一个构造函数，Python 的构造函数为 <strong>init</strong>(), 它会在对象初始化的时候执行。</p>
+<p><strong>iter</strong>() 方法返回一个特殊的<strong>迭代器对象</strong>， 这个迭代器对象实现了 <strong>next</strong>() 方法并通过 <strong>StopIteration</strong> 异常标识迭代的完成。</p>
+<p><strong>next</strong>() 方法（Python 2 里是 next()）会返回下一个迭代器对象。</p>
+<p>创建一个返回数字的迭代器，初始值为 1，逐步递增 1：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Numbers</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    抽象一个迭代器对象，初始属性【value=0每次next自增1，并通过【value&gt;20】来rais StopInteration</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.value = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 注意这里返回的不是属性self.value而是self这个抽象对象</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self.value &lt;= <span class="number">20</span>:</span><br><span class="line">	        self.value += <span class="number">1</span></span><br><span class="line">            <span class="comment"># 这里我们需要输出值,print进行查看</span></span><br><span class="line">            <span class="keyword">return</span> self.value</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line">            </span><br><span class="line"><span class="comment"># ------</span></span><br><span class="line"></span><br><span class="line">temp = Numbers()</span><br><span class="line">temp_iter = <span class="built_in">iter</span>(temp)  <span class="comment"># 这一步骤可以省略，因为temp在实例化的时候已经是一个迭代器了（contains magic method） iterm | next</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以直接for-in-loop temp</span></span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> temp_iter:</span><br><span class="line">    print(item)</span><br><span class="line">&gt; <span class="number">1</span> <span class="number">2</span> ... <span class="number">21</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将俩者的信息进行打印如下:</span></span><br><span class="line">print(<span class="string">f&quot;the obj is <span class="subst">&#123;temp&#125;</span> , type is <span class="subst">&#123;<span class="built_in">type</span>(temp)&#125;</span>&quot;</span>)</span><br><span class="line">print(<span class="string">f&quot;the iter is <span class="subst">&#123;temp_iter&#125;</span> , type is <span class="subst">&#123;<span class="built_in">type</span>(temp)&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">the obj <span class="keyword">is</span> &lt;__main__.Numbers <span class="built_in">object</span> at <span class="number">0x0000016FFBD51088</span>&gt; , <span class="built_in">type</span> <span class="keyword">is</span> &lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">__main__</span>.<span class="title">Numbers</span>&#x27;&gt;</span></span><br><span class="line">the iter is &lt;__main__.Numbers object at 0x0000016FFBD51088&gt; , type is &lt;class &#x27;__main__.Numbers&#x27;&gt;</span><br><span class="line"><span class="comment"># 可以看到两者的物理地址相同，因此iter(OBJ)和OBJ一样都是属于迭代器</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p>在 Python 中，使用了 yield 的函数被称为生成器（generator）。</p>
+<p>跟普通函数不同的是，生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器。</p>
+<p>在调用生成器运行的过程中，每次遇到 yield 时函数会暂停并保存当前所有的运行信息，返回 yield 的值, 并在下一次执行 next() 方法时从当前位置继续运行。</p>
+<p>调用一个生成器函数，返回的是一个迭代器对象。</p>
+<p>以下实例使用 yield 实现斐波那契数列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fibonacci</span>(<span class="params">n</span>):</span>  <span class="comment"># 生成器函数 - 斐波那契</span></span><br><span class="line">    a, b, counter = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> (counter &gt; n): </span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">yield</span> a</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        counter += <span class="number">1</span></span><br><span class="line">f = fibonacci(<span class="number">10</span>)  <span class="comment"># f 是一个迭代器，由生成器返回生成</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span> (<span class="built_in">next</span>(f), end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        sys.exit()</span><br><span class="line"><span class="comment">#  每次next（generator）所生成的迭代器对象公用和一个物理地址</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="迭代器和生成器对比："><a href="#迭代器和生成器对比：" class="headerlink" title="迭代器和生成器对比："></a>迭代器和生成器对比：</h2><ul>
+<li><p>迭代器（iterator）是一个特殊的类，其中必有iterm和next方法，本质上是一个类|对象 </p>
+<ul>
+<li>除了使用class来定义一个迭代器外， 还可以使用iterm(obj)来快速生成一个迭代器对象</li>
+<li>可以使用rais StopIteration来抛出exception阻止迭代器进入<strong>死循环</strong></li>
+<li>是一个可以记住遍历的位置的对象（本质上含有iterm和next）</li>
+</ul>
+</li>
+<li><p>生成器是一个含有yield的函数（generator），生成器是一个返回迭代器的函数，只能用于迭代操作，其实生成器也可以理解成一种特殊的迭代器</p>
+<ul>
+<li>生成器是一个返回迭代器的函数</li>
+<li>在调用生成器运行的过程中，每次遇到 yield 时函数会暂停并保存当前所有的运行信息，返回 yield 的值, 并在下一次执行 next() 方法时从当前位置继续运行。</li>
+<li>调用一个生成器函数，返回的是一个迭代器对象</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://drinkle.top/2022/02/06/%E6%B5%81%E7%95%85%E7%9A%84python/" data-id="ckzb823ai0000ngf5h2vdfe6t" data-title="流畅的python" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/14/%E7%BB%8F%E6%B5%8E%E5%88%86%E6%9E%90-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">经济分析[1]</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/825%E8%AE%A1%E5%88%92/" rel="tag">825计划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BuiltIn/" rel="tag">BuiltIn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Daily-Plan/" rel="tag">Daily Plan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Structure/" rel="tag">Data Structure</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DataBase/" rel="tag">DataBase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Drink/" rel="tag">Drink</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/English-Study/" rel="tag">English Study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GoodNotes/" rel="tag">GoodNotes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeeCode/" rel="tag">LeeCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/" rel="tag">Mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Object-Oriented/" rel="tag">Object Oriented</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Postgraduate/" rel="tag">Postgraduate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%90%8E%E7%AB%AF/" rel="tag">Python后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spirit/" rel="tag">Spirit</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/consciousness/" rel="tag">consciousness</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/source-code/" rel="tag">source-code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag">世界观</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">世界观 方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" rel="tag">左翼同盟会</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" rel="tag">新闻联播</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" rel="tag">独到科技</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" rel="tag">致你的一封信</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/825%E8%AE%A1%E5%88%92/" style="font-size: 13.33px;">825计划</a> <a href="/tags/Algorithm/" style="font-size: 10px;">Algorithm</a> <a href="/tags/BuiltIn/" style="font-size: 10px;">BuiltIn</a> <a href="/tags/Daily-Plan/" style="font-size: 10px;">Daily Plan</a> <a href="/tags/Data-Structure/" style="font-size: 10px;">Data Structure</a> <a href="/tags/DataBase/" style="font-size: 10px;">DataBase</a> <a href="/tags/Drink/" style="font-size: 13.33px;">Drink</a> <a href="/tags/English-Study/" style="font-size: 20px;">English Study</a> <a href="/tags/GoodNotes/" style="font-size: 10px;">GoodNotes</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/LeeCode/" style="font-size: 10px;">LeeCode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Object-Oriented/" style="font-size: 10px;">Object Oriented</a> <a href="/tags/Postgraduate/" style="font-size: 10px;">Postgraduate</a> <a href="/tags/Python/" style="font-size: 16.67px;">Python</a> <a href="/tags/Python%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">Python后端</a> <a href="/tags/Spirit/" style="font-size: 10px;">Spirit</a> <a href="/tags/consciousness/" style="font-size: 10px;">consciousness</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/source-code/" style="font-size: 10px;">source-code</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" style="font-size: 13.33px;">世界观</a> <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82-%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">世界观 方法论</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 10px;">实践</a> <a href="/tags/%E5%B7%A6%E7%BF%BC%E5%90%8C%E7%9B%9F%E4%BC%9A/" style="font-size: 10px;">左翼同盟会</a> <a href="/tags/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD/" style="font-size: 10px;">新闻联播</a> <a href="/tags/%E7%8B%AC%E5%88%B0%E7%A7%91%E6%8A%80/" style="font-size: 10px;">独到科技</a> <a href="/tags/%E8%87%B4%E4%BD%A0%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/" style="font-size: 10px;">致你的一封信</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/06/">六月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/02/06/%E6%B5%81%E7%95%85%E7%9A%84python/">流畅的python</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/14/%E7%BB%8F%E6%B5%8E%E5%88%86%E6%9E%90-1/">经济分析[1]</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/14/%E6%96%B0%E9%97%BB%E8%81%94%E6%92%AD-2/">新闻联播[2]</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/07/Question/">Question</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/07/My-Project/">My-Project</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Drink<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
