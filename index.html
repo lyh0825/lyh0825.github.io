@@ -93,7 +93,14 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Part0-BulitIn"><a href="#Part0-BulitIn" class="headerlink" title="Part0.BulitIn"></a>Part0.BulitIn</h1><h2 id="Magic-Method"><a href="#Magic-Method" class="headerlink" title="Magic Method"></a>Magic Method</h2><p><strong>表1:跟运算符无关的 magic method</strong></p>
+        <h1 id="Part0-BulitIn"><a href="#Part0-BulitIn" class="headerlink" title="Part0.BulitIn"></a>Part0.BulitIn</h1><h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h3 id="1-python中list和array的区别"><a href="#1-python中list和array的区别" class="headerlink" title="1.python中list和array的区别"></a>1.python中list和array的区别</h3><ul>
+<li>list是python的内置数据类型</li>
+<li>list中的数据类不必相同的</li>
+<li>array的中的类型必须全部相同</li>
+<li>在list中的数据类型保存的是数据存放的地址，简单的说就是指针，并非数据</li>
+<li>这种保存方式增加了存储和CPU的消耗例如list1=[1,2,3,’a’]需要4个指针和四个数据</li>
+</ul>
+<h2 id="Magic-Method"><a href="#Magic-Method" class="headerlink" title="Magic Method"></a>Magic Method</h2><p><strong>表1:跟运算符无关的 magic method</strong></p>
 <table>
 <thead>
 <tr>
@@ -281,6 +288,42 @@
 </li>
 </ul>
 <h2 id="6-len为什么不是普通方法"><a href="#6-len为什么不是普通方法" class="headerlink" title="6.len为什么不是普通方法"></a>6.len为什么不是普通方法</h2><p>如果x是一个python内置类型的实例， 那么len(x)中Cpython会直接调用这个类的属性，解释器将不走<code>__len__()</code>这个方法</p>
+<h2 id="杂谈"><a href="#杂谈" class="headerlink" title="杂谈"></a>杂谈</h2><ol>
+<li><p>数据模型|对象模型</p>
+<ul>
+<li>python文档中大多使用数据模型, 而大多数喜欢使用对象模型</li>
+<li>对象模型:计算机编程语言中对象的属性&lt;==&gt;数据模型</li>
+</ul>
+</li>
+<li><p>魔法方法</p>
+<ul>
+<li>python用这个方法来提供更多的元对象协议,目的是让语言的使用者和开发者拥有并使用同样的工具</li>
+</ul>
+</li>
+<li><p>元对象</p>
+<p><code>the art of the MetaObject Protocal | AMOP</code></p>
+<ul>
+<li>元对象协议:那些对构建语言本身来讲很重要的对象, 以此为前提, 协议也可以看成是接口, 即是说, 元对象协议是对象模型(数据模型)的同义词, 他们的本质都是构建核心语言的API</li>
+</ul>
+</li>
+</ol>
+<h1 id="Part2-DataStructure"><a href="#Part2-DataStructure" class="headerlink" title="Part2.DataStructure"></a>Part2.DataStructure</h1><h2 id="2-0前言"><a href="#2-0前言" class="headerlink" title="2.0前言"></a>2.0前言</h2><p>在创建<code>poython</code>之前<code>Guido</code>曾为<code>ABC</code>语言贡献过代码, <code>ABC</code>语言是一个致力于为初学者设计变成环境的长达10的研究项目, 其中很多点子在现在看来任然具有python的特性如:</p>
+<ol>
+<li>序列的泛型操作</li>
+<li>内置的元组</li>
+<li>映射类型</li>
+<li>用缩进来构建源码</li>
+<li>无需变量声明的强类型</li>
+</ol>
+<p>python也从ABC继承了用统一风格处理<code>序列数据</code>这一特点, 无论是中数据结构(string|list|bytes|tuple|array|xml|element|database query)他们都公用一套操作:</p>
+<ol>
+<li>迭代</li>
+<li>切片</li>
+<li>排序</li>
+<li>拼接</li>
+</ol>
+<h2 id="2-1内置序列类型"><a href="#2-1内置序列类型" class="headerlink" title="2.1内置序列类型"></a>2.1内置序列类型</h2><p>python使用C实现了两大类序列类型：<strong>容器序列 扁平序列</strong></p>
+<p>两者</p>
 
       
     </div>
