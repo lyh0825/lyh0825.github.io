@@ -106,6 +106,9 @@
 <li>array的中的类型必须全部相同</li>
 <li>在list中的数据类型保存的是数据存放的地址，简单的说就是指针，并非数据</li>
 <li>这种保存方式增加了存储和CPU的消耗例如list1=[1,2,3,’a’]需要4个指针和四个数据</li>
+<li>数组在背后存的并不是float对象，而是数字的机器翻译，也就是字节表述。这一点和c语言中的数组一样</li>
+<li>array创建的数组不适用于数字操作（比如矩阵和矢量运算）。另外+=和*=运算符可以用于array的添加。</li>
+<li>从python3.4开始，数组（array）类型不再支持诸如list.sort()这种就地排序方法。要给数组排序的话，得用sorted函数新建一个数组：</li>
 </ul>
 <h2 id="Magic-Method"><a href="#Magic-Method" class="headerlink" title="Magic Method"></a>Magic Method</h2><p><strong>表1:跟运算符无关的 magic method</strong></p>
 <table>
@@ -213,7 +216,116 @@
 <p>优先级<code>str &gt; repr </code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># define a class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">temp</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.value = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;repr value is <span class="subst">&#123;self.value&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;str value is <span class="subst">&#123;self.value&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">test = temp()</span><br><span class="line">print(test)</span><br><span class="line"></span><br><span class="line">H:\Python\python.exe H:/MY_TXM/test.py</span><br><span class="line"><span class="built_in">str</span> value <span class="keyword">is</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Moudle"><a href="#Moudle" class="headerlink" title="Moudle"></a>Moudle</h2><h3 id="bisect"><a href="#bisect" class="headerlink" title="bisect"></a>bisect</h3><p>bisect是一个根据二分算法写的库，其中主要的俩个方法是bisect和insert，根本上根据二分算法算出有序序列的索引，可以当做快速定位index使用</p>
+<h2 id="Moudle"><a href="#Moudle" class="headerlink" title="Moudle"></a>Moudle</h2><h3 id="time"><a href="#time" class="headerlink" title="time"></a>time</h3><h4 id="time-1"><a href="#time-1" class="headerlink" title="time"></a>time</h4><h4 id="process-time"><a href="#process-time" class="headerlink" title="process_time"></a>process_time</h4><h4 id="process-time-ns"><a href="#process-time-ns" class="headerlink" title="process_time_ns"></a>process_time_ns</h4><h4 id="perf-counter"><a href="#perf-counter" class="headerlink" title="perf_counter"></a>perf_counter</h4><h4 id="perf-counter-ns"><a href="#perf-counter-ns" class="headerlink" title="perf_counter_ns"></a>perf_counter_ns</h4><p><code>time()</code>精度上相对没有那么高，而且受系统的影响，适合表示日期时间或者大程序程序的计时。</p>
+<p><code>perf_counter()</code>适合小一点的程序测试，会计算<code>sleep()</code>时间。</p>
+<p><code>process_counter()</code>适合小一点的程序测试，不会计算<code>sleep()</code>时间。</p>
+<p>此外<code>Python3.7</code>开始还提供了以上三个方法精确到<code>纳秒</code>的计时。分别是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">time.perf_counter_ns()</span><br><span class="line">time.process_time_ns()</span><br><span class="line">time.time_ns()</span><br></pre></td></tr></table></figure>
+
+<h3 id="arrary"><a href="#arrary" class="headerlink" title="arrary"></a>arrary</h3><p>数组所接受的typecode以及其对应的存储数据类型</p>
+<table>
+<thead>
+<tr>
+<th align="left">Type code</th>
+<th align="left">C Type</th>
+<th align="left">Python Type</th>
+<th align="left">Minimum size in bytes</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">‘b’</td>
+<td align="left">signed char</td>
+<td align="left">int</td>
+<td align="left">1</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘B’</td>
+<td align="left">unsigned char</td>
+<td align="left">int</td>
+<td align="left">1</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘u’</td>
+<td align="left">Py_UNICODE</td>
+<td align="left">Unicode character</td>
+<td align="left">2</td>
+<td align="left">(1)</td>
+</tr>
+<tr>
+<td align="left">‘h’</td>
+<td align="left">signed short</td>
+<td align="left">int</td>
+<td align="left">2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘H’</td>
+<td align="left">unsigned short</td>
+<td align="left">int</td>
+<td align="left">2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘i’</td>
+<td align="left">signed int    int</td>
+<td align="left">2</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘I’</td>
+<td align="left">unsigned int</td>
+<td align="left">int</td>
+<td align="left">2</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘l’</td>
+<td align="left">signed long</td>
+<td align="left">int</td>
+<td align="left">4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘L’</td>
+<td align="left">unsigned long</td>
+<td align="left">int</td>
+<td align="left">4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘q’</td>
+<td align="left">signed long long    int</td>
+<td align="left">8</td>
+<td align="left">(2)</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘Q’</td>
+<td align="left">unsigned long long</td>
+<td align="left">int</td>
+<td align="left">8</td>
+<td align="left">(2)</td>
+</tr>
+<tr>
+<td align="left">‘f’</td>
+<td align="left">float</td>
+<td align="left">float</td>
+<td align="left">4</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">‘d’</td>
+<td align="left">double</td>
+<td align="left">float</td>
+<td align="left">8</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h3 id="bisect"><a href="#bisect" class="headerlink" title="bisect"></a>bisect</h3><p>bisect是一个根据二分算法写的库，其中主要的俩个方法是bisect和insert，根本上根据二分算法算出有序序列的索引，可以当做快速定位index使用</p>
 <h4 id="bisect-bisect-left"><a href="#bisect-bisect-left" class="headerlink" title="bisect|bisect_left"></a>bisect|bisect_left</h4><p>接受一个有序序列，一个元素，返回该元素在有序序列的索引，索引以前全≤该元素，<code>bisect(bisect_right)|bisect_left</code>主要区别是如果俩对比元素相等，前者返回index是从右边插入，后者左边</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bisect</span><br><span class="line">temp_sequence = [<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">index = bisect.bisect(temp_sequence, <span class="number">2</span>)</span><br><span class="line">_index = bisect.bisect_left(temp_sequence, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">print(index)</span><br><span class="line">print(_index)</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
 
@@ -343,7 +455,17 @@
 
 <p>获取对象所消耗的内存大小</p>
 <h4 id="argv"><a href="#argv" class="headerlink" title="argv"></a>argv</h4><p>是一个从程序外部获取参数的桥梁，从外部取得的参数可以是多个，所以获得的是一个列表（list)，也就是说sys.argv其实可以看作是一个列表，所以才能用[]提取其中的元素。其第一个元素是程序本身，随后才依次是外部给予的参数。</p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>返回对象的物理存储地址, 一般用作操作符是或否创建了一个新对象, 比较两个对象的物理地址是否相同使用<code>is</code></p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="memoryview"><a href="#memoryview" class="headerlink" title="memoryview"></a>memoryview</h3><p>memoryview**[内存视图]<strong>是一个内置类, 它能让用户在不复制内容的情况下操作同一个数组的不同切片,其实内存试图时泛化和去数学化的</strong>numpy数组**,它允许你在不复制内容的前提下,在数据结构之间共享内存, 其中数据结构可以是任何形式,这个功能在处理大型数据集合的时候十分重要</p>
+<p>memoryview 语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memoryview(obj)</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>obj – 对象</li>
+</ul>
+<p>返回元组列表(物理地址)。</p>
+<h4 id="cast"><a href="#cast" class="headerlink" title=".cast"></a>.cast</h4><p><strong>memoryview.cast</strong>的概念和数组模型差不多,能用不同的方式读写同一块内存地址,而且内容字节不会随意移动,和C语言中类型转换的概念相似.cast会把同一块内存里的内容打包成一个全新的memoryview对象给你</p>
+<h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>返回对象的物理存储地址, 一般用作操作符是或否创建了一个新对象, 比较两个对象的物理地址是否相同使用<code>is</code></p>
 <h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>提供的函数对指定序列做映射。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>(function, iterable, ...)</span><br></pre></td></tr></table></figure>
 
