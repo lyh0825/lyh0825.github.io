@@ -93,7 +93,106 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="Part0-BulitIn"><a href="#Part0-BulitIn" class="headerlink" title="Part0.BulitIn"></a>Part0.BulitIn</h1><h2 id="小知识"><a href="#小知识" class="headerlink" title="小知识"></a>小知识</h2><h3 id="format"><a href="#format" class="headerlink" title="format"></a>format</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#123;&#125; format</span></span><br><span class="line"><span class="comment"># &#123;0&#125; format the index</span></span><br><span class="line"><span class="comment"># &#123;0:2d&#125; format the type --&gt; d int 2d: remain two int</span></span><br><span class="line"><span class="comment"># &#123;&lt;2d&#125; 左对齐，宽度为2d，不足补空格</span></span><br><span class="line">ROW_FMT = <span class="string">&quot;&#123;0:2d&#125;  @ &#123;1:2d&#125;   &#123;2&#125; &#123;0:&lt;2d&#125;&quot;</span></span><br><span class="line">print(ROW_FMT.<span class="built_in">format</span>(needle, posotion, offset))</span><br></pre></td></tr></table></figure>
+        <h1 id="Part0-BulitIn"><a href="#Part0-BulitIn" class="headerlink" title="Part0.BulitIn"></a>Part0.BulitIn</h1><h2 id="小知识"><a href="#小知识" class="headerlink" title="小知识"></a>小知识</h2><h3 id="format"><a href="#format" class="headerlink" title="format"></a>format</h3><table>
+<thead>
+<tr>
+<th align="left">数字</th>
+<th align="left">格式</th>
+<th align="center">输出</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">3.1415926</td>
+<td align="left">{:.2f}</td>
+<td align="center">3.14</td>
+<td align="left">保留小数点后两位</td>
+</tr>
+<tr>
+<td align="left">3.1415926</td>
+<td align="left">{:+.2f}</td>
+<td align="center">+3.14</td>
+<td align="left">带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td align="left">-1</td>
+<td align="left">{:+.2f}</td>
+<td align="center">-1.00</td>
+<td align="left">带符号保留小数点后两位</td>
+</tr>
+<tr>
+<td align="left">2.71828</td>
+<td align="left">{:.0f}</td>
+<td align="center">3</td>
+<td align="left">不带小数</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">{:0&gt;2d}</td>
+<td align="center">05</td>
+<td align="left">数字补零 (填充左边, 宽度为2)</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">{:x&lt;4d}</td>
+<td align="center">5xxx</td>
+<td align="left">数字补x (填充右边, 宽度为4)</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left">{:x&lt;4d}</td>
+<td align="center">10xx</td>
+<td align="left">数字补x (填充右边, 宽度为4)</td>
+</tr>
+<tr>
+<td align="left">1000000</td>
+<td align="left">{:,}</td>
+<td align="center">1,000,000</td>
+<td align="left">以逗号分隔的数字格式</td>
+</tr>
+<tr>
+<td align="left">0.25</td>
+<td align="left">{:.2%}</td>
+<td align="center">25.00%</td>
+<td align="left">百分比格式</td>
+</tr>
+<tr>
+<td align="left">1000000000</td>
+<td align="left">{:.2e}</td>
+<td align="center">1.00e+09</td>
+<td align="left">指数记法</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left">{:&gt;10d}</td>
+<td align="center">13</td>
+<td align="left">右对齐 (默认, 宽度为10)</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left">{:&lt;10d}</td>
+<td align="center">13</td>
+<td align="left">左对齐 (宽度为10)</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left">{:^10d}</td>
+<td align="center">13</td>
+<td align="left">中间对齐 (宽度为10)</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left"><code>&#39;&#123;:b&#125;&#39;.format(11) &#39;&#123;:d&#125;&#39;.format(11) &#39;&#123;:o&#125;&#39;.format(11) &#39;&#123;:x&#125;&#39;.format(11) &#39;&#123;:#x&#125;&#39;.format(11) &#39;&#123;:#X&#125;&#39;.format(11)</code></td>
+<td align="center"><code>1011 11 13 b 0xb 0XB</code></td>
+<td align="left">进制</td>
+</tr>
+</tbody></table>
+<p><strong>^</strong>, <strong>&lt;**, **&gt;</strong> 分别是居中、左对齐、右对齐，后面带宽度， <strong>:</strong> <strong>号后面带填充的字符</strong>，**只能是一个字符[即只能填充一次]**，不指定则默认是用空格填充。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 即长度为多少</span></span><br><span class="line"><span class="built_in">str</span> = <span class="string">&quot;1&#123;:15&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;&amp;&quot;</span>)</span><br><span class="line">print(string_1, <span class="built_in">len</span>(<span class="built_in">str</span>))</span><br><span class="line">|<span class="number">1</span>&amp;               |</span><br><span class="line"><span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>+</strong> 表示在正数前显示 **+**，负数前显示 **-**； （空格）表示在正数前加空格</p>
+<p>b、d、o、x 分别是二进制、十进制、八进制、十六进制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#123;&#125; format</span></span><br><span class="line"><span class="comment"># &#123;0&#125; format the index</span></span><br><span class="line"><span class="comment"># &#123;0:2d&#125; format the type --&gt; d int 2d: remain two int</span></span><br><span class="line"><span class="comment"># &#123;&lt;2d&#125; 左对齐，宽度为2d，不足补空格</span></span><br><span class="line">ROW_FMT = <span class="string">&quot;&#123;0:2d&#125;  @ &#123;1:2d&#125;   &#123;2&#125; &#123;0:&lt;2d&#125;&quot;</span></span><br><span class="line">print(ROW_FMT.<span class="built_in">format</span>(needle, posotion, offset))</span><br></pre></td></tr></table></figure>
 
 <h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2><h3 id="函数-方法返回"><a href="#函数-方法返回" class="headerlink" title="函数|方法返回"></a>函数|方法返回</h3><p>python 会对operation返回return None来表示对对象的就地更改, 即不会id(obj)不会变</p>
 <ul>
@@ -455,7 +554,7 @@
 
 <p>获取对象所消耗的内存大小</p>
 <h4 id="argv"><a href="#argv" class="headerlink" title="argv"></a>argv</h4><p>是一个从程序外部获取参数的桥梁，从外部取得的参数可以是多个，所以获得的是一个列表（list)，也就是说sys.argv其实可以看作是一个列表，所以才能用[]提取其中的元素。其第一个元素是程序本身，随后才依次是外部给予的参数。</p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="memoryview"><a href="#memoryview" class="headerlink" title="memoryview"></a>memoryview</h3><p>memoryview**[内存视图]<strong>是一个内置类, 它能让用户在不复制内容的情况下操作同一个数组的不同切片,其实内存试图时泛化和去数学化的</strong>numpy数组**,它允许你在不复制内容的前提下,在数据结构之间共享内存, 其中数据结构可以是任何形式,这个功能在处理大型数据集合的时候十分重要</p>
+<h3 id="memoryview"><a href="#memoryview" class="headerlink" title="memoryview"></a>memoryview</h3><p>memoryview**[内存视图]<strong>是一个内置类, 它能让用户在不复制内容的情况下操作同一个数组的不同切片,其实内存试图时泛化和去数学化的</strong>numpy数组**,它允许你在不复制内容的前提下,在数据结构之间共享内存, 其中数据结构可以是任何形式,这个功能在处理大型数据集合的时候十分重要</p>
 <p>memoryview 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memoryview(obj)</span><br></pre></td></tr></table></figure>
 
@@ -465,6 +564,10 @@
 </ul>
 <p>返回元组列表(物理地址)。</p>
 <h4 id="cast"><a href="#cast" class="headerlink" title=".cast"></a>.cast</h4><p><strong>memoryview.cast</strong>的概念和数组模型差不多,能用不同的方式读写同一块内存地址,而且内容字节不会随意移动,和C语言中类型转换的概念相似.cast会把同一块内存里的内容打包成一个全新的memoryview对象给你</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h3><h3 id="reversed"><a href="#reversed" class="headerlink" title="reversed"></a>reversed</h3><ol>
+<li><code>s.reverse()</code>就地排序, <code>id(s)</code>不变</li>
+<li><code>reversed(s)</code>返回<code>s</code>的<strong>倒序迭代器</strong></li>
+</ol>
 <h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>返回对象的物理存储地址, 一般用作操作符是或否创建了一个新对象, 比较两个对象的物理地址是否相同使用<code>is</code></p>
 <h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>提供的函数对指定序列做映射。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>(function, iterable, ...)</span><br></pre></td></tr></table></figure>
@@ -593,8 +696,254 @@
 <li>拼接</li>
 </ol>
 <h2 id="2-1内置序列类型"><a href="#2-1内置序列类型" class="headerlink" title="2.1内置序列类型"></a>2.1内置序列类型</h2><p>python使用C实现了两大类序列类型：<strong>容器序列 扁平序列</strong></p>
-<p>两者</p>
+<blockquote>
+<p>两者的却别前者支持存储不同类型的数据; 后者仅支持一种类型的数据</p>
+</blockquote>
+<p><strong>容器序列</strong>: <code>list tuple collection.deque</code></p>
+<ul>
+<li>存放的是任意类型的对象的引用</li>
+<li>支持存储不同数据类型</li>
+<li>非连续内存存储</li>
+</ul>
+<p><strong>扁平序列</strong>: <code>str bytes bytearray memoryvivew arrary.arrary</code></p>
+<ul>
+<li>存放的是值而不是引用</li>
+<li>只能存储一种数据类型[字符 字节 数值]</li>
+<li>连续存储</li>
+</ul>
+<p>根据是否可以被修改可以分为:<strong>可变序列</strong> <strong>不可变序列</strong></p>
+<p>从UML图中可以看出两者之间的部分继承关系，但是<strong>内置的序列</strong>类型不是直接<code>sequence</code>和<code>mutale sequence</code>这两个抽象基类继承来的<code>Abstarct Base Class | ABC</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>immutable sequence</th>
+<th>mutable sequence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*getitem</td>
+<td>y</td>
+<td></td>
+</tr>
+<tr>
+<td>*setitem</td>
+<td></td>
+<td>y</td>
+</tr>
+<tr>
+<td>*delitem</td>
+<td></td>
+<td>y</td>
+</tr>
+<tr>
+<td>*contains</td>
+<td>y</td>
+<td></td>
+</tr>
+<tr>
+<td>*iter</td>
+<td>y</td>
+<td></td>
+</tr>
+<tr>
+<td>*reversed</td>
+<td>y</td>
+<td></td>
+</tr>
+<tr>
+<td>*iadd</td>
+<td></td>
+<td>y</td>
+</tr>
+<tr>
+<td>index</td>
+<td>y</td>
+<td></td>
+</tr>
+<tr>
+<td>insert</td>
+<td></td>
+<td>y</td>
+</tr>
+<tr>
+<td>append</td>
+<td></td>
+<td>y</td>
+</tr>
+<tr>
+<td>reverse</td>
+<td></td>
+<td>y</td>
+</tr>
+<tr>
+<td>extend</td>
+<td></td>
+<td>y</td>
+</tr>
+<tr>
+<td>pop</td>
+<td></td>
+<td>y</td>
+</tr>
+<tr>
+<td>remove</td>
+<td></td>
+<td>y</td>
+</tr>
+<tr>
+<td>count</td>
+<td>y</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="2-2-列表推导和生成器表达"><a href="#2-2-列表推导和生成器表达" class="headerlink" title="2.2 列表推导和生成器表达"></a>2.2 列表推导和生成器表达</h2><blockquote>
+<p>list comprehension and generator expression</p>
+</blockquote>
+<p><code>[]: 列表推导式</code></p>
+<p><code>(): 生成器表达式</code></p>
+<p><strong>列表推导式: 快速构建list</strong></p>
+<p>使用原则:</p>
+<ol start="0">
+<li><p><strong>列表推导式的作用只有一个:生成列表</strong></p>
+</li>
+<li><p>创建新列表</p>
+</li>
+<li><p>尽量保持简短</p>
+</li>
+<li><p>在<code>py3.x</code>中修复了列表推导是中的变量泄露问题(通过局部作用域修复)</p>
+</li>
+<li><p>使用<code>filter + map</code>也可以达到相同效果</p>
+</li>
+<li><p>注意: <code>filter</code>返回的是一个迭代器</p>
+</li>
+<li><p>两者的效率根据不同情况表现不一样</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">temp = <span class="string">&#x27;!@#$%&#x27;</span></span><br><span class="line"></span><br><span class="line">m1 = [<span class="built_in">ord</span>(s) <span class="keyword">for</span> s <span class="keyword">in</span> temp <span class="keyword">if</span> <span class="built_in">ord</span>(s) &gt; <span class="number">35</span>]</span><br><span class="line">print(m1)</span><br><span class="line"></span><br><span class="line">m2 = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x &gt; <span class="number">35</span>, <span class="built_in">map</span>(<span class="built_in">ord</span>, temp)))</span><br><span class="line">print(m2)</span><br></pre></td></tr></table></figure>
 
+<h3 id="2-2-1-笛卡尔积"><a href="#2-2-1-笛卡尔积" class="headerlink" title="2.2.1 笛卡尔积"></a>2.2.1 笛卡尔积</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">col_1 = [<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;c&quot;</span>]</span><br><span class="line">col_2 = [<span class="string">&quot;!&quot;</span>, <span class="string">&quot;@&quot;</span>, <span class="string">&quot;#&quot;</span>]</span><br><span class="line"></span><br><span class="line">col_3 = [(i, j) <span class="keyword">for</span> i <span class="keyword">in</span> col_1 <span class="keyword">for</span> j <span class="keyword">in</span> col_2]</span><br><span class="line">print(col_3)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> col_1:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> col_2:</span><br><span class="line">        print(i, j)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>列表推导式和双层<code>for</code>循环俩者执行顺序一样</p>
+</blockquote>
+<h3 id="2-2-2生成器表达式"><a href="#2-2-2生成器表达式" class="headerlink" title="2.2.2生成器表达式"></a>2.2.2生成器表达式</h3><p>使用列表推导也可以初始化元组|数组|其他序列,但是生成器表达式是一个更好的选择, 因为背后支持迭代器协议,可以逐个产出元素而非先建立一个完整的<code>list</code>,可以更好的节省内存</p>
+<p>生成器表达式和列表推导式的区别是:</p>
+<ul>
+<li><code>[]</code> <code>()</code></li>
+<li>生成一个完整的<code>list</code>; 迭代器</li>
+</ul>
+<h2 id="2-3-元组"><a href="#2-3-元组" class="headerlink" title="2.3 元组"></a>2.3 元组</h2><blockquote>
+<p>元组: 是一个不可变的list; 记录一定的维度[位置]的数据信息</p>
+</blockquote>
+<p>元组的拆包</p>
+<p>本质上是将元组中的数据提取</p>
+<ol start="0">
+<li><p>元组的拆包方式在任意可迭代对象中都是通用的</p>
+</li>
+<li><p><code>for-loop</code></p>
+</li>
+<li><p><code>*</code></p>
+<ul>
+<li><code>*</code>拆包返回的是<code>list</code></li>
+</ul>
+</li>
+<li><p>平行赋值</p>
+</li>
+<li><p><code>a, b = b, a </code>本质上也是拆包</p>
+</li>
+<li><p>可以使用<code>_</code>占位符来过滤掉不需要的数据</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.for-loop</span></span><br><span class="line">a = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    print(i)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 2.*</span></span><br><span class="line"><span class="comment"># 提取元素</span></span><br><span class="line">i, *j = a</span><br><span class="line"><span class="comment"># 将可迭代对象拆开作为函数的参数</span></span><br><span class="line">b = (<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="built_in">divmod</span>(*b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 平行赋值</span></span><br><span class="line">i, j, m = a</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-1-具名元组"><a href="#2-3-1-具名元组" class="headerlink" title="2.3.1 具名元组"></a>2.3.1 具名元组</h4><p><code>collections.namedtuple</code>构建的类的实例所消耗的内存和元组一样, 因为字段名都存在了相应的类里</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># namedtuple</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line"><span class="comment"># define a class</span></span><br><span class="line"><span class="comment"># namedtuple(str, iterator)</span></span><br><span class="line"><span class="comment">#   &gt;&gt;&gt; str: the name of class</span></span><br><span class="line"><span class="comment">#   &gt;&gt;&gt; iterator: define the attributes of class</span></span><br><span class="line"><span class="comment">#   &gt;&gt;&gt; iterator(if accept str): &quot;name age score&quot; split whith &#x27; &#x27;</span></span><br><span class="line">student = namedtuple(<span class="string">&#x27;student&#x27;</span>, [<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;score&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># create some instances</span></span><br><span class="line">drink = student(<span class="string">&#x27;Drink&#x27;</span>, <span class="string">&#x27;21&#x27;</span>, <span class="string">&#x27;90&#x27;</span>)</span><br><span class="line">starfire = student(<span class="string">&#x27;starfire&#x27;</span>, <span class="string">&#x27;23&#x27;</span>, <span class="string">&#x27;92&#x27;</span>)</span><br><span class="line">spark = student(<span class="string">&#x27;spark&#x27;</span>, <span class="string">&#x27;24&#x27;</span>, <span class="string">&#x27;95&#x27;</span>)</span><br><span class="line"></span><br><span class="line">print(drink)</span><br><span class="line">print(starfire)</span><br><span class="line">print(spark)</span><br><span class="line"></span><br><span class="line">student(name=<span class="string">&#x27;Drink&#x27;</span>, age=<span class="string">&#x27;21&#x27;</span>, score=<span class="string">&#x27;90&#x27;</span>)</span><br><span class="line">student(name=<span class="string">&#x27;starfire&#x27;</span>, age=<span class="string">&#x27;23&#x27;</span>, score=<span class="string">&#x27;92&#x27;</span>)</span><br><span class="line">student(name=<span class="string">&#x27;spark&#x27;</span>, age=<span class="string">&#x27;24&#x27;</span>, score=<span class="string">&#x27;95&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># we can get the specify value by [] or .attr</span></span><br><span class="line">print(drink[<span class="number">0</span>])</span><br><span class="line">print(drink.name)</span><br><span class="line"></span><br><span class="line">Drink</span><br><span class="line">Drink</span><br></pre></td></tr></table></figure>
+
+<p>除了从普通元组继承的属性之外, 具名元组还有独特的属性:<code>_fields类属性|类方法|_make(iterable)和实列方法_asdict() </code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="comment"># get all attrs of drink</span></span><br><span class="line">print(drink._fields)</span><br><span class="line"></span><br><span class="line">(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;age&#x27;</span>, <span class="string">&#x27;score&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># exchange drink into dict</span></span><br><span class="line">drink_dict = drink._asdict()</span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> drink_dict.items():</span><br><span class="line">    print(key, <span class="string">&quot;:&quot;</span>, value)</span><br><span class="line">    </span><br><span class="line">name : Drink</span><br><span class="line">age : <span class="number">21</span></span><br><span class="line">score : <span class="number">90</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># accept date generate an instance</span></span><br><span class="line">data = (<span class="string">&quot;star&quot;</span>, <span class="string">&quot;20&quot;</span>, <span class="string">&quot;60&quot;</span>)</span><br><span class="line">star = student._make(data)</span><br><span class="line">print(star)</span><br><span class="line"></span><br><span class="line">student(name=<span class="string">&#x27;star&#x27;</span>, age=<span class="string">&#x27;20&#x27;</span>, score=<span class="string">&#x27;60&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-2-不可变列表-元组"><a href="#2-3-2-不可变列表-元组" class="headerlink" title="2.3.2 不可变列表[元组]"></a>2.3.2 不可变列表[元组]</h4><blockquote>
+<p>元组支持列表的大多数操作除了增删改元素之外</p>
+</blockquote>
+<h2 id="2-4切片"><a href="#2-4切片" class="headerlink" title="2.4切片"></a>2.4切片</h2><ol>
+<li>切片支持大多数<code>可变序列</code></li>
+<li>切片的数学表达式为<code>[&lt;= &lt;)</code></li>
+<li>区间运算<code>start default=0</code></li>
+<li><code>s[a:b:c] start end step</code>其中<code>step</code>可以为负即反向取值</li>
+</ol>
+<p>本质上在使用slice取值时, python会调用<code>seq.__getitem__(slice(start, end, step))</code></p>
+<p>或者说<code>slice()</code>是一个切片对象, 可以改切片命名就像<code>excel--sheet</code>一样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name_slice = <span class="built_in">slice</span>(<span class="number">0</span>, <span class="number">5</span>)</span><br><span class="line">a = <span class="string">&quot;drink 21 98&quot;</span></span><br><span class="line">print(a[name_slice])</span><br><span class="line"></span><br><span class="line">drink</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-1-多维切片-省略"><a href="#2-4-1-多维切片-省略" class="headerlink" title="2.4.1 多维切片|省略"></a>2.4.1 多维切片|省略</h3><blockquote>
+<p>多维切片所支持的数据序列也是多维度,而python内置的数据序列都是一维的</p>
+</blockquote>
+<p>本质上多维切片<code>seq[i, j]| seq[m:n, i:j]</code>调用的是<code>seq.__getitem__((i, j))</code>或者<code>seq.__setitem((i, j))</code></p>
+<p>省略<code>...</code>在python解释器中是一个符号,其实本质上<code>Ellipsis</code>对象的别称</p>
+<p>如果<code>x</code>是四维数组,那么<code>x[i:...]</code>就是<code>x[i:::]</code>的缩写</p>
+<h3 id="2-4-2-切片赋值"><a href="#2-4-2-切片赋值" class="headerlink" title="2.4.2 切片赋值"></a>2.4.2 切片赋值</h3><ul>
+<li>通过切片赋值右边必须是<strong>可迭代对象</strong></li>
+</ul>
+<h2 id="2-5-对序列使用-和"><a href="#2-5-对序列使用-和" class="headerlink" title="2.5 对序列使用+和*"></a>2.5 对序列使用+和*</h2><ul>
+<li><p><code>+</code>和<code>*</code>都遵守一条规律即<strong>不修改原有的操作对象</strong>而是创建一个全新的序列</p>
+</li>
+<li><p><code>+</code>通常是相同类型的数据</p>
+</li>
+<li><p>在操作中python会创建一个包含相同类型数据的序列作为拼接的结果</p>
+</li>
+<li><p>注意在使用<code>seq * n</code>操作时, 如果<code>seq</code>里的元素是对其他可变对象的引用的话, 虽然<code>* n</code>拼接了, 但本质上还是对<code>seq</code>的引用, 对其进行操作时很可能会出现”多重操作”</p>
+</li>
+</ul>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">a = [[<span class="string">&quot;_&quot;</span>] * <span class="number">3</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)]</span><br><span class="line"></span><br><span class="line">b = [[<span class="string">&quot;_&quot;</span>] * <span class="number">3</span>] * <span class="number">3</span></span><br><span class="line"></span><br><span class="line">a[<span class="number">1</span>][<span class="number">2</span>] = <span class="string">&quot;X&quot;</span></span><br><span class="line">b[<span class="number">1</span>][<span class="number">2</span>] = <span class="string">&quot;O&quot;</span></span><br><span class="line"></span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line">[[<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;_&#x27;</span>],</span><br><span class="line"> [<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;X&#x27;</span>],</span><br><span class="line"> [<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;_&#x27;</span>]]</span><br><span class="line"></span><br><span class="line">[[<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;O&#x27;</span>],</span><br><span class="line"> [<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;O&#x27;</span>], </span><br><span class="line"> [<span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;_&#x27;</span>, <span class="string">&#x27;O&#x27;</span>]]</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/add_mul_operator.png"></p>
+<p>其中<code>b</code>时三个指向同一对象的引用</p>
+<p><code>b</code>所犯的错误和下面的错误一样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># list中追加的是对同一对象的三次引用</span></span><br><span class="line">row = [<span class="string">&quot;_&quot;</span>] * <span class="number">3</span></span><br><span class="line">board = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    board.append(row)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># should optimize to this </span></span><br><span class="line">board = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    row = [<span class="string">&quot;_&quot;</span>] * <span class="number">3</span></span><br><span class="line">    board.append(row)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-6-序列的增量赋值"><a href="#2-6-序列的增量赋值" class="headerlink" title="2.6 序列的增量赋值"></a>2.6 序列的增量赋值</h2><blockquote>
+<p>即就地增量 += *= (仅针对可变序列), 不可变序列增量拼接的话实现的是 + * 每次都会创建一个新对象,效率会很低(str除外, 因为对于str的拼接操作过于频繁, CPython对其进行优化)</p>
+</blockquote>
+<p>在调用这些运算符中, python优先调用<code>__iadd__|__imul__</code>如果没有会次级调用<code>__add__|__mul__</code></p>
+<p>需要注意的是:</p>
+<p>如果<code>a</code>实现了<code>__iadd__</code>那么<code>+=</code>会实现就地增量赋值,像<code>a.extend(iterator)</code> 否则会调用<code>__add__</code>, 此时不是就地增加,而是首先计算<code>a + b</code>得到一个新的对象, 然后再将对象赋值给<code>a</code>,即是否实现<code>就地</code>完全取决于这个类型有没有实现<code>__iadd__</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">aa = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">print(<span class="built_in">id</span>(aa))</span><br><span class="line">aa += [<span class="number">1</span>, <span class="number">23</span>]</span><br><span class="line">print(<span class="built_in">id</span>(aa))</span><br><span class="line"></span><br><span class="line">ss = <span class="string">&quot;123&quot;</span></span><br><span class="line">print(<span class="built_in">id</span>(ss))</span><br><span class="line">ss += <span class="string">&quot;qwer&quot;</span></span><br><span class="line">print(<span class="built_in">id</span>(ss))</span><br><span class="line"></span><br><span class="line"><span class="number">1168530238600</span></span><br><span class="line"><span class="number">1168530238600</span></span><br><span class="line"><span class="number">1168257348464</span></span><br><span class="line"><span class="number">1168257157616</span></span><br></pre></td></tr></table></figure>
+
+<p>对不可变序列进行重复拼接操作:</p>
+<ol>
+<li>创建一个新对象</li>
+<li>将原来对象的元素复制到新对象中</li>
+<li>追加寻元素</li>
+</ol>
+<p><code>str有优化:在为str初始化内存的时候,程序会为他流出额外的可扩展空间,因此进行增量操作的时候,并不会涉及复制原有字符串到新位置的这一操作</code></p>
+<h3 id="2-6-1-元组的增量赋值"><a href="#2-6-1-元组的增量赋值" class="headerlink" title="2.6.1 元组的增量赋值"></a>2.6.1 元组的增量赋值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">t = (<span class="number">1</span>, <span class="number">2</span>, [<span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line">t[<span class="number">2</span>] += [<span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;input&gt;&quot;</span>, line <span class="number">2</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: <span class="string">&#x27;tuple&#x27;</span> <span class="built_in">object</span> does <span class="keyword">not</span> support item assignment</span><br><span class="line">print(t)</span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>元组中的元素被成功拼接</li>
+<li>解释器抛出异常</li>
+</ol>
+<blockquote>
+<p>其实写成t[2].extend([3, 4])就不会抛出异常了</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用dis.dis展示操作的python字节码</span></span><br><span class="line">dis.dis(<span class="string">&#x27;tuple[i] += iter&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="number">1</span>           <span class="number">0</span> LOAD_NAME                <span class="number">0</span> (<span class="built_in">tuple</span>)</span><br><span class="line">              <span class="number">2</span> LOAD_NAME                <span class="number">1</span> (i)</span><br><span class="line">              <span class="number">4</span> DUP_TOP_TWO</span><br><span class="line">              <span class="number">6</span> BINARY_SUBSCR</span><br><span class="line">              <span class="number">8</span> LOAD_NAME                <span class="number">2</span> (<span class="built_in">iter</span>)</span><br><span class="line">             <span class="number">10</span> INPLACE_ADD</span><br><span class="line">             <span class="number">12</span> ROT_THREE</span><br><span class="line">             <span class="number">14</span> STORE_SUBSCR</span><br><span class="line">             <span class="number">16</span> LOAD_CONST               <span class="number">0</span> (<span class="literal">None</span>)</span><br><span class="line">             <span class="number">18</span> RETURN_VALUE</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>BINARY_SUBSCR: 将值存入stack (DONE)</li>
+<li>INPLACE_ADD 完成 += (DONE)</li>
+<li>STORE_SUBSCR 赋值 (ERROR)</li>
+</ul>
+<p>可以得出:</p>
+<ol>
+<li>不要把可变对象放在元组里</li>
+<li>增量赋值不是一个原子操作<ul>
+<li>先计算</li>
+<li>后赋值</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-7-排序"><a href="#2-7-排序" class="headerlink" title="2.7 排序"></a>2.7 排序</h2>
       
     </div>
     <footer class="article-footer">
