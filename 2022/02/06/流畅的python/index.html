@@ -14,8 +14,15 @@
 <meta property="og:description" content="Part0.BulitIn小知识format   数字 格式 输出 描述    3.1415926 {:.2f} 3.14 保留小数点后两位   3.1415926 {:+.2f} +3.14 带符号保留小数点后两位   -1 {:+.2f} -1.00 带符号保留小数点后两位   2.71828 {:.0f} 3 不带小数   5 {:0&gt;2d} 05 数字补零 (填充左边, 宽度为2)">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/add_mul_operator.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/memoryview">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220303231533.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/fluent_python_dict_set">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict01.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict02">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict03.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict04">
 <meta property="article:published_time" content="2022-02-06T10:02:01.000Z">
-<meta property="article:modified_time" content="2022-02-20T15:52:48.253Z">
+<meta property="article:modified_time" content="2022-03-03T15:37:38.299Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -204,6 +211,13 @@
 <li>用返回None来表示就地改动有一个弊端, 即调用者无法将其串联起来; 而返回一个新对象的方法(比如说str里的所有方法)则正好相反, 他们可以串联起来调用</li>
 </ul>
 <h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h3><p>sort分为两种， 一种是value sort即根据值进行排序， 另一种是time sort即就算两个元素比不出大小， 但在每次排序的结果里他们的相对位置是固定的</p>
+<h3 id="推导式"><a href="#推导式" class="headerlink" title="推导式"></a>推导式</h3><ul>
+<li>一般推导式的作用 <code>[]</code> <code>&#123;&#125;</code><ul>
+<li>创建新的数据对象</li>
+<li>过滤作用</li>
+</ul>
+</li>
+</ul>
 <h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><h3 id="1-python中list和array的区别"><a href="#1-python中list和array的区别" class="headerlink" title="1.python中list和array的区别"></a>1.python中list和array的区别</h3><ul>
 <li>list是python的内置数据类型</li>
 <li>list中的数据类不必相同的</li>
@@ -948,7 +962,232 @@
 </ul>
 </li>
 </ol>
-<h2 id="2-7-排序"><a href="#2-7-排序" class="headerlink" title="2.7 排序"></a>2.7 排序</h2>
+<h2 id="2-7-排序-sort和sorted"><a href="#2-7-排序-sort和sorted" class="headerlink" title="2.7 排序.sort和sorted()"></a>2.7 排序.sort和sorted()</h2><blockquote>
+<p>两者都是排序, 且内部算法使用的是<code>Timsort</code>,它是一种自适应算法,会根据原始数据的顺序特点交替使用插入排序和并归排序,而且<code>Timsort</code>算法是稳定的(相等元素的相对位置保持不变)</p>
+</blockquote>
+<ul>
+<li><p>seq.sort: 就地排序, 在原始数据的基础上排序, id不会改变, 这个方法返回<code>None</code> </p>
+<ul>
+<li>python operation返回<code>None</code>表示就地修改, 不会创建新对象</li>
+<li>如果函数或者方法对对象进行就地修改,那么就应该让他返回<code>None</code>,通知调用者传入的参数发生改变,但并未创建新对象</li>
+<li><code>random.shuffle(iterator)</code>|<code>id(iterator)</code>不会修改</li>
+<li>返回<code>None</code>表示就地改动又个弊端, 就是调用者无法串联接口,即始终使用的是一个对象引用</li>
+</ul>
+</li>
+<li><p>sort(obj) 会返回一个新建的<code>list</code></p>
+<ul>
+<li>可以接收任何形式的可迭代对象作为参数,包括不可变序列和生成器</li>
+<li>最后返回的是一个<code>list</code></li>
+</ul>
+</li>
+<li><p>两者都接受两个参数</p>
+<ol>
+<li><code>reverse=False</code>: 是否反向排序</li>
+<li><code>key=identity function:接收一个排序</code>fun<code>通常使用</code>lambda函数<ul>
+<li>恒等函数<code>(identity funtion)</code>默认用元素自己的值进行排序</li>
+<li><code>key=str.lower</code>:忽略大小写排序</li>
+<li><code>key=len</code>: 基于长度排序</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>接收<code>key</code>参数:</p>
+<ol>
+<li><code>min|max</code></li>
+<li><code>sort|.sort</code></li>
+<li><code>itertools.groupby()</code></li>
+<li><code>heapq.nlargest()|heapq.nsmller()</code></li>
+</ol>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> groupby</span><br><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter</span><br><span class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> nlargest, nsmallest</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">random.seed(<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line">a = [i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 就地随机打乱seq</span></span><br><span class="line">random.shuffle(a)</span><br><span class="line"></span><br><span class="line">print(a)</span><br><span class="line">a.sort()</span><br><span class="line">print(a)</span><br><span class="line">print(nlargest(<span class="number">3</span>, a))</span><br><span class="line">print(nsmallest(<span class="number">3</span>, a))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">temp_data = [</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>: <span class="number">1</span>, <span class="string">&quot;age&quot;</span>: <span class="number">1</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>: <span class="number">2</span>, <span class="string">&quot;age&quot;</span>: <span class="number">32</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;name&quot;</span>: <span class="number">1</span>, <span class="string">&quot;age&quot;</span>: <span class="number">45</span>&#125;,</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据list中每个ele中的name进行排序</span></span><br><span class="line">temp_data.sort(key=itemgetter(<span class="string">&quot;name&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤key=name</span></span><br><span class="line"><span class="keyword">for</span> name, data <span class="keyword">in</span> groupby(temp_data, key=itemgetter(<span class="string">&quot;name&quot;</span>)):</span><br><span class="line">    print(<span class="string">f&quot;name---[<span class="subst">&#123;name&#125;</span>]-----&gt; [<span class="subst">&#123;<span class="built_in">list</span>(data)&#125;</span>]&quot;</span>)</span><br><span class="line">    </span><br><span class="line">[<span class="number">4</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">[<span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line">name---[1]-----&gt; [[&#123;&#x27;name&#x27;: 1, &#x27;age&#x27;: 1&#125;, &#123;&#x27;name&#x27;: 1, &#x27;age&#x27;: 45&#125;]]</span><br><span class="line">name---[2]-----&gt; [[&#123;&#x27;name&#x27;: 2, &#x27;age&#x27;: 32&#125;]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-8-bisect管理有序序列"><a href="#2-8-bisect管理有序序列" class="headerlink" title="2.8 bisect管理有序序列"></a>2.8 bisect管理有序序列</h2><blockquote>
+<p><code>bisect</code>模块包含两个主要的函数<code>bisect</code>和<code>insort</code>, 两者都是通过二分法获取<code>index</code>并进行操作</p>
+</blockquote>
+<p><code>bisect(haystack, needle)</code>, 在<code>haystack</code>中搜索<code>needle</code>其中:</p>
+<ol>
+<li><code>haystack</code>必须是有序的</li>
+<li><code>return index</code></li>
+</ol>
+<p><code>bisect</code>可以建立一个用数字作为索引的查询表格, 比如把表格和成绩对应起来</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bisect</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">grade</span>(<span class="params">socre, grades=<span class="literal">None</span>, breakpoints=<span class="string">&quot;FDCBA&quot;</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> grades <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        grades = [<span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>]</span><br><span class="line">    socre_index = bisect.bisect(grades, score)</span><br><span class="line">    <span class="keyword">return</span> breakpoints[socre_index]</span><br></pre></td></tr></table></figure>
+
+<p><code>bisect.insort(seq, item)</code> 把变量<code>item</code>插入到有序序列<code>seq</code>中<code>[本质上是通过二分法获取index后插入]</code></p>
+<ul>
+<li>如果只是处理数字列表的话, <code>array</code>是一个更好的选择</li>
+</ul>
+<h2 id="2-9-当list不是首选时"><a href="#2-9-当list不是首选时" class="headerlink" title="2.9 当list不是首选时"></a>2.9 当list不是首选时</h2><p><code>list</code>可以处理多个数据类型,但当面对大量的数字类型时, <code>array</code>是一个更好的选择</p>
+<ol>
+<li>数组存储的不是<code>num</code>对象,而是数字的机器翻译(字节表述)</li>
+<li>和C语言的数组一样, 如果需要频繁的对序列进行进出操作, <code>deque</code>的速度会更快</li>
+<li>在处理<code>包含</code>操作时,<code>set</code>是个更好的选择,python对此进行过优化,需要注意的是,<code>set</code>不是序列,他是无序的</li>
+</ol>
+<h3 id="2-9-1-数组"><a href="#2-9-1-数组" class="headerlink" title="2.9.1 数组"></a>2.9.1 数组</h3><p><code>array.array</code>在存储数字方面效率胜于<code>list</code>且支持<code>list</code>的基本操作,此外数组还提供从文件读取<code>(.frombytes)</code>和存入文件<code>(.tofile)</code>的快速方法</p>
+<blockquote>
+<p>python中的数组和C一样, 在创建数组时都需要一个类型码,以表明要存储的数据类型</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> array <span class="keyword">import</span> array</span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="comment"># init a array</span></span><br><span class="line">floats = array(<span class="string">&quot;d&quot;</span>, [random() <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span> ** <span class="number">7</span>)])</span><br><span class="line"><span class="comment"># get ele by index</span></span><br><span class="line">print(floats[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># init the path</span></span><br><span class="line">file_path = <span class="string">&quot;./floats.bin&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># open the file with &quot;wb&quot;</span></span><br><span class="line">fp = <span class="built_in">open</span>(file_path, <span class="string">&quot;wb&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># write the data to the specify file</span></span><br><span class="line"><span class="comment"># by binaryIO</span></span><br><span class="line">floats.tofile(fp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># close the file</span></span><br><span class="line">fp.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># init an empty array</span></span><br><span class="line">floats2 = array(<span class="string">&quot;d&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># open the file with &quot;rb</span></span><br><span class="line">op = <span class="built_in">open</span>(file_path, <span class="string">&quot;rb&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># open the file 10 ** 7 from file</span></span><br><span class="line"><span class="comment"># by binaryIO</span></span><br><span class="line">floats2.fromfile(op, <span class="number">10</span>**<span class="number">7</span>)</span><br><span class="line">print(floats2[<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<p>method区别:</p>
+<ol>
+<li>数组不支持浅拷贝|但支持<code>__deepcopy__</code></li>
+<li>数组支持<code>seq.reverse()</code>但不支持<code>seq.__reversed__()</code></li>
+<li>数组不支持就地排序<code>seq.sort()</code></li>
+</ol>
+<blockquote>
+<p>从python3.4开始数组不再支持就地排序seq.sort(), 如果需要排序得用sorted函数重新建立一个数组</p>
+</blockquote>
+<p><code>a = array.array(a.typecode, sorted(a))</code></p>
+<h3 id="2-9-2-内存视图"><a href="#2-9-2-内存视图" class="headerlink" title="2.9.2 内存视图"></a>2.9.2 内存视图</h3><p><code>memoryview</code>是一个内置类, 可以让用户在不复制内容的情况下操作同一数组的不同切片</p>
+<ul>
+<li>本质上是泛化和去数学化的<code>Numpy</code>数组</li>
+<li>可以在不需要复制内容的前提下,在任何数据结构之间共享内存 </li>
+<li>处理大数据很实用 –&gt; 节省了数据copy内存和时间</li>
+<li>需要注意是对原数据直接进行操作</li>
+</ul>
+<p><code>memoryview.cast</code><strong>能用不同的方式读写同一块内存数据</strong>,并且内容字节不会随意移动,会把同一块内存里的内容打包成一个全新的<code>memoryview.cast</code>对象给你    </p>
+<p> <strong>不同方式</strong>:可以用不同的读写方式操作数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># init array 类型码“h”</span></span><br><span class="line">temp_array = array(<span class="string">&#x27;h&#x27;</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用数组创一个memoryview实例</span></span><br><span class="line">view = <span class="built_in">memoryview</span>(temp_array)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个memoryview实例,其中把这块内存内容用“B”类型存储[无符号字符]</span></span><br><span class="line">cast = view.cast(<span class="string">&quot;B&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># .tolist()以列表的形式查看|return --&gt; list</span></span><br><span class="line">temp = cast.tolist()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把位于1的字节赋值为6, 因为把占2个字节的整数高位字节改成了6</span></span><br><span class="line"><span class="comment"># 那么之歌有符号整数的值就变为了 1537</span></span><br><span class="line">cast[<span class="number">1</span>] = <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/memoryview"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220303231533.png"></p>
+<h3 id="2-9-3-NumPy-SciPy"><a href="#2-9-3-NumPy-SciPy" class="headerlink" title="2.9.3 NumPy|SciPy"></a>2.9.3 NumPy|SciPy</h3><blockquote>
+<p>NumPy和SciPy提供了高阶数组和矩阵操作, python内置数据类型都是一维数据</p>
+</blockquote>
+<p>维度: row</p>
+<p>每个维度所含元素: col</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">a = numpy.arange(<span class="number">12</span>)</span><br><span class="line">print(a.shape)</span><br><span class="line"><span class="comment"># 表述1维row 12元素</span></span><br><span class="line">(<span class="number">12</span>,) </span><br><span class="line"></span><br><span class="line"><span class="comment"># using unpacking tuple </span></span><br><span class="line"><span class="comment"># 将1维12元素转化成4维3元素</span></span><br><span class="line">a.shape = <span class="number">4</span>, <span class="number">3</span></span><br><span class="line">[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>]</span><br><span class="line"> [ <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>]</span><br><span class="line"> [ <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>]</span><br><span class="line"> [ <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># get index_row = 1 index_col = 2</span></span><br><span class="line">a[<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># get all index_row index_col = 1</span></span><br><span class="line">a[:, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># transpose() matrix</span></span><br><span class="line"><span class="comment"># return new view</span></span><br><span class="line">a.transpose()</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-9-4-双向队列"><a href="#2-9-4-双向队列" class="headerlink" title="2.9.4 双向队列"></a>2.9.4 双向队列</h3><blockquote>
+<p>用列表和append pop(0)可以实现队列 先进先出, 但是删除list中的第一个或者在第一元素前添加一个元素都是十分耗时的, 因为这涉及到所有元素的移动</p>
+</blockquote>
+<p><code>collection.deque</code>双端队列实现了队列两端元素操作的优化, 但是涉及到中间元素的操作依然会耗时, 并且是一个<code>thread safe</code>类</p>
+<ul>
+<li>快速从两端对元素进行操作</li>
+<li>存储最近使用的几个元素</li>
+<li><code>collection.deque</code>可以实现简单的过期机制&lt;通过设置maxlen&gt;</li>
+<li><code>append(item)|popleft(index)</code>都是原子操作, 因此<code>deque</code>可以在多线程程序中安全地当作<code>先进先出</code>的<code>栈</code>使用, 而且使用者不需要担心<code>资源锁</code>问题</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"></span><br><span class="line"><span class="comment"># create dequeue maxlen=10 eles=range(10)</span></span><br><span class="line">dq = deque(<span class="built_in">range</span>(<span class="number">10</span>), maxlen=<span class="number">10</span>)</span><br><span class="line"><span class="comment"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># append one ele - right</span></span><br><span class="line">dq.append(<span class="number">10</span>)</span><br><span class="line"><span class="comment"># [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># append one ele - left</span></span><br><span class="line">dq.appendleft(<span class="number">0</span>)</span><br><span class="line"><span class="comment"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># rotate num ele default=right | negative=left</span></span><br><span class="line"><span class="comment"># return None ==&gt; will change ori data</span></span><br><span class="line">dq.rotate(<span class="number">3</span>)</span><br><span class="line"><span class="comment"># [7, 8, 9, 0, 1, 2, 3, 4, 5, 6]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># extend iterator ele default=right</span></span><br><span class="line">dq.extend([<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>])</span><br><span class="line"><span class="comment"># [0, 1, 2, 3, 4, 5, 6, 10, 11, 12]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># extendleft iterator ele</span></span><br><span class="line"><span class="comment"># attention the order!</span></span><br><span class="line">dq.extendleft([-<span class="number">1</span>, -<span class="number">2</span>, -<span class="number">3</span>])</span><br><span class="line"><span class="comment"># [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-10-线程安全"><a href="#2-10-线程安全" class="headerlink" title="2.10 线程安全"></a>2.10 线程安全</h2><blockquote>
+<p>除了<code>collections.deque</code>外还有其他<code>python</code>标准库也有对队列的实现</p>
+</blockquote>
+<p><strong>queue</strong></p>
+<p>提供了同步<code>线程安全</code>类<code>Queue|LifoQueue|PriorityQueue</code>,不同的<strong>线程</strong>可以利用这些数据类型来交换信息</p>
+<ul>
+<li>线程通信</li>
+<li>三个类构造时都有一个可选参数<code>maxsize</code>用来限制队列大小</li>
+<li>在满员时这些类并<strong>不会丢掉旧的元素腾出位置</strong></li>
+<li>而是会锁住资源, 直到另外的线程移除了某个元素</li>
+<li>适合<strong>控制活跃线程的数量</strong></li>
+</ul>
+<hr>
+<p><strong>multiprocessing</strong></p>
+<p>这个包实现了自己的<code>Queue</code>和<code>queue.Queue</code>类似, 是设计给<strong>进程</strong>通信用的还有一个<code>multiprocessiong.JoinableQueue</code></p>
+<ul>
+<li>进程通信</li>
+<li>任务管理</li>
+</ul>
+<hr>
+<p><strong>asyncio</strong></p>
+<p><code>python3.4</code>及以上提供, 里面有<code>Queue</code> <code>LifoQueue PriorityQueue</code>和<code>JoinableQueue</code>这些类受到<code>queue</code>和<code>multiprocessing</code>的影响,用于异步变成任务管理</p>
+<ul>
+<li>异步编程</li>
+</ul>
+<hr>
+<p><strong>heapq</strong></p>
+<p>和上面三个模块不同, <code>heapq</code>没有队列类,而是提供了<code>heappush</code>和<code>heappop</code>方法, 可以让用户把<code>可变序列</code>当作堆队列或者优先队列使用</p>
+<h2 id="本章小结"><a href="#本章小结" class="headerlink" title="本章小结"></a>本章小结</h2><p>可变序列 不可变序列</p>
+<p>容器序列: 存储引用 非连续存储</p>
+<p>扁平序列: 存储值 连续存储 原子性数据</p>
+<p>列表: 列表中数据最好是具有相同特性的数据</p>
+<p>拆包: 获取元组内数据最安全可靠的方法,<code>*</code>拆包的利器</p>
+<p>具名元组: 将元组与数据关联</p>
+<ul>
+<li><code>namedtuple()._asdict</code>将具名元组转化成<code>ordereddoct</code></li>
+<li><code>dict(zip(iter_key, iter_value))</code>普通元组转化<code>dict</code></li>
+</ul>
+<p>序列切片是python中最受欢迎的语言特性之一</p>
+<p><strong>对切片赋值是一个修改可变序列的捷径</strong></p>
+<p>重复拼接<code>n*seq</code>要在正确的前提下使用!!!!!</p>
+<ul>
+<li>初始化含有不可变元素的序列</li>
+</ul>
+<p>增量赋值<code>+= 和 *=</code>的操作行为和序列本身有关(可变序列|不可变序列) </p>
+<p>PS: string类型有优化不会重复复制原数据</p>
+<ul>
+<li><p>可变序列: 就地修改</p>
+</li>
+<li><p>不可变序列: 生成新的序列</p>
+<p><code>sort</code>和<code>sorted()</code>与<code>key</code>的用法</p>
+</li>
+<li><p>背后的逻辑是<code>timsort</code>算法, 它是一种自适应算法, 会根据原始数据的特点交替使用插入排序和并归排序</p>
+</li>
+</ul>
+<hr>
+<p>元组的鼻祖是ABC语言中的compounds, tuple更准确的说是<code>frozenlist</code></p>
+<p><strong>key参数</strong></p>
+<p>再使用默认函数key进行排序时<code>Python</code>总会比较两个键, 但是这一计算阶段发生在<code>C</code>语言层, 这也是比调用用户自定义比较函数快的原因</p>
+<ul>
+<li>当<code>ele</code>是<code>int</code> 或者<code>str</code>时, <code>key</code>支持<code>int</code>或者<code>str</code><ul>
+<li><code>int</code>: 比较整个数值</li>
+<li><code>str</code>: 只比较第一位数值</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">temp_1 = [<span class="number">3</span>, <span class="number">45</span>, <span class="number">2</span>, <span class="string">&quot;10&quot;</span>, <span class="string">&quot;34&quot;</span>]</span><br><span class="line">print(<span class="built_in">sorted</span>(temp_1, key=<span class="built_in">int</span>))</span><br><span class="line">print(<span class="built_in">sorted</span>(temp_1, key=<span class="built_in">str</span>))</span><br><span class="line"></span><br><span class="line">[<span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;10&#x27;</span>, <span class="string">&#x27;34&#x27;</span>, <span class="number">45</span>]</span><br><span class="line">[<span class="string">&#x27;10&#x27;</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">&#x27;34&#x27;</span>, <span class="number">45</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="Part3-Dict-Set"><a href="#Part3-Dict-Set" class="headerlink" title="Part3.Dict|Set"></a>Part3.Dict|Set</h1><blockquote>
+<p><code>dict</code>的内置函数<code>_builtins_.dict_</code>, Python对字典实现了高度优化 –&gt; <code>hashtable</code></p>
+</blockquote>
+<h2 id="3-1-泛映射类型"><a href="#3-1-泛映射类型" class="headerlink" title="3.1 泛映射类型"></a>3.1 泛映射类型</h2><p><code>collections.abc</code>中含有<code>Mapping</code>和<code>MutableMapping</code>这俩个抽象类,为<code>dict</code>和其他类似的类型定义形式接口</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/fluent_python_dict_set"></p>
+<p>非抽象类一般不会直接继承这些抽象基类, 而是直接对<code>dict</code>或者<code>collections.User.Dict</code>进行扩展,这些抽象基类的主要作用是作为形式化的文档, 定义构建一个映射类型所需要的最基本接口.而且还可以与<code>isinstance</code>一起使用来判断某个数据是否是广义上的<code>mapping</code>类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">my_dict = &#123;&#125;</span><br><span class="line"><span class="built_in">isinstance</span>(my_dict, abc.mapping)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>isinstance</code>而不是<code>type</code></li>
+<li>可以判断除<code>dict</code>外的广义映射类型</li>
+</ul>
+<blockquote>
+<p>标准库的所有映射类型都是通过dict来实现的,他们有个共同的限制, 即key必须是可散列的</p>
+</blockquote>
+<p><strong>可散列数据</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">An <span class="built_in">object</span> <span class="keyword">is</span> hashable <span class="keyword">if</span> it has a <span class="built_in">hash</span> value which never changes during its lifetime (it needs a __hash__() method), <span class="keyword">and</span> can be compared to other objects (it needs an __eq__() method). Hashable objects which compare equal must have the same <span class="built_in">hash</span> value. </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>含有<code>__hash__</code> 散列</li>
+<li>含有<code>__eq__ </code>比较key</li>
+<li>哈希值在整个声明周期不会变化</li>
+<li>散列对象相等==&gt;散列值一定相等</li>
+</ul>
+<p>可散列的数据类型:</p>
+<ul>
+<li>str</li>
+<li>bytes</li>
+<li>数值类型</li>
+<li>frozenset</li>
+<li>tuple(所含的元素全为可散列)</li>
+</ul>
+<hr>
+<p>一般用户自定义的类型的对象都是可散列的, 其中散列值就是<code>id(obj)</code>, 所以所有这些对象在比较时都是不相等的. 如果一个对象实现了<code>__eq__</code>方法, 并且在方法中用到了这个对象的内部状态的话, 那么只有当所有这些内部状态都是不可变的情况下, 这个对象才是可散列的</p>
+<hr>
+<p><strong>构造字典方法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;</span><br><span class="line"><span class="built_in">dict</span>(name=<span class="string">&quot;Drink&quot;</span>, age=<span class="string">&quot;23&quot;</span>, score=<span class="string">&quot;98&quot;</span>)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Drink&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="string">&quot;23&quot;</span>, <span class="string">&quot;score&quot;</span>: <span class="string">&quot;98&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="built_in">dict</span>(<span class="built_in">zip</span>([<span class="string">&quot;name&quot;</span>, <span class="string">&quot;age&quot;</span>, <span class="string">&quot;score&quot;</span>], [<span class="string">&quot;Drink&quot;</span>, <span class="string">&quot;23&quot;</span>, <span class="string">&quot;98&quot;</span>]))</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="built_in">dict</span>([(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Drink&quot;</span>), (<span class="string">&quot;age&quot;</span>, <span class="string">&quot;23&quot;</span>), (<span class="string">&quot;score&quot;</span>, <span class="string">&quot;98&quot;</span>)])</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="built_in">dict</span>(&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Drink&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="string">&quot;23&quot;</span>, <span class="string">&quot;score&quot;</span>: <span class="string">&quot;98&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">&#123;key, value <span class="keyword">for</span> key, value <span class="keyword">in</span> iterator(key-value-pair)&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-字典推导"><a href="#3-2-字典推导" class="headerlink" title="3.2 字典推导"></a>3.2 字典推导</h2><blockquote>
+<p>推导式的作用: </p>
+<p>创建新的数据对象</p>
+<p>过滤作用</p>
+</blockquote>
+<h2 id="3-3-常见的映射方法"><a href="#3-3-常见的映射方法" class="headerlink" title="3.3 常见的映射方法"></a>3.3 常见的映射方法</h2><p>映射类型的方法很丰富, <code>dict</code> <code>defalutdict</code> 和<code>OrderedDict</code>的常见方法, 后面两个数据类型是<code>dict</code>的变种,位于<code>collections</code>模块内</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict01.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict02"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict03.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict04"></p>
+
       
     </div>
     <footer class="article-footer">
@@ -963,6 +1202,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2022/02/22/python%E9%9D%A2%E8%AF%95%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          python面试题
+        
+      </div>
+    </a>
   
   
     <a href="/2021/11/14/%E7%BB%8F%E6%B5%8E%E5%88%86%E6%9E%90-1/" id="article-nav-older" class="article-nav-link-wrap">
@@ -1019,6 +1267,10 @@
       <ul>
         
           <li>
+            <a href="/2022/02/22/python%E9%9D%A2%E8%AF%95%E9%A2%98/">python面试题</a>
+          </li>
+        
+          <li>
             <a href="/2022/02/06/%E6%B5%81%E7%95%85%E7%9A%84python/">流畅的python</a>
           </li>
         
@@ -1032,10 +1284,6 @@
         
           <li>
             <a href="/2021/10/07/Question/">Question</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/07/My-Project/">My-Project</a>
           </li>
         
       </ul>
