@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict03.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict04">
 <meta property="article:published_time" content="2022-02-06T10:02:01.000Z">
-<meta property="article:modified_time" content="2022-03-03T15:37:38.299Z">
+<meta property="article:modified_time" content="2022-03-06T16:26:22.063Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -663,7 +663,7 @@
 <p>以下实例使用 yield 实现斐波那契数列：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fibonacci</span>(<span class="params">n</span>):</span>  <span class="comment"># 生成器函数 - 斐波那契</span></span><br><span class="line">    a, b, counter = <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> (counter &gt; n): </span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">yield</span> a</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        counter += <span class="number">1</span></span><br><span class="line">f = fibonacci(<span class="number">10</span>)  <span class="comment"># f 是一个迭代器，由生成器返回生成</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="built_in">print</span> (<span class="built_in">next</span>(f), end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        sys.exit()</span><br><span class="line"><span class="comment">#  每次next（generator）所生成的迭代器对象公用和一个物理地址</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="5-4迭代器和生成器对比："><a href="#5-4迭代器和生成器对比：" class="headerlink" title="5.4迭代器和生成器对比："></a>5.4迭代器和生成器对比：</h3><ul>
+<h3 id="5-4迭代器和生成器对比"><a href="#5-4迭代器和生成器对比" class="headerlink" title="5.4迭代器和生成器对比"></a>5.4迭代器和生成器对比</h3><ul>
 <li><p>迭代器（iterator）是一个特殊的类，其中必有iterm和next方法，本质上是一个类|对象 </p>
 <ul>
 <li>除了使用class来定义一个迭代器外， 还可以使用iterm(obj)来快速生成一个迭代器对象</li>
@@ -1187,6 +1187,128 @@
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict02"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict03.png"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/dict04"></p>
+<p><code>default_factory</code>不是一个方法而是一个可调用对象, 他的值在<code>defaultdict</code>初始化中由用户设置</p>
+<p><code>OrderedDict.popitem()</code>会移除最先插入的元素**(先进先出)<strong>, 如果<code>.popitem(last=True)</code>则会移除最后插入的元素</strong>(后进先出)**</p>
+<p><code>d.update(m, [**kargs])</code>, 在处理<code>m</code>时, 函数首先检验<code>m</code>是否有<code>keys</code>方法,</p>
+<ul>
+<li>有–&gt;<code>update</code>会把它当作映射对象处理</li>
+<li>无–&gt;<code>update</code>会把它当作含有<code>(key-vaule)</code>键值对元素的迭代器</li>
+<li><code>python</code>大多数映射类型的构建都采用了相似的逻辑</li>
+</ul>
+<p><strong>可调用对象</strong></p>
+<blockquote>
+<p>将类当作函数调用instance()</p>
+</blockquote>
+<ul>
+<li>类中实现<code>__call__</code></li>
+<li>快速调用带有某一实例化属性的类的函数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">eval_some</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">slef, g</span>):</span></span><br><span class="line">        self.g = g</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span>(<span class="params">self, t</span>):</span></span><br><span class="line">        <span class="keyword">return</span> (self.g * <span class="number">2</span>) / t</span><br><span class="line"></span><br><span class="line">earth = eval_some(<span class="number">9.8</span>)</span><br><span class="line">print(earth(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-1-更新字典kV"><a href="#3-3-1-更新字典kV" class="headerlink" title="3.3.1 更新字典kV"></a>3.3.1 更新字典kV</h3><p><strong>用setdefault处理找不到的键</strong></p>
+<p><code>d[k] --&gt; getitem</code>找不到键时, 会有异常抛出<code>KeyError</code></p>
+<ul>
+<li>符合python的快速失败哲学</li>
+<li>可以使用<code>d.get(k, default)</code>代替异常</li>
+<li><strong>当在更新某个键对应的值的时候, 以上俩个方式效率都很低</strong></li>
+</ul>
+<p>如果要更新字典的一个键值对(包括不存在)使用<code>setdefault(key, default) [operate]</code>这样只会<code>query 1</code>,如果使用<code>if else []</code>则会查询<code>2~3</code>次</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Drink&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里只会查询一次key并更新或初始化</span></span><br><span class="line"><span class="comment"># 如果key存在则对key-value更新</span></span><br><span class="line"><span class="comment"># 不存在将key-default放进映射中</span></span><br><span class="line">a.setdefault(<span class="string">&quot;things&quot;</span>, []).append(<span class="string">&quot;reading&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当存在key时查询2次, 不存在会查询3次</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;things&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> a:</span><br><span class="line">    a[<span class="string">&quot;things&quot;</span>] = []</span><br><span class="line">a[<span class="string">&quot;things&quot;</span>].append(<span class="string">&quot;reading&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-映射的弹性键查询"><a href="#3-4-映射的弹性键查询" class="headerlink" title="3.4 映射的弹性键查询"></a>3.4 映射的弹性键查询</h2><blockquote>
+<p>在映射中查找不存的key时, 我们希望可以返回一个default value而不是error, 以下俩途径可以实现弹性键查询</p>
+</blockquote>
+<ol>
+<li>通过<code>defaultdict</code>这个类而不是普通的<code>dict</code></li>
+<li>自己定义一个<code>dict</code>子类, 并在在子类中实现<code>__missing__</code>方法</li>
+</ol>
+<h3 id="3-4-1-defaultdict处理不存在的key"><a href="#3-4-1-defaultdict处理不存在的key" class="headerlink" title="3.4.1 defaultdict处理不存在的key"></a>3.4.1 defaultdict处理不存在的key</h3><blockquote>
+<p><code>defaultdict</code>是<code>collections</code>中的一个类, 在实例化它时,可以接受一个<code>defaultfoctory</code>不接受参数(一定是可调用的且不接受参数的方法类|函数)</p>
+</blockquote>
+<ol>
+<li><p>在调用<code>d[key]</code>中如果<code>__getitem__</code>找不到对应的<code>key</code>会调用<code>__missing__</code>查看是否定义了<code>defaultfactory</code></p>
+</li>
+<li><p>将<code>defaultfactory</code>返回的值赋值给<code>d[key]</code></p>
+</li>
+<li><p>更新<code>dict</code></p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line">temp = defaultdict(<span class="built_in">list</span>)</span><br><span class="line"></span><br><span class="line">temp[<span class="string">&quot;name&quot;</span>]</span><br><span class="line">print(temp)</span><br><span class="line">&gt;&gt; </span><br><span class="line">defaultdict(&lt;class &#x27;list&#x27;&gt;, &#123;&quot;name&quot;: []&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>如果<code>defaultfactory=None</code>在没有找到对应的<code>key</code>时会抛出<code>KeyError</code></p>
+</li>
+<li><p><code>defaultfactory</code>只会在<code>__getitem__</code>中调用, 比如<code>dict[key]</code>才会被调用, 其中连接两者桥梁的时<code>__missing__</code></p>
+</li>
+</ul>
+<h3 id="3-4-2-特殊方法missing"><a href="#3-4-2-特殊方法missing" class="headerlink" title="3.4.2 特殊方法missing"></a>3.4.2 特殊方法missing</h3><blockquote>
+<p>所有的映射类型在找不到key的时候都会牵扯到missing, python基类虽然直到这个方法,但并没有定义这个方法, 不过, 如果一个class继承了dict并且这个类提供了missing方法,那么在<code>getitem</code>找不到值的时候不会抛出<code>异常</code></p>
+</blockquote>
+<p>特点:</p>
+<ol>
+<li><code>missing</code>方法只会被<code>getitem</code>调用</li>
+<li>不会对<code>.get()</code> <code>__contains__</code>方法产生影响</li>
+</ol>
+<p><code>dict[key] -- __getitem__ -- __missing__</code></p>
+<p><code>dict.get() -- get -- try except</code></p>
+<hr>
+<p>如果要自定义一个映射类型, 更合适的策略是继承<code>collections.UserDict</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># define the new mapping class by user based on dict</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StrKeyDict</span>(<span class="params"><span class="built_in">dict</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__missing__</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        <span class="comment"># 如果键不存在且本身是str则抛出异常</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(key, <span class="built_in">str</span>):</span><br><span class="line">            <span class="keyword">raise</span> KeyError(key)</span><br><span class="line">        <span class="comment"># 如果键不存在且本身不是str则调用getitem</span></span><br><span class="line">        <span class="keyword">return</span> self[<span class="built_in">str</span>(key)]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># get方法吧查找工作用self[key]的形式委托给getitem,这样</span></span><br><span class="line">    <span class="comment"># 在宣布查找失败之前还missing再给某个键一个机会</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, key, default=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> self[key]</span><br><span class="line">        <span class="keyword">except</span> KeyError:</span><br><span class="line">            <span class="comment"># 如果cast异常则missing也失败了,返回default</span></span><br><span class="line">            <span class="keyword">return</span> default</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__contains__</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        <span class="comment"># 按照传入键的原本值来查找,如果没找到则转化成str再次查找</span></span><br><span class="line">        <span class="keyword">return</span> key <span class="keyword">in</span> self.keys() <span class="keyword">or</span> <span class="built_in">str</span>(key) <span class="keyword">in</span> self.keys()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 像<code>k in dict.keys()</code>操作在<code>python3</code>中是十分快速的, 即使映射类型对象很庞大, 因为:</p>
+</blockquote>
+<ul>
+<li><code>dict.keys()</code>返回的值是一个视图, 就像集合, 在里面查找一个元素是十分快的</li>
+<li><code>key in dict</code>扫描的是一个list, 处理大数据效率低<code>dict.keys()</code></li>
+</ul>
+<h2 id="3-5-字典的变种"><a href="#3-5-字典的变种" class="headerlink" title="3.5 字典的变种"></a>3.5 字典的变种</h2><p>都是基于<code>collections</code>库</p>
+<blockquote>
+<p>除了bultin中定义的dict外, 其余字典的变种都是<code>collections</code>库中的</p>
+</blockquote>
+<h3 id="UserDict"><a href="#UserDict" class="headerlink" title="UserDict"></a>UserDict</h3><blockquote>
+<p>比较特殊的一种dict, 这个类其实是把builtin中的dict用纯Pyhton又实现了一遍</p>
+</blockquote>
+<p>一般用于用户自定义子类的继承</p>
+<h3 id="OrderedDict"><a href="#OrderedDict" class="headerlink" title="OrderedDict"></a>OrderedDict</h3><blockquote>
+<p>这个类型会在添加键的时候保持顺序, 因此键的每次迭代次序总是一致的</p>
+</blockquote>
+<p><code>OrderedDict</code>的<code>popitem</code>方法默认删除并返回的时字典里的最后一个元素(先进后出), 如果<code>popitem(last=False)</code>则会删除并返回第一个元素(先进先出)</p>
+<h3 id="ChainMap"><a href="#ChainMap" class="headerlink" title="ChainMap"></a>ChainMap</h3><p><a target="_blank" rel="noopener" href="https://zditect.com/main-advanced/python/python-chainmap.html">什么是chainmap?为什么要搞chainmap</a></p>
+<blockquote>
+<p>该类型可以容纳数个不同的映射对象,然后在进行键查找操作时, 这些对象会被当作一个整体逐个进行查找,直到键被找到</p>
+</blockquote>
+<p>在给有嵌套功能作用域的语言做解释器的时候很有用, 可以用一个映射对象来代表一个作用域的上下文</p>
+<p><code>ChainMap</code>可以将多个字典合并为一个独有的字典，这样的操作 并不是对源数据的拷贝，而是指向源数据，假如原字典数据修改，<code>ChainMap</code>映射也会改变；如果对<code>ChainMap</code>的结果修改，那么原数据一样也会被修改</p>
+<p><strong>使用update进行合并字典,是对源数据的拷贝</strong></p>
+<ol>
+<li><p><code>ChainMap</code> 可接受多个映射然后在逻辑上使它们表现为一个单独的映射结构；它只是维护了一个记录底层映射关系的列表，然后去重定义常用的字典操作</p>
+</li>
+<li><p>如果有重复的键，会采用第一个映射中键对应的值</p>
+</li>
+<li><p>修改 <code>ChainMap </code>映射结构，会同时作用在自己和原始字典结构上</p>
+</li>
+<li><p>可以使用字典的 <code>update() </code>方法，来替代上面的合并方案；但是这就需要创建一个新的字典对象(或者修改原字典，破坏了原始数据)，并且原始字典做了修改，并不会反映到新建的字典上</p>
+</li>
+<li><p><code>ChainMap </code>使用的就是原始字典，因此原字典变，它也会改变。</p>
+</li>
+<li><p><strong>如果在使用 ChainMap 合并多个字典时，字典中有重复的 key 值，默认取第一个字典中 key 对应的 value</strong> ，从原理上面讲，ChainMap 实际上是把放入的字典存储在一个队列中，当进行字典的增加删除等操作只会在第一个字典上进行，当进行查找的时候会依次查找<code>(以查找的第一个key-value返回)</code></p>
+</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">m1 = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Drink&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">23</span>&#125;</span><br><span class="line">m2 = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Drinkle&quot;</span>, <span class="string">&quot;score&quot;</span>: <span class="number">93</span>&#125;</span><br><span class="line">m3 = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Spark&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">23</span>, <span class="string">&quot;score&quot;</span>: <span class="number">98</span>, <span class="string">&quot;sex&quot;</span>: <span class="string">&quot;man&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">cm = collections.ChainMap(m1, m2, m3)</span><br><span class="line">print(cm)</span><br><span class="line">print(cm[<span class="string">&quot;name&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> cm.items():</span><br><span class="line">    print(key, <span class="string">&quot; &lt;--&gt; &quot;</span>, value)</span><br><span class="line"></span><br><span class="line">ChainMap(&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Drink&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>&#125;, &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Drinkle&#x27;</span>, <span class="string">&#x27;score&#x27;</span>: <span class="number">93</span>&#125;, &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Spark&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>, <span class="string">&#x27;score&#x27;</span>: <span class="number">98</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;man&#x27;</span>&#125;)</span><br><span class="line">Drink</span><br><span class="line">name  &lt;--&gt;  Drink</span><br><span class="line">age  &lt;--&gt;  23</span><br><span class="line">score  &lt;--&gt;  93</span><br><span class="line">sex  &lt;--&gt;  man</span><br></pre></td></tr></table></figure>
+
+<h3 id="Counter"><a href="#Counter" class="headerlink" title="Counter"></a>Counter</h3><blockquote>
+<p>这个类型会给键准备一个整数计数器, 每次更新一个键的时候都会增加这个计数器.因此这个类型可以用来给可散列对象计数(str bytes frozenset 数值型)或者当成多重集来用–&gt;多重集合就是集合里的元素可以出现不止一次, Counter实现了+ - 运算符来和并记录</p>
+</blockquote>
+<p>还有像<code>most_common(num)</code>这类方法, 会按照次序返回映射里最常见的num个键和他们的计数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">counter = collections.Counter(<span class="string">&quot;asdxzcsdfwerewrfewzsqawd&quot;</span>)</span><br><span class="line"></span><br><span class="line">print(counter)</span><br><span class="line"></span><br><span class="line">counter.update(<span class="string">&quot;asdsassd&quot;</span>)</span><br><span class="line"></span><br><span class="line">print(counter.most_common())</span><br><span class="line"></span><br><span class="line">Counter(&#123;<span class="string">&#x27;w&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;s&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;a&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;z&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;f&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;r&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;x&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;q&#x27;</span>: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line">[(<span class="string">&#x27;s&#x27;</span>, <span class="number">7</span>), (<span class="string">&#x27;d&#x27;</span>, <span class="number">5</span>)]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
 
       
     </div>
