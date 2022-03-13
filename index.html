@@ -650,7 +650,14 @@
 </ul>
 <p>返回元组列表(物理地址)。</p>
 <h4 id="cast"><a href="#cast" class="headerlink" title=".cast"></a>.cast</h4><p><strong>memoryview.cast</strong>的概念和数组模型差不多,能用不同的方式读写同一块内存地址,而且内容字节不会随意移动,和C语言中类型转换的概念相似.cast会把同一块内存里的内容打包成一个全新的memoryview对象给你</p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h3><h3 id="reversed"><a href="#reversed" class="headerlink" title="reversed"></a>reversed</h3><ol>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h3><blockquote>
+<p>python断言和try-except用法相反</p>
+</blockquote>
+<p>断言函数是对表达式布尔值的判断，要求表达式计算值必须为真。可用于自动调试。</p>
+<p>如果表达式为假，触发异常；如果表达式为真，不执行任何操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> condition</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> condition:</span><br><span class="line">    <span class="keyword">raise</span> AssertionError()</span><br></pre></td></tr></table></figure>
+
+<h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse"></a>reverse</h3><h3 id="reversed"><a href="#reversed" class="headerlink" title="reversed"></a>reversed</h3><ol>
 <li><code>s.reverse()</code>就地排序, <code>id(s)</code>不变</li>
 <li><code>reversed(s)</code>返回<code>s</code>的<strong>倒序迭代器</strong></li>
 </ol>
@@ -1370,13 +1377,354 @@
 <p>还有像<code>most_common(num)</code>这类方法, 会按照次序返回映射里最常见的num个键和他们的计数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">counter = collections.Counter(<span class="string">&quot;asdxzcsdfwerewrfewzsqawd&quot;</span>)</span><br><span class="line"></span><br><span class="line">print(counter)</span><br><span class="line"></span><br><span class="line">counter.update(<span class="string">&quot;asdsassd&quot;</span>)</span><br><span class="line"></span><br><span class="line">print(counter.most_common())</span><br><span class="line"></span><br><span class="line">Counter(&#123;<span class="string">&#x27;w&#x27;</span>: <span class="number">4</span>, <span class="string">&#x27;s&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;d&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">3</span>, <span class="string">&#x27;a&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;z&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;f&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;r&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;x&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;c&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;q&#x27;</span>: <span class="number">1</span>&#125;)</span><br><span class="line"></span><br><span class="line">[(<span class="string">&#x27;s&#x27;</span>, <span class="number">7</span>), (<span class="string">&#x27;d&#x27;</span>, <span class="number">5</span>)]</span><br></pre></td></tr></table></figure>
 
+<h2 id="3-6-子类化UserDict"><a href="#3-6-子类化UserDict" class="headerlink" title="3.6 子类化UserDict"></a>3.6 子类化UserDict</h2><blockquote>
+<p>自定义mapping类型,以<code>UserDict</code>为基类更加方便,因为<code>UserDict</code>是原生的方法, 而<code>dict</code>可能会走写捷径,导致我们不得不在子类中重写这些方法, 而<code>UserDict</code>则不会出现这个问题</p>
+</blockquote>
+<p>需要注意的是, <code>UserDict</code>并不是<code>Dict</code>的子类,但在<code>data</code>属性是基于<code>Dict</code>的实例实现的, 这个属性实际上是<code>UserDict</code>最终存储数据的地方</p>
+<ul>
+<li><code>UserDict</code>的子类在实现<code>__setitem__</code>避免了不必要的递归</li>
+<li>可以让<code>__contains__</code>的代码更加简洁</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StrKeyDict</span>(<span class="params">collections.UserDict</span>):</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__missing__</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(key, <span class="built_in">str</span>):</span><br><span class="line">            <span class="keyword">raise</span> KeyError (key)</span><br><span class="line">        <span class="keyword">return</span> self[<span class="built_in">str</span>(key)]</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__contains__</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(key) <span class="keyword">in</span> self.data</span><br><span class="line">    </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__setitem__</span>(<span class="params">self, key, value</span>):</span></span><br><span class="line">        self.data[<span class="built_in">str</span>(key)] = value</span><br></pre></td></tr></table></figure>
 
+<p><code>UserDict</code>继承的是<code>MutableMapping</code>,所以<code>StrKeyDict</code>里剩下的映射类型方法都是从<code>UserDict</code> <code>MutableMapping</code> 和 <code>Mapping</code>这些超类中继承的</p>
+<p><code>Mapping</code>类虽然是一个抽象基类<code>ABC</code>,但它提供了许多实用方法</p>
+<p><strong>1.MutableMapping.update</strong></p>
+<ul>
+<li>可以直接使用<code>dict.update(obj)</code></li>
+<li>定义在<code>__init__</code>中, 实列化时可以接受多个不同类型的参数构造<code>dict</code></li>
+<li>本质上调用的是<code>__setitem__</code> –&gt; <code>self[key]=value</code></li>
+</ul>
+<p><strong>2.Mapping.get</strong></p>
+<ul>
+<li><code>.get()</code> –&gt; <code>def get()</code> –&gt; <code>try except</code></li>
+</ul>
+<h2 id="3-7-不可变映射类型"><a href="#3-7-不可变映射类型" class="headerlink" title="3.7 不可变映射类型"></a>3.7 不可变映射类型</h2><blockquote>
+<p>接受一个mapping类型, 返还一个动态只读视图, 在原数据上更改可以反映到视图上,但不能对视图进行写操作, 只能读取 <code>types.MappingProxyType</code></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> types <span class="keyword">import</span> MappingProxyType</span><br><span class="line"></span><br><span class="line">temp = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Drink&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line">proxy_dict = MappingProxyType(temp)</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">proxy_dict[<span class="string">&quot;name&quot;</span>] </span><br><span class="line">proxy_dict[<span class="string">&quot;age&quot;</span>]</span><br><span class="line">proxy_dict[<span class="string">&quot;score&quot;</span>] = <span class="number">90</span></span><br><span class="line">temp[<span class="string">&quot;age&quot;</span>] = <span class="number">23</span></span><br><span class="line">proxy_dict</span><br><span class="line">&gt;&gt;</span><br><span class="line">&lt;Dirnk&gt;</span><br><span class="line">&lt;KeyError: <span class="string">&#x27;age&#x27;</span>&gt;</span><br><span class="line">&lt;TypeError: <span class="string">&#x27;mappingproxy&#x27;</span> <span class="built_in">object</span> does <span class="keyword">not</span> support item assignment&gt;</span><br><span class="line">&lt;SUCCESS&gt;</span><br><span class="line">&lt;&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Drink&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>&#125;&gt;</span><br></pre></td></tr></table></figure>
 
+<h2 id="3-8-集合论"><a href="#3-8-集合论" class="headerlink" title="3.8 集合论"></a>3.8 集合论</h2><blockquote>
+<p>集合从2.3以module出现, 到2.6才成为built-in type, 包括<code>set</code> <code>frozenset</code></p>
+<p>集合的本质是许多唯一对象的聚集(去重)</p>
+<p>拥有极快的查找速度 ==&gt; 散列表</p>
+</blockquote>
+<p>空集 –&gt; <code>set()</code></p>
+<p><code>&#123;&#125;</code> –&gt; <code>dict 本质上是一个空字典</code></p>
+<p>集合内元素必须是<code>can hash</code>即可散列的</p>
+<ul>
+<li>str</li>
+<li>bytes</li>
+<li>数值类型</li>
+<li>frozenset</li>
+</ul>
+<p>集合的操作</p>
+<p><code>|</code> –&gt; <code>∪</code></p>
+<p><code>&amp;</code> –&gt; <code>∩</code> –&gt; <code>set.intersection(set)</code></p>
+<p><code>-</code> –&gt; 差集</p>
+<h3 id="3-8-1-集合字面量「仅set」"><a href="#3-8-1-集合字面量「仅set」" class="headerlink" title="3.8.1 集合字面量「仅set」"></a>3.8.1 集合字面量「仅set」</h3><blockquote>
+<p>除了空集合<code>set()</code>外, 集合的字面量如同<code>&#123;1&#125; &#123;1, 2&#125;</code></p>
+</blockquote>
+<p>字面量语句构造集合的方法比<code>set([1, 2, &quot;3&quot;])</code>更快, 后者<code>python</code>需要新建一个列表, 最后吧这个列表传入到构造方法中, 如果是<code>&#123;1, 2, &quot;3&quot;&#125;</code>的字面量构造, <code>python</code>会利用一个<code>BUILD_SET</code>的字节码创建集合</p>
+<p>使用反汇编函数查看字节码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dis <span class="keyword">import</span> dis</span><br><span class="line"></span><br><span class="line">dis(<span class="string">&quot;&#123;1&#125;&quot;</span>)</span><br><span class="line">dis(<span class="string">&quot;set([1])&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">0</span> LOAD_CONST    <span class="number">0</span> (<span class="number">1</span>)</span><br><span class="line"><span class="number">2</span> BUILD_SET     <span class="number">1</span></span><br><span class="line"><span class="number">4</span> RETURN_VALUE</span><br><span class="line">            </span><br><span class="line"><span class="number">0</span> LOAD_NAME      <span class="number">0</span> (<span class="built_in">set</span>)</span><br><span class="line"><span class="number">2</span> LOAD_CONST     <span class="number">0</span> (<span class="number">1</span>)</span><br><span class="line"><span class="number">4</span> BUILD_LIST     <span class="number">1</span>  --</span><br><span class="line"><span class="number">6</span> CALL_FUNCTION  <span class="number">1</span>  --</span><br><span class="line"><span class="number">8</span> RETURN_VALUE</span><br></pre></td></tr></table></figure>
 
+<p><code>python</code>对于<code>frozenset</code>没有特殊字面量句法, 只能采用构造的方式</p>
+<h3 id="3-8-2-集合推导"><a href="#3-8-2-集合推导" class="headerlink" title="3.8.2 集合推导"></a>3.8.2 集合推导</h3><blockquote>
+<p>同列表推导字典推导一样</p>
+</blockquote>
+<ol>
+<li>创建一个新的序列</li>
+<li>起到过滤条件的作用</li>
+</ol>
+<h3 id="3-8-3-集合的操作"><a href="#3-8-3-集合的操作" class="headerlink" title="3.8.3 集合的操作"></a>3.8.3 集合的操作</h3><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/338FE41118E025DEC0F08E62E79242FB.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># KeyError</span></span><br><span class="line">a.remove(<span class="number">4</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment"># pop the first one ele</span></span><br><span class="line">a.pop()  </span><br><span class="line"></span><br><span class="line"><span class="comment"># if number not in set do nothing</span></span><br><span class="line">a.discard(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
 
+<p>下表中, 缀运算符需要两侧的对象都是集合类型, 但是其他的方法则只要求所传入的参数是可迭代对象</p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/04AFD0F1F67F70C8B753E15D433EBB86.png"></p>
+<p><strong>集合的比较运算符, 返回布尔值</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/9074D4974B2971BC1FA4BFBE2710A364.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/6D3B0816875580AF04759FD9538975E0.png"></p>
+<p><strong>集合的其他操作方法</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/56D97AD7F6AB7ADC76CFDFC71D3CF306.png"></p>
+<h2 id="3-9-dict和set的原理"><a href="#3-9-dict和set的原理" class="headerlink" title="3.9 dict和set的原理"></a>3.9 dict和set的原理</h2><blockquote>
+<p><code>principles of dict and set</code>, 了解<code>python</code>里的字典和集合类型,他们背后所涉及的<code>hash table</code>是必不可少的</p>
+<p>这节将会回答以下几个问题</p>
+</blockquote>
+<ol>
+<li><code>python</code>中的<code>dict</code>和<code>set</code>效率有多高?</li>
+<li>为什么他是无序且不稳定的?</li>
+<li>为什么并不是所有的<code>python</code>对象都可以当作<code>dict</code>的<code>key</code>或<code>set</code>里的<code>number</code>?</li>
+<li>为什么<code>dict</code>的<code>key</code>和<code>set</code>的<code>number</code>的顺序是根据它们被添加的次序而定的,以及为什么在映射对象的生命周期中,这个顺序并不是一成不变的?</li>
+<li>为什么不应该迭代循环<code>dict</code>或<code>set</code>的同时往里面添加元素?</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">temp_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Drink&quot;</span>&#125;.fromkeys(temp_list, <span class="string">&quot;&quot;</span>)</span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line"><span class="built_in">dict</span>.fromkeys(iterator, values)</span><br><span class="line"><span class="comment"># Create a new dictionary with keys from iterable</span></span><br><span class="line"><span class="comment"># and values set to value.</span></span><br><span class="line">&#123;<span class="number">1</span>: <span class="string">&#x27;&#x27;</span>, <span class="number">2</span>: <span class="string">&#x27;&#x27;</span>, <span class="number">3</span>: <span class="string">&#x27;&#x27;</span>, <span class="number">4</span>: <span class="string">&#x27;&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="3-9-1-效率实验"><a href="#3-9-1-效率实验" class="headerlink" title="3.9.1 效率实验"></a>3.9.1 效率实验</h3><p>使用<code>in set(&amp;)</code>  操作符,分别在<code>set dict list</code>查询是否含有某个元素</p>
+<p>其中结果如下:</p>
+<p>最快的是<code>&amp;</code></p>
+<p>最慢的是<code>list in</code></p>
+<p>由于列表背后没有散列表来支持<code>in</code>运算符, 每次搜索都会扫描一次完成的列表 [说明了, <code>dict</code>和<code>set</code>在使用散列表存储的时候使用了类似排序的功能]</p>
+<h3 id="3-9-2-dict中的散列表"><a href="#3-9-2-dict中的散列表" class="headerlink" title="3.9.2 dict中的散列表"></a>3.9.2 dict中的散列表</h3><blockquote>
+<p>这一节只是笼统的描述python如何使用hashtable来实现dict, 其中Cpython对dict有过优化</p>
+</blockquote>
+<p><strong>散列表</strong> </p>
+<ul>
+<li><p>本质上是一个稀疏数组(总是有空白元素的数组称为稀疏数组)</p>
+</li>
+<li><p>散列表中的单元叫做表元(bucket)</p>
+</li>
+<li><p>在dict的散列表中, 每个键值对占用一个表元,一个表元有俩部分, 分别是对值的引用和对键的引用</p>
+</li>
+<li><p>表元大小一致, 可以通过偏移量读取特定的表元</p>
+</li>
+<li><p>python会保证散列表中大约三分之一的表元是空的,如果达到阈值, <strong>原有的散列表会被复制</strong>到一个更大的空间中</p>
+</li>
+<li><p>把对象放入散列表, 首先使用<code>hash()</code>计算这个元素键的散列值</p>
+</li>
+</ul>
+<p><strong>有关散列表的概念</strong>:</p>
+<p><strong>1.散列值和相等性</strong></p>
+<blockquote>
+<p><code>hash()</code> <code>  ==</code></p>
+</blockquote>
+<ul>
+<li><code>hash()</code>可以用于任何内置类型对象, 自定义对象调用自定义实现的<code>__hash__</code></li>
+<li>如果俩对象在比较时是相等的, 则它们的散列值一定相等(但对象的类型和存储结构不一定相等)</li>
+<li>为了让散列值可以当作散列表的索引, 越是相似但不相等的对象,他们散列值的差别就越大</li>
+</ul>
+<p>从python3.3开始 str bytes datetime对象的散列值计算过程中多了随机<code>加盐</code> 所加盐值是python进程内的一个常量每次启动python解释器都会生成一个不同的盐值,目的是为了防止<code>DOS</code>攻击而采取的安全措施</p>
+<p><strong>2.散列表算法</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220312164711.png"></p>
+<p>以<code>dict[key]</code>为例:</p>
+<ul>
+<li>python首先会调用<code>hash(key)</code>计算key的散列值</li>
+<li>把计算的散列值最低的几位数字当作偏移量, 在散列表中查找表元<code>bucket</code><ul>
+<li>具体取几位要看散列表的大小</li>
+<li>若对应的表元为空 –&gt;  <code>KeyError</code></li>
+<li>若非空 –&gt; 表元里会有<code>key-value-pairs</code></li>
+</ul>
+</li>
+<li>python会校验<code>key-value-pairs</code>中的<code>key</code>与输入的<code>key</code>是否相等<code>==</code><ul>
+<li>相等 –&gt; 返回对应的<code>value</code></li>
+<li>不等 –&gt; 散列冲突</li>
+</ul>
+</li>
+<li>散列冲突: 因为散列表所做的是把随机的元素映射到只有几位的数字上,而散列表本身的索引又依赖于这个数字的一部分<ul>
+<li>为了解决冲突,算法会在散列值中另外再取几位数字用特殊方法处理后把新的数字当作索引寻找表元,并重复之前的操作</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>添加新元素:</strong></p>
+<p>发现表元为空时会放入一个新元素</p>
+<p><strong>更新元素</strong>:</p>
+<p>找到表元后会更新元素</p>
+<p><strong>需要注意的是,python会按照散列表的拥挤程度来决定是否要重新分配内存为它扩容,如果增加散列表的大小,那散列值所占的位数和用作索引的位数会增加,减少了散列冲突</strong></p>
+<hr>
+<p>**注意:**Cpython中规定如果有一个整型对象,而且他能存进入一个机器字中,那么他的散列值就是它本身</p>
+<h3 id="3-9-3-dict的实现和限制"><a href="#3-9-3-dict的实现和限制" class="headerlink" title="3.9.3 dict的实现和限制"></a>3.9.3 dict的实现和限制</h3><blockquote>
+<p>主要讨论hashtable给dict带来的优势和限制</p>
+</blockquote>
+<p><strong>1.键必须是可散列的</strong></p>
+<p>包括: str bytes frozenset 数值类型</p>
+<p>一个可散列的对象必须包括</p>
+<ul>
+<li>支持<code>hash()</code>函数并且通过<code>__hash__</code>所得到的散列值不变(在他的生命周期中)</li>
+<li>支持通过<code>__eq__</code>方法检测相等性</li>
+<li>若<code>a==b</code>那么<code>hash(a)==hash(b)</code></li>
+<li>所有由用户自定义的对象默认都是可散列的,因为他们的散列值都是<code>id()</code>来获取的,而且他们不相等</li>
+</ul>
+<p>**注意:**如果自定义的类实现了<code>_eq_</code>,并且希望他是可散列的, 那么必须定义一个恰当的<code>_hash_</code>保证<code>a==b</code>时<code>hash(a)==hash(b)</code>另一方面,如果一个含有自定义<code>_eq_</code>依赖的类处于可变状态, 那么就不要在这个类中实现<code>_hash_</code>,因为他的实例是不可散列的</p>
+<hr>
+<p><strong>2.字典在内存中开销大</strong></p>
+<ul>
+<li>字典使用散列表实现</li>
+<li>散列表是稀疏的</li>
+<li>在自定义类中<code>_slots_</code>属性可以改变实例属性的存储方式, 由<code>dict--&gt;tuple</code></li>
+<li><code>optimization</code>优化往往和可维护相对立<code>maintain</code></li>
+</ul>
+<hr>
+<p><strong>3.键查询很快</strong></p>
+<ul>
+<li>空间换时间</li>
+<li><code>hash table</code>实现了无视数据量大小的快速访问<code>(在数据能放入内存的前提下)</code></li>
+</ul>
+<p><strong>4.键的次序取决于添加次序</strong></p>
+<ul>
+<li>在添加新键时, 可能会由哈希冲突, 此时新键会被安排到另一个表元(bucket)中</li>
+<li>但是和俩个值相同的键添加顺序有关</li>
+<li>虽然逻辑和面向用户表现形式上如此,在判断俩上依旧是相等的</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Drink&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">23</span>&#125;</span><br><span class="line">b = &#123;<span class="string">&quot;age&quot;</span>: <span class="number">23</span>, <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Drink&quot;</span>&#125;</span><br><span class="line"><span class="keyword">if</span> a == b:</span><br><span class="line">    print(<span class="string">&quot;you are right&quot;</span>)</span><br><span class="line">&gt;&gt;</span><br><span class="line">right</span><br></pre></td></tr></table></figure>
 
+<p><strong>5.添加新键会改变已有键的顺序</strong></p>
+<blockquote>
+<p>尽量不要边遍历边添加新键</p>
+</blockquote>
+<ul>
+<li>添加新键</li>
+<li>python解释器为字典扩容</li>
+<li>新键散列表并把已有元素添加到新表中</li>
+<li>这个过程可能会发生散列冲突,导致新散列表中键的次序变化</li>
+<li>如果在迭代一个字典的所有键的过程中同时对字典进行修改,那么这个循环可能会跳过一些键甚至是字典中已有的键</li>
+</ul>
+<p>因此:不要对字典同时进行迭代和修改,如果扫描并修改一个字典,最好分成俩步 :</p>
+<p>​        [迭代–得出要添加的内容–并把内容放到新字典]  </p>
+<p>​        [对原有字典进行更新]</p>
+<p>不过在<code>python3</code>中对此进行了优化,<code>.keys()</code> <code>.items()</code> <code>.values()</code>方法返回的都是字典视图, 换句话说这些方法返回的更像<code>set</code>而不是<code>list</code>,此外视图还可以动态的反馈字典的变化</p>
+<h3 id="3-9-4-set的实现和限制"><a href="#3-9-4-set的实现和限制" class="headerlink" title="3.9.4 set的实现和限制"></a>3.9.4 set的实现和限制</h3><blockquote>
+<p>set 和 frozenset的实现也依赖于散列表</p>
+</blockquote>
+<ul>
+<li>在散列表中只存放元素的引用(类似只存放key的引用)</li>
+<li>集合中的元素必须是可散列的</li>
+<li>集合很消耗内存</li>
+<li>可以很高效的判断元素是否在集合中</li>
+<li>元素的次序取决于被添加到集合中的顺序</li>
+<li>在集合里添加元素会改变集合里已有元素的次序</li>
+</ul>
+<h2 id="本章小结-1"><a href="#本章小结-1" class="headerlink" title="本章小结"></a>本章小结</h2><p><code>dict</code>是<code>python</code>的基石, 除了<code>dict</code>外<code>builtin</code>里还提供了特殊映射比如<code>collections</code>里的<code>defaultdict</code> <code>OrderDict</code> <code>ChainMap</code> <code>Counter</code> <code>UserDict</code>以及<code>types</code>里的<code>MappingProxyTypes</code></p>
+<p><strong>映射类型的重要方法</strong></p>
+<p><strong>1.setdefault</strong></p>
+<ul>
+<li>更新字典里存档的可变值(比如列表)</li>
+<li>避免重复搜索键</li>
+</ul>
+<p><strong>2.update</strong></p>
+<ul>
+<li>让批量更新字典成为可能</li>
+</ul>
+<p><strong>3.missing</strong></p>
+<ul>
+<li>可以自定当找不到对应的<code>key</code>时, 对象如何处理</li>
+</ul>
+<p><code>collections.abc</code>模块提供了<code>Mapping</code>和<code>MutableMapping</code>俩大抽象基类,利用它可以进行类型查询或者引用,此外还有<code>Set</code>和<code>MutableSet</code>俩大抽象基类</p>
+<h1 id="Part4-TextAndBytes"><a href="#Part4-TextAndBytes" class="headerlink" title="Part4.TextAndBytes"></a>Part4.TextAndBytes</h1><blockquote>
+<p>human use text and computer use bytes.</p>
+</blockquote>
+<p>本章节主要讨论:</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 字符 码位 字节表述</li>
+<li><input checked="" disabled="" type="checkbox"> <code>bytes</code> <code>bytearray</code> 和 <code>memoryview</code>等二进制序列的独特性</li>
+<li><input checked="" disabled="" type="checkbox"> 全部<code>unicode</code>和陈旧字符集的编解码器</li>
+<li><input checked="" disabled="" type="checkbox"> 避免和处理编码错误</li>
+<li><input checked="" disabled="" type="checkbox"> 处理文本文件的最佳实践</li>
+<li><input checked="" disabled="" type="checkbox"> 默认编码的陷阱和标准<code>I/O</code>问题</li>
+<li><input checked="" disabled="" type="checkbox"> 规范化 <code>Unicode</code>文本 进行安全比较</li>
+<li><input checked="" disabled="" type="checkbox"> 规范化 大小写折叠和暴力移除音调符号的实用函数</li>
+<li><input checked="" disabled="" type="checkbox"> 使用<code>locale</code>模块和<code>PyUCA</code>库正确地排序<code>Unicode</code>文本</li>
+<li><input checked="" disabled="" type="checkbox"> <code>Unicode</code>数据库中的字符元数据</li>
+<li><input checked="" disabled="" type="checkbox"> 能处理字符串和字节序列的双模式<code>API</code></li>
+</ul>
+<h2 id="4-1-字符问题"><a href="#4-1-字符问题" class="headerlink" title="4.1 字符问题"></a>4.1 字符问题</h2><blockquote>
+<p>字符串:一个字符序列, 本质上是一个序列; 问题是什么是字符?</p>
+<p>2015年字符的定义为Unicode字符(面向人)</p>
+</blockquote>
+<p>Unicode标准把字符的标识-和具体的字节表述进行了区分:</p>
+<ul>
+<li><strong>字符的标识即码位</strong>:是0<del>1114111的数字(10进制)在<code>unicode</code>标准中以4</del>6个十六进制数字标识,并且加前缀<code>U+</code></li>
+<li><strong>字符的具体表述取决于所用的编码</strong>:编码是在码位和字节序列之间转换时使用的算法</li>
+</ul>
+<p><strong>把码位转化成字节序列的过程时编码,反之是解码</strong></p>
+<p>简单的理解: </p>
+<p><strong>码位</strong>是数字映射后的准备编码的<strong>字符标识</strong>;</p>
+<p><strong>字节序列</strong>是通过一定编码规则(算法)编码后的用于计算机存储和传播的<strong>字节序列</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220313165653.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># init string</span></span><br><span class="line">a = <span class="string">&#x27;advdv我&#x27;</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment"># advdv我字符串有四个Unicode字符</span></span><br><span class="line">print(<span class="built_in">len</span>(a))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用UTF-8把str对象编码成bytes对象</span></span><br><span class="line">b = a.encode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># check b and len of b</span></span><br><span class="line"><span class="comment"># \xe6 --&gt; one 16-base</span></span><br><span class="line"><span class="comment"># 我 -encode-&gt; three bytes</span></span><br><span class="line"><span class="comment"># -&gt; \xe6\x88\x91</span></span><br><span class="line">print(b, <span class="built_in">len</span>(b))</span><br><span class="line"></span><br><span class="line"><span class="comment"># decode b with utf-8</span></span><br><span class="line"><span class="comment"># 使用UTF-8把bytes对象解码成str对象</span></span><br><span class="line">print(b.decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="number">6</span> </span><br><span class="line"><span class="comment"># bytes对象字面量以b开头</span></span><br><span class="line"><span class="comment"># 字节序列b有8个字节 我被编码成了三个字节</span></span><br><span class="line"><span class="string">b&#x27;advdv\xe6\x88\x91&#x27;</span> <span class="number">8</span></span><br><span class="line">advdv我</span><br></pre></td></tr></table></figure>
 
+<p><code>python3</code>的<code>str</code>类型基本相当于<code>python2</code>的<code>unicode</code>类型, 但是前者的<code>bytes</code>类型却不是把<code>str</code>类型换个名字那么简单</p>
+<h2 id="4-2-字节概要"><a href="#4-2-字节概要" class="headerlink" title="4.2 字节概要"></a>4.2 字节概要</h2><p><code>python</code>内置了两个基本的二进制序列类型其中有<code>py3</code>引入的不可变<code>bytes</code>类型和<code>py2.6</code>添加的可变<code>bytesarray</code>类型</p>
+<p><code>bytes</code>和<code>bytearray</code>对象的各个元素是介于<code>0~255(含)</code>之间的整数而不是<code>py2</code>的<code>str</code>对象那样的单个字符.</p>
+<p>需要注意的是二进制序列的切片始终是同一类型的二进制序列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bytes对象可以从str对象加给定的编码方法构建</span></span><br><span class="line">cafe = <span class="built_in">bytes</span>(<span class="string">&quot;cafの&quot;</span>, encoding=<span class="string">&quot;utf_8&quot;</span>)</span><br><span class="line">print(cafe)</span><br><span class="line"></span><br><span class="line"><span class="comment"># bytes对象中的各个元素是range(256)的整数</span></span><br><span class="line">print(cafe[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># bytes对象的切片依然是bytes</span></span><br><span class="line">print(cafe[:<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># bytesarray对象没有字面量语句而是以bytearray()</span></span><br><span class="line"><span class="comment"># 和字节序列字面量参数的形式显示</span></span><br><span class="line">cafe_arr = <span class="built_in">bytearray</span>(cafe)</span><br><span class="line">print(cafe_arr)</span><br><span class="line"><span class="comment"># bytearray对象的切片还是bytearray对象</span></span><br><span class="line">print(cafe_arr[-<span class="number">1</span>:])</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="string">b&#x27;caf\xe3\x81\xae&#x27;</span></span><br><span class="line"><span class="number">99</span></span><br><span class="line"><span class="string">b&#x27;c&#x27;</span></span><br><span class="line"><span class="built_in">bytearray</span>(<span class="string">b&#x27;caf\xe3\x81\xae&#x27;</span>)</span><br><span class="line"><span class="built_in">bytearray</span>(<span class="string">b&#x27;\xae&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>二进制序列本质上整数序列,但是他们的字面量表示含有ASCII文本,因此各个字节的值会有以下三种不同的方式显示 –&gt; 例如<code>b&#39;xxxxx\xx\xx\t&#39;</code></p>
+</blockquote>
+<ul>
+<li>可打印的ASCII范围内的字节(从空格到~)使用ASCII字符本身</li>
+<li>制表符 换行符 回车符和\ 使用转义序列 <code>\t</code> <code>\n</code>  <code>\r</code> <code>\\</code></li>
+<li>其他字节的值,使用十六进制转义序列(<code>\x00</code>空字节)</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220313200437.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">bytes</span>.fromhex(<span class="string">&#x27;31 4b ce a9&#x27;</span>)</span><br><span class="line">print(a)</span><br><span class="line"><span class="string">b&#x27;1K\xce\xa9&#x27;</span></span><br><span class="line">31(16进制) --&gt; 49(10进制) --&gt; ASCII(1K)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">在ASCII中K代表10进制</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-1-str方法"><a href="#4-2-1-str方法" class="headerlink" title="4.2.1 str方法"></a>4.2.1 str方法</h3><p><strong>1.casefold</strong></p>
+<p><code>lower()</code> 只对 ASCII 也就是 <code>&#39;A-Z&#39;</code>有效，但是其它一些语言里面存在小写的情况就没办法了。文档里面举得例子是德语中<code>&#39;ß&#39;</code>的小写是<code>&#39;ss&#39;</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">&#x27;ß&#x27;</span></span><br><span class="line">s.lower() <span class="comment">#  &#x27;ß&#x27;</span></span><br><span class="line">s.casefold() <span class="comment"># &#x27;ss&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>汉语 &amp; 英语环境下面，继续用 <code>lower()</code>没问题；要处理其它语言且存在大小写情况的时候再用<code>casefold()</code></p>
+<p><strong>2.isdecimal</strong></p>
+<p>判断<code>string</code>是否是十进制, 返回<code>bool</code>空字符为<code>False</code></p>
+<p><strong>3.isidentifier</strong></p>
+<blockquote>
+<p>Python 对各种变量、方法、函数等命名时使用的字符序列称为标识符</p>
+</blockquote>
+<p>检查<code>string</code>是否是<code>python</code>标识符</p>
+<p>标准为:</p>
+<ul>
+<li><p>由 26 个英文字母大小写，0-9 ，_ 组成，不能以数字开头，且严格区分大小写</p>
+</li>
+<li><p>不能包含空格、@、% 以及 $ 等特殊字符，不能以系统保留关键字作为标识符一共有25 个</p>
+</li>
+<li><p>以下划线开头的标识符有特殊含义</p>
+</li>
+</ul>
+<p>对应<code>keyword.iskeyword(str)</code>检查是否是<code>python</code>保留的关键字</p>
+<p><strong>4.isnumeric</strong></p>
+<p><code>isnumeric()</code> 方法检测字符串是否只由数字组成，数字可以是<code>Unicode</code>数字，全角数字（双字节） 罗马数字 汉字数字。指数类似 <strong>²</strong> 与分数类似 <strong>½</strong> 也属于数字。返回<code>bool</code></p>
+<p><strong>5.isprintable</strong></p>
+<p>判断是否是可打印字符,不可打印的有:</p>
+<ul>
+<li>换行符制表符等<code>\t \n</code></li>
+</ul>
+<p><strong>6.translate</strong></p>
+<p><code>s.transelate(table)</code></p>
+<p><code>table</code>用<code>str.maketrans(in-str, out-str)</code>生成<strong>用于创建字符映射的转换表</strong></p>
+<p>转换表本质上整数映射</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(transtable)</span><br><span class="line"></span><br><span class="line">&#123;<span class="number">115</span>: <span class="number">109</span>, <span class="number">111</span>: <span class="number">97</span>, <span class="number">109</span>: <span class="number">110</span>, <span class="number">101</span>: <span class="number">121</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以<code>table</code>作为基础替换<code>s</code>中所有命中的字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&quot;i like something relaxing!&quot;</span></span><br><span class="line">in_str = <span class="string">&quot;some&quot;</span></span><br><span class="line">out_str = <span class="string">&quot;many&quot;</span></span><br><span class="line">transtable = <span class="built_in">str</span>.maketrans(in_str, out_str)</span><br><span class="line"></span><br><span class="line">print(a.translate(transtable))</span><br><span class="line">&gt;&gt;</span><br><span class="line">i liky manything rylaxing!</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><code>str</code>类型的其他方法都支持<code>bytes</code>和<code>bytearray</code>类型</p>
+<p><strong>二进制序列并不是指字节序列全是二进制编码,而是指用于计算机存储和传播的二进制字节序列即字节序列,其本质上还是整数序列</strong></p>
+<ul>
+<li>在<code>ASCII</code>中<code>K</code>表示十进制</li>
+<li><code>1k</code>表示十进制<code>1</code></li>
+</ul>
+<hr>
+<p>构建<code>bytes</code>或<code>bytearray</code>实例还可以调用各自的构造方法,传参如下:</p>
+<ul>
+<li>一个<code>str</code>对象(码位)和<code>encoding</code>关键字参数(编码规则)</li>
+<li>一个可迭代对象, 提供<code>0~255</code>数值</li>
+<li>一个实现缓冲协议的对象<code>(bytes bytearray memoryview array.array)</code> 此时把源对象中的字节序列复制到新建的二进制序列中</li>
+</ul>
+<p>注意使用缓冲类对象构建二进制序列是一个底层操作,可能涉及类型转换</p>
+<p><strong>下面是将<code>array.array</code>转化成字节序列表示</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> array</span><br><span class="line"><span class="comment"># 创建一个短整数16位数组</span></span><br><span class="line">numbers = array.array(<span class="string">&#x27;h&#x27;</span>, [-<span class="number">2</span>, -<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br><span class="line"><span class="comment"># 保存组成的numbers的字节序列副本</span></span><br><span class="line">to_bytes = <span class="built_in">bytes</span>(numbers)</span><br><span class="line"><span class="comment"># 表示5个短整数的10个字节</span></span><br><span class="line">print(to_bytes)</span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="string">b&#x27;\xfe\xff\xff\xff\x00\x00\x01\x00\x02\x00&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个空array接收bytes</span></span><br><span class="line"><span class="comment"># 并输出结构化的bytes</span></span><br><span class="line">temp_array = array.array(<span class="string">&#x27;h&#x27;</span>)</span><br><span class="line">print(temp_array.frombytes(to_bytes))</span><br><span class="line">print(temp_array)</span><br><span class="line">&gt;&gt;</span><br><span class="line"><span class="literal">None</span></span><br><span class="line">array(<span class="string">&#x27;h&#x27;</span>, [-<span class="number">2</span>, -<span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<p><strong>需要注意</strong></p>
+<ul>
+<li><p><strong>使用缓冲类对象<code>(bytes bytearray array.array memoryview)</code>创建<code>bytes</code> <code>bytearray</code>对象时, 始终复制的是源对象中的字节序列</strong></p>
+</li>
+<li><p>不过<code>memoryview</code>对象允许在二进制数据结构之间共享内存</p>
+</li>
+<li><p>从二进制序列提取结构化信息需要<code>struct</code>模块</p>
+</li>
+</ul>
+<h3 id="4-2-2-结构体和内存视图"><a href="#4-2-2-结构体和内存视图" class="headerlink" title="4.2.2 结构体和内存视图"></a>4.2.2 结构体和内存视图</h3><p><code>struct</code>模块提供了一些函数, 把打包的字节序列转换成不同类型字段组成的元组,还有一些函数用于执行反向转换,把元组转化成打包的字节序列.可以处理<code>bytes</code> <code>bytearray</code> <code>memoryview</code>对象</p>
+<p><strong>注意</strong>:</p>
+<p><code>memoryview</code>类不是用于创建或存储字节序列的, 而是共享内存,让你访问其他二进制序列 打包的数组和缓冲中的数据切片,而无需复制字节序列</p>
+<p><strong>memoryview 对象的切片是一个新 memoryview 对象，而且不会复制字节序列</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"><span class="comment"># 结构体格式: &lt; 小字节序列</span></span><br><span class="line"><span class="comment">#		  3s3s 俩个3字节序列</span></span><br><span class="line"><span class="comment">#         HH   俩个16位二进制整数</span></span><br><span class="line">fmt = <span class="string">&quot;&lt;3s3sHH&quot;</span></span><br><span class="line">whith <span class="built_in">open</span>(<span class="string">&quot;filter.gif&quot;</span>, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="comment"># 使用内存中的文件内容创建一个memoryview对象</span></span><br><span class="line">    img = <span class="built_in">memoryview</span>(fp.read())</span><br><span class="line"><span class="comment"># 使用他的切片再创建一个mv对象(这里不会复制字节序列)</span></span><br><span class="line">header = img[:<span class="number">10</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转化成字节序列(10字节)</span></span><br><span class="line"><span class="built_in">bytes</span>(header)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拆包mv对象获得一个元组包括类型 版本 宽度 高度</span></span><br><span class="line">struct.unpack(fmt, header)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除引用 释放mv实列占用的内存</span></span><br><span class="line"><span class="keyword">del</span> header</span><br><span class="line"><span class="keyword">del</span> img</span><br></pre></td></tr></table></figure>
+
+<p>如果经常处理二进制数据推荐阅读:</p>
+<p><strong><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#memory-views">memoryview</a></strong></p>
+<p><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/struct.html"><strong>struct interpret bytes as packed binary data</strong></a></p>
+<h2 id="4-3-基本的编解码器"><a href="#4-3-基本的编解码器" class="headerlink" title="4.3 基本的编解码器"></a>4.3 基本的编解码器</h2>
       
     </div>
     <footer class="article-footer">
