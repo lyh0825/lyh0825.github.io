@@ -29,8 +29,10 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220312164711.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220313165653.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220313200437.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/496D8BAFE68A48610FC47DBC7BB2A83F.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220320144303.png">
 <meta property="article:published_time" content="2022-02-06T10:02:01.000Z">
-<meta property="article:modified_time" content="2022-03-13T15:52:26.539Z">
+<meta property="article:modified_time" content="2022-03-25T15:26:12.797Z">
 <meta property="article:author" content="Drink">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -342,7 +344,29 @@
 <p>优先级<code>str &gt; repr </code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># define a class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">temp</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.value = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;repr value is <span class="subst">&#123;self.value&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;str value is <span class="subst">&#123;self.value&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line">test = temp()</span><br><span class="line">print(test)</span><br><span class="line"></span><br><span class="line">H:\Python\python.exe H:/MY_TXM/test.py</span><br><span class="line"><span class="built_in">str</span> value <span class="keyword">is</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Moudle"><a href="#Moudle" class="headerlink" title="Moudle"></a>Moudle</h2><h3 id="time"><a href="#time" class="headerlink" title="time"></a>time</h3><h4 id="time-1"><a href="#time-1" class="headerlink" title="time"></a>time</h4><h4 id="process-time"><a href="#process-time" class="headerlink" title="process_time"></a>process_time</h4><h4 id="process-time-ns"><a href="#process-time-ns" class="headerlink" title="process_time_ns"></a>process_time_ns</h4><h4 id="perf-counter"><a href="#perf-counter" class="headerlink" title="perf_counter"></a>perf_counter</h4><h4 id="perf-counter-ns"><a href="#perf-counter-ns" class="headerlink" title="perf_counter_ns"></a>perf_counter_ns</h4><p><code>time()</code>精度上相对没有那么高，而且受系统的影响，适合表示日期时间或者大程序程序的计时。</p>
+<h2 id="Moudle"><a href="#Moudle" class="headerlink" title="Moudle"></a>Moudle</h2><h3 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h3><h4 id="listdir"><a href="#listdir" class="headerlink" title="listdir"></a>listdir</h4><blockquote>
+<p>列出目录下的所有文件和文件夹不包括<code>.</code> <code>..</code>隐藏目录</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">print(os.listdir(<span class="string">&quot;H:\MY_TXM&quot;</span>))</span><br><span class="line">&gt;&gt;</span><br><span class="line">[<span class="string">&#x27;.git&#x27;</span>, <span class="string">&#x27;.gitignore&#x27;</span>, <span class="string">&#x27;.idea&#x27;</span>, <span class="string">&#x27;static&#x27;</span>, <span class="string">&#x27;venv&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="locale"><a href="#locale" class="headerlink" title="locale"></a>locale</h3><blockquote>
+<p>locale 是根据计算机用户所使用的语言，所在国家或者地区，以及当地的文化传统所定义的一个软件运行时的语言环境。通常情况下它可以按照涉及使用习惯分为12大类:</p>
+</blockquote>
+<ul>
+<li>语言符号及其分类（LC_CTYPE)</li>
+<li>数字（LC_NUMBERIC）</li>
+<li>比较习惯（LC_COLLATE)</li>
+<li>时间显示格式（LC_TIME）</li>
+<li>货币单位（LC_MONETARY)</li>
+<li>信息主要是提示信息，错误信息，状态信息，标题，标签，按钮和菜单等（LC_MESSAGES）</li>
+<li>行么书写方式（LC_NAME）</li>
+<li>地址书写方式（LC_ADDRESS）</li>
+<li>电话号码书写方式（LC_TELEPHONE）<br>-度量衡表达方式（LC_MEASUREMENT）</li>
+<li>默认纸张尺寸大小（LC_PAPER）</li>
+<li>对locale 自身包含信息的概述（LC_IDENTIFICATION）</li>
+<li>除此之外还有一个LANGUAGE参数，它与LC_MESSAGES相似</li>
+</ul>
+<h3 id="time"><a href="#time" class="headerlink" title="time"></a>time</h3><h4 id="time-1"><a href="#time-1" class="headerlink" title="time"></a>time</h4><h4 id="process-time"><a href="#process-time" class="headerlink" title="process_time"></a>process_time</h4><h4 id="process-time-ns"><a href="#process-time-ns" class="headerlink" title="process_time_ns"></a>process_time_ns</h4><h4 id="perf-counter"><a href="#perf-counter" class="headerlink" title="perf_counter"></a>perf_counter</h4><h4 id="perf-counter-ns"><a href="#perf-counter-ns" class="headerlink" title="perf_counter_ns"></a>perf_counter_ns</h4><p><code>time()</code>精度上相对没有那么高，而且受系统的影响，适合表示日期时间或者大程序程序的计时。</p>
 <p><code>perf_counter()</code>适合小一点的程序测试，会计算<code>sleep()</code>时间。</p>
 <p><code>process_counter()</code>适合小一点的程序测试，不会计算<code>sleep()</code>时间。</p>
 <p>此外<code>Python3.7</code>开始还提供了以上三个方法精确到<code>纳秒</code>的计时。分别是：</p>
@@ -591,7 +615,28 @@
 </ul>
 <p>返回元组列表(物理地址)。</p>
 <h4 id="cast"><a href="#cast" class="headerlink" title=".cast"></a>.cast</h4><p><strong>memoryview.cast</strong>的概念和数组模型差不多,能用不同的方式读写同一块内存地址,而且内容字节不会随意移动,和C语言中类型转换的概念相似.cast会把同一块内存里的内容打包成一个全新的memoryview对象给你</p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h3><blockquote>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><h3 id="eval"><a href="#eval" class="headerlink" title="eval"></a>eval</h3><p><strong>描述</strong></p>
+<p>eval() 函数用来执行一个字符串表达式，并返回表达式的值。</p>
+<p><strong>语法</strong></p>
+<p>以下是 eval() 方法的语法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eval(expression[, globals[, locals]])</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li>expression – 表达式。</li>
+<li>globals – 变量作用域，全局命名空间，如果被提供，则必须是一个字典对象。</li>
+<li>locals – 变量作用域，局部命名空间，如果被提供，可以是任何映射对象。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<p>返回表达式计算结果。</p>
+<h3 id="isatty"><a href="#isatty" class="headerlink" title="isatty"></a>isatty</h3><blockquote>
+<p><strong>isatty()</strong> 方法检测文件是否连接到一个终端设备，如果是返回 True，否则返回 False。</p>
+</blockquote>
+<p><strong>语法</strong></p>
+<p>isatty() 方法语法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fileObject.isatty()</span><br></pre></td></tr></table></figure>
+
+<h3 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h3><blockquote>
 <p>python断言和try-except用法相反</p>
 </blockquote>
 <p>断言函数是对表达式布尔值的判断，要求表达式计算值必须为真。可用于自动调试。</p>
@@ -1665,7 +1710,207 @@
 <p>如果经常处理二进制数据推荐阅读:</p>
 <p><strong><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/stdtypes.html#memory-views">memoryview</a></strong></p>
 <p><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/struct.html"><strong>struct interpret bytes as packed binary data</strong></a></p>
-<h2 id="4-3-基本的编解码器"><a href="#4-3-基本的编解码器" class="headerlink" title="4.3 基本的编解码器"></a>4.3 基本的编解码器</h2>
+<h2 id="4-3-基本的编解码器"><a href="#4-3-基本的编解码器" class="headerlink" title="4.3 基本的编解码器"></a>4.3 基本的编解码器</h2><blockquote>
+<p>python自带了超过100种编解码器(编码算法)用于在文本和字节之间相互转换</p>
+</blockquote>
+<img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/496D8BAFE68A48610FC47DBC7BB2A83F.png" style="zoom:150%;" />
+
+<p>其中后三者是可变长度的多字节编码, 其余都是单字节编码</p>
+<p>图中星号表示某些编码(<code>ASCII</code>和多字节编码<code>GB2312</code>)不能表示所有的<code>Unicode</code>字符, <code>UTF</code>编码的设计目的是处理每一个<code>Unicode</code>码位</p>
+<h2 id="4-4-编解码问题"><a href="#4-4-编解码问题" class="headerlink" title="4.4 编解码问题"></a>4.4 编解码问题</h2><blockquote>
+<p>编解码涉及到<code>unicode</code>或者<code>string</code>或称<code>码位</code>与<code>byte</code>的编解码转换</p>
+</blockquote>
+<p>编解码异常有三种:</p>
+<p><strong>1.UnicodeEncodeError</strong></p>
+<p><code>str</code>转<code>byte</code>异常</p>
+<p><strong>2.UnicodeDecodeError</strong></p>
+<p><code>byte</code>转<code>str</code>异常</p>
+<p><strong>3.SynatxError</strong></p>
+<p>如果在编解码中,源码的编码与预期不符, 在加载模块时会抛出语法异常</p>
+<h3 id="4-4-1-UnicodeEncodeError"><a href="#4-4-1-UnicodeEncodeError" class="headerlink" title="4.4.1 UnicodeEncodeError"></a>4.4.1 UnicodeEncodeError</h3><h3 id="4-4-2-UnicodeDecodeError"><a href="#4-4-2-UnicodeDecodeError" class="headerlink" title="4.4.2 UnicodeDecodeError"></a>4.4.2 UnicodeDecodeError</h3><h3 id="4-4-3-SyntaxError"><a href="#4-4-3-SyntaxError" class="headerlink" title="4.4.3 SyntaxError"></a>4.4.3 SyntaxError</h3><blockquote>
+<p>多数非<code>UTF</code>编解码器只能处理<code>Unicode</code>字符的一小部分子集, 把文本转化成字节序列时, 如果目标编码中没有定义某个字符就会抛该异常, 处理方式是把<code>errors</code>参数传给编码方法或函数,对错误进行特殊处理</p>
+</blockquote>
+<blockquote>
+<p>不是每个字节都包含有效的ASCII字符,也不是每个字符序列都是有效<code>UTF-8</code> 或<code>UTF-16</code> 因此,在把二进制序列转化成文本时, 如果假设是这俩个编码中的一个, 遇到无法转换的字节序列时会抛出UnicodeDecodeError</p>
+</blockquote>
+<p><strong>str.en|decode(encoding=””, errors=””)</strong></p>
+<p><code>errors</code>接收四个参数</p>
+<ul>
+<li><p>strict: 遇到无法编码的字符raise error</p>
+</li>
+<li><p>ignore: 忽略不能编码的字符</p>
+</li>
+<li><p>replace: 使用<code>?</code>代替不能编码的字符</p>
+</li>
+<li><p>xmlcharrefreplace: 把无法编码的字符替换成XML实体</p>
+</li>
+</ul>
+<p>需要注意的是errors接受的参数是可以扩展的, 你可以位errors参数注册额外的字符串方法<code>codecs.register_error</code>函数</p>
+<ul>
+<li>python3允许在源码中使用非ASCII标识符</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">β = <span class="number">1</span></span><br><span class="line">print(β)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-4-找出字节序列编码"><a href="#4-4-4-找出字节序列编码" class="headerlink" title="4.4.4 找出字节序列编码"></a>4.4.4 找出字节序列编码</h3><blockquote>
+<p>简单的说一般找不出字节序列的编码, 有些通讯协议和文件格式, 比如 HTTP和XML包含<strong>明确指明内容编码的首部</strong>. 可以肯定的是, 某些字节流不是ASCII, 因为其中包含大于127的字节值, 而且制定UTF-8和UTF-16的方式也限制了可用的字节序列.即使如此我们也无法根据特定的位模式来确定二进制文件的编码时ASCII或UTF-8</p>
+</blockquote>
+<p>  统一字符编码侦测包<code>Chartdetect</code>,可以识别30中编码</p>
+<p>二进制序列编码通常不会指明自己的编码, 但是<code>UTF</code>格式可以在文本内容的开头添加一个字节序列标记</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> chardet</span><br><span class="line">a = chardet.detect(<span class="string">b&quot;sddssfsd&quot;</span>)</span><br><span class="line">print(a)</span><br><span class="line"></span><br><span class="line">&#123;<span class="string">&#x27;encoding&#x27;</span>: <span class="string">&#x27;ascii&#x27;</span>, <span class="string">&#x27;confidence&#x27;</span>: <span class="number">1.0</span>, <span class="string">&#x27;language&#x27;</span>: <span class="string">&#x27;&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-5-BOM有用的鬼符"><a href="#4-4-5-BOM有用的鬼符" class="headerlink" title="4.4.5 BOM有用的鬼符"></a>4.4.5 BOM有用的鬼符</h3><blockquote>
+<p>BOM (bytes-Order-Mark)字节序列标记, 指明编码时使用的是IntelGPU的小子节序</p>
+</blockquote>
+<ul>
+<li><code>utf-16</code>有俩种编码格式<code>UTF-16LE</code>小子节序<code>UTF-6BE</code>大字节序</li>
+<li>小子节序各个码位的最低有效字节在前面, 大字节序相反(Unicode码位)</li>
+<li>因此在<code>utf-16</code>编码中使用开头的BOM<code>b&#39;\xff\xfe&#39;</code>十进制(255 254)表示小子节编码</li>
+<li><code>utf-8</code>无论设备使用哪种字节序,生成的字节序列始终一致, 因此不需要BOM</li>
+</ul>
+<h2 id="4-5-处理文本文件"><a href="#4-5-处理文本文件" class="headerlink" title="4.5 处理文本文件"></a>4.5 处理文本文件</h2><p><img src="https://cdn.jsdelivr.net/gh/StarFire1226/photos@master/20220320144303.png"></p>
+<p>处理文本文件最好的方式是三明治处理法, 首先将输入的字节序列转码成字符串, 在对字符串进行处理, 最后把处理好的字符串编码成字节序列进行输出</p>
+<p><code>Python3</code>中的<code>Open</code>函数会在读取文本进行必要的解码, 在以文本模式写入文件时也会进行必要的编码, 所以<code>my_file.read()</code>方法得到的以及传递给<code>my_file.write(text)</code>方法的都是字符串对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用utf-8编码打开(创建)txt文件, 模式位写</span></span><br><span class="line"><span class="comment"># 此时使用open函数创建一个TextIowrapper对象</span></span><br><span class="line">fp = <span class="built_in">open</span>(<span class="string">&quot;text.txt&quot;</span>, <span class="string">&quot;w&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">print(fp)</span><br><span class="line">&lt;_io.TextIOWrapper name=<span class="string">&#x27;text.txt&#x27;</span> mode=<span class="string">&#x27;w&#x27;</span> encoding=<span class="string">&#x27;utf-8&#x27;</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将字符串对象写入TextIo对象中</span></span><br><span class="line">fp.write(<span class="string">&quot;Drink&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭TextIo对象</span></span><br><span class="line">fp.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="comment"># 调用系统stat,查看路径文件的字节大小</span></span><br><span class="line">print(os.stat(<span class="string">&quot;text.txt&quot;</span>).st_size)</span><br><span class="line"><span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开文本文件, 返回一个TextIoWrapper对象</span></span><br><span class="line"><span class="comment"># 编码是区域设置中的默认值</span></span><br><span class="line">fp2 = <span class="built_in">open</span>(<span class="string">&quot;text.txt&quot;</span>)</span><br><span class="line"><span class="comment"># TextIO对象有encoding属性, 查看所使用的编码</span></span><br><span class="line">print(fp2.encoding)</span><br><span class="line">cp936</span><br><span class="line">fp2.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以特定的编码方式打开文本文件流</span></span><br><span class="line">fp3 = <span class="built_in">open</span>(<span class="string">&quot;text.txt&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">fp3.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用open函数创建一个BytesIoWrapper对象</span></span><br><span class="line">fp4 = <span class="built_in">open</span>(<span class="string">&quot;text.txt&quot;</span>, <span class="string">&quot;rb&quot;</span>)</span><br><span class="line"><span class="comment"># 在二进制模式即字节流中返回的是BufferedReader对象</span></span><br><span class="line"><span class="comment"># 其满足buffer-protocol协议</span></span><br><span class="line">print(fp4)</span><br><span class="line">&lt;_io.BufferedReader name=<span class="string">&#x27;text.txt&#x27;</span>&gt;</span><br><span class="line">fp4.read()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>除非想要判断编码否则不要使用二进制模式打开文本文件, 即便想要查看编码类型也不要重复发明轮子, 可以使用chardet</p>
+</blockquote>
+<p><strong>通常不建议使用默认编码方式取处理二进制或文本流</strong></p>
+<h3 id="编码默认值"><a href="#编码默认值" class="headerlink" title="编码默认值"></a>编码默认值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> locale</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">expressions = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    locale.getpreferredencoding()</span></span><br><span class="line"><span class="string">    type(my_file)</span></span><br><span class="line"><span class="string">    sys.stdout.isatty()</span></span><br><span class="line"><span class="string">    sys.stdout.encoding</span></span><br><span class="line"><span class="string">    sys.stdin.isatty()</span></span><br><span class="line"><span class="string">    sys.stdin.encoding</span></span><br><span class="line"><span class="string">    sys.stderr.isatty()</span></span><br><span class="line"><span class="string">    sys.stderr.encoding</span></span><br><span class="line"><span class="string">    sys.getdefaultencoding()</span></span><br><span class="line"><span class="string">    sys.getfilesystemencoding()</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">my_file = <span class="built_in">open</span>(<span class="string">&#x27;dummy&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> expression <span class="keyword">in</span> expressions.split():</span><br><span class="line">    value = <span class="built_in">eval</span>(expression)</span><br><span class="line">    print(expression.rjust(<span class="number">30</span>), <span class="string">&quot;--&gt;&quot;</span>, <span class="built_in">repr</span>(value))</span><br><span class="line"></span><br><span class="line">sys.stdin.isatty()</span><br><span class="line">sys.stderr.isatty()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">locale.getpreferredencoding() --&gt; &#x27;cp936&#x27;</span><br><span class="line">                type(my_file) --&gt; &lt;class &#x27;_io.TextIOWrapper&#x27;&gt;</span><br><span class="line">          sys.stdout.isatty() --&gt; False</span><br><span class="line">          sys.stdout.encoding --&gt; &#x27;UTF-8&#x27;</span><br><span class="line">           sys.stdin.isatty() --&gt; False</span><br><span class="line">           sys.stdin.encoding --&gt; &#x27;UTF-8&#x27;</span><br><span class="line">          sys.stderr.isatty() --&gt; False</span><br><span class="line">          sys.stderr.encoding --&gt; &#x27;UTF-8&#x27;</span><br><span class="line">     sys.getdefaultencoding() --&gt; &#x27;utf-8&#x27;</span><br><span class="line">  sys.getfilesystemencoding() --&gt; &#x27;utf-8&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><code>sys.getfilesystemencoding()</code>用于编解码文件名而非文件内容, 把字符串参数作为文件名传给<code>open()</code>函数会使用它, 如果是字节序列则直接传给<code>OS API</code></p>
+<blockquote>
+<p><code>locale.getprefferedencoding()</code>返回的编码即是打开文件的默认编码,同时也是重定向文件的<code>sys.stdout/stdin/stderr</code></p>
+</blockquote>
+<blockquote>
+<p>不要依赖默认编码尤其是windows用户</p>
+</blockquote>
+<h2 id="4-6-规范化Unicode字符"><a href="#4-6-规范化Unicode字符" class="headerlink" title="4.6 规范化Unicode字符"></a>4.6 规范化Unicode字符</h2><blockquote>
+<p>因为Unicode有组合字符(变音字符和附加到前一个字符上的记号, 打印时作为一个整体)所以字符串比较起来比较复杂</p>
+</blockquote>
+<p>比如<code>é</code>这个词, 是<code>e</code>后加<code>U+0301</code>得来的, 在<code>unicode</code>中称为标准等价物, 但是<code>python</code>看到的是不同的码位序列, 因此判断两者不相等, 这时就需要一个统一的标准, 来规范化<code>Unicode</code>就像规范两种方言一样</p>
+<p>使用<code>unicodedata.normalize</code>函数</p>
+<p>第一个参数:</p>
+<ul>
+<li><strong>NFC (Normalization Form C)</strong></li>
+</ul>
+<p>使用最少的码位构成等价的字符串</p>
+<ul>
+<li><strong>NFD</strong></li>
+</ul>
+<p>把组合字符分解成 [基字符] 和 [单独的组合字符]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">s1 = <span class="string">&quot;café&quot;</span></span><br><span class="line">s2 = <span class="string">&quot;cafe\u3001&quot;</span></span><br><span class="line"></span><br><span class="line">print(unicodedata.normalize(<span class="string">&quot;NFC&quot;</span>, s1))</span><br><span class="line">print(unicodedata.normalize(<span class="string">&quot;NFC&quot;</span>, s2))</span><br><span class="line"></span><br><span class="line">print(unicodedata.normalize(<span class="string">&quot;NFD&quot;</span>, s1))</span><br><span class="line">print(unicodedata.normalize(<span class="string">&quot;NFD&quot;</span>, s2))</span><br><span class="line"></span><br><span class="line">café</span><br><span class="line">cafe、</span><br><span class="line">café</span><br><span class="line">cafe、</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>用户输入的文本默认是NFC格式, 在保存文本前, 最好使用normalization(“NFC”, text)清洗字符串</p>
+<p>需要注意的是, 在使用NFC清洗字符串时, 有些单字符会被规范成另一个单字符, 比如电阻的单位Ω会被规范成欧米茄, 在视觉上是一样的, 但在比较时并不相等</p>
+</blockquote>
+<ul>
+<li><p>NFKC</p>
+</li>
+<li><p>NFKD</p>
+</li>
+</ul>
+<p><strong>这俩个规范化方法是兼容性规范化, 这些规范化更适合用在用户搜索或索引上, 需要注意的是, 经过NFKC或者NFKD兼容性规范化后的字符可能会丧失原本的意义, 尽量不要用于数据的持久化</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s3 = <span class="string">&quot;¼&quot;</span></span><br><span class="line">print(unicodedata.normalize(<span class="string">&quot;NFKC&quot;</span>, s3))</span><br><span class="line">&gt;&gt; <span class="number">1</span>/<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-6-1-大小写折叠"><a href="#4-6-1-大小写折叠" class="headerlink" title="4.6.1 大小写折叠"></a>4.6.1 大小写折叠</h3><blockquote>
+<p>即将所有的字符转化成小写, 相比于lower()只支持Unicode, casefold()支持更多的大小写转化, 尽管如此, 两者不同的字符仅有116个码位, 占比0.11%</p>
+</blockquote>
+<h3 id="4-6-2-规范化文本匹配实用函数"><a href="#4-6-2-规范化文本匹配实用函数" class="headerlink" title="4.6.2 规范化文本匹配实用函数"></a>4.6.2 规范化文本匹配实用函数</h3><blockquote>
+<p>NFC和NFD可以很合理的比较Unicode字符串, 并且NFC是最好的规范化形式, 不区分大小写应该使用casefold()</p>
+</blockquote>
+<p><strong>1.去掉变音字符号</strong></p>
+<blockquote>
+<p>unicodedata.combining (unichr) <strong>将分配给Unicode字符 unichr 的规范组合类 返回 为整数</strong>。 如果未定义组合类，则返回 0 。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> unicodedata <span class="keyword">import</span> normalize</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shave_marks</span>(<span class="params">txt</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    去掉所有的变音符号</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 把所有的字符拆成基字符和组合记号</span></span><br><span class="line">    norm_txt = unicodedata.normalize(<span class="string">&quot;NFD&quot;</span>, txt)</span><br><span class="line">    <span class="comment"># 过滤掉所有组合记号</span></span><br><span class="line">    shaved = <span class="string">&quot;&quot;</span>.join(c <span class="keyword">for</span> c <span class="keyword">in</span> norm_txt <span class="keyword">if</span> <span class="keyword">not</span> unicodedata.combining(c))</span><br><span class="line">    <span class="comment"># 重组所有字符</span></span><br><span class="line">    <span class="keyword">return</span> unicodedata.normalize(<span class="string">&quot;NFC&quot;</span>, shaved)</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.比较字符是否相等|忽略大小写</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> unicodedata <span class="keyword">import</span> normalize</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nfc_equal</span>(<span class="params">str1, str2</span>):</span></span><br><span class="line">    <span class="keyword">return</span> normalize(<span class="string">&quot;NFC&quot;</span>, str1) == normalize(<span class="string">&quot;NFC&quot;</span>, str2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fold_equal</span>(<span class="params">str1, str2</span>):</span></span><br><span class="line">    <span class="keyword">return</span> (normalize(<span class="string">&quot;NFC&quot;</span>, str1).casefold() == </span><br><span class="line">            normalize(<span class="string">&quot;NFC&quot;</span>, str2).casefold())</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-7-Unicode文本排序"><a href="#4-7-Unicode文本排序" class="headerlink" title="4.7 Unicode文本排序"></a>4.7 Unicode文本排序</h2><blockquote>
+<p>对于ASCII字符串来说比较的是码位, 但在非ASCII字符时会使用locale.strxfrm函数, 这个函数会把string转化成适合的区域进行比较</p>
+</blockquote>
+<p>需要注意的是, 一般情况下, 变音符不会对排序造成影响, 如果有影响, 变音符号常常排在常规词后面</p>
+<p>在使用locale.strxfrm函数作为排序key前, 要先调用setlocale(LC_COLLATE, your_locale)</p>
+<p>需要注意:</p>
+<ol>
+<li>区域设置是全局的, 不建议库中调用, 且应用或框架应该在进程中调用</li>
+<li>操作系统必须支持区域设置</li>
+</ol>
+<p><strong>使用unicode排序算法排序</strong></p>
+<p><code>pyuca</code> </p>
+<blockquote>
+<p>Python Unicode Collator Algorithm</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyuca</span><br><span class="line"></span><br><span class="line">coll = pyuca.Collator()</span><br><span class="line">fruits = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;alle&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;bba&quot;</span>]</span><br><span class="line">sorted_fruits = <span class="built_in">sorted</span>(fruits, key=coll.sort_key)</span><br><span class="line">print(sorted_fruits)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-8-Unicode-数据库"><a href="#4-8-Unicode-数据库" class="headerlink" title="4.8 Unicode 数据库"></a>4.8 Unicode 数据库</h2><blockquote>
+<p>本质上已经一个关于unicode以及个中映射关系的数据库, 就如码位与string bytes的映射一样, 同样基于此提供了许多双模式API对外调用, 出名的有unicodedata</p>
+</blockquote>
+<p><strong>regex库正在替代re库</strong></p>
+<p><strong>双模式API是一个趋势</strong>: 即支持字符和字节参数,并根据参数的格式做出自适应的调整</p>
+<h2 id="4-9-支持str和bytes的双模式API"><a href="#4-9-支持str和bytes的双模式API" class="headerlink" title="4.9 支持str和bytes的双模式API"></a>4.9 支持str和bytes的双模式API</h2><blockquote>
+<p>标准库中一些函数能接受字符串或字节序列作为参数, 然后根据类型自适应做不同的行为, 其中re和os为例</p>
+</blockquote>
+<h3 id="4-9-1-正则str和bytes"><a href="#4-9-1-正则str和bytes" class="headerlink" title="4.9.1 正则str和bytes"></a>4.9.1 正则str和bytes</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>unicode</th>
+<th>bytes</th>
+<th>次数|注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td></td>
+<td></td>
+<td>{0,}</td>
+</tr>
+<tr>
+<td>+</td>
+<td></td>
+<td></td>
+<td>{1,}</td>
+</tr>
+<tr>
+<td>?</td>
+<td></td>
+<td></td>
+<td>{0,1}</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配任何一个十进制数字, 包括[0-9]和其他数字字符</td>
+<td>只匹配[0-9]</td>
+<td>和re.ASCII</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>任何Unicode字符, 所有语言|数字|下横线</td>
+<td>[a-zA-A0-9]</td>
+<td>和re.ASCII一样</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">re_numbers_str = re.<span class="built_in">compile</span>(<span class="string">r&quot;\d+&quot;</span>)</span><br><span class="line">re_words_str = re.<span class="built_in">compile</span>(<span class="string">r&quot;\w+&quot;</span>)</span><br><span class="line"></span><br><span class="line">re_numbers_bytes = re.<span class="built_in">compile</span>(<span class="string">rb&quot;\d+&quot;</span>)</span><br><span class="line">re_words_bytes = re.<span class="built_in">compile</span>(<span class="string">rb&quot;\w+&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里会默认拼接str</span></span><br><span class="line">text_str = <span class="string">&quot;Drink see \u0be7\u0be6\u0be5\u0be4&quot;</span> <span class="string">&quot;as 1999 = 1000 + 999&quot;</span></span><br><span class="line"></span><br><span class="line">text_bytes = text_str.encode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;TEXT&quot;</span>, <span class="built_in">repr</span>(text_str), sep=<span class="string">&quot;\n &quot;</span>)</span><br><span class="line">print(<span class="string">&quot;NUMBERS&quot;</span>)</span><br><span class="line">print(<span class="string">&quot;  str  :&quot;</span>, re_numbers_str.findall(text_str))</span><br><span class="line">print(<span class="string">&quot;  bytes:&quot;</span>, re_numbers_bytes.findall(text_bytes))</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;WORDS&quot;</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;  str  :&quot;</span>, re_words_str.findall(text_str))</span><br><span class="line">print(<span class="string">&quot;  bytes:&quot;</span>, re_words_bytes.findall(text_bytes))</span><br><span class="line"></span><br><span class="line">&gt;&gt;</span><br><span class="line">TEXT</span><br><span class="line"> <span class="string">&#x27;Drink see ௧௦\u0be5\u0be4as 1999 = 1000 + 999&#x27;</span></span><br><span class="line">NUMBERS</span><br><span class="line">  <span class="built_in">str</span>  : [<span class="string">&#x27;௧௦&#x27;</span>, <span class="string">&#x27;1999&#x27;</span>, <span class="string">&#x27;1000&#x27;</span>, <span class="string">&#x27;999&#x27;</span>]</span><br><span class="line">  <span class="built_in">bytes</span>: [<span class="string">b&#x27;1999&#x27;</span>, <span class="string">b&#x27;1000&#x27;</span>, <span class="string">b&#x27;999&#x27;</span>]</span><br><span class="line">WORDS</span><br><span class="line">  <span class="built_in">str</span>  : [<span class="string">&#x27;Drink&#x27;</span>, <span class="string">&#x27;see&#x27;</span>, <span class="string">&#x27;௧௦&#x27;</span>, <span class="string">&#x27;as&#x27;</span>, <span class="string">&#x27;1999&#x27;</span>, <span class="string">&#x27;1000&#x27;</span>, <span class="string">&#x27;999&#x27;</span>]</span><br><span class="line">  <span class="built_in">bytes</span>: [<span class="string">b&#x27;Drink&#x27;</span>, <span class="string">b&#x27;see&#x27;</span>, <span class="string">b&#x27;as&#x27;</span>, <span class="string">b&#x27;1999&#x27;</span>, <span class="string">b&#x27;1000&#x27;</span>, <span class="string">b&#x27;999&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-9-2-os中的字符串和字节序列"><a href="#4-9-2-os中的字符串和字节序列" class="headerlink" title="4.9.2 os中的字符串和字节序列"></a>4.9.2 os中的字符串和字节序列</h3><blockquote>
+<p>GNU/linux内核不理解Unicode, 因此文件名中使用字节序列都是无效的</p>
+</blockquote>
+<p>为了方便处理字符串或字节序列形式的文件名或路径名, os模块提供了特殊的编码和解码函数</p>
+<p><strong>fsencode(filename)</strong></p>
+<p>当filename是str时使用<code>sys.getfilesystemencoding()</code>编码成bytes</p>
+<p><strong>fsdecode(filename)</strong></p>
+<p>当filename是bytes时使用<code>sys.getfilesystemencoding()</code>解码成str</p>
+<blockquote>
+<p>在unix及其衍生平台中使用<code>surrogateescape</code>错误处理方式, 避免碰到意外字节卡住, windows使用strict, 这种处理方式在py3.1时被引进</p>
+</blockquote>
+<p>这种错误的处理方式实际上是将无法编码的字节替换成<code>Unicode</code>中<code>U+DC00</code>到<code>U+DCFF</code>之间的码位<code>(low surrogate area)</code>, 这些码位是保留的,没有分配字符, 只供程序内部使用</p>
+
       
     </div>
     <footer class="article-footer">
